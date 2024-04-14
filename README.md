@@ -4,7 +4,7 @@ A lifestyle for those tired of binging shows
 
 ## The Name
 
-This app is named after an amazing tv show: (Silo)[https://en.wikipedia.org/wiki/Silo_(TV_series)]. Watch it, if you haven't already.
+This app is named after an amazing tv show: [Silo](https://en.wikipedia.org/wiki/Silo_(TV_series)). Watch it, if you haven't already.
 
 ## Running the App
 
