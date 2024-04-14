@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+
+gem 'cucumber', '~>7.1'
+gem 'faraday', '~>2.7.11'
+gem 'puma', '>=6.4.0' 
+gem 'rspec', '>=3.12.0'
+gem 'sinatra', '>=3.1.0'
+gem 'sequel', '>=5.75.0'
+gem 'sqlite3', '>=1.7.0'
+gem 'slim', '>=5.2.1'
+gem 'rerun', '>=0.14.0'
+gem 'rack-test', '~>2.1.0'
