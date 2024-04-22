@@ -6,7 +6,7 @@ require 'rspec'
 require 'rack/test'
 require 'sinatra'
 
-RSpec.describe 'silo night site' do
+RSpec.describe 'Silo Night app' do
   include Rack::Test::Methods
 
   def app
