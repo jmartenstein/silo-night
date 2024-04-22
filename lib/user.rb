@@ -6,8 +6,17 @@ class User
 
   def initialize( u={"config"=>{},"shows"=>[],"schedule"=>{}} )
     @config   = u["config"]
-    @shows    = u["shows"]
     @schedule = u["schedule"]
+    @shows    = u["shows"]
+  end
+
+  def expand_shows()
+  end
+
+  def generate_schedule()
+    @shows.each do |show|
+    end
+    @schedule = {}
   end
 
 end
