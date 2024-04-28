@@ -3,10 +3,10 @@ require 'rspec'
 
 describe User do
 
-  let(:testc1) {{ "config"  => { "days" => "m", "time" => "35m" },
-                  "shows"   => [ "Platonic" ] }}
-  let(:testc2) {{ "config"  => { "days" => "t", "time" => "60m" },
-                  "shows"   => [ "Suits" ] }}
+  let(:testc1) {{ "config"  => { "days" => "t", "time" => "10m" },
+                  "shows"   => [ "foo" ] }}
+  let(:testc2) {{ "config"  => { "days" => "t", "time" => "12m" },
+                  "shows"   => [ "bar" ] }}
 
   it "creates a new user with an empty config" do
     u = User.new
@@ -27,20 +27,20 @@ describe User do
     u = User.new(testc1)
     u.expand_shows()
     expect(u.shows[0].class.name).to eq("Show")
-    expect(u.shows[0].runtime).to eq ("30 minutes")
+    expect(u.shows[0].runtime).to eq ("4-6 minutes")
   end
 
   it "generates a first populated schedule" do
     u = User.new(testc1)
     u.generate_schedule()
     expect(u.schedule).not_to be_nil
-    expect(u.schedule["Monday"]).to eq("Platonic")
+    expect(u.schedule["tuesday"][0]).to eq("foo")
   end
 
   it "generates a second populated schedule" do
     u = User.new(testc2)
     u.generate_schedule()
-    expect(u.schedule["Tuesday"]).to eq("Suits")
+    expect(u.schedule["tuesday"][0]).to eq("bar")
   end
 
 end
