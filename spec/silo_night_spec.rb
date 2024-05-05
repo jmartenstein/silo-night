@@ -20,7 +20,7 @@ RSpec.describe 'Silo Night app' do
   end
 
   it "creates a new schedule" do
-    post '/'
+    post '/schedule'
     expect(last_response).to be_ok
   end
 

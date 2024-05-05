@@ -17,6 +17,23 @@ get '/schedule' do
   slim :schedule
 end
 
+post '/schedule' do
+  slim :schedule
+end
+
+get '/api/v0.1/user/:name/shows' do
+
+  user_id = db[:users].where(name: params["name"]).first[:id]
+  usershows = db[:usershows].join(:shows, id: :show_id)
+
+  show_name_list = usershows.select(:name).where(user_id: user_id)
+  show_names = show_name_list.all.map{ |i| i[:name] }
+
+  content_type :json
+  show_names.to_json
+
+end
+
 get '/user/:name/shows' do
 
   # lookup user_id based on name
