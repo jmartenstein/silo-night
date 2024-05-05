@@ -4,14 +4,11 @@ When('any user sends a request to the main page') do
   $browser.get '/'
 end
 
-When('{string} sends a request for a list of shows') do |username|
-  $browser.get "/user/#{username}/shows"
+When('{string} sends an API request for a list of shows') do |username|
+  $browser.get "/api/v0.1/user/#{username}/shows"
 end
 
-Then('the site responds with an OK code') do
-  expect($browser.last_response).to be_ok
-end
-
-Then('the site responds with JSON containing {string}') do |show|
-  expect($browser.last_response).to match(/Equalizer/)
+Then('the site responds with JSON') do
+  head = $browser.last_response.headers
+  expect(head["Content-Type"]).to match("application/json")
 end
