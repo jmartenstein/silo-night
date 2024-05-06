@@ -1,4 +1,5 @@
 require 'show'
+require 'sequel'
 
 class User
 
@@ -12,6 +13,40 @@ class User
     @shows    = u["shows"]
   end
 
+  def load_from_file( filename = "" )
+
+    text = File.read(filename)
+    j = JSON.parse(text)
+
+    # TODO: can these be mapped to a single line?
+    @config   = j["config"]
+    @shows    = j["shows"]
+    @schedule = j["schedule"]
+
+    true
+
+  end
+
+  def load_from_file_by_username( name = "test" )
+    load_from_file( "./data/#{name}.json" )
+  end
+
+  def load_from_sql_by_username( name = "" )
+
+    db = Sequel.connect('sqlite://data/silo_night.db')
+    user = db[:users].where(name: name).first
+    usershows = db[:usershows].join(:shows, id: :show_id)
+
+    show_name_list = usershows.select(:name).where(user_id: user[:id])
+    @shows = show_name_list.all.map{ |i| i[:name] }
+
+    true
+
+  end
+
+  def save_to_sql()
+  end
+
   def expand_shows()
 
     # create a lookup from the test data
@@ -20,8 +55,12 @@ class User
     temp = []
 
     # build a temporary list of shows from the lookup
-    @shows.each { |show| temp.append( lookup.find { |k,v| v = show } ) }
+    @shows.each do |show| 
+      temp.append( lookup.find { |k,v| v = show } )
+    end
     @shows = temp
+
+    return true
 
   end
 
