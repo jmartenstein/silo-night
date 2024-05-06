@@ -1,22 +1,22 @@
 create table if not exists shows(
-  id int not null primary key,
-  name varchar(255),
-  avg_duration int
+  id integer primary key,
+  name varchar(255) not null unique,
+  runtime varchar(255)
 );
 
 create table if not exists users(
-  id int not null primary key,
-  name varchar(255)
+  id integer primary key,
+  name varchar(255) not null unique
 );
 
 create table if not exists usershows(
-  id int not null primary key,
-  user_id int,
-  show_id int
+  id integer primary key,
+  user_id int not null,
+  show_id int not null
 );
 
 create table if not exists schedule(
-  id int not null primary key,
+  id integer primary key,
   user_id int
 );
 
