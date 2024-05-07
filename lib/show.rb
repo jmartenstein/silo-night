@@ -25,6 +25,11 @@ class Show
 
   end
 
+  def save_to_sql()
+    db = Sequel.connect('sqlite://data/silo_night.db')
+    db[:shows].insert_ignore.insert(name: @name, runtime: @runtime)
+  end
+
 end
 
 class Shows
@@ -47,11 +52,13 @@ class Shows
   def load_from_file( filename="" )
     text = File.read(filename)
     load_from_json(text)
+    return true
   end
 
   def load_from_json( json="[]" )
     j = JSON.parse(json)
     j.each { |show| @list.append(Show.new(show)) }
+    return true
   end
 
 end
