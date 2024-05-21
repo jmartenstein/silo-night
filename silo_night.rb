@@ -1,6 +1,7 @@
 # silo_night.rb
 
 require 'sinatra'
+require 'sinatra/contrib'
 require 'sequel'
 
 # set slim templates to custom diectory
@@ -21,16 +22,20 @@ post '/schedule' do
   slim :schedule
 end
 
-get '/api/v0.1/user/:name/shows' do
+namespace '/api/v0.1' do
 
-  user_id = db[:users].where(name: params["name"]).first[:id]
-  usershows = db[:usershows].join(:shows, id: :show_id)
+  get '/user/:name/shows' do
 
-  show_name_list = usershows.select(:name).where(user_id: user_id)
-  show_names = show_name_list.all.map{ |i| i[:name] }
+    user_id = db[:users].where(name: params["name"]).first[:id]
+    usershows = db[:usershows].join(:shows, id: :show_id)
 
-  content_type :json
-  show_names.to_json
+    show_name_list = usershows.select(:name).where(user_id: user_id)
+    show_names = show_name_list.all.map{ |i| i[:name] }
+
+    content_type :json
+    show_names.to_json
+
+  end
 
 end
 
