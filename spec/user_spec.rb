@@ -23,6 +23,18 @@ describe User do
     expect(u.shows).to eq(testc1["shows"])
   end
 
+  it "deletes a show from the list" do
+    u = User.new(testc1)
+    u.delete_show("foo")
+    expect(u.shows).to be_empty
+  end
+
+  it "add a show to the list" do
+    u = User.new(testc1)
+    u.add_show("baz")
+    expect(u.shows).to include("foo", "baz")
+  end
+
   it "displays show runtime" do
     u = User.new(testc1)
     u.expand_shows()

@@ -13,6 +13,14 @@ class User
     @shows    = u["shows"]
   end
 
+  def add_show( show="" )
+    @shows.push( show )
+  end
+
+  def delete_show( show="" )
+    @shows.delete( show )
+  end
+
   def load_from_file( filename = "" )
 
     text = File.read(filename)
