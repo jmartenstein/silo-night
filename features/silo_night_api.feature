@@ -24,10 +24,14 @@ Feature: silo-night API
     Then the site responds with an OK code
     And the site responds with text containing "Equalizer"
 
+  Scenario: Show user's schedule based on seeded data
+    When "justin" sends an API request to view the schedule
+    Then the show "Reacher" is scheduled for "Monday"
+
   Scenario: Remove and add a show and generate a new schedule
     Given "steph" sends an API request to delete "Suits" from the list
       And "steph" sends an API request to add "Suits" to the list
     When  "steph" generates a new schedule
     Then  the site responds with text not containing "Suits"
       And the site responds with text containing "The Amazing Race"
-      And "The Amazing Race" is scheduled for Wednesday
+      And the show "The Amazing Race" is scheduled for "Wednesday"

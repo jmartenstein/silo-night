@@ -16,6 +16,14 @@ When('{string} sends an API request to delete {string} from the list') do |usern
   $browser.delete "/api/v0.1/user/#{username}/show/#{show}"
 end
 
+When('{string} sends an API request to view the schedule') do |username|
+  $browser.get "/api/v0.1/user/#{username}/schedule"
+end
+
+When('{string} generates a new schedule') do |username|
+  $browser.put "/api/v0.1/user/#{username}/schedule"
+end
+
 Then('the site responds with JSON') do
   head = $browser.last_response.headers
   expect(head["Content-Type"]).to match("application/json")

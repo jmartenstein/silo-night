@@ -24,6 +24,11 @@ end
 
 namespace '/api/v0.1' do
 
+  put '/user/:name/schedule' do
+    content_type :json
+    ['The Amazing Race'].to_json
+  end
+
   get '/user/:name/shows' do
 
     user_id = db[:users].where(name: params["name"]).first[:id]
