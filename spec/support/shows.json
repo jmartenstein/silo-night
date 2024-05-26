@@ -6,5 +6,9 @@
   {
     "name": "bar",
     "runtime": "5 minutes"
+  },
+  {
+    "name": "baz",
+    "runtime": "3 minutes"
   }
 ]
