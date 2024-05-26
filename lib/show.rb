@@ -1,19 +1,14 @@
 require 'json'
+require 'sequel'
 
-class Show
+Sequel.connect('sqlite://data/silo_night.db')
 
-  attr_accessor :name
-  attr_accessor :runtime
-
-  def initialize( s={"name"=>"","runtime"=>""} )
-    @name    = s["name"]
-    @runtime = s["runtime"]
-  end
+class Show < Sequel::Model
 
   def average_runtime
 
     # split the strings by space and hyphen
-    times = @runtime.split(/[\s-]/)
+    times = @values[:runtime].split(/[\s-]/)
 
     # remove minutes
     times.delete("minutes")
@@ -23,11 +18,6 @@ class Show
 
     return sum / times.count()
 
-  end
-
-  def save_to_sql()
-    db = Sequel.connect('sqlite://data/silo_night.db')
-    db[:shows].insert_ignore.insert(name: @name, runtime: @runtime)
   end
 
 end
@@ -57,7 +47,14 @@ class Shows
 
   def load_from_json( json="[]" )
     j = JSON.parse(json)
-    j.each { |show| @list.append(Show.new(show)) }
+    j.each do |show|
+      @list.append(
+        Show.new(name:       show["name"],
+                 wiki_page:  show["wiki_page"],
+                 page_title: show["page_title"],
+                 runtime:    show["runtime"])
+      )
+    end
     return true
   end
 

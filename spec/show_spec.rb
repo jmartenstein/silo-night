@@ -8,7 +8,7 @@ describe Show do
 
   it "creates a new show with an empty name" do
     n = Show.new
-    expect(n.name).to eq("")
+    expect(n.values).to be_empty
   end
 
   it "loads from a data structure" do
@@ -24,6 +24,11 @@ describe Show do
   it "calculates an average from two numbers" do
     s = Show.new(platonic)
     expect(s.average_runtime).to eq(30)
+  end
+
+  it "gets average from second line in seed data" do
+    s = Show[2]
+    expect(s.average_runtime).to eq(48)
   end
 
 end
