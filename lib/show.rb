@@ -5,10 +5,12 @@ Sequel.connect('sqlite://data/silo_night.db')
 
 class Show < Sequel::Model
 
+  many_to_many :users
+
   def average_runtime
 
     # split the strings by space and hyphen
-    times = @values[:runtime].split(/[\s-]/)
+    times = @values[:runtime].split(/\W/)
 
     # remove minutes
     times.delete("minutes")
