@@ -3,112 +3,83 @@ require 'rspec'
 
 describe User do
 
-  let(:testc1) {{ "config"   => { "days" => [ "t", "w" ], "time" => "10m" },
-                  "shows"    => [ "foo", "bar", "baz" ],
-                  "schedule" => {
-                     "Tuesday" => [ "foo" ],
-                     "Wednesday" => [ "baz" ]
-                   }
-               }}
-  
-  let(:testc2) {{ "config"  => { "days" => [ "t", "w" ], "time" => "12m" },
-                  "shows"   => [ "bar", "foo" ] }}
-
-  it "creates a new user with an empty config" do
-    u = User.new
-    expect(u.shows).to be_empty
+  before :context do
+    @new_user = User.new(config: "days",
+                         schedule: "{ \"Tuesday\": [\"foo\"] }")
+    @seeded_user_justin = User.find(name: "justin")
+    @seeded_user_test = User.find(name: "test")
   end
 
   it "loads config from a data structure" do
-    u = User.new(testc1)
-    expect(u.config).to eq(testc1["config"])
-  end
-
-  it "loads shows from a data structure" do
-    u = User.new(testc1)
-    expect(u.shows).to eq(testc1["shows"])
+    expect(@new_user.values[:config]).to eq("days")
   end
 
   it "loads a schedule from a file" do
 
     u = User.new()
     u.load_from_file("./data/justin.json")
-    sched = u.schedule
 
-    expect(sched["monday"]).to include("Reacher")
+    sched_str = u.values[:schedule]
+    sched = JSON.parse(sched_str)
 
-  end
-
-  it "deletes a show from the list" do
-    u = User.new(testc2)
-    u.delete_show("bar")
-    expect(u.shows).to include("foo")
-  end
-
-  it "add a show to the list" do
-    u = User.new(testc1)
-    u.add_show("baz")
-    expect(u.shows).to include("foo", "baz")
-  end
-
-  it "displays show runtime" do
-    u = User.new(testc1)
-    u.expand_shows()
-    expect(u.shows[0].class.name).to eq("Show")
-    expect(u.shows[0].runtime).to eq ("4-6 minutes")
-    expect(u.shows[1].class.name).to eq("Show")
-    expect(u.shows[1].runtime).to eq ("5 minutes")
-  end
-
-  it "finds next available slot for user 1" do
-    u = User.new(testc1)
-    expect(u.find_next_available_slot("bar")).to eq("Tuesday")
-  end
-
-  it "finds next available slot fo user 2" do
-    u = User.new(testc2)
-    expect(u.find_next_available_slot("bar")).to eq("Tuesday")
-  end
-
-  it "checks if time is available for Wednesday" do  
-    u = User.new(testc1)
-    expect(u.get_available_runtime_for_day("Wednesday")).to eq(7)
-  end
-
-  it "checks if Tuesday is full in second user's schedule" do
-
-    u = User.new(testc2)
-    u.generate_schedule
-
-    actual = u.get_available_runtime_for_day("Tuesday")
-    expect(actual).to eq(2)
+    expect(sched["Tuesday"]).to include("Suits")
 
   end
 
-  it "generates a first populated schedule" do
+  it "confirm show class from user seed data" do
+    expect(@seeded_user_justin.shows[0].class.name).to eq("Show")
+  end
 
-    u = User.new(testc1)
+  it "checks for day in schedule" do
+    actual = @new_user.is_show_in_schedule?("foo")
+    expect(actual).to be_truthy
+  end
+
+  it "finds next available slot for seeded user justin" do
+    next_slot = @seeded_user_justin.find_next_available_slot("Platonic")
+    expect(next_slot).to eq("Monday")
+  end
+
+  it "finds next available slot for seeded user test" do
+    next_slot = @seeded_user_test.find_next_available_slot("Suits")
+    expect(next_slot).to eq("Monday")
+  end
+
+  it "checks if time is available for Sunday in seeded data" do
+    expect(@seeded_user_justin.get_available_runtime_for_day("Monday")).to eq(37)
+  end
+
+  it "checks if Tuesday is full in second seeded user's schedule" do
+
+    @seeded_user_test.generate_schedule
+    actual = @seeded_user_test.get_available_runtime_for_day("Tuesday")
+    expect(actual).to eq(32)
+
+  end
+
+  it "generates populated schedule from first seeded user" do
+
+    @seeded_user_justin.generate_schedule()
     weekday = "Tuesday"
 
-    u.generate_schedule()
+    sched = JSON.parse(@seeded_user_justin.schedule)
 
-    expect(u.schedule).not_to be_nil
-    expect(u.schedule[weekday]).not_to be_empty
-    expect(u.schedule[weekday].length).to eq(2)
-    expect(u.schedule[weekday]).to include("foo")
+    expect(sched).not_to be_nil
+    expect(sched[weekday]).not_to be_empty
+    expect(sched[weekday].length).to eq(2)
+    expect(sched[weekday]).to include("Suits")
 
   end
 
   it "generates a second populated schedule" do
 
-    u = User.new(testc2)
+    @seeded_user_test.generate_schedule
     weekday = "Tuesday"
 
-    u.generate_schedule()
-    #p u.schedule
-    
-    expect(u.schedule[weekday]).not_to be_empty
-    expect(u.schedule[weekday][0]).to eq("bar")
+    sched = JSON.parse(@seeded_user_test.schedule)
+
+    expect(sched[weekday]).not_to be_empty
+    expect(sched[weekday][0]).to eq("His Dark Materials")
 
   end
 
