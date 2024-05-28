@@ -6,15 +6,20 @@ Sequel.connect('sqlite://data/silo_night.db')
 l = Shows.new()
 l.load_from_file("data/full_show_lookup.json")
 l.each do |show| 
-  show.save
+  show.save unless Show.find(name: show.name)
 end
 
-u1 = User.new
-name = "justin"
-u1.load_from_file_by_username(name)
-u1.save
+def load_user(name)
 
-u2 = User.new
-name = "test"
-u2.load_from_file_by_username("test")
-u2.save
+  u = User.new
+  u.load_from_file_by_username(name)
+  u.save unless User.find(name: name)
+
+  j = JSON.parse(File.read("data/#{name}.json"))
+  u = User.find(name: name)
+  j["shows"].each { |s| u.add_show( Show.find(name: s)) }
+
+end
+
+load_user("justin")
+load_user("test")
