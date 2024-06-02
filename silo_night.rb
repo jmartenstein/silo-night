@@ -2,7 +2,9 @@
 
 require 'sinatra'
 require 'sinatra/contrib'
+
 require 'sequel'
+require 'user'
 
 # set slim templates to custom diectory
 set :views, File.expand_path(File.join(__FILE__, '../template'))
@@ -26,20 +28,53 @@ namespace '/api/v0.1' do
 
   put '/user/:name/schedule' do
     content_type :json
-    ['The Amazing Race'].to_json
+    u = User.find(name: params["name"])
+    sched = u.generate_schedule
+    sched.to_json
+  end
+
+  get '/user/:name/schedule' do
+    content_type :json
+    u = User.find(name: params["name"])
+    sched = u.generate_schedule
+    sched.to_json
+  end
+
+  post '/user/:name/show' do
+    content_type :json
+
+    u = User.find(name: params["name"])
+    s = Show.find(name: params["show"])
+
+    if s.nil? then
+      "couldn't find show #{params["show"]}"
+    else
+      u.add_show(s)
+    end
+
+    u.shows.map { |s| s.name }.to_json
+
+  end
+
+  delete '/user/:name/show/:show' do
+
+    u = User.find(name: params["name"])
+    s = Show.find(uri_encoded: params["show"])
+
+    if s.nil? then
+      "couldn't find show #{params["show"]}"
+    else
+      u.remove_show(s)
+    end
+
+    u.shows.map { |s| s.name }.to_json
+
   end
 
   get '/user/:name/shows' do
-
-    user_id = db[:users].where(name: params["name"]).first[:id]
-    usershows = db[:usershows].join(:shows, id: :show_id)
-
-    show_name_list = usershows.select(:name).where(user_id: user_id)
-    show_names = show_name_list.all.map{ |i| i[:name] }
-
     content_type :json
-    show_names.to_json
-
+    u = User.find(name: params["name"])
+    u.shows.map { |s| s.name }.to_json
   end
 
 end
