@@ -110,6 +110,8 @@ class User < Sequel::Model
       end # if not ...
     end # shows_dataset.each
 
+    schedule
+
   end
 
 end
