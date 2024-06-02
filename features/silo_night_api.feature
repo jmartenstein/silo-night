@@ -12,25 +12,26 @@ Feature: silo-night API
   Scenario: Return a different user's show list through the API
     When "justin" sends an API request for a list of shows
     Then the site responds with JSON
-    And the site responds with text containing "Slow Horses"
-    And the site responds with text not containing "Suits"
+    And the site responds with text containing "His Dark Materials"
+    And the site responds with text not containing "The Amazing Race"
 
   Scenario: Return 200 on a delete request
-    When "steph" sends an API request to delete "Suits" from the list
+    When "steph" sends an API request to delete "suits" from the list
     Then the site responds with an OK code
+    And the site responds with text not containing "Suits"
 
   Scenario: Return 200 on a post request to an add URL
-    When "justin" sends an API request to add "Suits" to the list
+    When "justin" sends an API request to add "His Dark Materials" to the list
     Then the site responds with an OK code
-    And the site responds with text containing "Equalizer"
+    And the site responds with text containing "His Dark Materials"
 
   Scenario: Show user's schedule based on seeded data
     When "justin" sends an API request to view the schedule
-    Then the show "Reacher" is scheduled for "Monday"
+    Then the show "The Equalizer" is scheduled for "Monday"
 
   Scenario: Remove and add a show and generate a new schedule
     Given "steph" sends an API request to delete "Suits" from the list
-      And "steph" sends an API request to add "Suits" to the list
+      And "steph" sends an API request to add "The Amazing Race" to the list
     When  "steph" generates a new schedule
     Then  the site responds with text not containing "Suits"
       And the site responds with text containing "The Amazing Race"

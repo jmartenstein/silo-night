@@ -11,9 +11,8 @@ end
 Then('the show {string} is scheduled for {string}') do |show, weekday|
   response_body = $browser.last_response.body
   j = JSON.parse(response_body)
-  expect(j["schedule"][weekday]).to include(show)
+  expect(j[weekday]).to include(show)
 end
-
 
 Then('the site responds with an OK code') do
   expect($browser.last_response).to be_ok
