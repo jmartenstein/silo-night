@@ -20,7 +20,14 @@ def load_user(name)
 
     j = JSON.parse(File.read("data/#{name}.json"))
     u = User.find(name: name)
-    j["shows"].each { |s| u.add_show( Show.find(name: s)) }
+
+    i = 0
+    j["shows"].each do |s|
+      show = Show.find(name: s)
+      u.add_show(show)
+      u.set_show_order(show, i)
+      i += 1
+    end
 
   end
 

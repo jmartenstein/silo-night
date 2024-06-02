@@ -5,7 +5,10 @@ Sequel.connect('sqlite://data/silo_night.db')
 
 class User < Sequel::Model
 
-  many_to_many :shows
+  # make sure to include the show order when pulling the show association
+  many_to_many :shows,
+    select: [Sequel[:shows].*,
+             Sequel[:shows_users][:show_order]]
 
   def config_day_lookup( day="" )
     case day
@@ -45,6 +48,13 @@ class User < Sequel::Model
 
   def load_from_file_by_username( name = "test" )
     load_from_file( "./data/#{name}.json" )
+  end
+
+  # TODO: Add code to make sure the show orders after this one are
+  #       also updated
+  def set_show_order( show="", order=0 )
+    usershow_ds = self.db[:shows_users].where(user_id: self.id, show_id: show.id)
+    usershow_ds.update(show_order: order)
   end
 
   def is_show_in_schedule?( show="" )

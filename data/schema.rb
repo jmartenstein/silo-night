@@ -19,8 +19,10 @@ db.create_table? :shows do
 end
 
 db.create_table? :shows_users do
-  primary_key :id
-  foreign_key  :user_id, :users, key: :id
-  foreign_key  :show_id, :shows, key: :id
+  foreign_key  :user_id, :users, null: false
+  foreign_key  :show_id, :shows, null: false
+  Integer      :show_order
+  primary_key  [:show_id, :user_id]
+  index        [:show_id, :user_id]
 end
 
