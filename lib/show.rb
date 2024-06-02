@@ -51,10 +51,11 @@ class Shows
     j = JSON.parse(json)
     j.each do |show|
       @list.append(
-        Show.new(name:       show["name"],
-                 wiki_page:  show["wiki_page"],
-                 page_title: show["page_title"],
-                 runtime:    show["runtime"])
+        Show.new(name:        show["name"],
+                 wiki_page:   show["wiki_page"],
+                 page_title:  show["page_title"],
+                 runtime:     show["runtime"],
+                 uri_encoded: show["uri_encoded"])
       )
     end
     return true
