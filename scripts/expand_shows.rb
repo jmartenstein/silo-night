@@ -4,6 +4,7 @@ require 'faraday'
 require 'json'
 require 'logger'
 require 'optparse'
+require 'uri'
 
 def get_page_info(conn, show_name)
 
@@ -120,12 +121,16 @@ source_show_list.each { |show|
     runtime = get_runtime(connection, title)
   end
 
+  p = URI::Parser.new
   show_match = /([^\(]+).*/.match(show)
 
-  show_hash['name'] = show_match[1].strip
+  show_name = show_match[1].strip
+
+  show_hash['name'] = show_name
   show_hash['wiki_page'] = title
   show_hash['page_title'] = address
   show_hash['runtime'] = runtime
+  show_hash['uri_encoded'] = p.escape(show_name.downcase)
 
   if runtime != "" then
     destination_list += [show_hash]

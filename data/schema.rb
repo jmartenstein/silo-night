@@ -11,9 +11,10 @@ end
 
 db.create_table? :shows do
   primary_key :id
-  String      :name,       unique: true
-  String      :wiki_page,  null: true
-  String      :page_title, null: true
+  String      :name,        unique: true
+  String      :uri_encoded, index: true
+  String      :wiki_page,   null: true
+  String      :page_title,  null: true
   String      :runtime
 end
 
