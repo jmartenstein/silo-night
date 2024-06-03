@@ -88,7 +88,7 @@ class User < Sequel::Model
 
   def find_next_available_slot( show="" )
 
-    lookup_show = shows_dataset.where( name: show ).first
+    lookup_show = self.shows_dataset.where( name: show ).first
     config = JSON.parse(@values[:config])
     next_available_day = ""
 
