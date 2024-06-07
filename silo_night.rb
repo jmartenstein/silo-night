@@ -40,6 +40,18 @@ namespace '/api/v0.1' do
     sched.to_json
   end
 
+  get '/user/:name/tonight' do
+
+    content_type :json
+    today = Date.today.strftime('%A')
+
+    u = User.find(name: params["name"])
+    j = JSON.parse(u.schedule)
+
+    j[today].to_json
+
+  end
+
   post '/user/:name/show' do
     content_type :json
 
