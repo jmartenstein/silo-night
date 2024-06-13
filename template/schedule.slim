@@ -1,0 +1,10 @@
+doctype html
+
+html
+  body
+    h1 Schedule
+    - @schedule.each do |day, shows|
+      h2 #{day}
+      ul
+        - shows.each do |show|
+          li: h3 #{show}

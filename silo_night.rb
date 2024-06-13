@@ -16,12 +16,14 @@ get '/' do
   slim :index
 end
 
-get '/schedule' do
+get '/user/:name/schedule' do
+  @schedule = JSON.parse(User.find(name: params["name"]).schedule)
   slim :schedule
 end
 
-post '/schedule' do
-  slim :schedule
+get '/user/:name/schedule/edit' do
+  @schedule = User.find(name: params["name"]).schedule
+  slim :edit_schedule
 end
 
 namespace '/api/v0.1' do
