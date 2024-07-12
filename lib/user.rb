@@ -8,7 +8,8 @@ class User < Sequel::Model
   # make sure to include the show order when pulling the show association
   many_to_many :shows,
     select: [Sequel[:shows].*,
-             Sequel[:shows_users][:show_order]]
+             Sequel[:shows_users][:show_order]],
+    order: Sequel[:shows_users][:show_order]
 
   def config_day_lookup( day="" )
     case day
@@ -53,8 +54,23 @@ class User < Sequel::Model
   # TODO: Add code to make sure the show orders after this one are
   #       also updated
   def set_show_order( show="", order=0 )
-    usershow_ds = self.db[:shows_users].where(user_id: self.id, show_id: show.id)
-    usershow_ds.update(show_order: order)
+
+    usershow_list = self.shows_dataset.all
+
+    # remove the show from the list
+    usershow_list.delete(show)
+
+    i = 0
+    while i < order do
+      usershow_list[i].values[:show_order] = i
+      i += 1
+    end
+
+    show.values[:show_order] = order
+    usershow_list.insert(order, show)
+
+    return usershow_list
+
   end
 
   def is_show_in_schedule?( show="" )
