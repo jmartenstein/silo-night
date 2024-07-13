@@ -13,6 +13,7 @@ set :views, File.expand_path(File.join(__FILE__, '../template'))
 db = Sequel.connect('sqlite://data/silo_night.db')
 
 get '/' do
+  @users = User.map { |x| x[:name] }
   slim :index
 end
 
