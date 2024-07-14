@@ -24,7 +24,7 @@ end
 
 get '/user/:name/schedule/edit' do
   @schedule = User.find(name: params["name"]).schedule
-  slim :edit_schedule
+  slim :schedule_edit
 end
 
 namespace '/api/v0.1' do
