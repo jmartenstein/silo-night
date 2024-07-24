@@ -10,11 +10,9 @@ html
     ul
       - @users.each do |u|
         li
-          p #{u}
-          ul
-            li
-              a href="/user/#{u}/schedule" schedule
-            li
-              a href="/user/#{u}/shows" shows
+          |> #{u}:
+          a> href="/user/#{u}/schedule" schedule
+          |> /
+          a> href="/user/#{u}/shows" shows
 
     h2 Create a new schedule
