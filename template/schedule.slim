@@ -1,8 +1,13 @@
 doctype html
 
 html
+
   body
-    h1 Schedule
+
+    h1
+      | Schedule
+      a style="font-size:60%;padding:15px" href="schedule/edit" edit
+
     - @schedule.each do |day, shows|
       h2 #{day}
       ul
