@@ -104,6 +104,6 @@ get '/user/:name/shows' do
   # get the list of shows associated with the username
   shows = db[:shows].select(:name).where(id: user_id)
 
-  slim :user_shows, :locals => { :shows => shows }
+  slim :shows, :locals => { :shows => shows }
 
 end
