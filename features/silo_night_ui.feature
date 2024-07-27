@@ -13,6 +13,8 @@ Feature: SiloNight user interface
   Scenario: Stephanie edits her list of shows
     When the user "Stephanie" visits the page to edit her shows
     Then the edit page displays an "Add" button
+    And the edit page displays a "Shows" header
+    And the edit page displays an "Availability" header
 
   Scenario: Create a new list of shows
     When any user clicks the "Create" link on the welcome page
