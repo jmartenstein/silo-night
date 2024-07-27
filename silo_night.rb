@@ -97,13 +97,8 @@ end
 get '/user/:name/shows' do
 
   # lookup user_id based on name
-  user_id = db[:users].where(name: params["name"])
-
-  puts user_id
-
-  # get the list of shows associated with the username
-  shows = db[:shows].select(:name).where(id: user_id)
-
-  slim :shows, :locals => { :shows => shows }
+  u = User.find(name: params["name"])
+  @shows = u.shows.map { |s| s.name }
+  slim :shows
 
 end

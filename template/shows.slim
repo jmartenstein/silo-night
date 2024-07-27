@@ -5,4 +5,6 @@ script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
 html
   body
     p List of shows
-
+    ul
+      - @shows.each do |s|
+        li #{s}
