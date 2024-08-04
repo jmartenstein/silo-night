@@ -23,7 +23,8 @@ get '/user/:name/schedule' do
 end
 
 get '/user/:name/schedule/edit' do
-  @schedule = User.find(name: params["name"]).schedule
+  @shows = User.find(name: params["name"]).shows
+  @config = User.find(name: params["name"]).config
   slim :schedule_edit
 end
 
