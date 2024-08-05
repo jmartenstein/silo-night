@@ -18,3 +18,8 @@ Then('the site responds with an OK code') do
   expect($browser.last_response).to be_ok
 end
 
+Then('the site responds with a 404 error code') do
+  p $browser.last_response.status
+  expect($browser.last_response.status).to eq(404)
+end
+

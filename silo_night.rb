@@ -73,12 +73,15 @@ namespace '/api/v0.1' do
   end
 
   delete '/user/:name/show/:show' do
+    content_type :json
+
+    parser = URI::Parser.new
 
     u = User.find(name: params["name"])
-    s = Show.find(uri_encoded: params["show"])
+    s = Show.find(uri_encoded: parser.escape(params["show"]))
 
     if s.nil? then
-      "couldn't find show #{params["show"]}"
+      status 404
     else
       u.remove_show(s)
     end

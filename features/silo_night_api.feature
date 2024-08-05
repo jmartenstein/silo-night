@@ -25,9 +25,13 @@ Feature: silo-night API
     Then the site responds with an OK code
     And the site responds with text containing "His Dark Materials"
 
+  Scenario: Return a 404 when a show is not found for a user
+    When "justin" sends an API request to delete "foo" from the list
+    Then the site responds with a 404 error code
+
   Scenario: Show user's schedule based on seeded data
-    When "justin" sends an API request to view the schedule
-    Then the show "The Equalizer" is scheduled for "Monday"
+    When "test" sends an API request to view the schedule
+    Then the show "Suits" is scheduled for "Monday"
 
   Scenario: Remove and add a show and generate a new schedule
     Given "steph" sends an API request to delete "Suits" from the list
