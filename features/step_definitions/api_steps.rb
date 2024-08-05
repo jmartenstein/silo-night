@@ -9,7 +9,7 @@ When('{string} sends an API request for a list of shows') do |username|
 end
 
 When('{string} sends an API request to add {string} to the list') do |username,show|
-  $browser.post "/api/v0.1/user/#{username}/show", "show=>#{show}"
+  $browser.post "/api/v0.1/user/#{username}/show", "show"=>"#{show}"
 end
 
 When('{string} sends an API request to delete {string} from the list') do |username,show|

@@ -69,7 +69,7 @@ namespace '/api/v0.1' do
     s = Show.find(name: params["show"])
 
     if s.nil? then
-      "couldn't find show #{params["show"]}"
+      status 404
     else
       u.add_show(s)
     end

@@ -15,12 +15,12 @@ Feature: silo-night API
     And the site responds with text containing "His Dark Materials"
     And the site responds with text not containing "The Amazing Race"
 
-  Scenario: Return 200 on a delete request
+  Scenario: User deletes a show
     When "steph" sends an API request to delete "suits" from the list
     Then the site responds with an OK code
     And the site responds with text not containing "Suits"
 
-  Scenario: Return 200 on a post request to an add URL
+  Scenario: User adds a show
     When "justin" sends an API request to add "His Dark Materials" to the list
     Then the site responds with an OK code
     And the site responds with text containing "His Dark Materials"
