@@ -93,6 +93,12 @@ namespace '/api/v0.1' do
     u.shows.map { |s| s.name }.to_json
   end
 
+  get '/user/:name/show_uris' do
+    content_type :json
+    u = User.find(name: params["name"])
+    u.shows.map { |s| s.uri_encoded }.to_json
+  end
+
 end
 
 get '/user/:name/shows' do
