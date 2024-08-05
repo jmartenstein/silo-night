@@ -44,6 +44,12 @@ namespace '/api/v0.1' do
     sched.to_json
   end
 
+  get '/user/:name/config' do
+    content_type :json
+    u = User.find(name: params["name"])
+    u.config
+  end
+
   get '/user/:name/tonight' do
 
     content_type :json
