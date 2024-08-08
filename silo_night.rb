@@ -30,6 +30,12 @@ end
 
 namespace '/api/v0.1' do
 
+  delete '/user/:name' do
+  end
+
+  put '/user/:name' do
+  end
+
   put '/user/:name/schedule' do
     content_type :json
     u = User.find(name: params["name"])
