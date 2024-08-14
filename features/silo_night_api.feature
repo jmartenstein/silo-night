@@ -21,7 +21,7 @@ Feature: silo-night API
     And the site responds with text not containing "Suits"
 
   Scenario: User adds a show
-    When "justin" sends an API request to add "His Dark Materials" to the list
+    When "test" sends an API request to add "His Dark Materials" to the list
     Then the site responds with an OK code
     And the site responds with text containing "His Dark Materials"
 
