@@ -31,9 +31,50 @@ end
 namespace '/api/v0.1' do
 
   delete '/user/:name' do
+    content_type :json
+
+    # delete each of the user show links
+    u = User.find(name: params["name"])
+
+    if u.nil?
+      status 404
+    else
+      show_list = u.shows
+      show_list.each do |s|
+        u.remove_show(s)
+      end
+
+      # delete the user itself
+      u.delete
+      "user #{params["name"]}' deleted"
+    end
+
   end
 
   put '/user/:name' do
+    content_type :json
+
+    # does the user already exist?
+    u = User.find(name: params["name"])
+
+    if u.nil?
+
+      # create new user from name
+      u = User.new
+      u["name"] = params["name"]
+      u.save
+
+      # load shows from json
+      u.load_from_json_string(request.body.read, true)
+      u.save
+
+      # return user name
+      return params["name"]
+
+    else
+      return "user '#{params["name"]}' already exists"
+    end
+
   end
 
   put '/user/:name/schedule' do

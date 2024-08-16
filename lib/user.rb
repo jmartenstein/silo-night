@@ -23,9 +23,8 @@ class User < Sequel::Model
     end
   end
 
-  def load_from_file( filename = "" )
+  def load_from_json_string( text = "", load_shows = false )
 
-    text = File.read(filename)
     j = JSON.parse(text)
 
     # load the initial values
@@ -33,18 +32,28 @@ class User < Sequel::Model
     @values[:config]   = j["config"].to_json
     @values[:schedule] = j["schedule"].to_json
 
+    # TODO: this is hacky, needs to be cleaned up
+    if load_shows
+      j["shows"].each { |s| add_show( Show.find(name: s) ) }
+    end
+
     true
 
   end
 
+  def load_from_file( filename = "" )
+    text = File.read(filename)
+    load_from_json_string(text)
+    true
+  end
+
+  def load_shows_from_json( shows = "" )
+    shows.each { |s| add_show( Show.find(name: s) ) }
+  end
+
   def load_shows_from_file( filename = "")
     text = File.read(filename)
-    j = JSON.parse(text)
-
-    if j["shows"] then
-      j["shows"].each { |s| add_show( Show.find(name: s) ) }
-    end
-    true
+    load_show_from_json( text )
   end
 
   def load_from_file_by_username( name = "test" )
@@ -93,7 +102,9 @@ class User < Sequel::Model
     if not schedule_day.nil?
       schedule_day.each do |show|
         lookup_show = shows_dataset.where( name: show ).first
-        runtime_sum += lookup_show.average_runtime
+        if not lookup_show.nil?
+          runtime_sum += lookup_show.average_runtime
+        end
       end
     end
 
