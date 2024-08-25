@@ -2,6 +2,7 @@
 
 require 'sinatra'
 require 'sinatra/contrib'
+require 'slim'
 
 require 'sequel'
 require 'user'
