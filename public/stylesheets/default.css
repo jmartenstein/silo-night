@@ -1,0 +1,47 @@
+/* default.css - the primary CSS file for silo_night */
+
+/* make the layout easier by including the border in the element size */
+* {
+  box-sizing: border-box;
+}
+
+div.border {
+  border-style: dotted;
+  border-width: 0px;
+  position: relative;
+  left: 8px;
+}
+
+input.addtext {
+  margin: 0;
+  position: relative;
+  left: 4px;
+  bottom: 4px;
+  font-size:16px;
+}
+
+input.addbutton {
+  margin: 0;
+  position: relative;
+  left: 4px;
+  bottom: 4px;
+  font-size:16px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+ul.list li {
+  cursor: pointer;
+  position: relative;
+  font-size: 16px;
+  padding: 10px 8px 10px 8px;
+  width: 300px;
+}
+
+ul.list li:hover {
+  background: #ddd
+}

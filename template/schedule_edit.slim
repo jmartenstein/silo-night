@@ -1,11 +1,26 @@
 doctype html
 
 html
+ 
+  head
+    link rel="stylesheet" href="/stylesheets/default.css"
+
   body
-    p Shows
-    p Add shows
-    div.shows
-    form
-      input type="text"
-      input type="button" value="Add"
-    p Availability
+
+    h2 Shows
+
+    div#showbox.border
+
+      div#show.header
+        form
+          input.addtext type="text" placeholder="Name..."
+          input.addbutton type="button" value="Add"
+
+      ul#show.list
+        - @shows.each do |s|
+          li #{s.name}
+
+    h2 Availability
+
+    div#availbox.border
+
