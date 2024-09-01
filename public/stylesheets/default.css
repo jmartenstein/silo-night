@@ -18,6 +18,7 @@ input.addtext {
   left: 4px;
   bottom: 4px;
   font-size:16px;
+  width: 200px;
 }
 
 input.addbutton {
@@ -39,9 +40,20 @@ ul.list li {
   position: relative;
   font-size: 16px;
   padding: 10px 8px 10px 8px;
-  width: 300px;
+  width: 250px;
 }
 
 ul.list li:hover {
   background: #ddd
+}
+
+span.remove {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10px 8px 10px 8px;
+}
+
+span.remove:hover {
+  background: #bbb
 }
