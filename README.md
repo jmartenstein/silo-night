@@ -1,6 +1,6 @@
 # Silo Night README
 
-A lifestyle for those tired of binging shows
+A lifestyle for those tired of binging shows. This project provides a multi-user website for managing weekly TV schedules.
 
 ## The Name
 
@@ -49,21 +49,12 @@ Any good system can be broken down into a series of loops.
 
 ### What am I watching tonight?
 
-This is the first and most straightforward question, and the simplest answer.
-Your weekly schedule is stored on the back-end (SQL? JSON?). Today's date and
-weekday are fed into the system, and the simple output of what is on your
-schedule is returned.
+This is the first and most straightforward question, and the simplest answer.  Your weekly schedule is stored on the back-end: JSON data stored in a sqlite3 database. Today's date and weekday are fed into the system, and the simple output of what is on your schedule is returned.
 
 ### Setting my schedule 
 
-When I'm ready to change shows, or re-order my schedule, then I want to be able
-to go to an "edit" page, and change the overall parameters of what I want to watch.
-The schedule should provide immediate feedback and display very clearly what I'm
-watching each day and each week.
+When I'm ready to change shows, or re-order my schedule, then I want to be able to go to an "edit" page, and change the overall parameters of what I want to watch.  The schedule should provide immediate feedback and display very clearly what I'm watching each day and each week.
 
 ### Populating the data
 
-The Silo Night app needs a backend data store with lookup information for any
-show. When a user is trying to plan out their weekly schedule, we want to
-provide information like average runtime, number of seasons, number of episodes,
-etc.
+The Silo Night app needs a backend data store with lookup information for any show. When a user is trying to plan out their weekly schedule, we want to provide information like average runtime, number of seasons, number of episodes, etc.
