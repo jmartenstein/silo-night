@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'cucumber', '~>7.1'
+gem 'cucumber', '~>10.0.0'
 gem 'faraday', '~>2.7.11'
 gem 'puma', '>=6.4.0' 
 gem 'rspec', '>=3.12.0'
