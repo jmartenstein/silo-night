@@ -37,3 +37,22 @@ The choice of database (SQLite3) influences the deployment strategy significantl
 - **Option A (VPS):** Deploy to a Virtual Private Server (e.g., DigitalOcean Droplet, Linode, AWS Lightsail) where the SQLite file can persist on the disk.
 - **Option B (Docker):** Containerize the application. Use a Docker volume to map the `data/` directory to the host machine, ensuring the database survives container restarts.
 - **Option C (PaaS with modification):** If using Heroku or Render, switch the database from SQLite to PostgreSQL to handle data persistence statelessly.
+
+## 4. What architectural assumptions and biases exist in the current implementation?
+
+**Context:** Analysis of the codebase (`silo_night.rb`, `lib/show.rb`, `lib/user.rb`, etc.) reveals several ingrained technical and logic-based assumptions.
+
+**Assumptions identified:**
+- **Database Coupling:** The database connection (`sqlite://data/silo_night.db`) is hardcoded in multiple core files, assuming a local SQLite file system.
+- **Identity via URL:** The application assumes a trusted environment by identifying users solely through URL parameters (e.g., `/user/:name`), with no session-based authentication.
+- **Serialized State:** User schedules and configurations are stored as JSON strings within database columns. This assumes that relational queries on schedule data won't be necessary and complicates data validation.
+- **Brittle Parsing:** The `Show#average_runtime` method assumes a specific string format (e.g., "60 minutes") and uses a basic regex/split strategy that may fail on more complex runtime descriptions.
+- **Local File Dependency:** There is a heavy reliance on local JSON files (`data/*.json`) for seeding and data loading, assuming these files are always present and correctly formatted.
+- **Greedy Scheduling:** The `generate_schedule` logic assumes a "first-fit" priority where shows are added to the first available day that fits their runtime, which may not align with complex user preferences.
+
+**Recommendation:**
+To improve the project's flexibility and robustness:
+- **Environment Configuration:** Extract database URLs and file paths into environment variables or a `config.yml`.
+- **Relational Refactoring:** Move schedule data from a JSON blob into a join table (e.g., `schedules` or `user_shows`) to allow for better data integrity and querying.
+- **Standardized Data Types:** Store runtimes as integers (minutes) in the database instead of strings to avoid brittle parsing.
+- **API-First Data:** Shift away from local JSON files towards the API-based approach mentioned in Question 1.
