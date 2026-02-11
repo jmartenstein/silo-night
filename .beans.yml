@@ -2,5 +2,5 @@ beans:
     path: .beans
     prefix: silo-
     id_length: 3
-    default_status: todo
+    default_status: draft
     default_type: task
