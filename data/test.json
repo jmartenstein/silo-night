@@ -1,0 +1,11 @@
+{
+  "name": "test",
+  "config": {
+    "days": "t,w,th,f",
+    "time": "85m"
+  },
+  "shows": [ "Suits", "The Afterparty", "His Dark Materials" ],
+  "schedule": {
+    "Tuesday": [ "Suits" ]
+  }
+}
