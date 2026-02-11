@@ -1,11 +1,11 @@
 ---
 # silo-iox
 title: Migration Tooling and Documentation
-status: todo
+status: completed
 type: feature
 priority: normal
 created_at: 2026-02-11T21:03:13Z
-updated_at: 2026-02-11T21:19:25Z
+updated_at: 2026-02-11T21:57:43Z
 parent: silo-v0b
 ---
 

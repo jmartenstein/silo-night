@@ -5,6 +5,7 @@ require 'sinatra/contrib'
 require 'slim'
 
 require 'sequel'
+require 'sequel/extensions/migration'
 require 'user'
 
 # set slim templates to custom diectory
@@ -12,6 +13,11 @@ set :views, File.expand_path(File.join(__FILE__, '../template'))
 
 # load the databae
 db = Sequel.connect('sqlite://data/silo_night.db')
+
+# Ensure migrations are current
+unless Sequel::Migrator.is_current?(db, 'db/migrations')
+  warn "WARNING: Database migrations are not up to date. Run 'rake db:migrate' to update."
+end
 
 get '/' do
   @users = User.map { |x| x[:name] }

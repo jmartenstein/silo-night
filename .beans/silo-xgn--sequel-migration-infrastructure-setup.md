@@ -1,11 +1,11 @@
 ---
 # silo-xgn
 title: Sequel Migration Infrastructure Setup
-status: todo
+status: completed
 type: feature
 priority: normal
 created_at: 2026-02-11T20:55:26Z
-updated_at: 2026-02-11T21:21:42Z
+updated_at: 2026-02-11T21:58:43Z
 parent: silo-v0b
 ---
 

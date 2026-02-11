@@ -1,11 +1,11 @@
 ---
 # silo-qnu
 title: Create Migration Development Guide
-status: todo
+status: completed
 type: task
 priority: normal
 created_at: 2026-02-11T21:04:41Z
-updated_at: 2026-02-11T21:19:31Z
+updated_at: 2026-02-11T21:51:56Z
 parent: silo-iox
 ---
 
@@ -17,6 +17,6 @@ Write documentation for developers explaining how to create new migrations and r
 - Document how to use the Rake tasks.
 
 ## Checklist
-- [ ] Create 'docs/migrations.md' (or add to README)
-- [ ] Document migration file naming (e.g., timestamps vs serial numbers)
-- [ ] Document 'db:migrate' and 'db:rollback' commands
+- [x] Create "docs/migrations.md" (or add to README)
+- [x] Document migration file naming (e.g., timestamps vs serial numbers)
+- [x] Document "db:migrate" and "db:rollback" commands

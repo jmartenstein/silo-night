@@ -1,11 +1,11 @@
 ---
 # silo-5ho
 title: Create Migrations Directory and Version Table
-status: todo
+status: completed
 type: task
 priority: normal
 created_at: 2026-02-11T21:03:21Z
-updated_at: 2026-02-11T21:21:42Z
+updated_at: 2026-02-11T21:58:33Z
 parent: silo-xgn
 ---
 
