@@ -38,4 +38,11 @@ namespace :db do
       exit 1
     end
   end
+
+  desc "Seed the database with initial data"
+  task :seed do
+    $LOAD_PATH.unshift File.expand_path('./lib', __dir__)
+    load 'data/seed.rb'
+    puts "Database seeded."
+  end
 end

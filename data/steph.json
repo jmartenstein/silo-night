@@ -1,0 +1,11 @@
+{
+  "name": "steph",
+  "config": {
+    "days": "t,th",
+    "time": "60m"
+  },
+  "shows": [ "Grey's Anatomy" ],
+  "schedule": {
+    "Tuesday": [ "Grey's Anatomy" ]
+  }
+}

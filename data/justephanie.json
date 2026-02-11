@@ -1,0 +1,16 @@
+{
+  "name": "justephanie",
+  "config": {
+    "days": "s,m,t,w,th,f",
+    "time": "90m"
+  },
+  "shows": [ ],
+  "schedule": {
+    "Sunday": [ ],
+    "Monday": [ "Lioness", "Abbott Elementary"],
+    "Tuesday": [ "The Equalizer", "Only Murders in the Building" ],
+    "Wednesday": [ "Arcane", "Slow Horses" ],
+    "Thursday": [ "Silo", "The Diplomat" ],
+    "Friday": [ "What If...?", "High Potential" ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "justin",
+  "config": {
+    "days": "m,w,f",
+    "time": "120m"
+  },
+  "shows": [ "Slow Horses", "The Afterparty" ],
+  "schedule": {
+    "Monday": [ "Slow Horses" ]
+  }
+}
