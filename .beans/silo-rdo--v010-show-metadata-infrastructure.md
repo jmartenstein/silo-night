@@ -3,9 +3,9 @@
 title: 'v0.10: Show Metadata Infrastructure'
 status: in-progress
 type: milestone
-priority: normal
+priority: high
 created_at: 2026-02-11T20:21:59Z
-updated_at: 2026-02-11T21:23:40Z
+updated_at: 2026-02-11T22:36:00Z
 ---
 
 Focuses on establishing a robust metadata pipeline and database integrity for show data.

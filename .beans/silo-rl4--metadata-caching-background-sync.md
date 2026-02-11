@@ -1,11 +1,11 @@
 ---
 # silo-rl4
 title: Metadata Caching & Background Sync
-status: draft
+status: todo
 type: epic
 priority: normal
 created_at: 2026-02-11T20:20:53Z
-updated_at: 2026-02-11T20:23:55Z
+updated_at: 2026-02-11T22:27:21Z
 parent: silo-rdo
 ---
 

@@ -3,10 +3,12 @@
 title: TMDB/TVMaze API Integration
 status: draft
 type: epic
-priority: normal
+priority: high
 created_at: 2026-02-11T20:20:46Z
-updated_at: 2026-02-11T20:23:50Z
+updated_at: 2026-02-11T22:35:55Z
 parent: silo-rdo
+blocking:
+    - silo-srm
 ---
 
 Build a robust API client to fetch show data (runtimes, genres, posters) from public databases. This replaces the manual seed.rb and static JSON data.
