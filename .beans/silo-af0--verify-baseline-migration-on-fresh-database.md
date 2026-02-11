@@ -1,10 +1,11 @@
 ---
 # silo-af0
 title: Verify Baseline Migration on Fresh Database
-status: draft
+status: completed
 type: task
+priority: normal
 created_at: 2026-02-11T21:04:33Z
-updated_at: 2026-02-11T21:04:33Z
+updated_at: 2026-02-11T21:34:24Z
 parent: silo-3la
 ---
 
@@ -16,7 +17,7 @@ Ensure that the initial migration can successfully build a new database from scr
 - Use 'db:rollback' to ensure the 'down' block works as expected.
 
 ## Checklist
-- [ ] Run 'db:migrate' on a clean database
-- [ ] Verify table structures match current schema
-- [ ] Run 'db:rollback' and verify tables are removed
-- [ ] Run 'db:migrate' again to confirm idempotency
+- [x] Run 'db:migrate' on a clean database
+- [x] Verify table structures match current schema
+- [x] Run 'db:rollback' and verify tables are removed
+- [x] Run 'db:migrate' again to confirm idempotency
