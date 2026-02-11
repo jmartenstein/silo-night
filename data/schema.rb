@@ -1,6 +1,7 @@
 require 'sequel'
 
-db = Sequel.connect('sqlite://data/silo_night.db')
+db_url = ENV['DATABASE_URL'] || (ENV['RACK_ENV'] == 'test' ? 'sqlite://data/test.db' : 'sqlite://data/silo_night.db')
+db = Sequel.connect(db_url)
 
 db.create_table? :users do
   primary_key :id

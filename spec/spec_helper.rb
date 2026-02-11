@@ -6,9 +6,11 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.before(:suite) do
-    db = Sequel.connect('sqlite://data/silo_night.db')
+    ENV['RACK_ENV'] = 'test'
+    db_url = ENV['DATABASE_URL'] || 'sqlite://data/test.db'
+    db = Sequel.connect(db_url)
     unless Sequel::Migrator.is_current?(db, 'db/migrations')
-      puts "Database migrations are not up to date. Run 'rake db:migrate' first."
+      puts "Database migrations are not up to date. Run 'RACK_ENV=test rake db:migrate' first."
       exit 1
     end
     FactoryBot.find_definitions

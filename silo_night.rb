@@ -10,9 +10,11 @@ require 'user'
 
 # set slim templates to custom diectory
 set :views, File.expand_path(File.join(__FILE__, '../template'))
+set :protection, :except => :host_authorization
 
 # load the databae
-db = Sequel.connect('sqlite://data/silo_night.db')
+db_url = ENV['DATABASE_URL'] || (ENV['RACK_ENV'] == 'test' ? 'sqlite://data/test.db' : 'sqlite://data/silo_night.db')
+db = Sequel.connect(db_url)
 
 # Ensure migrations are current
 unless Sequel::Migrator.is_current?(db, 'db/migrations')

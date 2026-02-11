@@ -1,7 +1,7 @@
 require 'sequel'
 require 'sequel/extensions/migration'
 
-DB_URL = 'sqlite://data/silo_night.db'
+DB_URL = ENV['DATABASE_URL'] || (ENV['RACK_ENV'] == 'test' ? 'sqlite://data/test.db' : 'sqlite://data/silo_night.db')
 MIGRATIONS_DIR = 'db/migrations'
 
 namespace :db do
