@@ -1,10 +1,11 @@
 ---
 # silo-qnu
 title: Create Migration Development Guide
-status: draft
+status: todo
 type: task
+priority: normal
 created_at: 2026-02-11T21:04:41Z
-updated_at: 2026-02-11T21:04:41Z
+updated_at: 2026-02-11T21:19:31Z
 parent: silo-iox
 ---
 

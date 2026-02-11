@@ -1,10 +1,11 @@
 ---
 # silo-3la
 title: Initial Schema Baseline Migration
-status: draft
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-11T21:03:06Z
-updated_at: 2026-02-11T21:03:06Z
+updated_at: 2026-02-11T21:34:59Z
 parent: silo-v0b
 ---
 

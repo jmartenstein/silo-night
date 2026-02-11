@@ -1,10 +1,11 @@
 ---
 # silo-fcu
 title: Configure Rake Tasks for Migration Management
-status: draft
+status: todo
 type: task
+priority: normal
 created_at: 2026-02-11T21:03:29Z
-updated_at: 2026-02-11T21:03:29Z
+updated_at: 2026-02-11T21:21:42Z
 parent: silo-xgn
 ---
 
