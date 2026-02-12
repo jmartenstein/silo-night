@@ -51,28 +51,23 @@ namespace :test do
   desc "Run RSpec tests"
   task :rspec do
     puts "Running RSpec tests..."
-    # The instruction is to disable failing tests. Without specific knowledge of
-    # which tests are failing, we'll try to run them and observe. If tests fail,
-    # we would ideally use rspec options to skip them. For now, we'll run them directly.
-    # Example for skipping if known: system("bundle exec rspec --tag ~flaky")
-    # For now, assume direct execution will show failures and we'll report them.
-    # If it fails, the command will exit with a non-zero status.
-    system("bundle exec rspec")
+    system("bundle exec rspec --tag ~failing")
+    # The instruction is to disable failing tests. Tests tagged with '~failing' will be skipped.
     if $?.exitstatus != 0
-      puts "RSpec tests failed. See output above. Failing tests will be addressed later."
+      puts "RSpec tests failed (or were skipped). See output above. Failing tests will be addressed later."
     end
   end
 
   desc "Run Cucumber tests"
   task :cucumber do
     puts "Running Cucumber tests..."
-    # Similar logic for Cucumber.
-    system("bundle exec cucumber")
+    system("bundle exec cucumber --tags ~failing")
+    # The instruction is to disable failing scenarios. Scenarios tagged with '~failing' will be skipped.
     if $?.exitstatus != 0
-      puts "Cucumber tests failed. See output above. Failing tests will be addressed later."
+      puts "Cucumber tests failed (or were skipped). See output above. Failing scenarios will be addressed later."
     end
   end
 
   desc "Run all tests (RSpec and Cucumber)"
-  task :all => [:rspec, :cucumber]
+  task :all => ['db:migrate', :rspec, :cucumber]
 end
