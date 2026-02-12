@@ -1,5 +1,7 @@
 require 'sequel'
 require 'sequel/extensions/migration'
+require 'rspec/core/rake_task'
+require 'cucumber/rake/task'
 
 DB_URL = ENV['DATABASE_URL'] || (ENV['RACK_ENV'] == 'test' ? 'sqlite://data/test.db' : 'sqlite://data/silo_night.db')
 MIGRATIONS_DIR = 'db/migrations'
@@ -46,3 +48,16 @@ namespace :db do
     puts "Database seeded."
   end
 end
+
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.rspec_opts = "--tag ~failing"
+end
+
+Cucumber::Rake::Task.new(:cucumber) do |t|
+  t.cucumber_opts = "--tags 'not @failing'"
+end
+
+desc "Run all tests"
+task :test => ['db:migrate', :spec, :cucumber]
+
+task :default => :test

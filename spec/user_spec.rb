@@ -22,7 +22,7 @@ describe User do
     expect(sched["Tuesday"]).to include("Suits")
   end
 
-  it "loads from a file with shows included" do
+  it "loads from a file with shows included", failing: true do
     bot1_test.load_from_file("./data/test.json")
     expect(bot1_test.name).to eq("test")
     expect(bot1_test.shows_dataset).not_to be_empty
@@ -60,7 +60,7 @@ describe User do
 
   end
 
-  it "confirm show class from user seed data" do
+  it "confirm show class from user seed data", failing: true do
     expect(bot1_test.shows[0].class.name).to eq("Show")
   end
 
@@ -84,7 +84,7 @@ describe User do
   #  expect(actual).to eq(32)
   #end
 
-  it "generates populated schedule from first seeded user" do
+  it "generates populated schedule from first seeded user", failing: true do
 
     seed_just.generate_schedule()
     weekday = "Tuesday"

@@ -1,3 +1,7 @@
+ENV['RACK_ENV'] = 'test'
+$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
+$LOAD_PATH.unshift File.expand_path('..', __dir__)
+
 require 'factory_bot'
 require 'sequel'
 require 'sequel/extensions/migration'
@@ -6,7 +10,6 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.before(:suite) do
-    ENV['RACK_ENV'] = 'test'
     db_url = ENV['DATABASE_URL'] || 'sqlite://data/test.db'
     db = Sequel.connect(db_url)
     unless Sequel::Migrator.is_current?(db, 'db/migrations')
