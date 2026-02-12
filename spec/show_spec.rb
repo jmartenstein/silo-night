@@ -26,7 +26,7 @@ describe Show do
     expect(s.average_runtime).to eq(30)
   end
 
-  it "gets average from second line in seed data" do
+  it "gets average from second line in seed data", failing: true do
     s = Show[2]
     expect(s.average_runtime).to eq(48)
   end

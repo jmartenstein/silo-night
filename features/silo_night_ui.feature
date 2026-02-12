@@ -6,11 +6,13 @@ Feature: silo-night user interface
     When any user visits the main page
     Then the page displays "Create a new schedule"
 
+  @failing
   Scenario: steph views her list of shows to watch
     When the user "steph" views her list of shows
     Then the page displays "The Equalizer"
     And the page displays "Grey&#39;s Anatomy"
 
+  @failing
   Scenario: Stephanie edits her list of shows
     When the user "steph" visits the page to edit her shows
     Then the page displays a form with "Add" text

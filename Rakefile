@@ -1,5 +1,7 @@
 require 'sequel'
 require 'sequel/extensions/migration'
+require 'rspec/core/rake_task'
+require 'cucumber/rake/task'
 
 DB_URL = ENV['DATABASE_URL'] || (ENV['RACK_ENV'] == 'test' ? 'sqlite://data/test.db' : 'sqlite://data/silo_night.db')
 MIGRATIONS_DIR = 'db/migrations'
@@ -47,27 +49,15 @@ namespace :db do
   end
 end
 
-namespace :test do
-  desc "Run RSpec tests"
-  task :rspec do
-    puts "Running RSpec tests..."
-    system("bundle exec rspec --tag ~failing")
-    # The instruction is to disable failing tests. Tests tagged with '~failing' will be skipped.
-    if $?.exitstatus != 0
-      puts "RSpec tests failed (or were skipped). See output above. Failing tests will be addressed later."
-    end
-  end
-
-  desc "Run Cucumber tests"
-  task :cucumber do
-    puts "Running Cucumber tests..."
-    system("bundle exec cucumber --tags ~failing")
-    # The instruction is to disable failing scenarios. Scenarios tagged with '~failing' will be skipped.
-    if $?.exitstatus != 0
-      puts "Cucumber tests failed (or were skipped). See output above. Failing scenarios will be addressed later."
-    end
-  end
-
-  desc "Run all tests (RSpec and Cucumber)"
-  task :all => ['db:migrate', :rspec, :cucumber]
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.rspec_opts = "--tag ~failing"
 end
+
+Cucumber::Rake::Task.new(:cucumber) do |t|
+  t.cucumber_opts = "--tags 'not @failing'"
+end
+
+desc "Run all tests"
+task :test => ['db:migrate', :spec, :cucumber]
+
+task :default => :test

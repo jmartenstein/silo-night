@@ -1,11 +1,11 @@
 ---
 # silo-kcb
 title: Automate Test Database Preparation in Rakefile
-status: todo
+status: completed
 type: task
 priority: high
 created_at: 2026-02-12T15:27:36Z
-updated_at: 2026-02-12T15:28:26Z
+updated_at: 2026-02-12T19:46:31Z
 parent: silo-ht5
 blocking:
     - silo-b21
@@ -15,5 +15,5 @@ blocking:
 Ensure the test database is migrated before running tests to avoid 'migrations not up to date' errors.
 
 ## Checklist
-- [ ] Add a task to migrate the test database
-- [ ] Make :spec and :cucumber depend on test database migration
+- [x] Add a task to migrate the test database
+- [x] Make :spec and :cucumber depend on test database migration

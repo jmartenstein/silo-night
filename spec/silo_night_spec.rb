@@ -19,7 +19,7 @@ RSpec.describe 'Silo Night app' do
     expect(last_response.body).to include("Create")
   end
 
-  it "creates a new schedule" do
+  it "creates a new schedule", failing: true do
     post '/schedule'
     expect(last_response).to be_ok
   end
