@@ -49,15 +49,17 @@ namespace :db do
   end
 end
 
-RSpec::Core::RakeTask.new(:spec) do |t|
-  t.rspec_opts = "--tag ~failing"
-end
+namespace :test do
+  RSpec::Core::RakeTask.new(:spec) do |t|
+    t.rspec_opts = "--tag ~failing"
+  end
 
-Cucumber::Rake::Task.new(:cucumber) do |t|
-  t.cucumber_opts = "--tags 'not @failing'"
+  Cucumber::Rake::Task.new(:cucumber) do |t|
+    t.cucumber_opts = "--tags 'not @failing'"
+  end
 end
 
 desc "Run all tests"
-task :test => ['db:migrate', :spec, :cucumber]
+task :test => ['db:migrate', 'test:spec', 'test:cucumber']
 
 task :default => :test
