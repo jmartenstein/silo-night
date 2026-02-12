@@ -7,7 +7,7 @@
 
 ## Assumptions
 - **Data Integrity**: It is assumed that `data/seed.rb` contains valid and up-to-date data for the current schema.
-- **Redundancy**: `data/schema.rb` is assumed to be entirely redundant now that migrations exist, but it might contain comments or structure not yet fully captured in the baseline migration.
+- **Redundancy**: `data/schema.rb` has been removed as it was entirely redundant once migrations were established in `db/migrations/`.
 - **API Availability**: The TMDB/TVMaze integration assumes these services are available and that their data models are stable enough to be cached locally with a simple TTL.
 - **Performance**: There is an assumption that N+1 queries and JSON parsing are the primary bottlenecks, without exhaustive profiling data yet mentioned (though `silo-cgn` mentions benchmarking).
 - **Isolation**: It is assumed that switching to `data/test.db` for tests will resolve all environment isolation issues without considering other side effects (like file system writes).
