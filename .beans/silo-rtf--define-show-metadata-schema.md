@@ -3,9 +3,9 @@
 title: Define show_metadata schema
 status: todo
 type: task
-priority: high
+priority: critical
 created_at: 2026-02-11T22:18:06Z
-updated_at: 2026-02-11T22:35:44Z
+updated_at: 2026-02-16T20:26:08Z
 parent: silo-sem
 blocking:
     - silo-mc1
