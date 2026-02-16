@@ -1,11 +1,11 @@
 ---
 # silo-7ca
 title: TMDB/TVMaze API Integration
-status: draft
+status: todo
 type: epic
-priority: high
+priority: critical
 created_at: 2026-02-11T20:20:46Z
-updated_at: 2026-02-11T22:35:55Z
+updated_at: 2026-02-16T20:26:03Z
 parent: silo-rdo
 blocking:
     - silo-srm
