@@ -11,4 +11,10 @@ blocking:
     - silo-2c5
 ---
 
-Create a specialized adapter class to communicate with TVMaze API.\n\n## Checklist\n- [ ] Create lib/tvmaze_adapter.rb\n- [ ] Implement show lookup by ID\n- [ ] Implement show search by title\n- [ ] Add unit tests with WebMock/VCR
+Create a specialized adapter class to communicate with TVMaze API.
+
+## Checklist
+- [ ] Create lib/tvmaze_adapter.rb
+- [ ] Implement show lookup by ID
+- [ ] Implement show search by title
+- [ ] Add unit tests with WebMock/VCR

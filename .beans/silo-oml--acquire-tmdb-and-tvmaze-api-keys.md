@@ -12,4 +12,9 @@ blocking:
     - silo-lpq
 ---
 
-Research and sign up for API keys from TMDB and TVMaze.\n\n## Checklist\n- [ ] Sign up for TMDB API key\n- [ ] Sign up for TVMaze API key\n- [ ] Document key usage and storage (e.g., .env)
+Research and sign up for API keys from TMDB and TVMaze.
+
+## Checklist
+- [ ] Sign up for TMDB API key
+- [ ] Sign up for TVMaze API key
+- [ ] Document key usage and storage (e.g., .env)

@@ -11,4 +11,10 @@ blocking:
     - silo-zp0
 ---
 
-Implement a central service to orchestrate calls between different API adapters.\n\n## Checklist\n- [ ] Create lib/metadata_service.rb\n- [ ] Implement unified interface for show data\n- [ ] Handle provider fallback logic\n- [ ] Add unit tests
+Implement a central service to orchestrate calls between different API adapters.
+
+## Checklist
+- [ ] Create lib/metadata_service.rb
+- [ ] Implement unified interface for show data
+- [ ] Handle provider fallback logic
+- [ ] Add unit tests

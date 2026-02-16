@@ -11,4 +11,10 @@ blocking:
     - silo-2c5
 ---
 
-Create a specialized adapter class to communicate with TMDB API.\n\n## Checklist\n- [ ] Create lib/tmdb_adapter.rb\n- [ ] Implement show lookup by ID\n- [ ] Implement show search by title\n- [ ] Add unit tests with WebMock/VCR
+Create a specialized adapter class to communicate with TMDB API.
+
+## Checklist
+- [ ] Create lib/tmdb_adapter.rb
+- [ ] Implement show lookup by ID
+- [ ] Implement show search by title
+- [ ] Add unit tests with WebMock/VCR
