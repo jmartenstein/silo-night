@@ -15,8 +15,12 @@ blocking:
 Research and sign up for API keys from TMDB and TVMaze.
 
 ## Checklist
-- [ ] Sign up for TMDB API key
-- [ ] Sign up for TVMaze API key
-- [x] Document key usage and storage (e.g., .env)
 
-## Summary of Changes\n- Added dotenv, webmock, and vcr to Gemfile.\n- Created .env.example and .env with placeholder keys.\n- Updated .gitignore to exclude .env.
+- [x] Sign up for TMDB API key
+- [x] Sign up for TVMaze API key
+- [ ] Document key usage and storage (e.g., .env)
+
+## Summary of Changes
+
+ - TMDB API Key added to .env.local
+ - TVMaze API key not needed for most public show data 
