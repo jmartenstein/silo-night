@@ -1,11 +1,11 @@
 ---
 # silo-2c5
 title: Implement MetadataService class
-status: todo
+status: completed
 type: task
 priority: high
 created_at: 2026-02-16T20:25:40Z
-updated_at: 2026-02-16T20:26:29Z
+updated_at: 2026-02-17T22:29:31Z
 parent: silo-7ca
 blocking:
     - silo-zp0
@@ -14,7 +14,9 @@ blocking:
 Implement a central service to orchestrate calls between different API adapters.
 
 ## Checklist
-- [ ] Create lib/metadata_service.rb
-- [ ] Implement unified interface for show data
-- [ ] Handle provider fallback logic
-- [ ] Add unit tests
+- [x] Create lib/metadata_service.rb
+- [x] Implement unified interface for show data
+- [x] Handle provider fallback logic
+- [x] Add unit tests
+
+## Summary of Changes\nImplemented  to orchestrate calls between TMDB and TVMaze adapters. It provides unified show metadata with provider fallback logic. Added unit tests.

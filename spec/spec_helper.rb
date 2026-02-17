@@ -5,6 +5,16 @@ $LOAD_PATH.unshift File.expand_path('..', __dir__)
 require 'factory_bot'
 require 'sequel'
 require 'sequel/extensions/migration'
+require 'webmock/rspec'
+require 'vcr'
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+  config.hook_into :webmock
+  config.filter_sensitive_data('<TMDB_API_KEY>') { ENV['TMDB_API_KEY'] }
+  config.filter_sensitive_data('<TVMAZE_API_KEY>') { ENV['TVMAZE_API_KEY'] }
+  config.configure_rspec_metadata!
+end
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
