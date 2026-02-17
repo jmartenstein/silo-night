@@ -18,6 +18,9 @@ PR_SUMMARY.md
 # Ignore Byebug command history file.
 .byebug_history
 
+# Archived project beans
+.beans/archive
+
 ## Specific to RubyMotion:
 .dat*
 .repl_history
