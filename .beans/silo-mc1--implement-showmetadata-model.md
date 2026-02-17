@@ -12,9 +12,9 @@ parent: silo-sem
 Create a Sequel model for the show_metadata table to handle data persistence.
 
 ## Checklist
-- [ ] Create lib/show_metadata.rb
-- [ ] Configure JSON serialization for the payload column
-- [ ] Add validations for provider_name and external_id
+- [x] Create lib/show_metadata.rb
+- [x] Configure JSON serialization for the payload column
+- [x] Add validations for provider_name and external_id
 - [x] Write unit tests for the model
 
 ## Summary of Changes

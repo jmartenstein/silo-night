@@ -15,9 +15,9 @@ blocking:
 Create a new Sequel migration to establish the schema for caching show metadata.
 
 ## Checklist
-- [ ] Create 002_create_show_metadata.rb migration
-- [ ] Add columns: id, provider_name, external_id, payload (JSON), created_at, updated_at
-- [ ] Add unique index on [provider_name, external_id]
+- [x] Create 002_create_show_metadata.rb migration
+- [x] Add columns: id, provider_name, external_id, payload (JSON), created_at, updated_at
+- [x] Add unique index on [provider_name, external_id]
 - [x] Run migration and verify schema
 
 ## Summary of Changes

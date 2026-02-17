@@ -14,9 +14,9 @@ blocking:
 Implements the database-level storage for show metadata, including schema migrations and data models.
 
 ## Checklist
-- [ ] Create database migration for show_metadata table
-- [ ] Implement ShowMetadata model with Sequel
-- [ ] Add serialization for complex API response objects
+- [x] Create database migration for show_metadata table
+- [x] Implement ShowMetadata model with Sequel
+- [x] Add serialization for complex API response objects
 - [x] Implement basic CRUD operations for metadata records
 
 ## Summary of Changes
