@@ -1,4 +1,6 @@
 ENV['RACK_ENV'] = 'test'
+require 'dotenv'
+Dotenv.load(".env.test", ".env")
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 $LOAD_PATH.unshift File.expand_path('..', __dir__)
 
@@ -7,6 +9,7 @@ require 'sequel'
 require 'sequel/extensions/migration'
 require 'webmock/rspec'
 require 'vcr'
+require 'database_cleaner/sequel'
 
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
@@ -27,5 +30,14 @@ RSpec.configure do |config|
       exit 1
     end
     FactoryBot.find_definitions
+    DatabaseCleaner[:sequel].db = db
+    DatabaseCleaner[:sequel].strategy = :transaction
+    DatabaseCleaner[:sequel].clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner[:sequel].cleaning do
+      example.run
+    end
   end
 end
