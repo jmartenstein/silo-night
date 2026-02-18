@@ -11,4 +11,6 @@ parent: silo-qwm
 
 Add Rake tasks `db:snapshot:save[name]` and `db:snapshot:load[name]` for quickly saving and restoring SQLite database states, facilitating faster setup and re-creation of specific test environments.
 
-## Summary of Changes\n- Added Rake tasks for database snapshotting (`db:snapshot:save`, `db:snapshot:load`, `db:snapshot:list`).\n- Snapshots are stored as `.sqlite3` files in `db/snapshots/`.
+## Summary of Changes
+- Added Rake tasks for database snapshotting (`db:snapshot:save`, `db:snapshot:load`, `db:snapshot:list`).
+- Snapshots are stored as `.sqlite3` files in `db/snapshots/`.

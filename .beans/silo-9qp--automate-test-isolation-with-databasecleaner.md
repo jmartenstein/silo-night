@@ -11,4 +11,7 @@ parent: silo-qwm
 
 Implement database_cleaner-sequel for RSpec and Cucumber to ensure a clean database state for every test run, preventing data pollution across tests.
 
-## Summary of Changes\n- Implemented `database_cleaner-sequel` for test isolation.\n- Added `database_cleaner-sequel` gem to `Gemfile`.\n- Configured `DatabaseCleaner` in `spec/spec_helper.rb` and `features/support/env.rb` using `:transaction` strategy.
+## Summary of Changes
+- Implemented `database_cleaner-sequel` for test isolation.
+- Added `database_cleaner-sequel` gem to `Gemfile`.
+- Configured `DatabaseCleaner` in `spec/spec_helper.rb` and `features/support/env.rb` using `:transaction` strategy.

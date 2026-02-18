@@ -11,4 +11,5 @@ parent: silo-qwm
 
 Create `docs/environment_management.md` to explain how to use the new snapshotting, seeding, and test isolation tools.
 
-## Summary of Changes\n- Created `docs/environment_management.md` to document environment configuration, seeding, snapshotting, and test isolation.
+## Summary of Changes
+- Created `docs/environment_management.md` to document environment configuration, seeding, snapshotting, and test isolation.

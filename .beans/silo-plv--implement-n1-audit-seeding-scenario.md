@@ -13,4 +13,6 @@ blocked_by:
 
 Implement a seeding scenario with a large dataset (100+ shows, 10+ users with complex schedules) to identify N+1 query and performance issues.
 
-## Summary of Changes\n\n- Created `data/scenarios/n1_audit.rb` with 100+ shows and 10 users with complex schedules. - Used `DatabaseCleaner` with `PRAGMA foreign_keys = OFF` for reliable cleaning.
+## Summary of Changes
+
+- Created `data/scenarios/n1_audit.rb` with 100+ shows and 10 users with complex schedules. - Used `DatabaseCleaner` with `PRAGMA foreign_keys = OFF` for reliable cleaning.

@@ -13,4 +13,6 @@ blocked_by:
 
 Implement a seeding scenario that applies migrations but leaves database tables empty to test first-run UI states and empty dashboards.
 
-## Summary of Changes\n\n- Updated `data/scenarios/empty.rb` to use `DatabaseCleaner` and truncate all database tables.
+## Summary of Changes
+
+- Updated `data/scenarios/empty.rb` to use `DatabaseCleaner` and truncate all database tables.

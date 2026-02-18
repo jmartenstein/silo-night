@@ -11,4 +11,7 @@ parent: silo-qwm
 
 Refactor `data/seed.rb` to support loading different data 'scenarios', allowing users to seed the database with specific datasets (e.g., empty, full, or specific user data) via a Rake task.
 
-## Summary of Changes\n- Refactored `data/seed.rb` to support pluggable scenarios.\n- Added `data/scenarios/` directory with `smoke.rb` and `empty.rb`.\n- Added Rake task `db:seed:scenario[name]` to load specific seeding scenarios.
+## Summary of Changes
+- Refactored `data/seed.rb` to support pluggable scenarios.
+- Added `data/scenarios/` directory with `smoke.rb` and `empty.rb`.
+- Added Rake task `db:seed:scenario[name]` to load specific seeding scenarios.

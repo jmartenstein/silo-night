@@ -11,4 +11,7 @@ parent: silo-qwm
 
 Ensure consistent use of .env and .env.test files for environment-specific variables like DATABASE_URL and API keys. This will provide a predictable foundation for other environment management tools.
 
-## Summary of Changes\n- Standardized environment configuration using `dotenv`.\n- Added `Dotenv.load(".env.#{ENV['RACK_ENV'] || 'development'}", ".env")` to `silo_night.rb`, `spec/spec_helper.rb`, `features/support/env.rb`, `data/seed.rb`, and `Rakefile`.\n- Created `.env.example` as a template.
+## Summary of Changes
+- Standardized environment configuration using `dotenv`.
+- Added `Dotenv.load(".env.#{ENV['RACK_ENV'] || 'development'}", ".env")` to `silo_night.rb`, `spec/spec_helper.rb`, `features/support/env.rb`, `data/seed.rb`, and `Rakefile`.
+- Created `.env.example` as a template.
