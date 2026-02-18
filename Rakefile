@@ -3,6 +3,8 @@ require 'sequel/extensions/migration'
 require 'rspec/core/rake_task'
 require 'cucumber/rake/task'
 require 'fileutils'
+require 'dotenv'
+Dotenv.load(".env.#{ENV['RACK_ENV'] || 'development'}", ".env")
 
 DB_URL = ENV['DATABASE_URL'] || (ENV['RACK_ENV'] == 'test' ? 'sqlite://data/test.db' : 'sqlite://data/silo_night.db')
 MIGRATIONS_DIR = 'db/migrations'
@@ -77,6 +79,55 @@ namespace :db do
     $LOAD_PATH.unshift File.expand_path('./lib', __dir__)
     load 'data/seed.rb'
     puts "Database seeded."
+  end
+
+  namespace :seed do
+    desc "Seed the database with a specific scenario"
+    task :scenario, [:name] do |t, args|
+      name = args[:name] || 'smoke'
+      ENV['SEED_SCENARIO'] = name
+      $LOAD_PATH.unshift File.expand_path('./lib', __dir__)
+      load 'data/seed.rb'
+      puts "Database seeded with scenario: #{name}"
+    end
+  end
+
+  namespace :snapshot do
+    SNAPSHOT_DIR = 'db/snapshots'
+
+    desc "Save a database snapshot"
+    task :save, [:name] do |t, args|
+      name = args[:name] || 'default'
+      db_path = DB_URL.sub('sqlite://', '')
+      FileUtils.mkdir_p(SNAPSHOT_DIR) unless Dir.exist?(SNAPSHOT_DIR)
+      snapshot_path = File.join(SNAPSHOT_DIR, "#{name}.sqlite3")
+      FileUtils.cp(db_path, snapshot_path)
+      puts "Snapshot saved to #{snapshot_path}"
+    end
+
+    desc "Load a database snapshot"
+    task :load, [:name] do |t, args|
+      name = args[:name] || 'default'
+      db_path = DB_URL.sub('sqlite://', '')
+      snapshot_path = File.join(SNAPSHOT_DIR, "#{name}.sqlite3")
+      if File.exist?(snapshot_path)
+        FileUtils.cp(snapshot_path, db_path)
+        puts "Snapshot restored from #{snapshot_path}"
+      else
+        puts "Snapshot #{snapshot_path} does not exist."
+      end
+    end
+
+    desc "List database snapshots"
+    task :list do
+      if Dir.exist?(SNAPSHOT_DIR)
+        Dir.glob(File.join(SNAPSHOT_DIR, "*.sqlite3")).each do |f|
+          puts File.basename(f, ".sqlite3")
+        end
+      else
+        puts "No snapshots found."
+      end
+    end
   end
 end
 

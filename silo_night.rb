@@ -3,6 +3,8 @@
 require 'sinatra'
 require 'sinatra/contrib'
 require 'slim'
+require 'dotenv'
+Dotenv.load(".env.#{ENV['RACK_ENV'] || 'development'}", ".env")
 
 require 'sequel'
 require 'sequel/extensions/migration'
