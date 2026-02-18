@@ -32,7 +32,10 @@ RSpec.configure do |config|
     FactoryBot.find_definitions
     DatabaseCleaner[:sequel].db = db
     DatabaseCleaner[:sequel].strategy = :transaction
+
+    db.run("PRAGMA foreign_keys = OFF")
     DatabaseCleaner[:sequel].clean_with(:truncation)
+    db.run("PRAGMA foreign_keys = ON")
   end
 
   config.around(:each) do |example|
