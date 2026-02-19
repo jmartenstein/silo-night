@@ -10,7 +10,9 @@
 /test/version_tmp/
 /tmp/
 /data/*.db
+db/*
 PR_SUMMARY.md
+*.log
 
 # Used by dotenv library to load environment variables.
 .env*
