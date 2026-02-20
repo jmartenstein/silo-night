@@ -44,6 +44,29 @@ rake test
 
 For more information on testing, see the [testing doc](./docs/testing.md)
 
+# Project Documentation
+
+This project includes several documents to help developers understand its architecture, testing procedures, and development workflows.
+
+- **[Architectural Assumptions](./docs/assumptions.md)**: Describes the technical biases and assumptions made during the project's architectural design.
+- **[Environment Management](./docs/environment_management.md)**: Explains how to configure and manage different environments, including database seeding, scenarios, and snapshots.
+- **[Database Migrations](./docs/migrations.md)**: A guide to creating, running, and managing database schema migrations using Sequel.
+- **[Testing Guide](./docs/testing.md)**: Provides detailed instructions on how to run the RSpec and Cucumber test suites and manage the test environment.
+
+# Project Structure
+
+This section provides an overview of the key directories within the project.
+
+- `data/`: Stores application data, including database seed files and scenarios.
+- `db/`: Database related files, including migrations and snapshots.
+- `docs/`: Project documentation files.
+- `features/`: Contains Cucumber BDD feature files and step definitions.
+- `lib/`: Core application logic, libraries, and modules.
+- `public/`: Static web assets served by the application (CSS, JS, etc.).
+- `scripts/`: Utility scripts for various development and operational tasks.
+- `spec/`: Contains RSpec unit and functional tests.
+- `template/`: Application view templates (using Slim).
+
 # User Scenarios
 
 The best way to understand how the site works is to frame interactions in terms of different possible scenarios.
