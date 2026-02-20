@@ -1,7 +1,7 @@
 Silo Night README
 ================
 
-A lifestyle for those tired of binging shows. This project provides a multi-user website for managing weekly TV schedules.
+An app for those burnt out on binging shows. Decide the shows you want to watch, on a weekly schedule.
 
 # The Name
 
@@ -12,7 +12,7 @@ This app is named after an amazing tv show: [Silo](https://en.wikipedia.org/wiki
 The app is rack-compatible, so you can launch it as follows:
 
 ```bash
-rackup -I lib
+rackup
 ```
 
 # Testing
@@ -24,7 +24,7 @@ This tests the internal libraries driving the core functionality of the app.
 You can run the Rspec test wih the following code:
 
 ```bash
-rspec spec/*.rb -I lib -I .
+rake test:spec
 ```
 
 In addition, there is a higher level of testing for the behavior of the overall
@@ -33,24 +33,61 @@ app itself. This app is using *Cucumber* for that level of testing.
 You can run the cucumber tests with the following code:
 
 ```bash
-cucumber features/*.feature
+rake test:cucumber
 ```
 
-# The Architecture
+User the following command to run the entire test suite:
 
-Any good system can be broken down into a series of loops. 
+```bash
+rake test
+```
 
-## What am I watching tonight?
+For more information on testing, see the [testing doc](./docs/testing.md)
+
+# Project Documentation
+
+This project includes several documents to help developers understand its architecture, testing procedures, and development workflows.
+
+- **[Architectural Assumptions](./docs/assumptions.md)**: Describes the technical biases and assumptions made during the project's architectural design.
+- **[Environment Management](./docs/environment_management.md)**: Explains how to configure and manage different environments, including database seeding, scenarios, and snapshots.
+- **[Database Migrations](./docs/migrations.md)**: A guide to creating, running, and managing database schema migrations using Sequel.
+- **[Testing Guide](./docs/testing.md)**: Provides detailed instructions on how to run the RSpec and Cucumber test suites and manage the test environment.
+
+# Project Structure
+
+This section provides an overview of the key directories within the project.
+
+- `data/`: Stores application data, including database seed files and scenarios.
+- `db/`: Database related files, including migrations and snapshots.
+- `docs/`: Project documentation files.
+- `features/`: Contains Cucumber BDD feature files and step definitions.
+- `lib/`: Core application logic, libraries, and modules.
+- `public/`: Static web assets served by the application (CSS, JS, etc.).
+- `scripts/`: Utility scripts for various development and operational tasks.
+- `spec/`: Contains RSpec unit and functional tests.
+- `template/`: Application view templates (using Slim).
+
+# User Scenarios
+
+The best way to understand how the site works is to frame interactions in terms of different possible scenarios.
+
+## Logging in and adding new users
+
+As of the protype release (v0.0.1) no user authentication exists. New users can be added by simply going to the website and click the box to specify a user name.
+
+While authentication is a low priority, it will need to be implemented, before being released for beta testing. User authentication can be simple and straightforward, relying on existing libraries. There will be an expectation to add some level of role-based access control at a future development point.
+
+## What to watch tonight?
 
 This is the first and most straightforward question, and the simplest answer.  Your weekly schedule is stored on the back-end: JSON data stored in a sqlite3 database. Today's date and weekday are fed into the system, and the simple output of what is on your schedule is returned.
 
-## Setting my schedule 
+## Setting the schedule
 
-When I'm ready to change shows, or re-order my schedule, then I want to be able to go to an "edit" page, and change the overall parameters of what I want to watch.  The schedule should provide immediate feedback and display very clearly what I'm watching each day and each week.
+When you are ready to change shows, or re-order your schedule, then go to the "edit schedule" page, and change the overall parameters of what you want to watch.  The schedule should provide immediate feedback and display very clearly what you're watching each day and each week.
 
 ## Populating the data
 
-The Silo Night app needs a backend data store with lookup information for any show. When a user is trying to plan out their weekly schedule, we want to provide information like average runtime, number of seasons, number of episodes, etc.
+The Silo Night app needs a backend data store with lookup information for any show. When a user is trying to plan out their weekly schedule, we want to provide information like average runtime, show genre, number of seasons, number of episodes, etc. This information should be pulled from existing sites like TMDB or TVMaze, and then stored in the database.
 
 # Future Work
 
@@ -58,9 +95,9 @@ Information tagged for further development
 
 ## Show Metadata
 
-Currently, the application appears to rely on local data seeding (`data/seed.rb`) and static JSON files (`public/static/justephanie/shows.json`).  To scale this effectively, we should integrate with a public TV metadata API such as **The Movie Database (TMDB)** or **TVMaze**.
+Currently, the application relies on local data seeding (`data/seed.rb`) and static JSON files (`public/static/justephanie/shows.json`).  To scale this effectively, the site should integrate with a public TV metadata API such as **The Movie Database (TMDB)** or **TVMaze**.
 
-In future versions of this site, we'll rely on caching show metadata from a public metadata API like the ones mentioned above. Further investigation needs to be done to determine if one API serves the needs of the service better than the other.
+Future versions of this site will rely on caching show metadata from a public metadata API like the ones mentioned above. Further investigation needs to be done to determine if one API serves the needs of the service better than the other.
 
 ## Data Storage
 
@@ -68,6 +105,3 @@ Given that this site is meant to be publicly facing, the current sqlite3 data ba
 
 Ideally, the backend of this server will run on a relational database engine, such as PostreSQL. Existing seed data and schema files will need to be adapted to run against an external database.
 
-## User Authentication
-
-As of the protype release (v0.0.1) no user authentication exists. While this is a low priority, it will need to be implemented, before being released for beta testing. User authentication can be simple and straightforward, relying on existing libraries. There will be an expectation to add some level of role-based access control at a future development point.

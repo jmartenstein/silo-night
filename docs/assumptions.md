@@ -1,4 +1,4 @@
-# Biases and Assumptions in silo-night Beans
+# Biases and Assumptions in silo-night Architecture
 
 ## Biases
 - **Technology Choice Bias**: The beans assume the use of `Sequel` for migrations and database interaction without exploring other Ruby ORMs (like ActiveRecord), although this is consistent with the existing project structure.
@@ -9,11 +9,8 @@
 
 ## Assumptions
 - **Data Integrity**: It is assumed that `data/seed.rb` contains valid and up-to-date data for the current schema.
-- **Redundancy**: `data/schema.rb` has been removed as it was entirely redundant once migrations were established in `db/migrations/`.
 - **API Availability**: The TMDB/TVMaze integration assumes these services are available and that their data models are stable enough to be cached locally with a simple TTL.
 - **Performance**: There is an assumption that N+1 queries and JSON parsing are the primary bottlenecks, without exhaustive profiling data yet mentioned (though `silo-cgn` mentions benchmarking).
 - **Isolation**: It is assumed that switching to `data/test.db` for tests will resolve all environment isolation issues without considering other side effects (like file system writes).
-- **API Key Access**: Assumes that obtaining API keys for TMDB and TVMaze is straightforward and free (at least for development).
-- **Orchestration**: Assumes that a single `MetadataService` is sufficient to orchestrate multiple providers and handle fallbacks effectively.
-- **Data Completeness**: Assumes that the combination of TMDB and TVMaze will provide all necessary fields (runtimes, genres, posters) for all shows in the database.
-- **Dependency Flow**: Assumes that API integration (`silo-7ca`) must be largely complete before cache-aside logic (`silo-srm`) can be fully implemented, although they could potentially be developed against mocks.
+- **Orchestration**: There is an assumption that a single `MetadataService` is sufficient to orchestrate multiple providers and handle fallbacks effectively.
+- **Data Completeness**: This project assumes that the combination of TMDB and TVMaze will provide all necessary fields (runtimes, genres, posters) for all shows in the database.
