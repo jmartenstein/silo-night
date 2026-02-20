@@ -10,15 +10,18 @@ The project uses two primary testing frameworks:
 
 ## Prerequisites
 
-Before running tests, ensure your environment is set up and dependencies are installed:
+Before running tests, ensure your environment is set up and dependencies are installed.
 
 ```bash
 bundle install
+bundle exec rake db:setup
 ```
+
+The `db:setup` task will create, migrate, and seed the database for the environment specified by `RACK_ENV` (defaults to `development`).
 
 ## Running Tests via Rake (Recommended)
 
-The project includes a unified testing task in the `Rakefile` that handles database preparation and executes both suites.
+The project includes a unified testing task in the `Rakefile` that handles database preparation and executes both suites. It is crucial to set `RACK_ENV=test` to ensure tests run against the isolated test database.
 
 ### Run all tests
 
@@ -32,14 +35,14 @@ RACK_ENV=test bundle exec rake test
 
 ### Run specific suites
 
-You can run the suites individually while still ensuring the test environment is used:
+You can run the suites individually:
 
 ```bash
 # Run only RSpec
-RACK_ENV=test bundle exec rake spec
+RACK_ENV=test bundle exec rake test:spec
 
 # Run only Cucumber
-RACK_ENV=test bundle exec rake cucumber
+RACK_ENV=test bundle exec rake test:cucumber
 ```
 
 ## Handling Failing Tests
@@ -56,23 +59,13 @@ Failing scenarios are tagged with `@failing`.
 - To run only the passing scenarios: `bundle exec cucumber --tags "not @failing"`
 - To include the failing scenarios: `bundle exec cucumber`
 
-## Test Database Management
+## Test Database and Isolation
 
-The testing suite is configured to use an isolated SQLite database located at `data/test.db`.
+The testing suite is configured to use an isolated SQLite database to prevent interference with development data.
 
-### Manual Migration
-If you need to manually migrate the test database:
+Tests (RSpec and Cucumber) are configured to use `DatabaseCleaner` with a `transaction` strategy. This ensures each test starts with a clean database state (after an initial truncation at the start of the test suite).
 
-```bash
-RACK_ENV=test bundle exec rake db:migrate
-```
-
-### Seeding
-If a test requires the standard seed data, you can seed the test database:
-
-```bash
-RACK_ENV=test bundle exec rake db:seed
-```
+For details on managing database state, including migrations, seeding, and snapshots, please see the [Environment Management](./environment_management.md) documentation.
 
 ## Test Structure
 
