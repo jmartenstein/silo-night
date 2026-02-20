@@ -23,7 +23,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.before(:suite) do
-    db_url = ENV['DATABASE_URL'] || 'sqlite://data/test.db'
+    db_url = ENV['DATABASE_URL'] || 'sqlite://data/development.db'
     db = Sequel.connect(db_url)
     unless Sequel::Migrator.is_current?(db, 'db/migrations')
       puts "Database migrations are not up to date. Run 'RACK_ENV=test rake db:migrate' first."
