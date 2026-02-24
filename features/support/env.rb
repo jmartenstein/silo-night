@@ -15,7 +15,18 @@ end
 
 DatabaseCleaner[:sequel].db = db
 DatabaseCleaner[:sequel].strategy = :transaction
+
+db.run("PRAGMA foreign_keys = OFF")
 DatabaseCleaner[:sequel].clean_with(:truncation)
+db.run("PRAGMA foreign_keys = ON")
+
+# Load the smoke scenario to seed the database for tests
+$LOAD_PATH.unshift File.expand_path('../../lib', __dir__)
+require 'user'
+require 'show'
+# Ensure we use the right DB connection in smoke.rb
+DB = db unless defined?(DB)
+load File.expand_path('../../data/scenarios/smoke.rb', __dir__)
 
 Before do
   DatabaseCleaner[:sequel].start
