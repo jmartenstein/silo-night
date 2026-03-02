@@ -22,6 +22,7 @@ PR_SUMMARY.md
 
 # Archived project beans
 .beans/archive
+.gemini
 
 ## Specific to RubyMotion:
 .dat*
