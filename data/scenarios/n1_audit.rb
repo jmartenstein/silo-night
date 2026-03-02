@@ -3,14 +3,9 @@
 require 'database_cleaner-sequel'
 require 'json'
 require 'uri'
+require 'database'
 
 puts "Seeding with n1_audit scenario..."
-
-# We need to make sure we have a DB connection
-unless defined?(DB)
-  db_url = ENV['DATABASE_URL'] || (ENV['RACK_ENV'] == 'test' ? 'sqlite://data/test.db' : 'sqlite://data/silo_night.db')
-  DB = Sequel.connect(db_url)
-end
 
 # Disable foreign keys for truncation in SQLite
 DB.run("PRAGMA foreign_keys = OFF")

@@ -1,21 +1,21 @@
 require 'rack/test'
-require 'dotenv'
-Dotenv.load(".env.test", ".env")
-require 'sequel'
+$LOAD_PATH.unshift File.expand_path('../../lib', __dir__)
+require 'database'
 require 'sequel/extensions/migration'
 require 'database_cleaner/sequel'
 
 ENV['RACK_ENV'] = 'test'
-db_url = ENV['DATABASE_URL'] || 'sqlite://data/test.db'
-db = Sequel.connect(db_url)
-unless Sequel::Migrator.is_current?(db, 'db/migrations')
+unless Sequel::Migrator.is_current?(DB, 'db/migrations')
   puts "Database migrations are not up to date. Run 'RACK_ENV=test rake db:migrate' first."
   exit 1
 end
 
-DatabaseCleaner[:sequel].db = db
+DatabaseCleaner[:sequel].db = DB
 DatabaseCleaner[:sequel].strategy = :transaction
+
+DB.run("PRAGMA foreign_keys = OFF")
 DatabaseCleaner[:sequel].clean_with(:truncation)
+DB.run("PRAGMA foreign_keys = ON")
 
 Before do
   DatabaseCleaner[:sequel].start

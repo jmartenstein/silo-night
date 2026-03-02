@@ -1,8 +1,5 @@
 require 'json'
-require 'sequel'
-
-db_url = ENV['DATABASE_URL'] || (ENV['RACK_ENV'] == 'test' ? 'sqlite://data/test.db' : 'sqlite://data/silo_night.db')
-Sequel.connect(db_url)
+require 'database'
 
 class Show < Sequel::Model
 

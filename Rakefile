@@ -1,12 +1,10 @@
-require 'sequel'
+$LOAD_PATH.unshift File.expand_path('./lib', __dir__)
+require 'database'
 require 'sequel/extensions/migration'
 require 'rspec/core/rake_task'
 require 'cucumber/rake/task'
 require 'fileutils'
-require 'dotenv'
-Dotenv.load(".env.#{ENV['RACK_ENV'] || 'development'}", ".env")
 
-DB_URL = ENV['DATABASE_URL'] || (ENV['RACK_ENV'] == 'test' ? 'sqlite://data/test.db' : 'sqlite://data/silo_night.db')
 MIGRATIONS_DIR = 'db/migrations'
 
 namespace :db do
@@ -18,7 +16,7 @@ namespace :db do
     if File.exist?(db_path)
       puts "Database #{db_path} already exists."
     else
-      Sequel.connect(DB_URL)
+      # Connection is already established by 'require database'
       puts "Created database #{db_path}."
     end
   end
@@ -27,6 +25,8 @@ namespace :db do
   task :drop do
     db_path = DB_URL.sub('sqlite://', '')
     if File.exist?(db_path)
+      # We might need to disconnect before dropping
+      DB.disconnect
       File.delete(db_path)
       puts "Dropped database #{db_path}."
     else
@@ -42,14 +42,12 @@ namespace :db do
 
   desc "Run migrations to the latest version"
   task :migrate do
-    DB = Sequel.connect(DB_URL)
     Sequel::Migrator.run(DB, MIGRATIONS_DIR)
     puts "Applied migrations to the latest version."
   end
 
   desc "Rollback the last migration"
   task :rollback do
-    DB = Sequel.connect(DB_URL)
     current_version = DB[:schema_info].first[:version] rescue 0
     target = current_version > 0 ? current_version - 1 : 0
     Sequel::Migrator.run(DB, MIGRATIONS_DIR, target: target)
@@ -58,14 +56,12 @@ namespace :db do
 
   desc "Show current migration version"
   task :version do
-    DB = Sequel.connect(DB_URL)
     version = DB[:schema_info].first[:version] rescue 0
     puts "Current migration version: #{version}"
   end
 
   desc "Check if migrations are current"
   task :status do
-    DB = Sequel.connect(DB_URL)
     if Sequel::Migrator.is_current?(DB, MIGRATIONS_DIR)
       puts "Migrations are up to date."
     else

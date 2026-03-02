@@ -1,11 +1,8 @@
-ENV['RACK_ENV'] = 'test'
-require 'dotenv'
-Dotenv.load(".env.test", ".env")
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 $LOAD_PATH.unshift File.expand_path('..', __dir__)
 
+require 'database'
 require 'factory_bot'
-require 'sequel'
 require 'sequel/extensions/migration'
 require 'webmock/rspec'
 require 'vcr'
@@ -23,19 +20,17 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.before(:suite) do
-    db_url = ENV['DATABASE_URL'] || 'sqlite://data/test.db'
-    db = Sequel.connect(db_url)
-    unless Sequel::Migrator.is_current?(db, 'db/migrations')
+    unless Sequel::Migrator.is_current?(DB, 'db/migrations')
       puts "Database migrations are not up to date. Run 'RACK_ENV=test rake db:migrate' first."
       exit 1
     end
     FactoryBot.find_definitions
-    DatabaseCleaner[:sequel].db = db
+    DatabaseCleaner[:sequel].db = DB
     DatabaseCleaner[:sequel].strategy = :transaction
 
-    db.run("PRAGMA foreign_keys = OFF")
+    DB.run("PRAGMA foreign_keys = OFF")
     DatabaseCleaner[:sequel].clean_with(:truncation)
-    db.run("PRAGMA foreign_keys = ON")
+    DB.run("PRAGMA foreign_keys = ON")
   end
 
   config.around(:each) do |example|
