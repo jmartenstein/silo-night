@@ -1,11 +1,11 @@
 ---
 # silo-csy
 title: Background Sync and Cache Management
-status: todo
+status: scrapped
 type: feature
-priority: normal
+priority: low
 created_at: 2026-02-11T22:17:18Z
-updated_at: 2026-02-11T22:17:18Z
+updated_at: 2026-03-03T14:52:25Z
 parent: silo-rl4
 ---
 

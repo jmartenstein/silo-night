@@ -1,11 +1,11 @@
 ---
 # silo-cgn
 title: Query Layer Refactoring
-status: draft
+status: scrapped
 type: epic
 priority: normal
 created_at: 2026-02-11T20:21:26Z
-updated_at: 2026-02-11T20:24:10Z
+updated_at: 2026-03-03T14:53:05Z
 parent: silo-uuw
 ---
 

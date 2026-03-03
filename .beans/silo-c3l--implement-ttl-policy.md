@@ -1,11 +1,11 @@
 ---
 # silo-c3l
 title: Implement TTL policy
-status: todo
+status: scrapped
 type: task
-priority: normal
+priority: low
 created_at: 2026-02-11T22:20:15Z
-updated_at: 2026-02-11T22:20:15Z
+updated_at: 2026-03-03T14:52:45Z
 parent: silo-csy
 ---
 

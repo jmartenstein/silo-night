@@ -1,10 +1,11 @@
 ---
 # silo-uuw
 title: 'v0.11: User Schedule & Query Performance'
-status: draft
+status: scrapped
 type: milestone
+priority: normal
 created_at: 2026-02-11T20:22:04Z
-updated_at: 2026-02-11T20:22:04Z
+updated_at: 2026-03-03T14:52:55Z
 ---
 
 Focuses on normalizing user data and optimizing scheduling performance through efficient SQL queries.

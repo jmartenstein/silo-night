@@ -1,11 +1,11 @@
 ---
 # silo-pik
 title: Add sync health monitoring
-status: todo
+status: scrapped
 type: task
-priority: normal
+priority: low
 created_at: 2026-02-11T22:20:20Z
-updated_at: 2026-02-11T22:20:20Z
+updated_at: 2026-03-03T14:52:30Z
 parent: silo-csy
 ---
 

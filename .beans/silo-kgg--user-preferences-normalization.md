@@ -1,11 +1,11 @@
 ---
 # silo-kgg
 title: User Preferences Normalization
-status: draft
+status: scrapped
 type: epic
 priority: normal
 created_at: 2026-02-11T20:21:16Z
-updated_at: 2026-02-11T20:24:05Z
+updated_at: 2026-03-03T14:53:10Z
 parent: silo-uuw
 ---
 

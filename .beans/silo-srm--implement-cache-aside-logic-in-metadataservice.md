@@ -1,11 +1,11 @@
 ---
 # silo-srm
 title: Implement cache-aside logic in MetadataService
-status: todo
+status: scrapped
 type: task
-priority: normal
+priority: low
 created_at: 2026-02-11T22:20:04Z
-updated_at: 2026-02-11T22:20:04Z
+updated_at: 2026-03-03T14:52:40Z
 parent: silo-csy
 ---
 

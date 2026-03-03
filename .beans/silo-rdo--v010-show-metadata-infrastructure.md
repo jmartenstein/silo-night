@@ -1,11 +1,11 @@
 ---
 # silo-rdo
 title: 'v0.10: Show Metadata Infrastructure'
-status: in-progress
+status: scrapped
 type: milestone
-priority: high
+priority: low
 created_at: 2026-02-11T20:21:59Z
-updated_at: 2026-02-11T22:36:00Z
+updated_at: 2026-03-03T14:52:14Z
 ---
 
 Focuses on establishing a robust metadata pipeline and database integrity for show data.

@@ -1,11 +1,11 @@
 ---
 # silo-cxw
 title: N+1 Auditing & Eager Loading
-status: draft
+status: scrapped
 type: epic
 priority: high
 created_at: 2026-02-11T20:45:12Z
-updated_at: 2026-02-11T20:45:12Z
+updated_at: 2026-03-03T14:53:00Z
 parent: silo-uuw
 ---
 

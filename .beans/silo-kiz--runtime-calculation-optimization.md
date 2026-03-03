@@ -1,11 +1,11 @@
 ---
 # silo-kiz
 title: Runtime Calculation Optimization
-status: draft
+status: scrapped
 type: epic
-priority: normal
+priority: low
 created_at: 2026-02-11T20:21:07Z
-updated_at: 2026-02-11T20:24:00Z
+updated_at: 2026-03-03T14:52:50Z
 parent: silo-rdo
 ---
 
