@@ -45,17 +45,18 @@ Available scenarios:
 
 ## Network Access and Security
 
-The server is configured to bind to all network interfaces (`0.0.0.0`) in both development and test environments, allowing access from other machines on your local network. However, the security middleware (Sinatra's protection) behaves differently between environments:
+The server's network binding and security middleware (Sinatra's protection) behave differently depending on the environment:
 
-- **Development (`RACK_ENV=development`)**: Sinatra's default protection middleware is **enabled**. This includes host authorization, which may block requests from unrecognized hostnames (like `.local` addresses) to prevent DNS rebinding attacks. Use this environment for standard local development where security parity with production is desired.
-- **Test (`RACK_ENV=test`)**: Sinatra's protection middleware is **completely disabled**. This allows for easier remote testing and access via any hostname (e.g., `justins-air.local`) without being blocked by "host not permitted" errors. This is the recommended environment for remote debugging and cross-device testing.
+- **Development (`RACK_ENV=development`)**: The server binds only to **localhost** (`127.0.0.1`). It is **not accessible** from other systems on your local network. Sinatra's default protection middleware is **enabled**.
+- **Test (`RACK_ENV=test`)**: The server binds to **all network interfaces** (`0.0.0.0`), allowing access from other machines on your local network. Sinatra's protection middleware is **completely disabled**, making it easy to test via any hostname (e.g., `justins-air.local`) without "host not permitted" errors.
+- **Production (`RACK_ENV=production`)**: The server binds to **all network interfaces** (`0.0.0.0`) for public/network access. Sinatra's default protection middleware is **enabled**.
 
 You can toggle between these behaviors by setting the `RACK_ENV` variable when starting the server:
 
 ```bash
-# Protected (default)
+# Restricted to localhost (default)
 RACK_ENV=development bundle exec puma
 
-# Unprotected (recommended for remote access)
+# Accessible from network (unprotected)
 RACK_ENV=test bundle exec puma
 ```

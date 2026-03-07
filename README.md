@@ -23,13 +23,13 @@ bundle exec puma
 
 ### Network Access and Environments
 
-To allow access from other hosts on your local network, the app is pre-configured in `config/puma.rb` and `silo_night.rb` to bind to all available interfaces (`0.0.0.0`).
+The server's network accessibility and security behavior differ by environment:
 
-Note that the security behavior differs by environment:
-- **Development (`RACK_ENV=development`)**: Default security protections (like host authorization) are **enabled**.
-- **Test (`RACK_ENV=test`)**: Security protections are **disabled** to allow for unrestricted local network testing and access via custom hostnames (e.g., `justins-air.local`).
+- **Development (`RACK_ENV=development`)**: The server binds to **localhost** (`127.0.0.1`) only and default security protections are **enabled**.
+- **Test (`RACK_ENV=test`)**: The server binds to **all interfaces** (`0.0.0.0`) and security protections are **disabled**, allowing for easy cross-device testing using hostnames like `justins-air.local`.
+- **Production (`RACK_ENV=production`)**: The server binds to **all interfaces** (`0.0.0.0`) and security protections are **enabled**.
 
-To run with protections disabled for cross-device testing:
+To run with network access enabled for testing:
 ```bash
 RACK_ENV=test bundle exec puma
 ```
