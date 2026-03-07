@@ -49,8 +49,34 @@ get '/user/:name/schedule' do
 end
 
 get '/user/:name/schedule/edit' do
-  @shows = User.find(name: params["name"]).shows
-  @config = User.find(name: params["name"]).config
+  @user = User.find(name: params["name"])
+  if @user.nil?
+    status 404
+    return "User not found"
+  end
+  @shows = @user.shows
+  @config = JSON.parse(@user.config || "{}")
+  slim :schedule_edit
+end
+
+post '/user/:name/availability' do
+  @user = User.find(name: params["name"])
+  config = JSON.parse(@user.config || "{}")
+
+  # Update enabled days
+  config["days"] = params["days"] ? params["days"].join(",") : ""
+
+  # Update per-day times
+  ["s", "m", "t", "w", "th", "f", "sa"].each do |abbr|
+    config["time_#{abbr}"] = params["time_#{abbr}"] if params["time_#{abbr}"]
+  end
+
+  @user.config = config.to_json
+  @user.save
+
+  @shows = @user.shows
+  @config = config
+  @message = "Availability updated successfully"
   slim :schedule_edit
 end
 

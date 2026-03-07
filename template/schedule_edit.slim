@@ -14,5 +14,22 @@ div#showbox.border
 h2 Availability
 
 div#availbox.border
+  form action="/user/#{@user.name}/availability" method="POST"
+    table
+      thead
+        tr
+          th Day
+          th Enabled
+          th Minutes
+      tbody
+        - ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day|
+          - abbr = @user.day_to_abbr(day)
+          tr
+            td = day
+            td
+              input type="checkbox" name="days[]" value=abbr checked=@user.day_enabled?(abbr)
+            td
+              input type="number" name="time_#{abbr}" value=@user.day_time(abbr) min="0" step="5"
+    input type="submit" value="Save Availability"
 
 script src="/javascript/default.js"

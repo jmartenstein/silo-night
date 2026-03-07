@@ -21,6 +21,38 @@ class User < Sequel::Model
     end
   end
 
+  def day_to_abbr( day="" )
+    case day
+      when "Sunday";    "s"
+      when "Monday";    "m"
+      when "Tuesday";   "t"
+      when "Wednesday"; "w"
+      when "Thursday";  "th"
+      when "Friday";    "f"
+      when "Saturday";  "sa"
+    end
+  end
+
+  def day_enabled?( abbr="" )
+    config = JSON.parse(self.config || "{}")
+    days = config["days"] ? config["days"].split(",") : []
+    days.include?(abbr)
+  end
+
+  def day_time( abbr="" )
+    config = JSON.parse(self.config || "{}")
+    # Current config has a single 'time' for all days.
+    # New config might have 'time_m', 'time_t', etc.
+    # Fallback to the global 'time' if the per-day time is not set.
+    time = config["time_#{abbr}"] || config["time"] || "0"
+    time.to_i
+  end
+
+  def total_day_time( abbr="" )
+    return 0 unless day_enabled?(abbr)
+    day_time(abbr)
+  end
+
   def load_from_json_string( text = "", load_shows = false )
 
     j = JSON.parse(text)
@@ -106,9 +138,16 @@ class User < Sequel::Model
       end
     end
 
-    config = JSON.parse(@values[:config])
-    config["time"].to_i - runtime_sum
+    config = JSON.parse(@values[:config] || "{}")
+    abbr = day_to_abbr(day)
 
+    # if the day is not enabled, return 0
+    days = config["days"] ? config["days"].split(",") : []
+    return 0 unless days.include?(abbr)
+
+    # lookup per-day time, then fallback to global time
+    time_limit = config["time_#{abbr}"] || config["time"] || "0"
+    time_limit.to_i - runtime_sum
   end
 
   def find_next_available_slot( show="" )
