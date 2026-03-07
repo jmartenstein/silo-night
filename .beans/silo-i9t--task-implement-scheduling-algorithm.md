@@ -1,7 +1,7 @@
 ---
 # silo-i9t
 title: 'Task: Implement scheduling algorithm'
-status: in-progress
+status: completed
 type: task
 priority: high
 tags:
