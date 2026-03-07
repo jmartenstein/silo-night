@@ -1,11 +1,11 @@
 ---
 # silo-kfy
 title: 'Feature: Search Result Selection & Persistence'
-status: todo
+status: completed
 type: feature
 priority: normal
 created_at: 2026-03-02T22:47:50Z
-updated_at: 2026-03-03T16:08:48Z
+updated_at: 2026-03-07T02:10:41Z
 parent: silo-w9n
 blocked_by:
     - silo-qy7

@@ -35,6 +35,7 @@ Scenario: Creating a new list of shows
 
   Scenario: Reordering the watch list
     Given the user "sam" has "Silo" and "Foundation" in their list
+    And the user "sam" is on their shows and schedule page
     When the user drags "Foundation" above "Silo"
     Then "Foundation" is the first show in the list
 
