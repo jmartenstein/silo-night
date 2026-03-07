@@ -3,7 +3,7 @@
 console.log(document.URL);
 
 function initRemoveButtons() {
-  var list_nodes = document.getElementsByTagName("li");
+  var list_nodes = document.querySelectorAll("ul#show.list li");
   for (var i = 0; i < list_nodes.length; i++) {
     if (!list_nodes[i].querySelector('.remove')) {
       var span = document.createElement("span");
@@ -13,15 +13,94 @@ function initRemoveButtons() {
       list_nodes[i].appendChild(span);
       
       span.onclick = function() {
-        var parent = this.parentElement;
-        parent.style.display = "none";
-        // TODO: silo-sxv will handle actual DB deletion
+        var li = this.parentElement;
+        var showName = li.childNodes[0].textContent.trim();
+        removeShow(showName, li);
       }
     }
   }
 }
 
+function removeShow(name, li) {
+  var username = window.location.pathname.split('/')[2];
+  if (!username) return;
+
+  fetch('/api/v0.1/user/' + username + '/show/' + encodeURIComponent(name), {
+    method: 'DELETE'
+  })
+  .then(response => response.json())
+  .then(data => {
+    li.remove();
+  });
+}
+
+// --- Drag and Drop Logic (silo-pqt) ---
+
+function initDraggable() {
+  var items = document.querySelectorAll("ul#show.list li");
+  items.forEach(function(item) {
+    item.draggable = true;
+    item.addEventListener('dragstart', handleDragStart);
+    item.addEventListener('dragover', handleDragOver);
+    item.addEventListener('drop', handleDrop);
+    item.addEventListener('dragend', handleDragEnd);
+  });
+}
+
+var dragSourceItem = null;
+
+function handleDragStart(e) {
+  dragSourceItem = this;
+  e.dataTransfer.effectAllowed = 'move';
+  this.classList.add('dragging');
+}
+
+function handleDragOver(e) {
+  if (e.preventDefault) e.preventDefault();
+  return false;
+}
+
+function handleDrop(e) {
+  if (e.stopPropagation) e.stopPropagation();
+  
+  if (dragSourceItem !== this) {
+    var list = this.parentNode;
+    var allItems = Array.from(list.children);
+    var sourceIndex = allItems.indexOf(dragSourceItem);
+    var targetIndex = allItems.indexOf(this);
+    
+    if (sourceIndex < targetIndex) {
+      list.insertBefore(dragSourceItem, this.nextSibling);
+    } else {
+      list.insertBefore(dragSourceItem, this);
+    }
+    
+    saveNewOrder();
+  }
+  return false;
+}
+
+function handleDragEnd() {
+  this.classList.remove('dragging');
+}
+
+function saveNewOrder() {
+  var username = window.location.pathname.split('/')[2];
+  if (!username) return;
+
+  var showNames = Array.from(document.querySelectorAll("ul#show.list li"))
+    .map(li => li.childNodes[0].textContent.trim());
+
+  fetch('/api/v0.1/user/' + username + '/shows/reorder', {
+    method: 'POST',
+    body: JSON.stringify(showNames),
+    headers: { 'Content-Type': 'application/json' }
+  });
+}
+
+// Run initializers
 initRemoveButtons();
+initDraggable();
 
 // --- Search Suggestion Logic (silo-ik7) ---
 
@@ -31,7 +110,6 @@ var suggestionsDiv = document.getElementById('suggestions');
 if (searchInput) {
   var debounceTimer;
 
-  // Add some basic styles for the suggestion dropdown
   var style = document.createElement('style');
   style.innerHTML = `
     #suggestions-list {
@@ -59,6 +137,17 @@ if (searchInput) {
     #suggestions-list li .meta {
       font-size: 0.8em;
       color: #666;
+    }
+    ul#show.list li {
+      cursor: move;
+      background: #fdfdfd;
+      margin-bottom: 5px;
+      padding: 5px;
+      border: 1px solid #eee;
+    }
+    ul#show.list li.dragging {
+      opacity: 0.5;
+      background: #eee;
     }
   `;
   document.head.appendChild(style);
@@ -138,9 +227,9 @@ function renderShows(showNames) {
     showList.appendChild(li);
   });
   initRemoveButtons();
+  initDraggable();
 }
 
-// Update the existing Add button
 var addButton = document.querySelector('.addbutton');
 if (addButton) {
   addButton.onclick = function() {
@@ -149,7 +238,6 @@ if (addButton) {
   };
 }
 
-// Close suggestions when clicking outside
 document.onclick = function(e) {
   if (e.target !== searchInput && !suggestionsDiv.contains(e.target)) {
     suggestionsDiv.innerHTML = '';

@@ -197,10 +197,8 @@ namespace '/api/v0.1' do
   delete '/user/:name/show/:show' do
     content_type :json
 
-    parser = URI::Parser.new
-
     u = User.find(name: params["name"])
-    s = Show.find(uri_encoded: parser.escape(params["show"]))
+    s = Show.find(name: params["show"])
 
     if s.nil? then
       status 404
@@ -210,6 +208,26 @@ namespace '/api/v0.1' do
 
     u.shows.map { |s| s.name }.to_json
 
+  end
+
+  post '/user/:name/shows/reorder' do
+    content_type :json
+    u = User.find(name: params["name"])
+    return status 404 if u.nil?
+
+    new_order = JSON.parse(request.body.read)
+    # new_order is an array of show names
+    
+    DB.transaction do
+      new_order.each_with_index do |show_name, index|
+        show = Show.find(name: show_name)
+        if show
+          DB[:shows_users].where(user_id: u.id, show_id: show.id).update(show_order: index)
+        end
+      end
+    end
+
+    u.shows.map { |s| s.name }.to_json
   end
 
   get '/user/:name/shows' do

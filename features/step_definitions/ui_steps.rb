@@ -36,6 +36,33 @@ Then('the runtime {string} is displayed for {string}') do |runtime, name|
   expect(actual_body).to include(name)
 end
 
+Given('the user {string} has {string} and {string} in their list') do |username, show1, show2|
+  # Ensure user exists
+  u = User.find(name: username) || User.create(name: username, config: {}.to_json, schedule: {}.to_json)
+  
+  # Ensure shows exist and are added to user
+  [show1, show2].each do |name|
+    show = Show.find(name: name) || Show.create(name: name, runtime: "45 minutes", uri_encoded: name.downcase.gsub(' ', '+'))
+    u.add_show(show) unless u.shows.include?(show)
+  end
+end
+
+When('the user drags {string} above {string}') do |show1, show2|
+  # In Rack::Test, we simulate the reorder API call
+  path = $browser.last_request.path_info
+  username = path.split('/')[2]
+  
+  # We want show1 above show2. Let's assume the list was [show2, show1] and now it's [show1, show2]
+  $browser.post "/api/v0.1/user/#{username}/shows/reorder", [show1, show2].to_json, { "CONTENT_TYPE" => "application/json" }
+end
+
+Then('{string} is the first show in the list') do |name|
+  # Check the returned JSON or the next page load
+  # The reorder API returns the new list
+  actual_body = JSON.parse($browser.last_response.body)
+  expect(actual_body.first).to eq(name)
+end
+
 When('any user visits the main page') do
   $browser.get '/'
 end
