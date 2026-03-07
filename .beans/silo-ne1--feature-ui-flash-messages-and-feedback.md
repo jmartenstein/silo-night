@@ -1,11 +1,11 @@
 ---
 # silo-ne1
 title: 'Feature: UI Flash Messages and Feedback'
-status: todo
+status: completed
 type: feature
 priority: critical
 created_at: 2026-03-02T22:51:10Z
-updated_at: 2026-03-03T16:08:17Z
+updated_at: 2026-03-07T01:25:11Z
 parent: silo-vjq
 ---
 
