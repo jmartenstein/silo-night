@@ -1,11 +1,11 @@
 ---
 # silo-f6n
 title: 'Epic: Intelligent Schedule Generation Engine'
-status: todo
+status: completed
 type: epic
 priority: deferred
 created_at: 2026-03-02T22:41:16Z
-updated_at: 2026-03-03T16:09:18Z
+updated_at: 2026-03-07T02:19:24Z
 blocked_by:
     - silo-kfy
     - silo-yjw

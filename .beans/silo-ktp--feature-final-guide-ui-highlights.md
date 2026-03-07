@@ -1,11 +1,11 @@
 ---
 # silo-ktp
 title: 'Feature: Final Guide UI & Highlights'
-status: todo
+status: completed
 type: feature
 priority: low
 created_at: 2026-03-02T22:41:22Z
-updated_at: 2026-03-03T16:09:03Z
+updated_at: 2026-03-07T02:19:19Z
 parent: silo-f6n
 blocked_by:
     - silo-f6n
