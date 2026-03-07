@@ -1,11 +1,11 @@
 ---
 # silo-qy7
 title: 'Feature: Show Search and Metadata Integration'
-status: todo
+status: completed
 type: feature
 priority: high
 created_at: 2026-03-02T22:41:01Z
-updated_at: 2026-03-03T16:08:27Z
+updated_at: 2026-03-07T02:01:11Z
 parent: silo-w9n
 blocked_by:
     - silo-vjq
