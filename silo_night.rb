@@ -22,8 +22,29 @@ get '/' do
   slim :index
 end
 
+post '/user' do
+  username = params[:username]
+  if username.nil? || username.strip.empty?
+    @error = "Username cannot be empty"
+    @users = User.map { |x| x[:name] }
+    return slim :index
+  end
+
+  if User.find(name: username)
+    @error = "Username '#{username}' already exists. Please choose a different one."
+    @users = User.map { |x| x[:name] }
+    return slim :index
+  end
+
+  User.create(name: username, config: {}.to_json, schedule: {}.to_json)
+  @message = "User '#{username}' created successfully"
+  @users = User.map { |x| x[:name] }
+  slim :index
+end
+
 get '/user/:name/schedule' do
-  @schedule = JSON.parse(User.find(name: params["name"]).schedule)
+  @user = User.find(name: params["name"])
+  @schedule = JSON.parse(@user.schedule)
   slim :schedule
 end
 
