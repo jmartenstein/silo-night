@@ -5,9 +5,10 @@ Feature: Shows and Schedule Configuration
   I want to curate my watch list and define my evening time budget
   So that I can eliminate decision paralysis
 Scenario: Searching for a show to add
-  Given the user "sam" is on their shows and schedule page
+  Given there is an existing user "sam"
+  And the user "sam" is on their shows and schedule page
   When the user types "Silo" in the "show-search" field
-  Then the page displays a suggestion for "Silo" with "Sci-Fi" and "2023"
+  Then the page displays a suggestion for "Silo" with "Science-Fiction" and "2023"
 
 Scenario: Viewing the watch list
   Given the user "steph" has "The Equalizer" and "Grey's Anatomy" in their list

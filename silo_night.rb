@@ -7,6 +7,7 @@ require 'slim'
 $LOAD_PATH.unshift File.expand_path('./lib', __dir__)
 require 'database'
 require 'user'
+require 'metadata_service'
 
 # set slim templates to custom diectory
 set :views, File.expand_path(File.join(__FILE__, '../template'))
@@ -179,6 +180,13 @@ namespace '/api/v0.1' do
     content_type :json
     u = User.find(name: params["name"])
     u.shows.map { |s| s.uri_encoded }.to_json
+  end
+
+  get '/search' do
+    content_type :json
+    service = MetadataService.new
+    results = service.search_shows(params[:q])
+    results.to_json
   end
 
 end

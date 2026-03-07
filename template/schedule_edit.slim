@@ -4,8 +4,9 @@ div#showbox.border
 
   div#show.header
     form
-      input.addtext type="text" placeholder="Name..."
+      input#show-search.addtext type="text" placeholder="Name..." autocomplete="off"
       input.addbutton type="button" value="Add"
+    div#suggestions style="position: relative;"
 
   ul#show.list
     - @shows.each do |s|
