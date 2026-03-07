@@ -15,6 +15,27 @@ The app is rack-compatible, so you can launch it as follows:
 rackup
 ```
 
+Alternatively, you can run using Puma directly:
+
+```bash
+bundle exec puma
+```
+
+### Network Access and Environments
+
+To allow access from other hosts on your local network, the app is pre-configured in `config/puma.rb` and `silo_night.rb` to bind to all available interfaces (`0.0.0.0`).
+
+Note that the security behavior differs by environment:
+- **Development (`RACK_ENV=development`)**: Default security protections (like host authorization) are **enabled**.
+- **Test (`RACK_ENV=test`)**: Security protections are **disabled** to allow for unrestricted local network testing and access via custom hostnames (e.g., `justins-air.local`).
+
+To run with protections disabled for cross-device testing:
+```bash
+RACK_ENV=test bundle exec puma
+```
+
+For more details, see the [Environment Management doc](./docs/environment_management.md).
+
 # Testing
 
 Currently, there are two different test methodologies / frameworks in use for
