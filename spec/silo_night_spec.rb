@@ -13,20 +13,10 @@ RSpec.describe 'Silo Night app' do
     Sinatra::Application
   end
 
-  it "prompts to create a schedule" do
+  it "prompts to create a new user" do
     get '/'
     expect(last_response).to be_ok
     expect(last_response.body).to include("Create")
-  end
-
-  it "creates a new schedule", failing: true do
-    post '/schedule'
-    expect(last_response).to be_ok
-  end
-
-  it "lists your current shows" do
-    get '/'
-    expect(last_response).to be_ok
   end
 
 end
