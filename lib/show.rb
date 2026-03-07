@@ -7,11 +7,16 @@ class Show < Sequel::Model
 
   def average_runtime
 
-    # split the strings by space and hyphen
-    times = @values[:runtime].split(/\W/)
+    # split the strings by non-word characters
+    times = @values[:runtime].split(/\W+/)
 
-    # remove minutes
+    # remove common words
     times.delete("minutes")
+    times.delete("min")
+    times.delete("")
+
+    # If nothing is left, return 0 or some default
+    return 30 if times.empty?
 
     # sum the remaining values:
     sum = times.map(&:to_i).reduce(:+)
