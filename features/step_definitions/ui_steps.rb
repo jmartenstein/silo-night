@@ -15,7 +15,10 @@ When('any user visits the create new schedule page') do ||
 end
 
 Then('the page displays {string}') do |string|
-  expect($browser.last_response).to match(string)
+  # Unescape HTML entities for comparison
+  require 'cgi'
+  actual_body = CGI.unescapeHTML($browser.last_response.body.to_s)
+  expect(actual_body).to include(string)
 end
 
 Then('the page displays a form with {string} text') do |string|

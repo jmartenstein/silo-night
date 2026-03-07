@@ -3,23 +3,17 @@
 require 'sinatra'
 require 'sinatra/contrib'
 require 'slim'
-require 'dotenv'
-Dotenv.load(".env.#{ENV['RACK_ENV'] || 'development'}", ".env")
 
-require 'sequel'
-require 'sequel/extensions/migration'
+$LOAD_PATH.unshift File.expand_path('./lib', __dir__)
+require 'database'
 require 'user'
 
 # set slim templates to custom diectory
 set :views, File.expand_path(File.join(__FILE__, '../template'))
 set :protection, :except => :host_authorization
 
-# load the databae
-db_url = ENV['DATABASE_URL'] || (ENV['RACK_ENV'] == 'test' ? 'sqlite://data/test.db' : 'sqlite://data/silo_night.db')
-db = Sequel.connect(db_url)
-
 # Ensure migrations are current
-unless Sequel::Migrator.is_current?(db, 'db/migrations')
+unless Sequel::Migrator.is_current?(DB, 'db/migrations')
   warn "WARNING: Database migrations are not up to date. Run 'rake db:migrate' to update."
 end
 
@@ -28,8 +22,29 @@ get '/' do
   slim :index
 end
 
+post '/user' do
+  username = params[:username]
+  if username.nil? || username.strip.empty?
+    @error = "Username cannot be empty"
+    @users = User.map { |x| x[:name] }
+    return slim :index
+  end
+
+  if User.find(name: username)
+    @error = "Username '#{username}' already exists. Please choose a different one."
+    @users = User.map { |x| x[:name] }
+    return slim :index
+  end
+
+  User.create(name: username, config: {}.to_json, schedule: {}.to_json)
+  @message = "User '#{username}' created successfully"
+  @users = User.map { |x| x[:name] }
+  slim :index
+end
+
 get '/user/:name/schedule' do
-  @schedule = JSON.parse(User.find(name: params["name"]).schedule)
+  @user = User.find(name: params["name"])
+  @schedule = JSON.parse(@user.schedule)
   slim :schedule
 end
 

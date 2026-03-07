@@ -1,28 +1,18 @@
-doctype html
+h2 Shows
 
-html
- 
-  head
-    link rel="stylesheet" href="/stylesheets/default.css"
+div#showbox.border
 
-  body
+  div#show.header
+    form
+      input.addtext type="text" placeholder="Name..."
+      input.addbutton type="button" value="Add"
 
+  ul#show.list
+    - @shows.each do |s|
+      li #{s.name}
 
-    h2 Shows
+h2 Availability
 
-    div#showbox.border
+div#availbox.border
 
-      div#show.header
-        form
-          input.addtext type="text" placeholder="Name..."
-          input.addbutton type="button" value="Add"
-
-      ul#show.list
-        - @shows.each do |s|
-          li #{s.name}
-
-    h2 Availability
-
-    div#availbox.border
-
-    script src="/javascript/default.js"
+script src="/javascript/default.js"
