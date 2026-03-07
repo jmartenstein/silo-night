@@ -15,6 +15,27 @@ The app is rack-compatible, so you can launch it as follows:
 rackup
 ```
 
+Alternatively, you can run using Puma directly:
+
+```bash
+bundle exec puma
+```
+
+### Network Access and Environments
+
+The server's network accessibility and security behavior differ by environment:
+
+- **Development (`RACK_ENV=development`)**: The server binds to **localhost** (`127.0.0.1`) only and default security protections are **enabled**.
+- **Test (`RACK_ENV=test`)**: The server binds to **all interfaces** (`0.0.0.0`) and security protections are **disabled**, allowing for easy cross-device testing using hostnames like `justins-air.local`.
+- **Production (`RACK_ENV=production`)**: The server binds to **all interfaces** (`0.0.0.0`) and security protections are **enabled**.
+
+To run with network access enabled for testing:
+```bash
+RACK_ENV=test bundle exec puma
+```
+
+For more details, see the [Environment Management doc](./docs/environment_management.md).
+
 # Testing
 
 Currently, there are two different test methodologies / frameworks in use for
