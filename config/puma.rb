@@ -1,11 +1,12 @@
 # Puma configuration for silo-night
-port        ENV.fetch("PORT") { 9292 }
 environment ENV.fetch("RACK_ENV") { "development" }
 
-# In development mode, bind only to localhost for security.
-# In test and production modes, bind to all interfaces to allow external access.
+# Single source of truth for host and port binding.
+# - Development: Bind only to localhost (127.0.0.1) for security.
+# - Test/Production: Bind to all interfaces (0.0.0.0) for network access.
+port = ENV.fetch("PORT") { 9292 }
 if ENV.fetch("RACK_ENV") { "development" } == "development"
-  bind "tcp://127.0.0.1:#{ENV.fetch("PORT") { 9292 }}"
+  bind "tcp://127.0.0.1:#{port}"
 else
-  bind "tcp://0.0.0.0:#{ENV.fetch("PORT") { 9292 }}"
+  bind "tcp://0.0.0.0:#{port}"
 end

@@ -14,20 +14,14 @@ set :views, File.expand_path(File.join(__FILE__, '../template'))
 
 configure :development do
   set :protection, true
-  set :bind, '127.0.0.1'
-  set :port, 9292
 end
 
 configure :production do
   set :protection, true
-  set :bind, '0.0.0.0'
-  set :port, 9292
 end
 
 configure :test do
   set :protection, false
-  set :bind, '0.0.0.0'
-  set :port, 9292
 end
 
 # Ensure migrations are current
