@@ -13,6 +13,7 @@ RSpec.describe MetadataService do
       {
         'id' => 1396,
         'name' => 'Breaking Bad',
+        'first_air_date' => '2008-01-20',
         'episode_run_time' => [45],
         'genres' => [{ 'name' => 'Drama' }],
         'poster_path' => '/poster.jpg',
@@ -24,6 +25,7 @@ RSpec.describe MetadataService do
       {
         'id' => 169,
         'name' => 'Breaking Bad',
+        'premiered' => '2008-01-20',
         'averageRuntime' => 45,
         'genres' => ['Drama', 'Crime'],
         'image' => { 'medium' => 'tvmaze_poster.jpg' },
@@ -43,6 +45,7 @@ RSpec.describe MetadataService do
       expect(result[:name]).to eq('Breaking Bad')
       expect(result[:runtime]).to eq('45 minutes')
       expect(result[:genres]).to contain_exactly('Drama', 'Crime')
+      expect(result[:year]).to eq(2008)
       expect(result[:poster_path]).to eq('https://image.tmdb.org/t/p/w500/poster.jpg')
       expect(result[:overview]).to eq('Heisenberg is born.')
       expect(result[:external_ids][:tmdb_id]).to eq(1396)
@@ -54,6 +57,7 @@ RSpec.describe MetadataService do
       result = service.get_show_metadata(title)
       expect(result[:name]).to eq('Breaking Bad')
       expect(result[:poster_path]).to eq('tvmaze_poster.jpg')
+      expect(result[:year]).to eq(2008)
     end
 
     it 'returns nil if neither provider finds the show' do
@@ -61,6 +65,33 @@ RSpec.describe MetadataService do
       allow(tvmaze_adapter).to receive(:search_shows_by_title).with(title).and_return([])
       result = service.get_show_metadata(title)
       expect(result).to be_nil
+    end
+  end
+
+  describe '#search_shows' do
+    let(:title) { 'Breaking Bad' }
+    let(:tmdb_results) do
+      [
+        { 'id' => 1396, 'name' => 'Breaking Bad', 'first_air_date' => '2008-01-20', 'genre_ids' => [18] }
+      ]
+    end
+    let(:tvmaze_results) do
+      [
+        { 'id' => 169, 'name' => 'Breaking Bad', 'premiered' => '2008-01-20', 'genres' => ['Drama', 'Crime'] }
+      ]
+    end
+
+    before do
+      allow(tmdb_adapter).to receive(:search_shows_by_title).with(title).and_return(tmdb_results)
+      allow(tvmaze_adapter).to receive(:search_shows_by_title).with(title).and_return(tvmaze_results)
+    end
+
+    it 'returns a list of suggestions with name, year, and genres' do
+      results = service.search_shows(title)
+      expect(results).to be_an(Array)
+      expect(results.first[:name]).to eq('Breaking Bad')
+      expect(results.first[:year]).to eq(2008)
+      expect(results.first[:genres]).to contain_exactly('Drama', 'Crime')
     end
   end
 end
