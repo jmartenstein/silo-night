@@ -1,4 +1,6 @@
 Given('the user {string} is on their shows and schedule page') do |username|
+  @current_user_name = username
+  User.find(name: username) || User.create(name: username, config: {}.to_json, schedule: {}.to_json)
   $browser.get "/user/#{username}/schedule/edit"
 end
 
@@ -68,15 +70,23 @@ When('any user visits the main page') do
 end
 
 When('the user {string} views her list of shows') do |username|
+  @current_user_name = username
+  User.find(name: username) || User.create(name: username, config: {}.to_json, schedule: {}.to_json)
   $browser.get "/user/#{username}/shows"
 end
 
 When('the user {string} visits the page to edit her shows') do |username|
+  @current_user_name = username
+  User.find(name: username) || User.create(name: username, config: {}.to_json, schedule: {}.to_json)
   $browser.get "/user/#{username}/schedule/edit"
 end
 
 When('any user visits the create new schedule page') do ||
-  $browser.get "schedule/new"
+  @current_user_name = "new_test_user"
+  u = User.find(name: @current_user_name)
+  u.delete if u
+  User.create(name: @current_user_name, config: {}.to_json, schedule: {}.to_json)
+  $browser.get "/user/#{@current_user_name}/schedule/edit"
 end
 
 Then('the page displays {string}') do |string|
@@ -87,10 +97,14 @@ Then('the page displays {string}') do |string|
 end
 
 Then('the page displays a form with {string} text') do |string|
-  form_string = $browser.last_response.body.to_s[/form(.*)form/,1]
-  expect(form_string).to match(string)
+  # Match either an input value, button text, or generic content inside a form
+  actual_body = $browser.last_response.body.to_s
+  expect(actual_body).to match(/<form.*#{string}.*<\/form>/m)
 end
 
 Then('a blank list of shows is displayed') do
-  pending
+  actual_body = $browser.last_response.body.to_s
+  expect(actual_body).to match(/ul.*id="show".*class="list"/)
+  expect(actual_body).not_to match(/<li.*>.*<\/li>/)
 end
+

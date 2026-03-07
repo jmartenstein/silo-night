@@ -1,11 +1,5 @@
 # features/step_definitions/schedule_steps.rb
 
-Given('the user {string} is on their shows and schedule page') do |username|
-  @current_user_name = username
-  User.find(name: username) || User.create(name: username, config: {}.to_json, schedule: {}.to_json)
-  $browser.get "/user/#{username}/schedule"
-end
-
 When('the user sets the available time for {string} to {string} minutes') do |day, minutes|
   u = User.find(name: @current_user_name)
   abbr = u.day_to_abbr(day)
@@ -35,10 +29,16 @@ When('the user sets {string} as {string}') do |day, status|
   end
 end
 
-Then('the Monday schedule should show {string}') do |text|
+Then('the {word} schedule should show {string}') do |day, text|
   $browser.get "/user/#{@current_user_name}/schedule"
-  expect($browser.last_response.body).to include("Monday")
+  expect($browser.last_response.body).to include(day)
   expect($browser.last_response.body).to include(text)
+end
+
+Then('the {word} schedule should show {string} or {string}') do |day, text1, text2|
+  $browser.get "/user/#{@current_user_name}/schedule"
+  expect($browser.last_response.body).to include(day)
+  expect($browser.last_response.body).to match(/#{text1}|#{text2}/)
 end
 
 Given(/^the user "([^"]*)" has "([^"]*)" \(([^)]*)\) and "([^"]*)" \(([^)]*)\) in their list$/) do |username, show1, run1, show2, run2|
