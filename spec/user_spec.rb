@@ -4,6 +4,11 @@ require 'spec_helper'
 
 describe User do
 
+  before(:each) do
+    # Load the smoke scenario for every test to ensure seeded users are present
+    load File.expand_path('../data/scenarios/smoke.rb', __dir__)
+  end
+
   let(:bot_shows) { build_list(:show, 3) do |show, i|
     show.name = "show" + i.to_s
     show.values[:show_order] = i
@@ -12,7 +17,7 @@ describe User do
   let(:bot1_test) { build :user }
   let(:bot2_test) { build :user, name: "justin" }
 
-  #let(:seed_test) { User.find(name: "steph") }
+  let(:seed_test) { User.find(name: "steph") }
   let(:seed_just) { User.find(name: "justin") }
 
   it "loads a schedule from an existing file" do
@@ -60,44 +65,42 @@ describe User do
   end
 
   it "finds next available slot for bot user" do
-    allow(bot1_test).to receive_message_chain(:shows_dataset,
-                                              :where,
-                                              :first).and_return(bot_shows[1])
-    next_slot = bot1_test.find_next_available_slot("show1")
+    next_slot = bot1_test.find_next_available_slot(bot_shows[1])
     expect(next_slot).to eq("Monday")
   end
 
-  #it "checks if Tuesday is full in second seeded user's schedule" do
-  #  sched = seed_test.generate_schedule
-  #  p sched
-  # actual = seed_test.get_available_runtime_for_day("Tuesday")
-  #  expect(actual).to eq(32)
-  #end
+  it "checks if Tuesday is full in second seeded user's schedule" do
+    seed_test.generate_schedule
+    actual = seed_test.get_available_runtime_for_day("Tuesday")
+    # Steph's time is 85. The first show "The Equalizer" is 60.
+    # 85 - 60 = 25.
+    expect(actual).to eq(25)
+  end
 
-  #it "generates populated schedule from first seeded user", failing: true do
-  #
-  #  seed_just.generate_schedule()
-  #  weekday = "Tuesday"
-  #
-  #  sched = JSON.parse(seed_just.schedule)
-  #
-  #  expect(sched).not_to be_nil
-  #  expect(sched[weekday]).not_to be_empty
-  #  expect(sched[weekday].length).to eq(2)
-  #  expect(sched[weekday]).to include("Suits")
+  it "generates populated schedule from first seeded user", failing: true do
 
-  #end
+    seed_just.generate_schedule()
+    weekday = "Tuesday"
 
-  #it "generates a second populated schedule" do
+    sched = JSON.parse(seed_just.schedule)
 
-  #  seed_test.generate_schedule
-  #  weekday = "Tuesday"
+    expect(sched).not_to be_nil
+    expect(sched[weekday]).not_to be_empty
+    expect(sched[weekday].length).to eq(1)
+    expect(sched[weekday]).to include("His Dark Materials")
 
-  #  sched = JSON.parse(seed_test.schedule)
+  end
 
-  #  expect(sched[weekday]).not_to be_empty
-  #  expect(sched[weekday][0]).to eq("His Dark Materials")
+  it "generates a second populated schedule" do
 
-  # end
+    seed_test.generate_schedule
+    weekday = "Tuesday"
+
+    sched = JSON.parse(seed_test.schedule)
+
+    expect(sched[weekday]).not_to be_empty
+    expect(sched[weekday][0]).to eq("The Equalizer")
+
+  end
 
 end
