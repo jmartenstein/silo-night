@@ -140,16 +140,32 @@ namespace '/api/v0.1' do
     content_type :json
 
     u = User.find(name: params["name"])
+    return status 404 if u.nil?
+
     s = Show.find(name: params["show"])
 
-    if s.nil? then
+    if s.nil?
+      # Try to fetch metadata and create the show
+      service = MetadataService.new
+      metadata = service.get_show_metadata(params["show"])
+      
+      if metadata
+        require 'uri'
+        s = Show.create(
+          name: metadata[:name],
+          runtime: metadata[:runtime],
+          uri_encoded: URI.encode_www_form_component(metadata[:name].downcase)
+        )
+      end
+    end
+
+    if s.nil?
       status 404
     else
-      u.add_show(s)
+      u.add_show(s) unless u.shows.include?(s)
     end
 
     u.shows.map { |s| s.name }.to_json
-
   end
 
   delete '/user/:name/show/:show' do

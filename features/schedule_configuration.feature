@@ -27,7 +27,8 @@ Scenario: Creating a new list of shows
   Then a blank list of shows is displayed
 
   Scenario: Adding a show to the watch list
-    Given the user "sam" is on their shows and schedule page
+    Given there is an existing user "sam"
+    And the user "sam" is on their shows and schedule page
     When the user searches for and adds "Silo"
     Then the show "Silo" appears in the "Watch List"
     And the runtime "45 min" is displayed for "Silo"

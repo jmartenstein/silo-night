@@ -106,9 +106,48 @@ function renderSuggestions(suggestions) {
 window.selectSuggestion = function(name) {
   searchInput.value = name;
   suggestionsDiv.innerHTML = '';
-  // Focus back to input or trigger add? 
-  // For now just fill the input.
+  addShow(name);
 };
+
+function addShow(name) {
+  var username = window.location.pathname.split('/')[2];
+  if (!username) return;
+
+  var formData = new FormData();
+  formData.append('show', name);
+
+  fetch('/api/v0.1/user/' + username + '/show', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    renderShows(data);
+    searchInput.value = '';
+  });
+}
+
+function renderShows(showNames) {
+  var showList = document.querySelector('ul#show.list');
+  if (!showList) return;
+
+  showList.innerHTML = '';
+  showNames.forEach(function(name) {
+    var li = document.createElement('li');
+    li.textContent = name;
+    showList.appendChild(li);
+  });
+  initRemoveButtons();
+}
+
+// Update the existing Add button
+var addButton = document.querySelector('.addbutton');
+if (addButton) {
+  addButton.onclick = function() {
+    var name = searchInput.value;
+    if (name) addShow(name);
+  };
+}
 
 // Close suggestions when clicking outside
 document.onclick = function(e) {
