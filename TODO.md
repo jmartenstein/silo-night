@@ -1,9 +1,7 @@
-# Feature: Weekly Availability Configuration (#21)
+# Refactor User Journey for Minimalist Philosophy (#29)
 
-- [ ] Implement daily availability inputs for each day of the week
-- [ ] Add 'Unavailable' toggle/status for specific days
-- [ ] Save and persist availability settings per user in the database
-- [ ] Implement 'Blank list' initialization for new schedules
-- [ ] Update schedule display to reflect configured daily time (e.g., '60 min')
-- [ ] Handle 'No TV tonight' display for unavailable days
-- [ ] Move availability scenarios in `schedule_configuration.feature` to green
+- [x] Update docs/user_journey.md to align with docs/design_philosophy.md
+- [x] Incorporate minimalist choices (typography, negative space)
+- [x] Ensure guidance for coding agents and developers
+- [x] Map states (Enter, Plan, Watch) to specific routes
+- [x] Streamline user persona for minimalist focus
