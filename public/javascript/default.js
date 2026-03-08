@@ -14,7 +14,7 @@ function initRemoveButtons() {
       
       span.onclick = function() {
         var li = this.parentElement;
-        var showName = li.childNodes[0].textContent.trim();
+        var showName = li.querySelector('.name').textContent.trim();
         removeShow(showName, li);
       }
     }
@@ -89,7 +89,7 @@ function saveNewOrder() {
   if (!username) return;
 
   var showNames = Array.from(document.querySelectorAll("ul#show.list li"))
-    .map(li => li.childNodes[0].textContent.trim());
+    .map(li => li.querySelector('.name').textContent.trim());
 
   fetch('/api/v0.1/user/' + username + '/shows/reorder', {
     method: 'POST',
@@ -148,6 +148,11 @@ if (searchInput) {
     ul#show.list li.dragging {
       opacity: 0.5;
       background: #eee;
+    }
+    ul#show.list li .runtime {
+      color: #777;
+      font-size: 0.9em;
+      margin-left: 10px;
     }
   `;
   document.head.appendChild(style);
@@ -216,14 +221,24 @@ function addShow(name) {
   });
 }
 
-function renderShows(showNames) {
+function renderShows(shows) {
   var showList = document.querySelector('ul#show.list');
   if (!showList) return;
 
   showList.innerHTML = '';
-  showNames.forEach(function(name) {
+  shows.forEach(function(s) {
     var li = document.createElement('li');
-    li.textContent = name;
+    
+    var nameSpan = document.createElement('span');
+    nameSpan.className = 'name';
+    nameSpan.textContent = s.name;
+    li.appendChild(nameSpan);
+    
+    var runtimeSpan = document.createElement('span');
+    runtimeSpan.className = 'runtime';
+    runtimeSpan.textContent = ' (' + s.runtime + ')';
+    li.appendChild(runtimeSpan);
+    
     showList.appendChild(li);
   });
   initRemoveButtons();

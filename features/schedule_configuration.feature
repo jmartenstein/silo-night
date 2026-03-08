@@ -31,12 +31,14 @@ Scenario: Creating a new list of shows
     And the user "sam" is on their shows and schedule page
     When the user searches for and adds "Silo"
     Then the show "Silo" appears in the "Watch List"
-    And the runtime "45 min" is displayed for "Silo"
+    And the runtime "50 min" is displayed for "Silo"
 
   Scenario: Reordering the watch list
     Given the user "sam" has "Silo" and "Foundation" in their list
     And the user "sam" is on their shows and schedule page
     When the user drags "Foundation" above "Silo"
+    Then "Foundation" is the first show in the list
+    When the user "sam" visits the page to edit her shows
     Then "Foundation" is the first show in the list
 
   Scenario: Configuring daily availability

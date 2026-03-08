@@ -10,7 +10,9 @@ div#showbox.border
 
   ul#show.list
     - @shows.each do |s|
-      li #{s.name}
+      li
+        span.name = s.name
+        span.runtime = " (#{s.runtime})"
 
 h2 Availability
 
