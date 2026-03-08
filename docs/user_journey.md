@@ -2,69 +2,63 @@
 
 "I love great TV, but I hate the feeling of wasting my evening scrolling through menus or accidentally binging until 2 AM."
 
-*   **Demographics:** 28, Remote Software Engineer, lives in a medium-sized city.
-*   **Behavioral Patterns:** Sam is highly organized in her professional life but finds herself suffering from "decision paralysis" when it comes to entertainment. She values high-quality storytelling (like the show *Silo*) but often ends up returning her same favorite content because it's "just there", or it "feels comfortable." She hesitates to start new shows due to concerns about becoming over-invested, or trying new things. She wants to mix comfort food shows with the newer binge-worthy shows that folks are talking about.
-*   **Goals and Needs:**
-    *   To establish a predictable evening routine with a clear "stop" time.
-    *   To make steady progress through a curated list of shows without feeling overwhelmed.
-    *   To remove the friction of choosing what to watch each night.
-*   **Pain Points:**
-    *   **Binge Burnout:** Feeling regret and exhaustion after staying up too late watching "just one more episode."
-    *   **Content Overload:** A massive "watch list" across five different streaming services that feels like a chore to manage.
-*   **Mental Model:** Sam views her time as a budget. She wants to allocate her "entertainment budget" (e.g., 45 minutes on a Tuesday) as efficiently as possible to maximize her enjoyment without sacrificing sleep or other hobbies.
+*   **Mindset:** Sam views her time as a budget. She is prone to "decision paralysis" and values an interface that makes choices *for* her based on her predefined constraints.
+*   **Goal:** To arrive at the "Watch" state with zero friction and a clear stopping point.
 
 ---
 
-# User Onboarding
+# The Minimalist Journey: State & Route Mapping
 
-The entry point for all users to access their personalized viewing schedules.
+Silo Night is designed with a "Subtract until it breaks" philosophy. This document serves as the **Navigation Source of Truth** for both developers and automated agents.
 
-*   **Landing Page:** The root page serves as the primary gateway.
-*   **Primary Route:** `GET /`
-*   **Authentication:** No password required; the prototype prioritizes immediate access.
-*   **Core Actions:**
-    *   **Select Profile:** Click an existing username to load a saved configuration via `/user/:name/schedule`.
-    *   **New Profile:** Use the provided text box to start a fresh setup.
+## State 1: Enter (The Gateway)
+The user establishes identity. Access must be instantaneous.
 
-# Creating a New User
+*   **Route:** `GET /`
+*   **Minimalist Choice:** No password. Single text input for new users; single-click list for existing users.
+*   **Developer/Agent Note:** If the user is known, redirect or link immediately to State 3. If unknown, stay in State 1 until a name is provided.
 
-A frictionless process to establish a new identity and viewing plan.
+## State 2: Plan (The Budgeting)
+The user defines their "Entertainment Budget" and "Content Queue."
 
-*   **Profile Setup:** Users provide a unique **username** and click **Create**.
-*   **Primary Route:** `PUT /api/v0.1/user/:name`
-*   **Validation Flow:**
-    *   **Success:** The system confirms creation and moves the user to their personal dashboard (`GET /user/:name/schedule/edit`).
-    *   **Error Handling:** If a username is **already taken**, the user is prompted to try a different name on the landing page.
+*   **Route:** `GET /user/:name/schedule/edit`
+*   **Minimalist Choice:** 
+    *   **Curation:** A vertical list of show names. No thumbnails, no ratings, no distracting metadata. Just titles and runtimes.
+    *   **Availability:** A simple grid of days with time inputs (minutes).
+*   **Transitions:**
+    *   `POST /api/v0.1/user/:name/show` -> Adds a show, remains on page.
+    *   `POST /user/:name/availability` -> Updates time constraints, remains on page.
+    *   `POST /api/v0.1/user/:name/shows/reorder` -> Changes priority, remains on page.
+    *   **Exit Action:** Link to "View Schedule" (State 3).
 
-# Existing User Experience
+## State 3: Watch (The Execution)
+The final, immutable plan for the week. This is the application's terminal state.
 
-Seamlessly resuming a curated entertainment journey.
+*   **Route:** `GET /user/:name/schedule`
+*   **Minimalist Choice:** 
+    *   The UI must recede. Only the schedule is visible.
+    *   **Tonight's Show:** High-contrast visual focus on the current day's content.
+*   **Developer/Agent Note:** This page should be the default "Home" for Sam once her schedule is configured. It should require zero interaction to identify "What do I watch right now?"
 
-*   **Persistent State:** Unlike new users, existing profiles load with all **shows and schedules** pre-populated.
-*   **Primary Route:** `GET /user/:name/schedule`
-*   **Efficiency:** One-click access from the landing page bypasses the initial setup phase.
+---
 
-# Shows and Schedule Management
+# Navigation Logic for Coding Agents
 
-The central hub for balancing content desires with real-world time constraints.
+When automating or refactoring navigation, adhere to these explicit constraints:
 
-*   **Dashboard View:** Access the configuration interface for shows and schedule.
-*   **Primary Route:** `GET /user/:name/schedule/edit`
-*   **Content Curation:**
-    *   **Add Shows:** Use `POST /api/v0.1/user/:name/show` to add new content to the watch list.
-    *   **Remove Shows:** Use `DELETE /api/v0.1/user/:name/show/:show_name` to refine the list.
-    *   **Smart Search:** Find shows using a search bar with **thumbnails, genre, and year** metadata.
-    *   **Watch List:** Build a **draggable, reorderable** list that calculates total **runtime** automatically.
-*   **Time Budgeting:**
-    *   **Availability:** Toggle specific **days of the week** for television viewing.
-    *   **Time Limits:** Define precise available windows in **minutes** for each active day.
-*   **System Logic:** Trigger `PUT /api/v0.1/user/:name/schedule` to fit show durations into defined nightly time slots.
+1.  **Direct Pathing:** Never introduce "Confirm" or "Are you sure?" modals unless data loss is catastrophic. Minimalism favors speed over safety nets.
+2.  **Route Hierarchy:**
+    *   `/` -> Identity Selection.
+    *   `/:name/schedule` -> Primary Consumption (State 3).
+    *   `/:name/schedule/edit` -> Primary Configuration (State 2).
+3.  **One Action per State:**
+    *   In `Enter`, the action is **Identify**.
+    *   In `Plan`, the action is **Configure**.
+    *   In `Watch`, the action is **Observe**.
+4.  **No Dead Ends:** Every page must provide a clear, single-link path to the next logical state.
 
-# Final Guide
+# Visual & Interaction Heuristics
 
-The actionable output that eliminates decision fatigue each night.
-
-*   **Weekly Roadmap:** Displays a clear, structured view of what to watch and when.
-*   **Primary Route:** `GET /user/:name/schedule`
-*   **Daily Focus:** Automatically **highlights shows** assigned to the current date, powered by `GET /api/v0.1/user/:name/tonight`.
-*   **User Interface:** Functions as a dedicated "view mode" to keep the user focused on the plan rather than the configuration.
+*   **Negative Space:** Maintain a 2:1 ratio of empty space to content on the `Watch` page.
+*   **Typography over Graphics:** Use font-weight (bold/light) to indicate "Today" vs "Rest of Week" instead of icons or colors.
+*   **Interaction:** Use `GET /api/v0.1/user/:name/tonight` to drive the "Today" highlight logic programmatically.
