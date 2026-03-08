@@ -42,6 +42,8 @@ function initDraggable() {
     item.draggable = true;
     item.addEventListener('dragstart', handleDragStart);
     item.addEventListener('dragover', handleDragOver);
+    item.addEventListener('dragenter', handleDragEnter);
+    item.addEventListener('dragleave', handleDragLeave);
     item.addEventListener('drop', handleDrop);
     item.addEventListener('dragend', handleDragEnd);
   });
@@ -57,22 +59,45 @@ function handleDragStart(e) {
 
 function handleDragOver(e) {
   if (e.preventDefault) e.preventDefault();
+  
+  if (dragSourceItem !== this) {
+    var rect = this.getBoundingClientRect();
+    var midpoint = rect.top + rect.height / 2;
+    if (e.clientY < midpoint) {
+      this.classList.add('over-top');
+      this.classList.remove('over-bottom');
+    } else {
+      this.classList.add('over-bottom');
+      this.classList.remove('over-top');
+    }
+  }
+  
   return false;
+}
+
+function handleDragEnter(e) {
+}
+
+function handleDragLeave(e) {
+  this.classList.remove('over-top');
+  this.classList.remove('over-bottom');
 }
 
 function handleDrop(e) {
   if (e.stopPropagation) e.stopPropagation();
   
+  this.classList.remove('over-top');
+  this.classList.remove('over-bottom');
+
   if (dragSourceItem !== this) {
     var list = this.parentNode;
-    var allItems = Array.from(list.children);
-    var sourceIndex = allItems.indexOf(dragSourceItem);
-    var targetIndex = allItems.indexOf(this);
+    var rect = this.getBoundingClientRect();
+    var midpoint = rect.top + rect.height / 2;
     
-    if (sourceIndex < targetIndex) {
-      list.insertBefore(dragSourceItem, this.nextSibling);
-    } else {
+    if (e.clientY < midpoint) {
       list.insertBefore(dragSourceItem, this);
+    } else {
+      list.insertBefore(dragSourceItem, this.nextSibling);
     }
     
     saveNewOrder();
@@ -82,6 +107,11 @@ function handleDrop(e) {
 
 function handleDragEnd() {
   this.classList.remove('dragging');
+  var items = document.querySelectorAll("ul#show.list li");
+  items.forEach(function(item) {
+    item.classList.remove('over-top');
+    item.classList.remove('over-bottom');
+  });
 }
 
 function saveNewOrder() {
@@ -148,6 +178,12 @@ if (searchInput) {
     ul#show.list li.dragging {
       opacity: 0.5;
       background: #eee;
+    }
+    ul#show.list li.over-top {
+      border-top: 20px solid #ddd;
+    }
+    ul#show.list li.over-bottom {
+      border-bottom: 20px solid #ddd;
     }
     ul#show.list li .runtime {
       color: #777;
