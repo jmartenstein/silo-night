@@ -5,9 +5,7 @@ status: todo
 type: epic
 priority: deferred
 created_at: 2026-03-02T22:40:55Z
-updated_at: 2026-03-03T16:09:13Z
-blocked_by:
-    - silo-f6n
+updated_at: 2026-03-07T23:38:56Z
 ---
 
 Implement the RESTful API endpoints required by api_access.feature.
