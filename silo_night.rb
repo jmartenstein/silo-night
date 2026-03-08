@@ -202,7 +202,7 @@ namespace '/api/v0.1' do
       u.add_show(s) unless u.shows.include?(s)
     end
 
-    u.shows.map { |s| s.name }.to_json
+    u.shows.map { |s| { name: s.name, runtime: s.runtime } }.to_json
   end
 
   delete '/user/:name/show/:show' do
@@ -217,7 +217,7 @@ namespace '/api/v0.1' do
       u.remove_show(s)
     end
 
-    u.shows.map { |s| s.name }.to_json
+    u.shows.map { |s| { name: s.name, runtime: s.runtime } }.to_json
 
   end
 
@@ -238,7 +238,7 @@ namespace '/api/v0.1' do
       end
     end
 
-    u.shows.map { |s| s.name }.to_json
+    u.shows.map { |s| { name: s.name, runtime: s.runtime } }.to_json
   end
 
   get '/user/:name/shows' do

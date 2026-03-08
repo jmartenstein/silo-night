@@ -31,11 +31,9 @@ Then('the show {string} appears in the {string}') do |name, list_name|
 end
 
 Then('the runtime {string} is displayed for {string}') do |runtime, name|
-  # In the current implementation, we only return names in JSON.
-  # But the feature expects it on the page. 
-  # For now, let's just check the response body.
   actual_body = $browser.last_response.body.to_s
   expect(actual_body).to include(name)
+  expect(actual_body).to include(runtime)
 end
 
 Given('the user {string} has {string} and {string} in their list') do |username, show1, show2|
@@ -59,10 +57,19 @@ When('the user drags {string} above {string}') do |show1, show2|
 end
 
 Then('{string} is the first show in the list') do |name|
-  # Check the returned JSON or the next page load
-  # The reorder API returns the new list
-  actual_body = JSON.parse($browser.last_response.body)
-  expect(actual_body.first).to eq(name)
+  if $browser.last_response.content_type == 'application/json'
+    actual_body = JSON.parse($browser.last_response.body)
+    first_show = actual_body.first
+    first_name = first_show.is_a?(Hash) ? first_show['name'] : first_show
+    expect(first_name).to eq(name)
+  else
+    # Check the HTML structure
+    actual_body = $browser.last_response.body.to_s
+    # In the HTML, the first show name is within span.name inside the first li of ul#show.list
+    # Be flexible about attribute order
+    first_match = actual_body.match(/<ul[^>]*id="show"[^>]*>.*?<span[^>]*class="name"[^>]*>([^<]+)<\/span>/m)
+    expect(first_match[1].strip).to eq(name)
+  end
 end
 
 When('any user visits the main page') do
