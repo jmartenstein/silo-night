@@ -54,6 +54,29 @@ describe User do
 
   end
 
+  describe "#generate_schedule" do
+    let(:user) { User.new(name: "test_user", config: { days: "m,t", time: "60" }.to_json) }
+    let(:show1) { double('Show', name: "Show 1", average_runtime: 40) }
+    let(:show2) { double('Show', name: "Show 2", average_runtime: 20) }
+    let(:show3) { double('Show', name: "Show 3", average_runtime: 30) }
+
+    before do
+      allow(user).to receive(:shows).and_return([show1, show2, show3])
+      allow(user).to receive(:save).and_return(true)
+      # Mocking Show.find which is used in find_next_available_slot_for_schedule
+      allow(Show).to receive(:find).with(name: "Show 1").and_return(show1)
+      allow(Show).to receive(:find).with(name: "Show 2").and_return(show2)
+      allow(Show).to receive(:find).with(name: "Show 3").and_return(show3)
+    end
+
+    it "packs shows into days based on order and availability" do
+      schedule = user.generate_schedule
+      
+      expect(schedule["Monday"]).to contain_exactly("Show 1", "Show 2") # 40 + 20 = 60
+      expect(schedule["Tuesday"]).to contain_exactly("Show 3")          # 30 < 60
+    end
+  end
+
   it "checks for day in schedule" do
     actual = bot1_test.is_show_in_schedule?("foo")
     expect(actual).to be_truthy
