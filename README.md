@@ -73,6 +73,7 @@ This project includes several documents to help developers understand its archit
 - **[Environment Management](./docs/environment_management.md)**: Explains how to configure and manage different environments, including database seeding, scenarios, and snapshots.
 - **[Database Migrations](./docs/migrations.md)**: A guide to creating, running, and managing database schema migrations using Sequel.
 - **[Testing Guide](./docs/testing.md)**: Provides detailed instructions on how to run the RSpec and Cucumber test suites and manage the test environment.
+- **[Workflow Guide](./docs/workflow.md)**: Outlines the required process for claiming and implementing features and bug fixes.
 
 # Project Structure
 
