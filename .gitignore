@@ -20,8 +20,7 @@ PR_SUMMARY.md
 # Ignore Byebug command history file.
 .byebug_history
 
-# Archived project beans
-.beans/archive
+# Gemini directory
 .gemini
 
 ## Specific to RubyMotion:

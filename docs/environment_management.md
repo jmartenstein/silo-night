@@ -43,10 +43,20 @@ Available scenarios:
 - `n1_audit`: A complex set of users and shows.
 - `empty`: No data.
 
-### Database Snapshotting
+## Network Access and Security
 
-Snapshots allow you to quickly save and restore database states, which is particularly useful for switching between different data sets during development.
+The server's network binding and security middleware (Sinatra's protection) behave differently depending on the environment:
 
-- `rake db:snapshot:save[name]`: Save the current database state to `db/snapshots/[name].sqlite3`.
-- `rake db:snapshot:load[name]`: Restore the database from a snapshot.
-- `rake db:snapshot:list`: List all available snapshots.
+- **Development (`RACK_ENV=development`)**: The server binds only to **localhost** (`127.0.0.1`). It is **not accessible** from other systems on your local network. Sinatra's default protection middleware is **enabled**.
+- **Test (`RACK_ENV=test`)**: The server binds to **all network interfaces** (`0.0.0.0`), allowing access from other machines on your local network. Sinatra's protection middleware is **completely disabled**, making it easy to test via any hostname (e.g., `justins-air.local`) without "host not permitted" errors.
+- **Production (`RACK_ENV=production`)**: The server binds to **all network interfaces** (`0.0.0.0`) for public/network access. Sinatra's default protection middleware is **enabled**.
+
+You can toggle between these behaviors by setting the `RACK_ENV` variable when starting the server:
+
+```bash
+# Restricted to localhost (default)
+RACK_ENV=development bundle exec puma
+
+# Accessible from network (unprotected)
+RACK_ENV=test bundle exec puma
+```

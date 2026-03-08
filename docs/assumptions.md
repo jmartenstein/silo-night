@@ -1,7 +1,7 @@
 # Biases and Assumptions in silo-night Architecture
 
 ## Biases
-- **Technology Choice Bias**: The beans assume the use of `Sequel` for migrations and database interaction without exploring other Ruby ORMs (like ActiveRecord), although this is consistent with the existing project structure.
+- **Technology Choice Bias**: The design assumes the use of `Sequel` for migrations and database interaction without exploring other Ruby ORMs (like ActiveRecord), although this is consistent with the existing project structure.
 - **Environment Assumption**: There is an assumption that a `DATABASE_URL` environment variable is the standard way to handle configuration, which is a common but specific pattern (Twelve-Factor App).
 - **Process Bias**: The migration process assumes a linear development flow (001, 002, etc.) which might cause conflicts in a multi-developer environment if not managed with timestamps.
 - **Provider Priority**: The plan assumes TMDB and TVMaze are the only or primary sources needed, potentially ignoring other metadata providers (e.g., Trakt, Fanart.tv) that might provide complementary data.

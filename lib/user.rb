@@ -18,6 +18,7 @@ class User < Sequel::Model
       when "th"; "Thursday"
       when "f";  "Friday"
       when "sa"; "Saturday"
+      else; nil
     end
   end
 
@@ -112,30 +113,28 @@ class User < Sequel::Model
 
   end
 
-  def is_show_in_schedule?( show="" )
-    schedule = JSON.parse(@values[:schedule])
-    if not schedule.nil?
-      schedule.keys.each { |day| return true if schedule[day].include?( show ) }
-    end
-    false
+  def is_show_in_schedule?( show="", schedule=nil )
+    schedule ||= JSON.parse(@values[:schedule] || "{}")
+    return false if schedule.nil?
+
+    schedule.values.any? { |shows| shows.include?(show) }
   end
 
-  def get_available_runtime_for_day( day="" )
+  def get_available_runtime_for_day( day="", schedule=nil )
 
     # TODO: add instance function to simplify this line
-    schedule = JSON.parse(@values[:schedule]) || {}
-    schedule_day = schedule[day] || nil
+    schedule ||= JSON.parse(@values[:schedule] || "{}")
+    schedule_day = schedule[day] || []
 
     # initialize an integer to track the runtime
     runtime_sum = 0
 
-    if not schedule_day.nil?
-      schedule_day.each do |show|
-        lookup_show = shows_dataset.where( name: show ).first
-        if not lookup_show.nil?
-          runtime_sum += lookup_show.average_runtime
-        end
-      end
+    # Optimization: Fetch all show runtimes for this day in one query if possible.
+    # For now, let's at least ensure we use the shows relation if available, 
+    # but schedule_day only has names.
+    if not schedule_day.empty?
+      lookup_shows = Show.where(name: schedule_day).all
+      runtime_sum = lookup_shows.sum(&:average_runtime)
     end
 
     config = JSON.parse(@values[:config] || "{}")
@@ -150,16 +149,30 @@ class User < Sequel::Model
     time_limit.to_i - runtime_sum
   end
 
-  def find_next_available_slot( show="" )
+  def find_next_available_slot( show=nil, schedule=nil )
 
-    lookup_show = self.shows_dataset.where( name: show ).first
-    config = JSON.parse(@values[:config])
+    return "" if show.nil?
+
+    # Handle if show is a String (name) for backward compatibility
+    lookup_show = if show.is_a?(String)
+                    Show.find(name: show)
+                  else
+                    show
+                  end
+
+    return "" if lookup_show.nil?
+
+    config = JSON.parse(self.config || "{}")
     next_available_day = ""
 
-    config["days"].split(",").each do |day|
-      avail = get_available_runtime_for_day(config_day_lookup(day))
+    days_str = config["days"] || ""
+    days_str.split(",").each do |day|
+      next if day.empty?
+      full_day = config_day_lookup(day)
+      next unless full_day
+      avail = get_available_runtime_for_day(full_day, schedule)
       if lookup_show.average_runtime <= avail
-        next_available_day = config_day_lookup(day)
+        next_available_day = full_day
         break
       end
     end
@@ -170,20 +183,24 @@ class User < Sequel::Model
 
   def generate_schedule()
 
-    schedule = JSON.parse(@values[:schedule]) || {}
-    shows_dataset.each do |show|
+    schedule = JSON.parse(@values[:schedule] || "{}")
+    
+    # Use the 'shows' association which respects 'show_order'
+    self.shows.each do |show|
 
-      if not is_show_in_schedule?(show.name)
+      if not is_show_in_schedule?(show.name, schedule)
 
-        day = find_next_available_slot(show.name)
-        schedule[day] = [] unless schedule.key?(day)
-
-        schedule[day].push(show.name)
-        @values[:schedule] = schedule.to_json.to_s
+        day = find_next_available_slot(show, schedule)
+        if day && !day.empty?
+          schedule[day] = [] unless schedule.key?(day)
+          schedule[day].push(show.name)
+        end
 
       end # if not ...
-    end # shows_dataset.each
+    end # shows.each
 
+    self.schedule = schedule.to_json
+    self.save
     schedule
 
   end

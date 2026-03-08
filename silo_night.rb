@@ -11,7 +11,18 @@ require 'metadata_service'
 
 # set slim templates to custom diectory
 set :views, File.expand_path(File.join(__FILE__, '../template'))
-set :protection, :except => :host_authorization
+
+configure :development do
+  set :protection, true
+end
+
+configure :production do
+  set :protection, true
+end
+
+configure :test do
+  set :protection, false
+end
 
 # Ensure migrations are current
 unless Sequel::Migrator.is_current?(DB, 'db/migrations')
