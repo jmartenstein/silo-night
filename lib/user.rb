@@ -183,20 +183,18 @@ class User < Sequel::Model
 
   def generate_schedule()
 
-    schedule = JSON.parse(@values[:schedule] || "{}")
+    # Clear the existing schedule to ensure we start from a blank list
+    schedule = {}
     
     # Use the 'shows' association which respects 'show_order'
     self.shows.each do |show|
 
-      if not is_show_in_schedule?(show.name, schedule)
+      day = find_next_available_slot(show, schedule)
+      if day && !day.empty?
+        schedule[day] = [] unless schedule.key?(day)
+        schedule[day].push(show.name)
+      end
 
-        day = find_next_available_slot(show, schedule)
-        if day && !day.empty?
-          schedule[day] = [] unless schedule.key?(day)
-          schedule[day].push(show.name)
-        end
-
-      end # if not ...
     end # shows.each
 
     self.schedule = schedule.to_json

@@ -103,4 +103,28 @@ describe User do
 
   end
 
+  it "re-generates schedule when show order changes" do
+    u = User.create(name: "reorder_test", config: { "days" => "m,t,w", "time" => "60" }.to_json, schedule: {}.to_json)
+    s1 = Show.create(name: "Show 1", runtime: "30")
+    s2 = Show.create(name: "Show 2", runtime: "30")
+    
+    u.add_show(s1)
+    u.add_show(s2)
+    
+    # Initial generation: Show 1 then Show 2 on Monday
+    u.generate_schedule
+    sched = JSON.parse(u.schedule)
+    expect(sched["Monday"]).to eq(["Show 1", "Show 2"])
+    
+    # Reorder: Show 2 then Show 1
+    DB[:shows_users].where(user_id: u.id, show_id: s1.id).update(show_order: 1)
+    DB[:shows_users].where(user_id: u.id, show_id: s2.id).update(show_order: 0)
+    u.refresh
+    
+    u.generate_schedule
+    sched = JSON.parse(u.schedule)
+    # If it doesn't clear the schedule, it will still be ["Show 1", "Show 2"] because they are "already in schedule"
+    expect(sched["Monday"]).to eq(["Show 2", "Show 1"])
+  end
+
 end
