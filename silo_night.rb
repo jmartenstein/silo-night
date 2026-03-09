@@ -84,6 +84,7 @@ post '/user/:name/availability' do
   end
 
   @user.config = config.to_json
+  @user.generate_schedule
   @user.save
 
   @shows = @user.shows
@@ -200,6 +201,7 @@ namespace '/api/v0.1' do
       status 404
     else
       u.add_show(s) unless u.shows.include?(s)
+      u.generate_schedule
     end
 
     u.shows.map { |s| { name: s.name, runtime: s.runtime } }.to_json
@@ -215,6 +217,7 @@ namespace '/api/v0.1' do
       status 404
     else
       u.remove_show(s)
+      u.generate_schedule
     end
 
     u.shows.map { |s| { name: s.name, runtime: s.runtime } }.to_json
@@ -237,6 +240,7 @@ namespace '/api/v0.1' do
         end
       end
     end
+    u.generate_schedule
 
     u.shows.map { |s| { name: s.name, runtime: s.runtime } }.to_json
   end
