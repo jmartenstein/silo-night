@@ -93,6 +93,11 @@ When('the user views their final guide') do
   $browser.get "/user/#{@current_user_name}/schedule"
 end
 
+When('the user {string} views their final guide') do |username|
+  @current_user_name = username
+  $browser.get "/user/#{username}/schedule"
+end
+
 Then('{string} is highlighted as {string}') do |show, highlight|
   # Assuming "Watch Tonight" is a class or a specific text in the UI
   actual_body = CGI.unescapeHTML($browser.last_response.body.to_s)

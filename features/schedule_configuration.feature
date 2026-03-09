@@ -47,3 +47,8 @@ Scenario: Creating a new list of shows
     And the user sets "Tuesday" as "Unavailable"
     Then the Monday schedule should show "60 min"
     And the Tuesday schedule should show "0 min" or "No TV tonight"
+
+  Scenario: Manual schedule generation button visibility
+    Given there is an existing user "sam"
+    When the user "sam" views their final guide
+    Then the page displays "Generate Schedule"

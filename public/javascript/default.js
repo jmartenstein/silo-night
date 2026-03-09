@@ -294,3 +294,44 @@ document.onclick = function(e) {
     suggestionsDiv.innerHTML = '';
   }
 };
+
+// --- Schedule Generation ---
+
+var generateButton = document.getElementById('generate-button');
+var generationStatus = document.getElementById('generation-status');
+var errorFeedback = document.getElementById('error-feedback');
+
+if (generateButton) {
+  generateButton.onclick = function() {
+    var username = window.location.pathname.split('/')[2];
+    if (!username) return;
+
+    // Reset status and UI
+    generateButton.disabled = true;
+    generationStatus.textContent = 'GENERATING...';
+    if (errorFeedback) errorFeedback.textContent = '';
+
+    fetch('/api/v0.1/user/' + username + '/schedule', {
+      method: 'PUT'
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Generation failed: ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (generationStatus) generationStatus.textContent = 'COMPLETE';
+      // Short delay before reload to let the user see the "COMPLETE" status
+      setTimeout(() => {
+        window.location.reload();
+      }, 800);
+    })
+    .catch(error => {
+      if (generateButton) generateButton.disabled = false;
+      if (generationStatus) generationStatus.textContent = '';
+      if (errorFeedback) errorFeedback.textContent = 'Error generating schedule. Please try again.';
+      console.error('Schedule generation error:', error);
+    });
+  };
+}
