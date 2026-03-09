@@ -19,7 +19,6 @@ Feature: Final Watch Guide
     Then "Foundation" is highlighted as "Watch Tonight"
     And the current day is marked as active in the weekly schedule
 
-  @failing
   Scenario: Investigation - Schedule is updated after adding a show via UI (Reason #1)
     Given the user "investigator" exists
     And "investigator" has "60 min" availability on "Monday"
