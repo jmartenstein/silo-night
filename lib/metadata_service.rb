@@ -127,6 +127,6 @@ class MetadataService
     
     rt ||= tvmaze_data&.fetch('averageRuntime', nil) || tvmaze_data&.fetch('runtime', nil)
     
-    rt ? "#{rt} min" : "unknown"
+    rt ? "#{rt} minutes" : "unknown"
   end
 end
