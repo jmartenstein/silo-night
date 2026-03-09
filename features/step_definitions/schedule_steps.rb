@@ -29,7 +29,7 @@ When('the user sets {string} as {string}') do |day, status|
   end
 end
 
-Then(/^(?:the )?"([^"]+)" schedule should show "([^"]*)"$/) do |day, text|
+Then(/^(?:the )?"?(\w+)"? schedule should show "([^"]*)"$/) do |day, text|
   $browser.get "/user/#{@current_user_name}/schedule"
   expect($browser.last_response.body).to include(day)
   expect($browser.last_response.body).to include(text)
