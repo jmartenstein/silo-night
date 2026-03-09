@@ -119,11 +119,24 @@ Once the work is complete and verified locally with tests:
     git commit -m "Remove TODO.md before PR review"
     git push
     ```
-3.  **Mark PR as Ready:**
+3.  **Update PR Description:** Ensure the PR description is detailed and provides context for the reviewers. It should include what was changed, why, and any relevant testing performed.
+    ```bash
+    gh pr edit --body "## Summary
+    Brief description of changes.
+
+    ## Changes
+    - Detail 1
+    - Detail 2
+
+    ## Testing
+    - [x] Unit tests passed
+    - [x] Integration tests passed"
+    ```
+4.  **Mark PR as Ready:**
     ```bash
     gh pr ready
     ```
-4.  **Request Review:** (Optional, if not automated)
+5.  **Request Review:** (Optional, if not automated)
     ```bash
     gh pr edit --add-reviewer <username>
     ```
