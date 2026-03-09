@@ -10,15 +10,14 @@ h1
   - total = @user.total_day_time(abbr)
   - shows = @schedule[day] || []
   
-  - if @user.day_enabled?(abbr) || !shows.empty? || total > 0
-    h2 class=(is_today ? "active" : "")
-      = day
-      |  (#{total} min)
-      - if is_today && !shows.empty?
-        span style="margin-left: 20px; font-size: 70%; color: orange;" Watch Tonight
-    - if !shows.empty?
-      ul
-        - shows.each do |show|
-          li: h3 #{show}
-    - else
-      p No TV tonight
+  h2 class=(is_today ? "active" : "")
+    = day
+    |  (#{total} min)
+    - if is_today && !shows.empty?
+      span style="margin-left: 20px; font-size: 70%; color: orange;" Watch Tonight
+  - if !shows.empty?
+    ul
+      - shows.each do |show|
+        li: h3 #{show}
+  - else
+    p No TV tonight
