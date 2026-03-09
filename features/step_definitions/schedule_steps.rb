@@ -29,16 +29,57 @@ When('the user sets {string} as {string}') do |day, status|
   end
 end
 
-Then('the {word} schedule should show {string}') do |day, text|
+Then(/^(?:the )?"([^"]+)" schedule should show "([^"]*)"$/) do |day, text|
   $browser.get "/user/#{@current_user_name}/schedule"
   expect($browser.last_response.body).to include(day)
   expect($browser.last_response.body).to include(text)
+end
+
+Then(/^(?:the )?"([^"]+)" schedule should NOT show "([^"]*)"$/) do |day, text|
+  $browser.get "/user/#{@current_user_name}/schedule"
+  # We check if the day's section contains the text. 
+  # This is a bit simplistic but works for the current template.
+  expect($browser.last_response.body).not_to include(text)
 end
 
 Then('the {word} schedule should show {string} or {string}') do |day, text1, text2|
   $browser.get "/user/#{@current_user_name}/schedule"
   expect($browser.last_response.body).to include(day)
   expect($browser.last_response.body).to match(/#{text1}|#{text2}/)
+end
+
+Given('the user {string} exists') do |username|
+  @current_user_name = username
+  User.find(name: username) || User.create(name: username, config: {}.to_json, schedule: {}.to_json)
+end
+
+Given('{string} has an empty schedule') do |username|
+  u = User.find(name: username)
+  u.schedule = {}.to_json
+  u.save
+end
+
+When('the user adds {string} \({string}\) to their list via the UI') do |show_name, runtime|
+  # Mimic the UI: Add the show to the database (if it doesn't exist) then associate with user
+  # The UI calls POST /api/v0.1/user/:name/show
+  Show.find(name: show_name) || Show.create(name: show_name, runtime: runtime)
+  $browser.post "/api/v0.1/user/#{@current_user_name}/show", { "show" => show_name }
+end
+
+When('the user enables {string} but sets time to {string} minutes') do |day, minutes|
+  u = User.find(name: @current_user_name)
+  abbr = u.day_to_abbr(day)
+  
+  # Mimic the UI: POST /user/:name/availability
+  $browser.post "/user/#{@current_user_name}/availability", {
+    "days" => [abbr],
+    "time_#{abbr}" => minutes
+  }
+end
+
+Then('the guide should NOT show {string}') do |text|
+  $browser.get "/user/#{@current_user_name}/schedule"
+  expect($browser.last_response.body).not_to include(text)
 end
 
 Given(/^the user "([^"]*)" has "([^"]*)" \(([^)]*)\) and "([^"]*)" \(([^)]*)\) in their list$/) do |username, show1, run1, show2, run2|
