@@ -28,7 +28,6 @@ Feature: Final Watch Guide
     And the user views their final guide
     Then "Monday" schedule should show "Foundation"
 
-  @failing
   Scenario: Investigation - Enabled days with zero time are visible in the UI (Reason #3)
     Given the user "investigator" exists
     When the user enables "Wednesday" but sets time to "0" minutes
