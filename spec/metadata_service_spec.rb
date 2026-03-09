@@ -43,7 +43,7 @@ RSpec.describe MetadataService do
     it 'returns unified metadata' do
       result = service.get_show_metadata(title)
       expect(result[:name]).to eq('Breaking Bad')
-      expect(result[:runtime]).to eq('45 minutes')
+      expect(result[:runtime]).to eq('45 min')
       expect(result[:genres]).to contain_exactly('Drama', 'Crime')
       expect(result[:year]).to eq(2008)
       expect(result[:poster_path]).to eq('https://image.tmdb.org/t/p/w500/poster.jpg')
