@@ -16,7 +16,10 @@ The user establishes identity. Access must be instantaneous.
 
 *   **Route:** `GET /`
 *   **Minimalist Choice:** No password. Single text input for new users; single-click list for existing users.
-*   **Developer/Agent Note:** If the user is known, redirect or link immediately to State 3. If unknown, stay in State 1 until a name is provided.
+*   **Known User Mechanism:** Identity is managed via a manual selection list of existing usernames on the index page. No browser sessions or cookies are used to maintain identity.
+*   **Developer/Agent Note:** 
+    *   **New Users:** Upon name entry, transition to State 2 (Plan) via `GET /user/:name/schedule/edit`.
+    *   **Existing Users:** Upon name selection, transition to State 3 (Watch) via `GET /user/:name/schedule`.
 
 ## State 2: Plan (The Budgeting)
 The user defines their "Entertainment Budget" and "Content Queue."
@@ -29,15 +32,17 @@ The user defines their "Entertainment Budget" and "Content Queue."
     *   `POST /api/v0.1/user/:name/show` -> Adds a show, remains on page.
     *   `POST /user/:name/availability` -> Updates time constraints, remains on page.
     *   `POST /api/v0.1/user/:name/shows/reorder` -> Changes priority, remains on page.
-    *   **Exit Action:** Link to "View Schedule" (State 3).
+    *   **Exit Action:** Clicking "View Schedule" (State 3) MUST trigger a fresh generation of the schedule data to ensure consistency.
 
 ## State 3: Watch (The Execution)
-The final, immutable plan for the week. This is the application's terminal state.
+The final, immutable plan for the week. This is the application's primary consumption state.
 
 *   **Route:** `GET /user/:name/schedule`
 *   **Minimalist Choice:** 
     *   The UI must recede. Only the schedule is visible.
     *   **Tonight's Show:** High-contrast visual focus on the current day's content.
+*   **Transitions:**
+    *   **Action:** "Return to Plan" -> Links to `GET /user/:name/schedule/edit` (State 2).
 *   **Developer/Agent Note:** This page should be the default "Home" for Sam once her schedule is configured. It should require zero interaction to identify "What do I watch right now?"
 
 ---
@@ -53,7 +58,7 @@ When automating or refactoring navigation, adhere to these explicit constraints:
     *   `/:name/schedule/edit` -> Primary Configuration (State 2).
 3.  **One Action per State:**
     *   In `Enter`, the action is **Identify**.
-    *   In `Plan`, the action is **Configure**.
+    *   In `Plan`, the action is **Configure** (an aggregate action comprising Availability, Curation, and Ordering sub-tasks).
     *   In `Watch`, the action is **Observe**.
 4.  **No Dead Ends:** Every page must provide a clear, single-link path to the next logical state.
 
