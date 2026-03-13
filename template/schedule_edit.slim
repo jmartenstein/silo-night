@@ -1,23 +1,25 @@
+.header-actions
+  a.btn.btn-large href="/user/#{@user.name}/schedule/generate" View Schedule
+
 h2 Shows
 
-div#showbox.border
-
-  div#show.header
+div#showbox
+  .search-container
     form
-      input#show-search.addtext type="text" placeholder="Name..." autocomplete="off"
-      input.addbutton type="button" value="Add"
+      input#show-search type="text" placeholder="Add a show..." autocomplete="off"
     div#suggestions style="position: relative;"
 
-  ul#show.list
+  ul id="show" class="list"
     - @shows.each do |s|
-      li
+      li.list-item
         span.name = s.name
-        span.runtime = " (#{s.runtime})"
+        span.runtime = "#{s.runtime}m"
+        span.remove &times;
 
 h2 Availability
 
-div#availbox.border
-  form action="/user/#{@user.name}/availability" method="POST"
+div#availbox
+  form#availability-form action="/user/#{@user.name}/availability" method="POST"
     table
       thead
         tr
@@ -33,6 +35,7 @@ div#availbox.border
               input type="checkbox" name="days[]" value=abbr checked=@user.day_enabled?(abbr)
             td
               input type="number" name="time_#{abbr}" value=@user.day_time(abbr) min="0" step="5"
-    input type="submit" value="Save Availability"
+    .form-actions style="margin-top: var(--spacing-lg);"
+      input.btn type="submit" value="Save Availability"
 
 script src="/javascript/default.js"

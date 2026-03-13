@@ -1,60 +1,161 @@
-/* default.css - the primary CSS file for silo_night */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --accent-color: #000000;
+  --dim-color: #999999;
+  --hover-bg: #f5f5f5;
+  --border-color: #eeeeee;
+  
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-size-base: 16px;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
 
-/* make the layout easier by including the border in the element size */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+  --spacing-xl: 64px;
+
+  /* 2:1 Negative Space Ratio Foundation */
+  --content-max-width: 600px;
+  --page-padding: 10vh 5vw;
+}
+
+/* Base Styles */
 * {
   box-sizing: border-box;
 }
 
-div.border {
-  border-style: dotted;
-  border-width: 0px;
-  position: relative;
-  left: 8px;
-}
-
-input.addtext {
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  line-height: 1.6;
   margin: 0;
-  position: relative;
-  left: 4px;
-  bottom: 4px;
-  font-size:16px;
-  width: 200px;
+  padding: var(--page-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-input.addbutton {
-  margin: 0;
-  position: relative;
-  left: 4px;
-  bottom: 4px;
-  font-size:16px;
+main {
+  width: 100%;
+  max-width: var(--content-max-width);
 }
 
+h2 {
+  font-weight: var(--font-weight-light);
+  font-size: 1.5rem;
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Inputs and Buttons */
+input[type="text"], input[type="number"] {
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-sm) 0;
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+  border-bottom-color: var(--accent-color);
+}
+
+.btn {
+  background: none;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: inherit;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+
+.btn-large {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: 1rem;
+}
+
+/* List Styles */
 ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 
-ul.list li {
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.list-item:hover {
+  background: var(--hover-bg);
+}
+
+.runtime {
+  color: var(--dim-color);
+  font-size: 0.9rem;
+}
+
+.remove {
   cursor: pointer;
-  position: relative;
-  font-size: 16px;
-  padding: 10px 8px 10px 8px;
-  width: 250px;
+  color: var(--dim-color);
+  font-size: 0.8rem;
+  margin-left: var(--spacing-md);
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
-ul.list li:hover {
-  background: #ddd
+.list-item:hover .remove {
+  opacity: 1;
 }
 
-span.remove {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 10px 8px 10px 8px;
+.remove:hover {
+  color: var(--accent-color);
 }
 
-span.remove:hover {
-  background: #bbb
+/* Table / Grid */
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
-\n.active {\n  background-color: #f0f0f0;\n  border-left: 5px solid orange;\n  padding-left: 10px;\n}
+
+th {
+  text-align: left;
+  font-weight: var(--font-weight-normal);
+  color: var(--dim-color);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  padding-bottom: var(--spacing-md);
+}
+
+td {
+  padding: var(--spacing-sm) 0;
+}
+
+.active {
+  background-color: var(--hover-bg);
+  border-left: 2px solid var(--accent-color);
+  padding-left: var(--spacing-md);
+}

@@ -1,24 +1,13 @@
 // default.js
 
-console.log(document.URL);
-
 function initRemoveButtons() {
-  var list_nodes = document.querySelectorAll("ul#show.list li");
-  for (var i = 0; i < list_nodes.length; i++) {
-    if (!list_nodes[i].querySelector('.remove')) {
-      var span = document.createElement("span");
-      var text = document.createTextNode("\u00D7");
-      span.className = "remove"
-      span.appendChild(text)
-      list_nodes[i].appendChild(span);
-      
-      span.onclick = function() {
-        var li = this.parentElement;
-        var showName = li.querySelector('.name').textContent.trim();
-        removeShow(showName, li);
-      }
+  document.querySelectorAll("ul#show.list .remove").forEach(function(btn) {
+    btn.onclick = function() {
+      var li = this.parentElement;
+      var showName = li.querySelector('.name').textContent.trim();
+      removeShow(showName, li);
     }
-  }
+  });
 }
 
 function removeShow(name, li) {
@@ -34,7 +23,31 @@ function removeShow(name, li) {
   });
 }
 
-// --- Drag and Drop Logic (silo-pqt) ---
+// --- Availability AJAX ---
+var availForm = document.getElementById('availability-form');
+if (availForm) {
+  availForm.onsubmit = function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    var username = window.location.pathname.split('/')[2];
+    
+    fetch('/user/' + username + '/availability', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        // Show a brief success indicator if needed
+        var btn = availForm.querySelector('input[type="submit"]');
+        var originalValue = btn.value;
+        btn.value = 'Saved';
+        setTimeout(() => btn.value = originalValue, 2000);
+      }
+    });
+  };
+}
+
+// --- Drag and Drop Logic ---
 
 function initDraggable() {
   var items = document.querySelectorAll("ul#show.list li");
@@ -128,11 +141,7 @@ function saveNewOrder() {
   });
 }
 
-// Run initializers
-initRemoveButtons();
-initDraggable();
-
-// --- Search Suggestion Logic (silo-ik7) ---
+// --- Search Suggestion Logic ---
 
 var searchInput = document.getElementById('show-search');
 var suggestionsDiv = document.getElementById('suggestions');
@@ -140,58 +149,50 @@ var suggestionsDiv = document.getElementById('suggestions');
 if (searchInput) {
   var debounceTimer;
 
-  var style = document.createElement('style');
-  style.innerHTML = `
-    #suggestions-list {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: white;
-      border: 1px solid #ccc;
-      border-top: none;
-      z-index: 1000;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-    #suggestions-list li {
-      padding: 10px;
-      cursor: pointer;
-      border-bottom: 1px solid #eee;
-    }
-    #suggestions-list li:hover {
-      background-color: #f0f0f0;
-    }
-    #suggestions-list li .meta {
-      font-size: 0.8em;
-      color: #666;
-    }
-    ul#show.list li {
-      cursor: move;
-      background: #fdfdfd;
-      margin-bottom: 5px;
-      padding: 5px;
-      border: 1px solid #eee;
-    }
-    ul#show.list li.dragging {
-      opacity: 0.5;
-      background: #eee;
-    }
-    ul#show.list li.over-top {
-      border-top: 20px solid #ddd;
-    }
-    ul#show.list li.over-bottom {
-      border-bottom: 20px solid #ddd;
-    }
-    ul#show.list li .runtime {
-      color: #777;
-      font-size: 0.9em;
-      margin-left: 10px;
-    }
-  `;
-  document.head.appendChild(style);
+  // Add styles for suggestions only if they don't exist
+  if (!document.getElementById('suggestion-styles')) {
+    var style = document.createElement('style');
+    style.id = 'suggestion-styles';
+    style.innerHTML = `
+      #suggestions-list {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-top: none;
+        z-index: 1000;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      }
+      #suggestions-list li {
+        padding: var(--spacing-md);
+        cursor: pointer;
+        border-bottom: 1px solid var(--border-color);
+      }
+      #suggestions-list li:hover {
+        background-color: var(--hover-bg);
+      }
+      #suggestions-list li .meta {
+        font-size: 0.8em;
+        color: var(--dim-color);
+      }
+      ul#show.list li.dragging {
+        opacity: 0.5;
+        background: var(--hover-bg);
+      }
+      ul#show.list li.over-top {
+        border-top: 2px solid var(--accent-color);
+      }
+      ul#show.list li.over-bottom {
+        border-bottom: 2px solid var(--accent-color);
+      }
+    `;
+    document.head.appendChild(style);
+  }
 
   searchInput.oninput = function() {
     clearTimeout(debounceTimer);
@@ -264,6 +265,7 @@ function renderShows(shows) {
   showList.innerHTML = '';
   shows.forEach(function(s) {
     var li = document.createElement('li');
+    li.className = 'list-item';
     
     var nameSpan = document.createElement('span');
     nameSpan.className = 'name';
@@ -272,8 +274,13 @@ function renderShows(shows) {
     
     var runtimeSpan = document.createElement('span');
     runtimeSpan.className = 'runtime';
-    runtimeSpan.textContent = ' (' + s.runtime + ')';
+    runtimeSpan.textContent = s.runtime + 'm';
     li.appendChild(runtimeSpan);
+
+    var removeSpan = document.createElement('span');
+    removeSpan.className = 'remove';
+    removeSpan.innerHTML = '&times;';
+    li.appendChild(removeSpan);
     
     showList.appendChild(li);
   });
@@ -281,13 +288,9 @@ function renderShows(shows) {
   initDraggable();
 }
 
-var addButton = document.querySelector('.addbutton');
-if (addButton) {
-  addButton.onclick = function() {
-    var name = searchInput.value;
-    if (name) addShow(name);
-  };
-}
+// Run initializers
+initRemoveButtons();
+initDraggable();
 
 document.onclick = function(e) {
   if (e.target !== searchInput && !suggestionsDiv.contains(e.target)) {

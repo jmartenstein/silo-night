@@ -111,7 +111,8 @@ end
 
 Then('a blank list of shows is displayed') do
   actual_body = $browser.last_response.body.to_s
-  expect(actual_body).to match(/ul.*id="show".*class="list"/)
+  expect(actual_body).to match(/ul.*id="show"/)
+  expect(actual_body).to match(/ul.*class="list"/)
   expect(actual_body).not_to match(/<li.*>.*<\/li>/)
 end
 

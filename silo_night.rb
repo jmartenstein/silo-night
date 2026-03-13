@@ -54,8 +54,14 @@ end
 
 get '/user/:name/schedule' do
   @user = User.find(name: params["name"])
-  @schedule = JSON.parse(@user.schedule)
+  @schedule = JSON.parse(@user.schedule || "{}")
   slim :schedule
+end
+
+get '/user/:name/schedule/generate' do
+  @user = User.find(name: params["name"])
+  @user.generate_schedule
+  redirect "/user/#{params[:name]}/schedule"
 end
 
 get '/user/:name/schedule/edit' do
