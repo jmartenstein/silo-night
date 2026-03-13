@@ -5,9 +5,10 @@ html
     script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     link rel="stylesheet" href="/stylesheets/default.css"
   body
-    - if @message
-      p.success style="color: green" = @message
-    - if @error
-      p.error style="color: red" = @error
+    main
+      - if @message
+        p.success style="color: green" = @message
+      - if @error
+        p.error style="color: red" = @error
 
-    == yield
+      == yield
