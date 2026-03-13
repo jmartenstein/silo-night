@@ -15,11 +15,12 @@ When('the user enters {string} in the {string} field') do |value, field_name|
 end
 
 When('the user clicks the {string} button') do |button_text|
-  if button_text == "Create"
+  if ["Create", "Enter"].include?(button_text)
     # Assuming user creation is via POST to /user/create
     # Need to verify where this form should post.
     # Looking at the requirement, it should likely be a POST to /user
     $browser.post '/user', @form_data
+    $browser.follow_redirect! if $browser.last_response.redirect?
   end
 end
 

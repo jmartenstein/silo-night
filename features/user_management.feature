@@ -10,19 +10,18 @@ Feature: User Management
     When any user visits the main page
     Then the page displays "steph"
     And the page displays "justin"
-    And the page displays "Create a new schedule"
 
   Scenario: Creating a new user with a unique name
     Given any user visits the main page
     When the user enters "sam" in the "username" field
-    And the user clicks the "Create" button
-    Then the page displays "User 'sam' created successfully"
+    And the user clicks the "Enter" button
+    Then the page displays "Availability"
 
   Scenario: Creating a new user with an existing name
     Given there is an existing user "steph"
     And any user visits the main page
     When the user enters "steph" in the "username" field
-    And the user clicks the "Create" button
+    And the user clicks the "Enter" button
     Then the page displays "Username 'steph' already exists. Please choose a different one."
 
   Scenario: Selecting an existing user

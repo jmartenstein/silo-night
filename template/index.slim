@@ -1,14 +1,7 @@
-h2 User Schedules
-
 ul
   - @users.each do |u|
-    li
-      |> #{u}:
-      a> href="/user/#{u}/schedule" schedule
-      |> /
-      a> href="/user/#{u}/shows" shows
+    li: a href="/user/#{u}/schedule" = u
 
-h2 Create a new schedule
 form action="/user" method="POST"
-  input type="text" name="username" placeholder="Enter username"
-  input type="submit" value="Create"
+  input type="text" name="username" placeholder="Who are you?"
+  input type="submit" value="Enter"
