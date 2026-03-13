@@ -23,6 +23,84 @@
   --page-padding: 10vh 5vw;
 }
 
+/* Schedule View (State 3: Watch) */
+.schedule-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.day-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.active-day .day-name {
+  font-weight: var(--font-weight-bold);
+  color: var(--accent-color);
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-md);
+  text-transform: none;
+  letter-spacing: -0.02em;
+}
+
+.inactive-day .day-name {
+  font-weight: var(--font-weight-light);
+  color: var(--dim-color);
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: var(--spacing-sm);
+}
+
+.show-list {
+  padding-left: 0;
+}
+
+.active-day .show-item {
+  margin-bottom: var(--spacing-sm);
+}
+
+.active-day .show-title {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-normal);
+}
+
+.inactive-day .show-item {
+  display: inline;
+  margin-right: var(--spacing-sm);
+}
+
+.inactive-day .show-item::after {
+  content: "•";
+  margin-left: var(--spacing-sm);
+  color: var(--border-color);
+}
+
+.inactive-day .show-item:last-child::after {
+  content: "";
+}
+
+.inactive-day .show-title {
+  font-size: 0.9rem;
+  color: var(--dim-color);
+}
+
+.no-shows {
+  color: var(--dim-color);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.actions {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 /* Base Styles */
 * {
   box-sizing: border-box;
