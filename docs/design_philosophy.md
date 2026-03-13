@@ -44,7 +44,7 @@ Silo Night must be equally usable on a mobile phone as it is on a large desktop 
 ## III. Implementation Guidelines for Coding Agents
 When modifying templates (`template/*.slim`) or stylesheets (`public/stylesheets/*.css`), follow these rules:
 
-1.  **Check Usability First:** Never sacrifice a functional feature for a "cleaner" look. If a button is necessary for a task, it stays.
+1.  **Check Usability First:** Never sacrifice a functional feature for a "cleaner" look. If a button or brief descriptive text is necessary for a task or to guide navigation, it stays. Minimalism should never be at the expense of making the site harder to navigate for a user.
 2.  **Verify Clickability:** Ensure that interactive elements (buttons, links) are easily recognizable as such, even in a flat design.
 3.  **Performance Priority:** Minimalism extends to technical efficiency. Minimize large assets and complex CSS selectors to ensure fast load times.
 4.  **Consistency:** Match the existing typography and spacing found in `default.css`. Do not introduce new font families or divergent color schemes without explicit instruction.

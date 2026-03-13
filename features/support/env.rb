@@ -1,10 +1,10 @@
+ENV['RACK_ENV'] = 'test'
 require 'rack/test'
 $LOAD_PATH.unshift File.expand_path('../../lib', __dir__)
 require 'database'
 require 'sequel/extensions/migration'
 require 'database_cleaner/sequel'
 
-ENV['RACK_ENV'] = 'test'
 unless Sequel::Migrator.is_current?(DB, 'db/migrations')
   puts "Database migrations are not up to date. Run 'RACK_ENV=test rake db:migrate' first."
   exit 1

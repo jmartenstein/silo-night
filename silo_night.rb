@@ -49,9 +49,7 @@ post '/user' do
   end
 
   User.create(name: username, config: {}.to_json, schedule: {}.to_json)
-  @message = "User '#{username}' created successfully"
-  @users = User.map { |x| x[:name] }
-  slim :index
+  redirect "/user/#{username}/schedule/edit"
 end
 
 get '/user/:name/schedule' do
