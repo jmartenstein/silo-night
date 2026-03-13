@@ -1,7 +1,9 @@
+p Select your profile:
 ul
   - @users.each do |u|
     li: a href="/user/#{u}/schedule" = u
 
+p Or start a new journey:
 form action="/user" method="POST"
   input type="text" name="username" placeholder="Who are you?"
   input type="submit" value="Enter"

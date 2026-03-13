@@ -15,11 +15,12 @@ Silo Night is designed with a "Subtract until it breaks" philosophy. This docume
 The user establishes identity. Access must be instantaneous.
 
 *   **Route:** `GET /`
-*   **Minimalist Choice:** No password. Single text input for new users; single-click list for existing users.
+*   **Minimalist Choice:** No password. Single text input for new users; single-click list for existing users. While the UI is simplified, it must remain navigable for both new and returning users through brief, clear descriptive instructions.
 *   **Known User Mechanism:** Identity is managed via a manual selection list of existing usernames on the index page. No browser sessions or cookies are used to maintain identity.
 *   **Developer/Agent Note:** 
     *   **New Users:** Upon name entry, transition to State 2 (Plan) via `GET /user/:name/schedule/edit`.
     *   **Existing Users:** Upon name selection, transition to State 3 (Watch) via `GET /user/:name/schedule`.
+    *   **Clarity:** UI simplification must NOT be at the expense of making the site harder to navigate. Always provide enough context for the user to understand the current state and the path forward.
 
 ## State 2: Plan (The Budgeting)
 The user defines their "Entertainment Budget" and "Content Queue."
