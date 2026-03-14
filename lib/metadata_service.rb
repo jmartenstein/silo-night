@@ -55,11 +55,21 @@ class MetadataService
 
     # Map TVMaze results
     tvmaze_results.each do |tvm|
+      year = extract_year(tvm['premiered'])
+      
+      # Try to find matching TMDB result for poster fallback
+      tmdb_match = tmdb_results.find { |tmdb| tmdb['name'].downcase == tvm['name'].downcase && extract_year(tmdb['first_air_date']) == year }
+      
+      poster_path = tvm.dig('image', 'medium')
+      if poster_path.nil? && tmdb_match && tmdb_match['poster_path']
+        poster_path = "https://image.tmdb.org/t/p/w500#{tmdb_match['poster_path']}"
+      end
+
       suggestions << {
         name: tvm['name'],
-        year: extract_year(tvm['premiered']),
+        year: year,
         genres: tvm['genres'] || [],
-        poster_path: tvm.dig('image', 'medium')
+        poster_path: poster_path
       }
     end
 
