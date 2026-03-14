@@ -217,6 +217,7 @@ namespace '/api/v0.1' do
     content_type :json
 
     u = User.find(name: params["name"])
+    return status 404 if u.nil?
     s = Show.find(name: params["show"])
 
     if s.nil? then
