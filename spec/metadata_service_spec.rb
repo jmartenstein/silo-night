@@ -72,12 +72,12 @@ RSpec.describe MetadataService do
     let(:title) { 'Breaking Bad' }
     let(:tmdb_results) do
       [
-        { 'id' => 1396, 'name' => 'Breaking Bad', 'first_air_date' => '2008-01-20', 'genre_ids' => [18] }
+        { 'id' => 1396, 'name' => 'Breaking Bad', 'first_air_date' => '2008-01-20', 'genre_ids' => [18], 'poster_path' => '/bb.jpg' }
       ]
     end
     let(:tvmaze_results) do
       [
-        { 'id' => 169, 'name' => 'Breaking Bad', 'premiered' => '2008-01-20', 'genres' => ['Drama', 'Crime'] }
+        { 'id' => 169, 'name' => 'Breaking Bad', 'premiered' => '2008-01-20', 'genres' => ['Drama', 'Crime'], 'image' => { 'medium' => 'tvm_bb.jpg' } }
       ]
     end
 
@@ -86,12 +86,19 @@ RSpec.describe MetadataService do
       allow(tvmaze_adapter).to receive(:search_shows_by_title).with(title).and_return(tvmaze_results)
     end
 
-    it 'returns a list of suggestions with name, year, and genres' do
+    it 'returns a list of suggestions with name, year, genres, and poster_path' do
       results = service.search_shows(title)
       expect(results).to be_an(Array)
       expect(results.first[:name]).to eq('Breaking Bad')
       expect(results.first[:year]).to eq(2008)
       expect(results.first[:genres]).to contain_exactly('Drama', 'Crime')
+      expect(results.first[:poster_path]).to eq('tvm_bb.jpg')
+    end
+
+    it 'correctly formats TMDB poster path when TVMaze result is missing' do
+      allow(tvmaze_adapter).to receive(:search_shows_by_title).with(title).and_return([])
+      results = service.search_shows(title)
+      expect(results.first[:poster_path]).to eq('https://image.tmdb.org/t/p/w500/bb.jpg')
     end
   end
 end

@@ -56,7 +56,8 @@ class MetadataService
       suggestions << {
         name: tvm['name'],
         year: extract_year(tvm['premiered']),
-        genres: tvm['genres'] || []
+        genres: tvm['genres'] || [],
+        poster_path: tvm.dig('image', 'medium')
       }
     end
 
@@ -65,10 +66,12 @@ class MetadataService
       year = extract_year(tmdb['first_air_date'])
       unless suggestions.any? { |s| s[:name].downcase == tmdb['name'].downcase && s[:year] == year }
         genres = (tmdb['genre_ids'] || []).map { |id| TMDB_GENRE_MAP[id] }.compact
+        poster_path = tmdb['poster_path'] ? "https://image.tmdb.org/t/p/w500#{tmdb['poster_path']}" : nil
         suggestions << {
           name: tmdb['name'],
           year: year,
-          genres: genres
+          genres: genres,
+          poster_path: poster_path
         }
       end
     end
