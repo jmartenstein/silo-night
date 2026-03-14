@@ -30,7 +30,7 @@ end
 
 describe Shows do
 
-  let(:shows)    { '[ { "name": "foo", "runtime": "12 minutes" } ]' }
+  let(:shows)    { '[ { "name": "foo", "runtime": "12 minutes", "poster_path": "foo.jpg" } ]' }
   let(:filename) { "spec/support/shows.json" }
 
   it "initializes an empty list" do
@@ -48,6 +48,7 @@ describe Shows do
     l = Shows.new()
     l.load_from_json(shows)
     expect(l[0].runtime).to eq("12 minutes")
+    expect(l[0].poster_path).to eq("foo.jpg")
   end
 
 end

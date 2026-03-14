@@ -58,7 +58,8 @@ class Shows
                  wiki_page:   show["wiki_page"],
                  page_title:  show["page_title"],
                  runtime:     show["runtime"],
-                 uri_encoded: show["uri_encoded"])
+                 uri_encoded: show["uri_encoded"],
+                 poster_path: show["poster_path"])
       )
     end
     return true
