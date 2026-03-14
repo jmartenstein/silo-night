@@ -9,11 +9,11 @@ require 'metadata_service'
 puts "Starting poster backfill..."
 
 service = MetadataService.new
-shows = Show.where(Sequel.or(poster_path: nil, poster_path: "")).all
+shows_dataset = Show.where(Sequel.or(poster_path: nil, poster_path: ""))
 
-puts "Found #{shows.count} shows to backfill."
+puts "Found #{shows_dataset.count} shows to backfill."
 
-shows.each do |show|
+shows_dataset.each do |show|
   puts "Fetching metadata for: #{show.name}"
   metadata = service.get_show_metadata(show.name)
   
