@@ -65,7 +65,7 @@ class User < Sequel::Model
 
     # TODO: this is hacky, needs to be cleaned up
     if load_shows
-      j["shows"].each { |s| add_show( Show.find(name: s) ) }
+      load_shows_from_json(j["shows"])
     end
 
     true
@@ -79,12 +79,22 @@ class User < Sequel::Model
   end
 
   def load_shows_from_json( shows = "" )
-    shows.each { |s| add_show( Show.find(name: s) ) }
+    shows.each do |s|
+      if s.is_a?(String)
+        show = Show.find(name: s)
+      else
+        show = Show.find(name: s["name"])
+        if show && s["poster_path"] && (show.poster_path.nil? || show.poster_path.empty?)
+          show.update(poster_path: s["poster_path"])
+        end
+      end
+      add_show(show) if show
+    end
   end
 
   def load_shows_from_file( filename = "")
     text = File.read(filename)
-    load_show_from_json( text )
+    load_shows_from_json( JSON.parse(text) )
   end
 
   def load_from_file_by_username( name = "test" )
