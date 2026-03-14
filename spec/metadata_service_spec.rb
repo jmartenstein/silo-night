@@ -100,5 +100,15 @@ RSpec.describe MetadataService do
       results = service.search_shows(title)
       expect(results.first[:poster_path]).to eq('https://image.tmdb.org/t/p/w500/bb.jpg')
     end
+
+    it 'falls back to TMDB poster path when TVMaze result has no image' do
+      tvmaze_results_without_image = [
+        { 'id' => 169, 'name' => 'Breaking Bad', 'premiered' => '2008-01-20', 'genres' => ['Drama', 'Crime'] }
+      ]
+      allow(tvmaze_adapter).to receive(:search_shows_by_title).with(title).and_return(tvmaze_results_without_image)
+
+      results = service.search_shows(title)
+      expect(results.first[:poster_path]).to eq('https://image.tmdb.org/t/p/w500/bb.jpg')
+    end
   end
 end
