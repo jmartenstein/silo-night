@@ -21,6 +21,8 @@ class MetadataService
     37 => 'Western'
   }
 
+  TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500'.freeze
+
   def initialize(tmdb_adapter = TmdbAdapter.new, tvmaze_adapter = TvmazeAdapter.new)
     @tmdb_adapter = tmdb_adapter
     @tvmaze_adapter = tvmaze_adapter
@@ -66,7 +68,7 @@ class MetadataService
       year = extract_year(tmdb['first_air_date'])
       unless suggestions.any? { |s| s[:name].downcase == tmdb['name'].downcase && s[:year] == year }
         genres = (tmdb['genre_ids'] || []).map { |id| TMDB_GENRE_MAP[id] }.compact
-        poster_path = tmdb['poster_path'] ? "https://image.tmdb.org/t/p/w500#{tmdb['poster_path']}" : nil
+        poster_path = tmdb['poster_path'] ? "#{TMDB_IMAGE_BASE_URL}#{tmdb['poster_path']}" : nil
         suggestions << {
           name: tmdb['name'],
           year: year,
