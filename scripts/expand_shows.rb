@@ -56,6 +56,7 @@ source_show_list.each do |show_title|
       'name' => metadata[:name],
       'runtime' => metadata[:runtime],
       'uri_encoded' => URI.encode_www_form_component(metadata[:name].downcase),
+      'poster_path' => metadata[:poster_path],
       'wiki_page' => nil, # No longer scraping Wikipedia
       'page_title' => nil,
       'tmdb_id' => metadata[:external_ids][:tmdb_id],

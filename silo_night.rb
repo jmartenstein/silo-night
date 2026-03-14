@@ -169,12 +169,13 @@ namespace '/api/v0.1' do
   get '/user/:name/tonight' do
 
     content_type :json
-    today = Date.today.strftime('%A')
-
     u = User.find(name: params["name"])
-    j = JSON.parse(u.schedule)
+    return status 404 if u.nil?
 
-    j[today].to_json
+    today = Date.today.strftime('%A')
+    j = JSON.parse(u.schedule || "{}")
+
+    (j[today] || []).to_json
 
   end
 
@@ -196,7 +197,8 @@ namespace '/api/v0.1' do
         s = Show.create(
           name: metadata[:name],
           runtime: metadata[:runtime],
-          uri_encoded: URI.encode_www_form_component(metadata[:name].downcase)
+          uri_encoded: URI.encode_www_form_component(metadata[:name].downcase),
+          poster_path: metadata[:poster_path]
         )
       end
     end
@@ -208,13 +210,14 @@ namespace '/api/v0.1' do
       u.generate_schedule
     end
 
-    u.shows.map { |s| { name: s.name, runtime: s.runtime } }.to_json
+    u.shows.map { |s| { name: s.name, runtime: s.runtime, poster_path: s.poster_path } }.to_json
   end
 
   delete '/user/:name/show/:show' do
     content_type :json
 
     u = User.find(name: params["name"])
+    return status 404 if u.nil?
     s = Show.find(name: params["show"])
 
     if s.nil? then
@@ -224,7 +227,7 @@ namespace '/api/v0.1' do
       u.generate_schedule
     end
 
-    u.shows.map { |s| { name: s.name, runtime: s.runtime } }.to_json
+    u.shows.map { |s| { name: s.name, runtime: s.runtime, poster_path: s.poster_path } }.to_json
 
   end
 
@@ -246,18 +249,20 @@ namespace '/api/v0.1' do
     end
     u.generate_schedule
 
-    u.shows.map { |s| { name: s.name, runtime: s.runtime } }.to_json
+    u.shows.map { |s| { name: s.name, runtime: s.runtime, poster_path: s.poster_path } }.to_json
   end
 
   get '/user/:name/shows' do
     content_type :json
     u = User.find(name: params["name"])
+    return status 404 if u.nil?
     u.shows.map { |s| s.name }.to_json
   end
 
   get '/user/:name/show_uris' do
     content_type :json
     u = User.find(name: params["name"])
+    return status 404 if u.nil?
     u.shows.map { |s| s.uri_encoded }.to_json
   end
 
