@@ -20,7 +20,7 @@ h1
       - shows.each do |show|
         li.schedule-item
           - if show["poster_path"]
-            img.schedule-poster src=show["poster_path"]
+            img.schedule-poster src=show["poster_path"] alt=show["name"]
           .schedule-info
             h3 = show["name"]
   - else
