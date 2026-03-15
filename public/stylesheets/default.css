@@ -46,6 +46,14 @@ main {
   max-width: var(--content-max-width);
 }
 
+h1 {
+  font-weight: var(--font-weight-heavy);
+  font-size: 1.7rem;
+  margin-bottom: var(--spacing-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 h2 {
   font-weight: var(--font-weight-light);
   font-size: 1.5rem;
