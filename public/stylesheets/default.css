@@ -105,12 +105,34 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-md) 0;
+  padding: var(--spacing-sm) 0;
   border-bottom: 1px solid var(--border-color);
+  gap: var(--spacing-md);
 }
 
 .list-item:hover {
   background: var(--hover-bg);
+}
+
+.show-poster {
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.show-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-weight: var(--font-weight-normal);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .runtime {
@@ -158,4 +180,56 @@ td {
   background-color: var(--hover-bg);
   border-left: 2px solid var(--accent-color);
   padding-left: var(--spacing-md);
+}
+
+/* Schedule Guide Styles */
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.schedule-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.schedule-poster {
+  width: 80px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}
+
+.schedule-info h3 {
+  margin: 0;
+  font-weight: var(--font-weight-normal);
+  font-size: 1.2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .schedule-poster {
+    width: 60px;
+    height: 90px;
+  }
+  
+  .schedule-item {
+    gap: var(--spacing-md);
+  }
+
+  .schedule-info h3 {
+    font-size: 1rem;
+  }
+  
+  .show-poster {
+    width: 40px;
+    height: 60px;
+  }
 }

@@ -30,8 +30,10 @@ Scenario: Creating a new list of shows
     Given there is an existing user "sam"
     And the user "sam" is on their shows and schedule page
     When the user searches for and adds "Silo"
+    And the user "sam" visits the page to edit her shows
     Then the show "Silo" appears in the "Watch List"
     And the runtime "50 min" is displayed for "Silo"
+    And the show "Silo" displays its poster art
 
   Scenario: Reordering the watch list
     Given the user "sam" has "Silo" and "Foundation" in their list

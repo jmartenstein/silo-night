@@ -16,8 +16,12 @@ h1
     - if is_today && !shows.empty?
       span style="margin-left: 20px; font-size: 70%; color: orange;" Watch Tonight
   - if !shows.empty?
-    ul
+    ul.schedule-list
       - shows.each do |show|
-        li: h3 #{show}
+        li.schedule-item
+          - if show["poster_path"]
+            img.schedule-poster src=show["poster_path"] alt=show["name"]
+          .schedule-info
+            h3 = show["name"]
   - else
     p No TV tonight

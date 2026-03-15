@@ -149,6 +149,7 @@ namespace '/api/v0.1' do
   put '/user/:name/schedule' do
     content_type :json
     u = User.find(name: params["name"])
+    return status 404 if u.nil?
     sched = u.generate_schedule
     sched.to_json
   end
@@ -156,6 +157,7 @@ namespace '/api/v0.1' do
   get '/user/:name/schedule' do
     content_type :json
     u = User.find(name: params["name"])
+    return status 404 if u.nil?
     sched = u.generate_schedule
     sched.to_json
   end
@@ -185,7 +187,7 @@ namespace '/api/v0.1' do
     u = User.find(name: params["name"])
     return status 404 if u.nil?
 
-    s = Show.find(name: params["show"])
+    s = Show.where(Sequel.function(:lower, :name) => params["show"].downcase).first
 
     if s.nil?
       # Try to fetch metadata and create the show
@@ -218,7 +220,7 @@ namespace '/api/v0.1' do
 
     u = User.find(name: params["name"])
     return status 404 if u.nil?
-    s = Show.find(name: params["show"])
+    s = Show.find(Sequel.ilike(:name, params["show"]))
 
     if s.nil? then
       status 404

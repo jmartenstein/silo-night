@@ -114,7 +114,7 @@ end
 Then('{string} should be scheduled for {string}') do |show, day|
   # The API returns the schedule as JSON
   schedule = JSON.parse($browser.last_response.body)
-  expect(schedule[day]).to include(show)
+  expect(schedule[day].any? { |s| s.is_a?(Hash) ? s["name"] == show : s == show }).to be_truthy
 end
 
 Given('the user {string} has {string} scheduled for today') do |username, show|
@@ -124,7 +124,10 @@ Given('the user {string} has {string} scheduled for today') do |username, show|
   
   schedule = JSON.parse(u.schedule || "{}")
   schedule[today] ||= []
-  schedule[today] << show unless schedule[today].include?(show)
+  show_obj = { "name" => show, "poster_path" => nil }
+  unless schedule[today].any? { |s| s.is_a?(Hash) ? s["name"] == show : s == show }
+    schedule[today] << show_obj
+  end
   
   u.schedule = schedule.to_json
   u.save

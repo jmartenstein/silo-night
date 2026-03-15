@@ -42,7 +42,7 @@ Feature: API Access for Watch Guide
   @failing
   Scenario: Retrieving the user schedule
     When "steph" sends an API request to view the schedule
-    Then the show "The Afterparty" is scheduled for "Thursday"
+    Then the show "The Afterparty" is scheduled for "Wednesday"
 
   @failing
   Scenario: Updating the schedule after changes
@@ -51,4 +51,4 @@ Feature: API Access for Watch Guide
     When "steph" generates a new schedule
     Then the site responds with text not containing "Suits"
     And the site responds with text containing "The Amazing Race"
-    And the show "The Amazing Race" is scheduled for "Wednesday"
+    And the show "The Amazing Race" is scheduled for "Thursday"

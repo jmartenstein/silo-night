@@ -9,7 +9,7 @@ require 'metadata_service'
 puts "Starting poster backfill..."
 
 service = MetadataService.new
-shows_dataset = Show.where(Sequel.or(poster_path: nil, poster_path: ""))
+shows_dataset = Show.where(poster_path: nil).or(poster_path: "")
 
 puts "Found #{shows_dataset.count} shows to backfill."
 
