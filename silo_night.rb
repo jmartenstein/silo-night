@@ -187,7 +187,7 @@ namespace '/api/v0.1' do
     u = User.find(name: params["name"])
     return status 404 if u.nil?
 
-    s = Show.find(Sequel.ilike(:name, params["show"]))
+    s = Show.where(Sequel.function(:lower, :name) => params["show"].downcase).first
 
     if s.nil?
       # Try to fetch metadata and create the show
