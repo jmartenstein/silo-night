@@ -169,16 +169,39 @@ if (searchInput) {
         box-shadow: 0 4px 6px rgba(0,0,0,0.05);
       }
       #suggestions-list li {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm);
         cursor: pointer;
         border-bottom: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
       }
       #suggestions-list li:hover {
         background-color: var(--hover-bg);
       }
+      .suggestion-poster {
+        width: 40px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+      .suggestion-info {
+        flex: 1;
+        min-width: 0;
+      }
+      #suggestions-list li strong {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
       #suggestions-list li .meta {
         font-size: 0.8em;
         color: var(--dim-color);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       ul#show.list li.dragging {
         opacity: 0.5;
@@ -225,8 +248,13 @@ function renderSuggestions(suggestions) {
     var yearText = s.year ? s.year : 'N/A';
     
     html += '<li onclick="selectSuggestion(\'' + s.name.replace(/'/g, "\\'") + '\')">';
+    if (s.poster_path) {
+      html += '<img src="' + s.poster_path + '" class="suggestion-poster" />';
+    }
+    html += '<div class="suggestion-info">';
     html += '<strong>' + s.name + '</strong>';
     html += '<div class="meta">' + yearText + ' &bull; ' + genreText + '</div>';
+    html += '</div>';
     html += '</li>';
   });
   html += '</ul>';
@@ -267,11 +295,23 @@ function renderShows(shows) {
     var li = document.createElement('li');
     li.className = 'list-item';
     
+    if (s.poster_path) {
+      var img = document.createElement('img');
+      img.src = s.poster_path;
+      img.className = 'show-poster';
+      li.appendChild(img);
+    }
+
+    var infoDiv = document.createElement('div');
+    infoDiv.className = 'show-info';
+
     var nameSpan = document.createElement('span');
     nameSpan.className = 'name';
     nameSpan.textContent = s.name;
-    li.appendChild(nameSpan);
+    infoDiv.appendChild(nameSpan);
     
+    li.appendChild(infoDiv);
+
     var runtimeSpan = document.createElement('span');
     runtimeSpan.className = 'runtime';
     runtimeSpan.textContent = s.runtime + 'm';

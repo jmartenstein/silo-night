@@ -43,7 +43,7 @@ Given('the user {string} has {string} and {string} in their list') do |username,
   # Ensure shows exist and are added to user
   [show1, show2].each do |name|
     show = Show.find(name: name) || Show.create(name: name, runtime: "45 minutes", uri_encoded: name.downcase.gsub(' ', '+'))
-    u.add_show(show) unless u.shows.include?(show)
+    u.add_show(show) unless DB[:shows_users].where(user_id: u.id, show_id: show.id).any?
   end
 end
 
@@ -114,5 +114,11 @@ Then('a blank list of shows is displayed') do
   expect(actual_body).to match(/ul.*id="show"/)
   expect(actual_body).to match(/ul.*class="list"/)
   expect(actual_body).not_to match(/<li.*>.*<\/li>/)
+end
+
+Then('the show {string} displays its poster art') do |show_name|
+  actual_body = $browser.last_response.body.to_s
+  # Matches: <img ... class="show-poster" ...> ... <span ... class="name">Show Name</span>
+  expect(actual_body).to match(/<img[^>]*class=["']show-poster["'][^>]*>.*?<span[^>]*class=["']name["'][^>]*>#{Regexp.escape(show_name)}<\/span>/m)
 end
 

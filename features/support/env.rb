@@ -19,6 +19,7 @@ DB.run("PRAGMA foreign_keys = ON")
 
 Before do
   DatabaseCleaner[:sequel].start
+  load File.join(File.dirname(__FILE__), '../../data/scenarios/smoke.rb')
 end
 
 After do

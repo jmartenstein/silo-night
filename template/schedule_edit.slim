@@ -12,7 +12,10 @@ div#showbox
   ul id="show" class="list"
     - @shows.each do |s|
       li.list-item
-        span.name = s.name
+        - if s.poster_path
+          img.show-poster src=s.poster_path
+        .show-info
+          span.name = s.name
         span.runtime = "#{s.runtime}m"
         span.remove &times;
 

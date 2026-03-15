@@ -87,7 +87,7 @@ describe User do
     expect(sched).not_to be_nil
     expect(sched[weekday]).not_to be_empty
     expect(sched[weekday].length).to eq(1)
-    expect(sched[weekday]).to include("His Dark Materials")
+    expect(sched[weekday]).to include({ "name" => "His Dark Materials", "poster_path" => nil })
 
   end
 
@@ -99,7 +99,7 @@ describe User do
     sched = JSON.parse(seed_test.schedule)
 
     expect(sched[weekday]).not_to be_empty
-    expect(sched[weekday][0]).to eq("The Equalizer")
+    expect(sched[weekday][0]["name"]).to eq("The Equalizer")
 
   end
 
@@ -114,7 +114,10 @@ describe User do
     # Initial generation: Show 1 then Show 2 on Monday
     u.generate_schedule
     sched = JSON.parse(u.schedule)
-    expect(sched["Monday"]).to eq(["Show 1", "Show 2"])
+    expect(sched["Monday"]).to eq([
+      { "name" => "Show 1", "poster_path" => nil },
+      { "name" => "Show 2", "poster_path" => nil }
+    ])
     
     # Reorder: Show 2 then Show 1
     DB[:shows_users].where(user_id: u.id, show_id: s1.id).update(show_order: 1)
@@ -124,7 +127,10 @@ describe User do
     u.generate_schedule
     sched = JSON.parse(u.schedule)
     # If it doesn't clear the schedule, it will still be ["Show 1", "Show 2"] because they are "already in schedule"
-    expect(sched["Monday"]).to eq(["Show 2", "Show 1"])
+    expect(sched["Monday"]).to eq([
+      { "name" => "Show 2", "poster_path" => nil },
+      { "name" => "Show 1", "poster_path" => nil }
+    ])
   end
 
 end

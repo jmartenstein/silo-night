@@ -127,7 +127,8 @@ class User < Sequel::Model
     schedule ||= JSON.parse(@values[:schedule] || "{}")
     return false if schedule.nil?
 
-    schedule.values.any? { |shows| shows.include?(show) }
+    show_name = show.is_a?(String) ? show : show.name
+    schedule.values.any? { |shows| shows.any? { |s| s.is_a?(Hash) ? s["name"] == show_name : s == show_name } }
   end
 
   def get_available_runtime_for_day( day="", schedule=nil )
@@ -135,6 +136,9 @@ class User < Sequel::Model
     # TODO: add instance function to simplify this line
     schedule ||= JSON.parse(@values[:schedule] || "{}")
     schedule_day = schedule[day] || []
+    
+    # Extract names if they are objects
+    show_names = schedule_day.map { |s| s.is_a?(Hash) ? (s["name"] || s[:name]) : s }
 
     # initialize an integer to track the runtime
     runtime_sum = 0
@@ -142,8 +146,8 @@ class User < Sequel::Model
     # Optimization: Fetch all show runtimes for this day in one query if possible.
     # For now, let's at least ensure we use the shows relation if available, 
     # but schedule_day only has names.
-    if not schedule_day.empty?
-      lookup_shows = Show.where(name: schedule_day).all
+    if not show_names.empty?
+      lookup_shows = Show.where(name: show_names).all
       runtime_sum = lookup_shows.sum(&:average_runtime)
     end
 
@@ -202,7 +206,7 @@ class User < Sequel::Model
       day = find_next_available_slot(show, schedule)
       if day && !day.empty?
         schedule[day] = [] unless schedule.key?(day)
-        schedule[day].push(show.name)
+        schedule[day].push({ "name" => show.name, "poster_path" => show.poster_path })
       end
 
     end # shows.each
