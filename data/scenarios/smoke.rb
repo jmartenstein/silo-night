@@ -4,6 +4,8 @@ require 'database_cleaner-sequel'
 require 'json'
 require 'uri'
 require 'database'
+require 'show'
+require 'user'
 
 puts "Seeding with smoke_test scenario..."
 
