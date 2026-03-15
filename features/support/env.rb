@@ -17,9 +17,11 @@ DB.run("PRAGMA foreign_keys = OFF")
 DatabaseCleaner[:sequel].clean_with(:truncation)
 DB.run("PRAGMA foreign_keys = ON")
 
+# Seed smoke data once at suite startup, outside per-scenario transactions
+load File.join(File.dirname(__FILE__), '../../data/scenarios/smoke.rb')
+
 Before do
   DatabaseCleaner[:sequel].start
-  load File.join(File.dirname(__FILE__), '../../data/scenarios/smoke.rb')
 end
 
 After do
