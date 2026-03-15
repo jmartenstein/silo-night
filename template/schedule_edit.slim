@@ -13,7 +13,7 @@ div#showbox
     - @shows.each do |s|
       li.list-item
         - if s.poster_path
-          img.show-poster src=s.poster_path
+          img.show-poster src=s.poster_path alt=s.name
         .show-info
           span.name = s.name
         span.runtime = "#{s.runtime}m"
