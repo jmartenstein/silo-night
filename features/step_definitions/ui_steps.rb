@@ -118,7 +118,13 @@ end
 
 Then('the show {string} displays its poster art') do |show_name|
   actual_body = $browser.last_response.body.to_s
-  # Matches: <img ... class="show-poster" ...> ... <span ... class="name">Show Name</span>
-  expect(actual_body).to match(/<img[^>]*class=["']show-poster["'][^>]*>.*?<span[^>]*class=["']name["'][^>]*>#{Regexp.escape(show_name)}<\/span>/m)
+  require 'nokogiri'
+  doc = Nokogiri::HTML(actual_body)
+  matching_li = doc.css('li').find do |li|
+    name_span = li.at_css('span.name')
+    next false unless name_span && name_span.text == show_name
+    li.at_css('img.show-poster')
+  end
+  expect(matching_li).not_to be_nil
 end
 
