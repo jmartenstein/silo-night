@@ -314,7 +314,7 @@ function renderShows(shows) {
 
     var runtimeSpan = document.createElement('span');
     runtimeSpan.className = 'runtime';
-    runtimeSpan.textContent = s.runtime + 'm';
+    runtimeSpan.textContent = s.runtime;
     li.appendChild(runtimeSpan);
 
     var removeSpan = document.createElement('span');
