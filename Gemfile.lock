@@ -64,6 +64,7 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
+    ffi (1.17.3-arm64-darwin)
     ffi (1.17.3-x86_64-darwin)
     hashdiff (1.2.1)
     i18n (1.14.8)
@@ -78,13 +79,15 @@ GEM
     logger (1.7.0)
     memoist3 (1.0.0)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.9)
     minitest (5.27.0)
     multi_json (1.19.1)
     multi_test (1.1.0)
     mustermann (3.0.4)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.7.5)
-    nokogiri (1.18.10-x86_64-darwin)
+    nokogiri (1.18.10)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     parallel (1.27.0)
     parser (3.3.10.1)
@@ -164,7 +167,8 @@ GEM
     slim (5.2.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
-    sqlite3 (2.8.1-x86_64-darwin)
+    sqlite3 (2.8.1)
+      mini_portile2 (~> 2.8.0)
     sys-uname (1.4.1)
       ffi (~> 1.1)
       memoist3 (~> 1.0.0)
@@ -182,6 +186,7 @@ GEM
       hashdiff (>= 0.4.0, < 2.0.0)
 
 PLATFORMS
+  arm64-darwin-25
   x86_64-darwin-20
 
 DEPENDENCIES
