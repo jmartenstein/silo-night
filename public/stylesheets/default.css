@@ -151,7 +151,8 @@ ul {
 .remove {
   cursor: pointer;
   color: var(--dim-color);
-  font-size: 0.8rem;
+  font-size: 1.4rem;
+  padding: 12px;
   margin-left: var(--spacing-md);
   opacity: 0;
   transition: opacity 0.2s;
