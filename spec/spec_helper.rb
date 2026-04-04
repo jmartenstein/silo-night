@@ -1,3 +1,19 @@
+require 'cgi'
+# Fallback for older CGI/VCR compatibility issues
+unless CGI.respond_to?(:parse)
+  def CGI.parse(query)
+    params = {}
+    query.split(/[&;]/).each do |pairs|
+      key, value = pairs.split('=', 2).map { |v| CGI.unescape(v) }
+      if params.has_key?(key)
+        params[key] << value
+      else
+        params[key] = [value]
+      end
+    end
+    params
+  end
+end
 ENV['RACK_ENV'] = 'test'
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 $LOAD_PATH.unshift File.expand_path('..', __dir__)
