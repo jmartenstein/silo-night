@@ -97,6 +97,24 @@ post '/user/:name/availability' do
   slim :schedule_edit
 end
 
+namespace '/api/v1' do
+  get '/user/:name/shows' do
+    content_type :json
+    u = User.find(name: params["name"])
+    return status 404 if u.nil?
+    
+    u.shows.map do |s|
+      {
+        id: s.id,
+        name: s.name,
+        runtime: s.runtime,
+        uri_safe_name: s.uri_encoded,
+        poster_url: s.poster_path # Minimal implementation
+      }
+    end.to_json
+  end
+end
+
 namespace '/api/v0.1' do
 
   delete '/user/:name' do
