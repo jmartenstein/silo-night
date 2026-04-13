@@ -89,8 +89,8 @@ Given(/^the user "([^"]*)" has "([^"]*)" \(([^)]*)\) and "([^"]*)" \(([^)]*)\) i
   s1 = Show.find(name: show1) || Show.create(name: show1, runtime: run1)
   s2 = Show.find(name: show2) || Show.create(name: show2, runtime: run2)
   
-  u.add_show(s1) unless u.shows.include?(s1)
-  u.add_show(s2) unless u.shows.include?(s2)
+  Services::UserShow.add_show(u, s1) unless u.shows.include?(s1)
+  Services::UserShow.add_show(u, s2) unless u.shows.include?(s2)
 end
 
 Given(/^"([^"]*)" has "([^"]*)" availability on "([^"]*)"$/) do |username, time, day|
