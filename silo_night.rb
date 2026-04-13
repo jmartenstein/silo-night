@@ -9,6 +9,9 @@ require 'database'
 require 'user'
 require 'metadata_service'
 
+require 'services/show_service'
+require 'presenters/show_presenter'
+
 # set slim templates to custom diectory
 set :views, File.expand_path(File.join(__FILE__, '../template'))
 
@@ -98,21 +101,21 @@ post '/user/:name/availability' do
 end
 
 namespace '/api/v1' do
+
   get '/user/:name/shows' do
     content_type :json
-    u = User.find(name: params["name"])
-    return status 404 if u.nil?
+
+    # ask the service to do the heavy lifting / database work
+    shows = Services::ShowService.list_for_user(params[:name])
+
+    # return 404 code if the service couldn't find any shows
+    return status 404 unless shows
+
+    # use the presenter object to format the josn
+    shows.map { |s| Presenters::ShowPresenter.new(s).to_h }.to_json
     
-    u.shows.map do |s|
-      {
-        id: s.id,
-        name: s.name,
-        runtime: s.runtime,
-        uri_safe_name: s.uri_encoded,
-        poster_url: s.poster_path # Minimal implementation
-      }
-    end.to_json
   end
+
 end
 
 namespace '/api/v0.1' do
