@@ -1,5 +1,5 @@
 module Presenters
-  class ShowPresenter
+  class Show
     def initialize(show)
       @show = show
     end
@@ -31,3 +31,4 @@ module Presenters
     end
   end
 end
+
