@@ -1,8 +1,8 @@
 # Architectural Proposal: API v1 Refactor (TDD-Driven Service & Presenter Layers)
 
-## Status: Proposed
+## Status: In Progress
 **Author:** Software Architect (Consultant)  
-**Date:** April 3, 2026  
+**Date:** April 12, 2026  
 **Target Audience:** Engineering Team
 
 ---
@@ -27,46 +27,36 @@ All new `v1` features must follow this strict cycle:
 
 ---
 
-## 3. The `ShowService` (Orchestration Layer)
+## 3. Implemented Objects (v1 Milestone 1)
 
-### Purpose
-The `ShowService` acts as the "Single Source of Truth" for operations involving shows, coordinating between the database and `MetadataService`.
-
-### Responsibilities
-- **Search & Create:** Searching for shows locally; fetching and persisting metadata if missing.
-- **User Association:** Managing a user's collection and triggering side effects (like schedule regeneration).
-- **Transaction Management:** Ensuring atomic updates for complex operations like list reordering.
+The following objects have been successfully extracted and verified:
+- **`Services::Show`**: Handles show lookup and user list retrieval.
+- **`Presenters::Show`**: Standardized JSON representation of a single show.
+- **`Services::UserShow`**: Manages the relationship between users and shows (adding, removing, reordering).
 
 ---
 
-## 4. The `ShowPresenter` (Representation Layer)
+## 4. Current Target: Schedule Management (v1 Milestone 2)
 
-### Purpose
-Presenters transform raw models into the versioned JSON contracts required by the front-end.
+### The `Services::Schedule` (Orchestration Layer)
+**Purpose:** Encapsulates the logic for retrieving and regenerating a user's weekly viewing schedule.
+**Responsibilities:**
+- **Retrieval:** Fetching the current saved schedule for a user.
+- **Regeneration:** Triggering the schedule generation algorithm and persisting the results.
 
-### Responsibilities
-- **Schema Enforcement:** Whitelisting fields and ensuring consistent types (e.g., integers for runtimes).
-- **Data Decoration:** Calculating dynamic fields like full poster URLs or formatted dates.
+### The `Presenters::Schedule` (Representation Layer)
+**Purpose:** Transforms the raw schedule hash (stored in the DB) into a UI-friendly structure.
+**Responsibilities:**
+- **Normalization:** Ensuring the schedule format is consistent (e.g., handling missing days).
+- **Filtering:** Providing "Tonight" views or specific day subsets.
 
 ---
 
-## 5. Roadmap: Planned Services & Presenters
+## 5. Roadmap: Future Services & Presenters
 
-To achieve full decoupling, the following objects are identified for implementation:
-
-### Service Objects
-- **`ShowService`:** Handles show lookup, metadata fetching, and creation.
-- **`UserShowService`:** Manages the relationship between users and shows (adding, removing, reordering).
-- **`ScheduleService`:** Encapsulates the logic for generating and formatting a user's weekly viewing schedule.
-- **`UserConfigService`:** Manages user settings, credentials, and profile metadata.
-- **`SearchService`:** Orchestrates multi-provider searches (Local DB + TMDB + TVMaze).
-
-### Presenter Objects
-- **`ShowPresenter`:** Standardized JSON for show details and list items.
-- **`SchedulePresenter`:** Formats the complex schedule hash into a UI-friendly structure.
-- **`UserPresenter`:** Represents user profiles and their associated configurations.
-- **`SearchResultPresenter`:** Normalizes search results from different external APIs into a uniform UI format.
-- **`ErrorPresenter`:** Standardizes error responses (e.g., `{ "error": "ShowNotFound", "message": "..." }`).
+- **`UserConfigService` / `UserPresenter`**: Manages user settings and profile metadata.
+- **`SearchService` / `SearchResultPresenter`**: Orchestrates multi-provider searches.
+- **`ErrorPresenter`**: Standardizes error responses across all v1 endpoints.
 
 ---
 
@@ -77,6 +67,7 @@ To achieve full decoupling, the following objects are identified for implementat
 - **External API Volatility:** We assume that external providers (TMDB, TVMaze) are volatile. This architectural design biases toward a strong "Adapter" pattern within the Service layer to ensure that a change in the TMDB API doesn't leak into our UI JSON contracts.
 - **Statelessness Preference:** While the current app uses some server-side rendering, we assume the future UI prototypes will favor a "Client-Side State" model. Our API v1 will be designed as a stateless resource provider, minimizing reliance on Sinatra-level session management.
 - **Environment Parity:** We assume that the `test` environment is (or will be) configured with stable mocks for external services, allowing the TDD cycle to run without actual network calls to TMDB/TVMaze.
+- **Stale State Management (New):** We assume that the Service layer is responsible for ensuring model data is fresh (e.g., using `user.reload`) before performing state-changing operations, especially when triggered by high-frequency testing environments like Cucumber.
 
 ### Architectural Biases
 - **Contract-First Design (TDD):** We bias heavily toward the API "Contract" as the primary deliverable. In this view, the backend is a service provider, and the JSON schema is the legal agreement between the backend and front-end teams.
@@ -85,12 +76,13 @@ To achieve full decoupling, the following objects are identified for implementat
 - **Explicit Representation (Presenters):** We bias against using `to_json` overrides in models. We believe a model's data should be separate from its representation. Using explicit Presenters allows us to provide different "Views" of the same data (e.g., a `SummaryShowPresenter` for lists and a `FullShowPresenter` for details) without polluting the model.
 - **Standardized Failure States:** We bias toward "Error Objects" over HTTP status codes alone. Every failure should return a predictable JSON payload, allowing the front-end to implement robust, user-friendly error handling for any UI prototype.
 - **v0.1 Preservation:** We bias toward a "Side-by-Side" migration. We will not touch or "improve" the `v0.1` namespace; it will remain as a legacy reference point until the `v1` implementation is feature-complete and verified.
+- **Idiomatic Module Scoping (New):** We bias toward concise, module-scoped naming (e.g., `Services::Show`) over redundant descriptors (e.g., `Services::ShowService`). We believe the namespace already provides sufficient context.
+- **Defensive Service Logic (New):** We bias toward Services handling database-level constraints (e.g., `UniqueConstraintViolation`) gracefully. Services should ensure the application remains stable even when the underlying data layer hits expected constraints.
 
 ---
 
 ## 7. Next Steps
 
-1.  **Initialize `api/v1` Spec Suite:** Create `spec/requests/api/v1/` to house the initial Red tests.
-2.  **First Slice (Shows):** Implement the `ShowPresenter` and `ShowService` via a Red-Green-Refactor cycle for the `GET /api/v1/shows` endpoint.
-3.  **Standardized Error Handling:** Implement the `ErrorPresenter` to replace plain-text error messages.
-4.  **Integration Testing:** Ensure all `v1` endpoints are covered by request specs before any `v0.1` routes are deprecated.
+1.  **Schedule Refactor:** Implement `Services::Schedule` and `Presenters::Schedule` for `GET /api/v1/user/:name/schedule`.
+2.  **Tonight View:** Create a specialized presenter or method for `GET /api/v1/user/:name/tonight`.
+3.  **User Config:** Move availability settings to `UserConfigService`.

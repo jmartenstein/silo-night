@@ -28,4 +28,4 @@ Feature: User Management
     Given there is an existing user "steph"
     When any user visits the main page
     And the user clicks on the name "steph"
-    Then the page displays "Shows and Schedule for steph"
+    Then the page displays "Weekly Schedule"
