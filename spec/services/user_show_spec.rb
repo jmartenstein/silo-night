@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'services/user_show'
 
 RSpec.describe Services::UserShow do
-  let(:user) { double('User', add_show: true, generate_schedule: true, shows: []) }
+  let(:user) { double('User', add_show: true, generate_schedule: true, shows: [], reload: true) }
   let(:show) { double('Show') }
 
   describe ".add_show" do
