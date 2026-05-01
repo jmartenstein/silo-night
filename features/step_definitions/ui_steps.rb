@@ -43,7 +43,7 @@ Given('the user {string} has {string} and {string} in their list') do |username,
   # Ensure shows exist and are added to user
   [show1, show2].each do |name|
     show = Show.find(name: name) || Show.create(name: name, runtime: "45 minutes", uri_encoded: name.downcase.gsub(' ', '+'))
-    u.add_show(show) unless DB[:shows_users].where(user_id: u.id, show_id: show.id).any?
+    Services::UserShow.add_show(u, show)
   end
 end
 
