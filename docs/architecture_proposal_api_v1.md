@@ -27,34 +27,35 @@ All new `v1` features must follow this strict cycle:
 
 ---
 
-## 3. Implemented Objects (v1 Milestone 1)
+## 3. Implemented Objects (v1 Milestone 1 & 2)
 
 The following objects have been successfully extracted and verified:
 - **`Services::Show`**: Handles show lookup and user list retrieval.
 - **`Presenters::Show`**: Standardized JSON representation of a single show.
 - **`Services::UserShow`**: Manages the relationship between users and shows (adding, removing, reordering).
+- **`Services::Schedule`**: Orchestrates retrieval and regeneration of the weekly viewing plan.
+- **`Presenters::Schedule`**: Normalizes schedule data, ensuring a consistent 7-day JSON contract with rich show metadata.
 
 ---
 
-## 4. Current Target: Schedule Management (v1 Milestone 2)
+## 4. Current Target: Specialized Views & Configuration (v1 Milestone 3)
 
-### The `Services::Schedule` (Orchestration Layer)
-**Purpose:** Encapsulates the logic for retrieving and regenerating a user's weekly viewing schedule.
+### The `Services::UserConfig` (Configuration Layer)
+**Purpose:** Manages user availability settings and preferences.
 **Responsibilities:**
-- **Retrieval:** Fetching the current saved schedule for a user.
-- **Regeneration:** Triggering the schedule generation algorithm and persisting the results.
+- **Persistence:** Updating `user.config` fields.
+- **Validation:** Ensuring time formats and day selections are valid.
 
-### The `Presenters::Schedule` (Representation Layer)
-**Purpose:** Transforms the raw schedule hash (stored in the DB) into a UI-friendly structure.
+### The `Presenters::Tonight` (Contextual Layer)
+**Purpose:** Provides a focused view of the shows scheduled for the current day.
 **Responsibilities:**
-- **Normalization:** Ensuring the schedule format is consistent (e.g., handling missing days).
-- **Filtering:** Providing "Tonight" views or specific day subsets.
+- **Date Calculation:** Identifying the current day of the week.
+- **Show Filtering:** Returning only the subset of the schedule relevant to "Tonight".
 
 ---
 
 ## 5. Roadmap: Future Services & Presenters
 
-- **`UserConfigService` / `UserPresenter`**: Manages user settings and profile metadata.
 - **`SearchService` / `SearchResultPresenter`**: Orchestrates multi-provider searches.
 - **`ErrorPresenter`**: Standardizes error responses across all v1 endpoints.
 
@@ -83,6 +84,6 @@ The following objects have been successfully extracted and verified:
 
 ## 7. Next Steps
 
-1.  **Schedule Refactor:** Implement `Services::Schedule` and `Presenters::Schedule` for `GET /api/v1/user/:name/schedule`.
-2.  **Tonight View:** Create a specialized presenter or method for `GET /api/v1/user/:name/tonight`.
-3.  **User Config:** Move availability settings to `UserConfigService`.
+1.  [x] **Schedule Refactor:** Implement `Services::Schedule` and `Presenters::Schedule` for `GET /api/v1/user/:name/schedule`.
+2.  [ ] **Tonight View:** Create a specialized presenter or method for `GET /api/v1/user/:name/tonight`.
+3.  [ ] **User Config:** Move availability settings to `UserConfigService`.

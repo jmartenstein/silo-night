@@ -8,6 +8,7 @@ $LOAD_PATH.unshift File.expand_path('./lib', __dir__)
 require 'database'
 require 'user'
 require 'metadata_service'
+require 'services/schedule'
 
 require 'services/show'
 require 'services/user_show'
@@ -117,6 +118,21 @@ namespace '/api/v1' do
     
   end
 
+  get '/user/:name/schedule' do
+    content_type :json
+    user = User.find(name: params["name"])
+    return 404 unless user
+
+    Services::Schedule.get_for_user(user).to_h.to_json
+  end
+
+  post '/user/:name/schedule/generate' do
+    content_type :json
+    user = User.find(name: params["name"])
+    return 404 unless user
+
+    Services::Schedule.generate_for_user(user).to_h.to_json
+  end
 end
 
 namespace '/api/v0.1' do
