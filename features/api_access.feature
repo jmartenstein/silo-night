@@ -51,4 +51,4 @@ Feature: API Access for Watch Guide
     When "steph" generates a new schedule
     Then the site responds with text not containing "Suits"
     And the site responds with text containing "The Amazing Race"
-    And the show "The Amazing Race" is scheduled for "Thursday"
+    And the show "The Amazing Race" is scheduled for "Tuesday"
