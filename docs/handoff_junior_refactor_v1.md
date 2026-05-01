@@ -1,4 +1,4 @@
-# Refactor Task: Implementing ShowService and ShowPresenter
+# Refactor Task: Implementing ScheduleService and SchedulePresenter
 
 ## Status: Ready for Implementation
 **Target Audience:** Junior Engineering Team
@@ -6,69 +6,55 @@
 ---
 
 ## 1. Architectural Context
-We've just reached a "Green" state in our TDD cycle for `GET /api/v1/user/:name/shows`. However, the current code in `silo_night.rb` is problematic because it mixes **orchestration** (finding the user) and **presentation** (shaping the JSON) directly in the route.
+After successfully refactoring our **Show** and **UserShow** logic, we are moving on to the **Schedule** system. Currently, the logic for generating and viewing a user's schedule is still scattered between the `User` model and the routes in `silo_night.rb`.
 
-Your goal is to perform the **Refactor** step: move this logic into dedicated objects that follow the **Single Responsibility Principle (SRP)**.
+Your goal is to apply the **Service/Presenter** pattern to clean this up, focusing on `GET /api/v1/user/:name/schedule`.
 
 ---
 
-## 2. Part A: The `ShowPresenter` (The "What")
+## 2. Part A: The `Presenters::Schedule` (The "What")
 
 ### Why?
-Models like `Show` contain all kinds of data (database IDs, internal timestamps, raw strings). We shouldn't just dump all of that into our API. The `ShowPresenter` acts as a "filter" and a "decorator" that ensures the front-end gets exactly what it needs, in the correct format.
+The `User.schedule` field contains a raw JSON hash of the weekly viewing plan. The front-end needs this data in a clean, predictable format. The `SchedulePresenter` will handle making sure every day of the week is represented, even if it's empty.
 
 ### Your Instructions:
-1.  **Create a new file:** `lib/presenters/show_presenter.rb`.
-2.  **Define the class:** It should take a `Show` object in its constructor.
-3.  **Implement a `to_h` (or `as_json`) method:** This method should return a hash with the following keys:
-    - `id`: The show's database ID.
-    - `name`: The display name.
-    - `runtime`: The runtime (as an integer).
-    - `uri_safe_name`: The `uri_encoded` field from the model.
-    - `poster_url`: A "decorated" version of `poster_path`. (Hint: If it starts with `/`, prepend the TMDB base URL `https://image.tmdb.org/t/p/w500`).
-4.  **Requirement:** Do not touch the `Show` model itself. All formatting happens here.
+1.  **Create a new file:** `lib/presenters/schedule.rb`.
+2.  **Define the class:** `module Presenters; class Schedule; end; end`.
+3.  **Implement `initialize(schedule_hash)`:** Store the raw hash.
+4.  **Implement `to_h`:** This method should return the schedule. (Bonus: Ensure it includes all 7 days of the week, with an empty array if a day is missing).
+5.  **Bonus Method:** `tonight(day_name)` - Returns only the shows for a specific day.
 
 ---
 
-## 3. Part B: The `ShowService` (The "How")
+## 3. Part B: The `Services::Schedule` (The "How")
 
 ### Why?
-Routes should be "thin shims." They should only handle the HTTP request and immediately hand off the real work to a "Service." This makes our business logic testable without needing to boot up a web server.
+Calculating the schedule (matching show runtimes against user availability) is complex business logic. The `ScheduleService` will orchestrate this process.
 
 ### Your Instructions:
-1.  **Create a new file:** `lib/services/show_service.rb`.
-2.  **Define a class method:** `self.list_for_user(user_name)`.
-3.  **Implementation logic:**
-    - Find the user by name using the `User` model.
-    - If the user doesn't exist, return `nil` or raise a custom `UserNotFoundError`.
-    - Fetch the shows associated with that user.
-    - Return the collection of shows.
-4.  **Goal:** This service should eventually handle adding, removing, and reordering shows, but for now, focus only on the `list_for_user` functionality.
+1.  **Create a new file:** `lib/services/schedule.rb`.
+2.  **Define the class:** `module Services; class Schedule; end; end`.
+3.  **Implement `self.get_for_user(user)`:** 
+    - Should return the user's current schedule.
+4.  **Implement `self.generate_for_user(user)`:**
+    - Should trigger `user.generate_schedule` and return the new results.
+    - Tip: This is where we will eventually move the generation logic out of the model!
 
 ---
 
-## 4. Final Integration (The Refactor)
+## 4. Final Integration (The TDD Cycle)
 
-Once your Service and Presenter are ready, you'll update the route in `silo_night.rb` to look like this:
+Follow the **Red-Green-Refactor** pattern you've learned:
 
-```ruby
-get '/user/:name/shows' do
-  content_type :json
-  shows = Services::ShowService.list_for_user(params[:name])
-  return status 404 unless shows
-  
-  shows.map { |s| Presenters::ShowPresenter.new(s).to_h }.to_json
-end
-```
+1.  **🔴 Red:** Write a test in `spec/services/schedule_spec.rb` or `spec/presenters/schedule_spec.rb`.
+2.  **🟢 Green:** Implement the minimal code in the Service or Presenter.
+3.  **🔵 Refactor:** Clean up the logic and update the route in `silo_night.rb`.
 
 ### Success Criteria:
-- Run `bundle exec rspec spec/requests/api/v1/shows_spec.rb`.
-- **The test must stay Green.** If it turns Red, check if you renamed any JSON keys or if your `poster_url` logic changed the expected output.
+- Run `bundle exec rspec`. All 46 tests must stay Green.
+- Run `bundle exec cucumber`. All scenarios must pass.
 
 ---
 
 ## 5. Why This Matters
-By doing this, you're making the system:
-- **Testable:** We can now write a unit test for `ShowPresenter` without needing a database.
-- **Maintainable:** If we decide to use a different image provider for posters, we only change one line in the `ShowPresenter`.
-- **Flexible:** The front-end team can now trust that *every* endpoint returning a show will use this exact same structure.
+By moving the schedule logic here, we prepare the app for future features like "Skip this week" or "Swap these days," without ever having to touch the web server code again. You're building a professional, scalable back-end!
