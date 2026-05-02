@@ -9,10 +9,10 @@ require 'database'
 require 'user'
 require 'metadata_service'
 require 'services/schedule'
-
-require 'services/show'
-require 'services/user_show'
+require 'services/user_config'
 require 'presenters/show'
+require 'presenters/schedule'
+require 'presenters/tonight'
 
 # set slim templates to custom diectory
 set :views, File.expand_path(File.join(__FILE__, '../template'))
@@ -126,12 +126,33 @@ namespace '/api/v1' do
     Services::Schedule.get_for_user(user).to_h.to_json
   end
 
-  post '/user/:name/schedule/generate' do
+  get '/user/:name/tonight' do
     content_type :json
     user = User.find(name: params["name"])
     return 404 unless user
 
-    Services::Schedule.generate_for_user(user).to_h.to_json
+    schedule_data = user.schedule.is_a?(String) ? JSON.parse(user.schedule) : (user.schedule || {})
+    today = Date.today.strftime('%A')
+    
+    Presenters::Tonight.new(schedule_data, today).to_h.to_json
+  end
+
+  get '/user/:name/config' do
+    content_type :json
+    user = User.find(name: params["name"])
+    return 404 unless user
+
+    Services::UserConfig.get_for_user(user).to_json
+  end
+
+  post '/user/:name/config' do
+    content_type :json
+    user = User.find(name: params["name"])
+    return 404 unless user
+
+    config_params = JSON.parse(request.body.read)
+    Services::UserConfig.update_for_user(user, config_params)
+    { status: 'success' }.to_json
   end
 end
 
