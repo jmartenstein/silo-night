@@ -27,7 +27,7 @@ All new `v1` features must follow this strict cycle:
 
 ---
 
-## 3. Implemented Objects (v1 Milestone 1 & 2)
+## 3. Implemented Objects (v1 Milestone 1, 2, & 3)
 
 The following objects have been successfully extracted and verified:
 - **`Services::Show`**: Handles show lookup and user list retrieval.
@@ -35,22 +35,21 @@ The following objects have been successfully extracted and verified:
 - **`Services::UserShow`**: Manages the relationship between users and shows (adding, removing, reordering).
 - **`Services::Schedule`**: Orchestrates retrieval and regeneration of the weekly viewing plan.
 - **`Presenters::Schedule`**: Normalizes schedule data, ensuring a consistent 7-day JSON contract with rich show metadata.
+- **`Services::UserConfig`**: Manages availability settings and user configuration persistence.
+- **`Presenters::Tonight`**: Provides a contextually filtered view of today's schedule.
 
 ---
 
-## 4. Current Target: Specialized Views & Configuration (v1 Milestone 3)
+## 4. Current Target: Future Features (v1 Milestone 4+)
 
-### The `Services::UserConfig` (Configuration Layer)
-**Purpose:** Manages user availability settings and preferences.
+### The `SearchService` (Orchestration Layer)
+**Purpose:** Orchestrates multi-provider show searches.
 **Responsibilities:**
-- **Persistence:** Updating `user.config` fields.
-- **Validation:** Ensuring time formats and day selections are valid.
+- Aggregating results from TMDB/TVMaze adapters.
+- Normalizing search results into a unified format.
 
-### The `Presenters::Tonight` (Contextual Layer)
-**Purpose:** Provides a focused view of the shows scheduled for the current day.
-**Responsibilities:**
-- **Date Calculation:** Identifying the current day of the week.
-- **Show Filtering:** Returning only the subset of the schedule relevant to "Tonight".
+### The `ErrorPresenter` (Representation Layer)
+**Purpose:** Standardizes error responses across all v1 endpoints.
 
 ---
 
@@ -85,5 +84,7 @@ The following objects have been successfully extracted and verified:
 ## 7. Next Steps
 
 1.  [x] **Schedule Refactor:** Implement `Services::Schedule` and `Presenters::Schedule` for `GET /api/v1/user/:name/schedule`.
-2.  [ ] **Tonight View:** Create a specialized presenter or method for `GET /api/v1/user/:name/tonight`.
-3.  [ ] **User Config:** Move availability settings to `UserConfigService`.
+2.  [x] **Tonight View:** Create a specialized presenter or method for `GET /api/v1/user/:name/tonight`.
+3.  [x] **User Config:** Move availability settings to `UserConfigService`.
+4.  [ ] **Search Service:** Implement `SearchService` and `SearchResultPresenter`.
+5.  [ ] **Error Handling:** Implement `ErrorPresenter` for API-wide error standardization.
