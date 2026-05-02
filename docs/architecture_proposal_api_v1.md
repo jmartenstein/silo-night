@@ -40,16 +40,16 @@ The following objects have been successfully extracted and verified:
 
 ---
 
-## 4. Current Target: Future Features (v1 Milestone 4+)
+## 4. Current Target: API Completion (v1 Milestone 4 & 5)
 
-### The `SearchService` (Orchestration Layer)
-**Purpose:** Orchestrates multi-provider show searches.
-**Responsibilities:**
-- Aggregating results from TMDB/TVMaze adapters.
-- Normalizing search results into a unified format.
+### Milestone 4: Search & Error Handling
+- **`SearchService`**: Orchestrates multi-provider show searches.
+- **`SearchResultPresenter`**: Standardizes search result formats.
+- **`ErrorPresenter`**: Centralizes error messaging for all `v1` API responses.
 
-### The `ErrorPresenter` (Representation Layer)
-**Purpose:** Standardizes error responses across all v1 endpoints.
+### Milestone 5: Full RESTful User Resource
+- **`UserManagement`**: Migrating `v0.1` user lifecycle routes (create, delete, update) to RESTful `v1` standards.
+- **`ShowManagement`**: Migrating `v0.1` show manipulation routes (reordering, adding, removing) to RESTful `v1` standards.
 
 ---
 
@@ -57,6 +57,8 @@ The following objects have been successfully extracted and verified:
 
 - **`SearchService` / `SearchResultPresenter`**: Orchestrates multi-provider searches.
 - **`ErrorPresenter`**: Standardizes error responses across all v1 endpoints.
+- **`UserManagementService`**: RESTful interface for user lifecycle.
+- **`ShowManagementService`**: RESTful interface for curated show lists.
 
 ---
 
@@ -88,3 +90,5 @@ The following objects have been successfully extracted and verified:
 3.  [x] **User Config:** Move availability settings to `UserConfigService`.
 4.  [ ] **Search Service:** Implement `SearchService` and `SearchResultPresenter`.
 5.  [ ] **Error Handling:** Implement `ErrorPresenter` for API-wide error standardization.
+6.  [ ] **RESTful User Management:** Migrate user lifecycle routes to `v1`.
+7.  [ ] **RESTful Show Management:** Migrate show manipulation routes to `v1`.
