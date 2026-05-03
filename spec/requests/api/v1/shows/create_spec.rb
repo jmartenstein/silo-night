@@ -2,7 +2,10 @@
 require 'spec_helper'
 
 RSpec.describe 'API v1 Shows Create', type: :request do
-  before { User.create(name: 'sam') }
+  before do
+    User.create(name: 'sam')
+    Show.create(name: 'Foundation', runtime: '60')
+  end
 
   it 'adds a show to the users list and returns 201' do
     post '/api/v1/user/sam/shows', { name: 'Foundation' }.to_json, { 'CONTENT_TYPE' => 'application/json' }
