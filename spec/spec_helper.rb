@@ -20,6 +20,8 @@ $LOAD_PATH.unshift File.expand_path('..', __dir__)
 
 require 'database'
 require 'factory_bot'
+require 'rack/test'
+require_relative '../silo_night'
 require 'sequel/extensions/migration'
 require 'webmock/rspec'
 require 'vcr'
@@ -35,6 +37,11 @@ end
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
+  config.include Rack::Test::Methods
+
+  def app
+    Sinatra::Application
+  end
 
   config.before(:suite) do
     unless Sequel::Migrator.is_current?(DB, 'db/migrations')
