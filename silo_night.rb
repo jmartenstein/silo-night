@@ -13,6 +13,7 @@ require 'services/user_config'
 require 'presenters/show'
 require 'presenters/schedule'
 require 'presenters/tonight'
+require 'presenters/error'
 
 # set slim templates to custom diectory
 set :views, File.expand_path(File.join(__FILE__, '../template'))
@@ -121,7 +122,7 @@ namespace '/api/v1' do
   get '/user/:name/schedule' do
     content_type :json
     user = User.find(name: params["name"])
-    return 404 unless user
+    return [404, Presenters::Error.new("User not found", 404).to_json] unless user
 
     Services::Schedule.get_for_user(user).to_h.to_json
   end
@@ -129,7 +130,7 @@ namespace '/api/v1' do
   get '/user/:name/tonight' do
     content_type :json
     user = User.find(name: params["name"])
-    return 404 unless user
+    return [404, Presenters::Error.new("User not found", 404).to_json] unless user
 
     schedule_data = user.schedule.is_a?(String) ? JSON.parse(user.schedule) : (user.schedule || {})
     today = Date.today.strftime('%A')
@@ -140,7 +141,7 @@ namespace '/api/v1' do
   get '/user/:name/config' do
     content_type :json
     user = User.find(name: params["name"])
-    return 404 unless user
+    return [404, Presenters::Error.new("User not found", 404).to_json] unless user
 
     Services::UserConfig.get_for_user(user).to_json
   end
@@ -148,7 +149,7 @@ namespace '/api/v1' do
   post '/user/:name/config' do
     content_type :json
     user = User.find(name: params["name"])
-    return 404 unless user
+    return [404, Presenters::Error.new("User not found", 404).to_json] unless user
 
     config_params = JSON.parse(request.body.read)
     Services::UserConfig.update_for_user(user, config_params)
