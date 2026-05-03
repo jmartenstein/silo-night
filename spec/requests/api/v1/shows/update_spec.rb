@@ -11,8 +11,8 @@ RSpec.describe 'API v1 Shows Update', type: :request do
   end
 
   it 'reorders shows and returns 200' do
-    patch '/api/v1/user/sam/shows/Foundation', { position: 1 }.to_json
+    patch '/api/v1/user/sam/shows/Foundation', { position: 1 }.to_json, { 'CONTENT_TYPE' => 'application/json' }
     expect(last_response.status).to eq(200)
-    expect(User.find(name: 'sam').shows).to eq(['Silo', 'Foundation'])
+    expect(User.find(name: 'sam').shows.map(&:name)).to eq(['Silo', 'Foundation'])
   end
 end
