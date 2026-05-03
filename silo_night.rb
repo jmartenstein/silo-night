@@ -11,6 +11,7 @@ require 'metadata_service'
 require 'clock'
 require 'services/schedule'
 require 'services/show'
+require 'services/user'
 require 'services/user_config'
 require 'services/user_show'
 require 'presenters/show'
@@ -110,18 +111,53 @@ end
 
 namespace '/api/v1' do
 
-  get '/user/:name/shows' do
+  # User Management
+  post '/users' do
     content_type :json
+    params = JSON.parse(request.body.read)
+    user = Services::User.create(params)
+    return Presenters::Error.new("Username already exists", 422).to_h.to_json unless user
+    user.to_json
+  end
 
-    # ask the service to do the heavy lifting / database work
-    shows = Services::Show.list_for_user(params[:name])
+  delete '/users/:name' do
+    content_type :json
+    return 204 if Services::User.destroy(params[:name])
+    Presenters::Error.new("User not found", 404).to_h.to_json
+  end
 
-    # return 404 code if the service couldn't find any shows
-    return status 404 unless shows
-
-    # use the presenter object to format the json
-    shows.map { |s| Presenters::Show.new(s).to_h }.to_json
+  # Show Management
+  post '/user/:name/shows' do
+    content_type :json
+    user = User.find(name: params[:name])
+    return Presenters::Error.new("User not found", 404).to_h.to_json unless user
     
+    data = JSON.parse(request.body.read)
+    show = Show.find(name: data['name'])
+    return Presenters::Error.new("Show not found", 404).to_h.to_json unless show
+    
+    Services::UserShow.add_show(user, show)
+    status 201
+    show.to_json
+  end
+
+  delete '/user/:name/shows/:show_name' do
+    content_type :json
+    user = User.find(name: params[:name])
+    return Presenters::Error.new("User not found", 404).to_h.to_json unless user
+    
+    return 204 if Services::UserShow.remove_show(user, params[:show_name])
+    Presenters::Error.new("Show not found", 404).to_h.to_json
+  end
+
+  patch '/user/:name/shows/:show_name' do
+    content_type :json
+    user = User.find(name: params[:name])
+    return Presenters::Error.new("User not found", 404).to_h.to_json unless user
+    
+    data = JSON.parse(request.body.read)
+    return 200 if Services::UserShow.reorder(user, params[:show_name], data['position'])
+    Presenters::Error.new("Show not found", 404).to_h.to_json
   end
 
   get '/user/:name/schedule' do
