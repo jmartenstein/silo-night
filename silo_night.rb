@@ -8,8 +8,11 @@ $LOAD_PATH.unshift File.expand_path('./lib', __dir__)
 require 'database'
 require 'user'
 require 'metadata_service'
+require 'clock'
 require 'services/schedule'
+require 'services/show'
 require 'services/user_config'
+require 'services/user_show'
 require 'presenters/show'
 require 'presenters/schedule'
 require 'presenters/tonight'
@@ -132,7 +135,7 @@ namespace '/api/v1' do
     return 404 unless user
 
     schedule_data = user.schedule.is_a?(String) ? JSON.parse(user.schedule) : (user.schedule || {})
-    today = Date.today.strftime('%A')
+    today = Clock.today.strftime('%A')
     
     Presenters::Tonight.new(schedule_data, today).to_h.to_json
   end
