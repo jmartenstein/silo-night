@@ -14,6 +14,8 @@ require 'presenters/show'
 require 'presenters/schedule'
 require 'presenters/tonight'
 require 'presenters/error'
+require 'presenters/search_result'
+require 'services/search'
 
 # set slim templates to custom diectory
 set :views, File.expand_path(File.join(__FILE__, '../template'))
@@ -154,6 +156,13 @@ namespace '/api/v1' do
     config_params = JSON.parse(request.body.read)
     Services::UserConfig.update_for_user(user, config_params)
     { status: 'success' }.to_json
+  end
+
+  get '/search' do
+    content_type :json
+    query = params[:q]
+    results = Services::Search.search(query)
+    Presenters::SearchResult.new(results).to_json
   end
 end
 

@@ -88,7 +88,8 @@ The following objects have been successfully extracted and verified:
 1.  [x] **Schedule Refactor:** Implement `Services::Schedule` and `Presenters::Schedule` for `GET /api/v1/user/:name/schedule`.
 2.  [x] **Tonight View:** Create a specialized presenter or method for `GET /api/v1/user/:name/tonight`.
 3.  [x] **User Config:** Move availability settings to `UserConfigService`.
-4.  [ ] **Search Service:** Implement `SearchService` and `SearchResultPresenter`.
+4. [x] **Search Service:** Implement `SearchService` and `SearchResultPresenter`.
+
 5. [x] **Error Handling:** Implement `ErrorPresenter` for API-wide error standardization.
 
 6.  [ ] **RESTful User Management:** Migrate user lifecycle routes to `v1`.
