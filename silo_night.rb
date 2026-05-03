@@ -15,6 +15,7 @@ require 'services/user'
 require 'services/user_config'
 require 'services/user_show'
 require 'presenters/show'
+require 'presenters/user'
 require 'presenters/schedule'
 require 'presenters/tonight'
 require 'presenters/error'
@@ -117,76 +118,65 @@ namespace '/api/v1' do
     params = JSON.parse(request.body.read, symbolize_names: true)
     user = Services::User.create(params)
     unless user
-      status 422
-      return Presenters::Error.new("Username already exists", 422).to_h.to_json
+      return [422, Presenters::Error.new("Username already exists", 422).to_h.to_json]
     end
-    status 201
-    user.to_json
+    [201, Presenters::User.new(user).to_h.to_json]
   end
 
   delete '/users/:name' do
     content_type :json
     if Services::User.destroy(params[:name])
-      status 204
-      return ""
+      return [204, ""]
     end
-    status 404
-    Presenters::Error.new("User not found", 404).to_h.to_json
+    [404, Presenters::Error.new("User not found", 404).to_h.to_json]
   end
 
   # Show Management
   get '/user/:name/shows' do
     content_type :json
     shows = Services::Show.list_for_user(params[:name])
-    return status 404 unless shows
+    return [404, ""] unless shows
     shows.map { |s| Presenters::Show.new(s).to_h }.to_json
   end
 
   post '/user/:name/shows' do
     content_type :json
     user = User.find(name: params[:name])
-    return Presenters::Error.new("User not found", 404).to_h.to_json unless user
+    return [404, Presenters::Error.new("User not found", 404).to_h.to_json] unless user
     
-    data = JSON.parse(request.body.read)
-    show = Show.find(name: data['name'])
-    return Presenters::Error.new("Show not found", 404).to_h.to_json unless show
+    data = JSON.parse(request.body.read, symbolize_names: true)
+    show = Show.find(name: data[:name])
+    return [404, Presenters::Error.new("Show not found", 404).to_h.to_json] unless show
     
     Services::UserShow.add_show(user, show)
-    status 201
-    show.to_json
+    [201, Presenters::Show.new(show).to_h.to_json]
   end
 
   delete '/user/:name/shows/:show_name' do
     content_type :json
     user = User.find(name: params[:name])
     unless user
-      status 404
-      return Presenters::Error.new("User not found", 404).to_h.to_json
+      return [404, Presenters::Error.new("User not found", 404).to_h.to_json]
     end
     
     if Services::UserShow.remove_show(user, params[:show_name])
-      status 204
-      return ""
+      return [204, ""]
     end
-    status 404
-    Presenters::Error.new("Show not found", 404).to_h.to_json
+    [404, Presenters::Error.new("Show not found", 404).to_h.to_json]
   end
 
   patch '/user/:name/shows/:show_name' do
     content_type :json
     user = User.find(name: params[:name])
     unless user
-      status 404
-      return Presenters::Error.new("User not found", 404).to_h.to_json
+      return [404, Presenters::Error.new("User not found", 404).to_h.to_json]
     end
     
-    data = JSON.parse(request.body.read)
-    if Services::UserShow.reorder(user, params[:show_name], data['position'])
-      status 200
-      return ""
+    data = JSON.parse(request.body.read, symbolize_names: true)
+    if Services::UserShow.reorder(user, params[:show_name], data[:position])
+      return [200, ""]
     end
-    status 404
-    Presenters::Error.new("Show not found", 404).to_h.to_json
+    [404, Presenters::Error.new("Show not found", 404).to_h.to_json]
   end
 
   # Schedule & Viewing

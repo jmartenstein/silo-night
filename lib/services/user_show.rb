@@ -3,8 +3,14 @@ module Services
     def self.add_show(user, show)
       user.reload
       return if user.shows.include?(show)
-      user.add_show(show)
-      user.generate_schedule
+      
+      begin
+        user.add_show(show)
+        user.generate_schedule
+      rescue Sequel::UniqueConstraintViolation
+        # Show is already added, just ensure schedule is consistent
+        user.generate_schedule
+      end
     end
 
     def self.remove_show(user, show_name)
