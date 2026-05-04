@@ -1,12 +1,11 @@
 # Design Philosophy: Minimalist & Adaptive
 
-This document outlines the design philosophy for Silo Night. It is intended to guide developers and automated agents in maintaining a consistent, functional, and aesthetically pleasing user interface that scales across all device types.
+This document outlines the core values and standards for Silo Night. It serves as a guide for both human developers and AI agents to ensure consistency across the user interface and the underlying system architecture.
 
-## Core Objective
+---
+
+## I. UI/UX Philosophy: Functional Minimalism
 The fundamental goal of Silo Night's design is to **simplify the interface by removing unnecessary elements or content that does not directly support the user's task of managing their show schedule.** Every element must serve a clear, functional purpose.
-
-## I. Minimalist Characteristics
-Based on industry standards (Nielsen Norman Group), our design adheres to the following "Big Five" characteristics:
 
 ### 1. Flat Patterns and Textures
 *   **Principle:** Avoid skeuomorphic elements like heavy shadows, 3D gradients, or lifelike textures.
@@ -14,42 +13,50 @@ Based on industry standards (Nielsen Norman Group), our design adheres to the fo
 
 ### 2. Limited & Strategic Color Palette
 *   **Principle:** Use a primarily monochromatic or grayscale palette (white, black, gray) with a single, bold accent color.
-*   **Implementation:** Use the accent color exclusively for primary actions (e.g., "Add Show," "Save Schedule") and critical information. Color is a functional tool, not a decorative one.
+*   **Implementation:** Use the accent color exclusively for primary actions (e.g., "Add Show," "Save Schedule") and critical information.
 
-### 3. Restricted Features and Elements
-*   **Principle:** "Subtract it until it breaks."
-*   **Implementation:** Eliminate gratuitous graphics, unnecessary borders, and redundant menu items. If removing an element doesn't hinder the user journey, remove it.
+### 3. Maximized Negative Space
+*   **Principle:** Use "white space" as a structural component to reduce cognitive load and direct the eye toward important information.
 
-### 4. Maximized Negative Space
-*   **Principle:** Use "white space" as a structural component.
-*   **Implementation:** Surround core content (like the daily schedule) with ample empty space to reduce cognitive load and direct the eye toward the most important information.
+### 4. Adaptability & Responsiveness
+*   **Mobile-First:** Interactive elements must be touch-friendly (min 44x44px). The schedule stacks vertically on small screens.
+*   **Desktop Optimization:** Utilize extra width for side-by-side grid layouts. Use hover states to provide context without clutter.
 
-### 5. Dramatic Typography
-*   **Principle:** Typography replaces graphics as the primary vehicle for hierarchy.
-*   **Implementation:** Use variations in font size, weight (bold vs. light), and style to communicate importance. Headlines should be clear and high-contrast.
+---
 
-## II. Adaptability & Responsiveness
-Silo Night must be equally usable on a mobile phone as it is on a large desktop display.
+## II. Architectural Philosophy: Contract-First & Decoupled
+We believe that a robust backend architecture is the foundation for rapid front-end prototyping. Our architecture is guided by the following biases:
 
-### Mobile-First Approach
-*   **Touch Targets:** Interactive elements must be large enough for reliable touch input (minimum 44x44px).
-*   **Vertical Flow:** On small screens, the schedule should stack vertically for easy scrolling.
-*   **Hidden Navigation:** Use overlays or "hamburger" menus on mobile to preserve screen real estate for the schedule content.
+### 1. Contract-First Design (TDD)
+We treat the API "Contract" as the primary deliverable. The backend is a service provider, and the JSON schema is the legal agreement between the backend and client teams. All new features must start with an RSpec request spec defining the contract.
 
-### Desktop Optimization
-*   **Grid Layouts:** On larger displays, utilize the extra width to show the full weekly schedule side-by-side.
-*   **Visual Scaffolding:** Use the grid to organize homogeneous content without adding extra visual "noise" like heavy lines or boxes.
-*   **Hover States:** Leverage hover effects to provide additional context without cluttering the initial view.
+### 2. Request-Level Verification
+While unit tests have value, we prioritize **Request Specs** (Route -> Service -> Model -> Presenter). This ensures the entire stack works together to deliver the correct contract, providing higher confidence during aggressive refactors.
 
-## III. Implementation Guidelines for Coding Agents
-When modifying templates (`template/*.slim`) or stylesheets (`public/stylesheets/*.css`), follow these rules:
+### 3. "Thin Model, Thick Service"
+We avoid adding business logic (like schedule generation or metadata fetching) directly to models. We prefer keeping models as "Anemic" data containers and moving orchestration to **Service Objects** to prevent "God Objects" and circular dependencies.
 
-1.  **Check Usability First:** Never sacrifice a functional feature for a "cleaner" look. If a button or brief descriptive text is necessary for a task or to guide navigation, it stays. Minimalism should never be at the expense of making the site harder to navigate for a user.
-2.  **Verify Clickability:** Ensure that interactive elements (buttons, links) are easily recognizable as such, even in a flat design.
-3.  **Performance Priority:** Minimalism extends to technical efficiency. Minimize large assets and complex CSS selectors to ensure fast load times.
-4.  **Consistency:** Match the existing typography and spacing found in `default.css`. Do not introduce new font families or divergent color schemes without explicit instruction.
-5.  **Intentionality:** Before adding a new UI element, ask: "Does this support the core user task?" If the answer is not a definitive "yes," find a way to achieve the goal using existing elements.
+### 4. Explicit Representation (Presenters)
+We do not use `to_json` overrides in models. A model's data should be separate from its representation. Explicit **Presenters** allow us to provide different "Views" of the same data without polluting the model layer.
+
+### 5. Standardized Failure States
+Every failure should return a predictable JSON payload via the `Presenters::Error` object. This allows clients to implement robust, user-friendly error handling for any UI prototype.
+
+### 6. Defensive Service Logic
+Services are responsible for handling database-level constraints (e.g., `UniqueConstraintViolation`) and ensuring data freshness (e.g., calling `user.reload`) before state-changing operations.
+
+### 7. Module Scoping & Naming
+We favor concise, module-scoped naming (e.g., `Services::Show`) over redundant descriptors (e.g., `Services::ShowService`). The namespace provides sufficient context.
+
+---
+
+## III. Implementation Guidelines
+1.  **Check Usability First:** Never sacrifice a functional feature for a "cleaner" look.
+2.  **Performance Priority:** Minimalism extends to technical efficiency. Minimize large assets and complex CSS selectors.
+3.  **Consistency:** Match existing typography and spacing in `default.css`.
+4.  **Preservation:** Maintain side-by-side compatibility with the `v0.1` namespace; it remains as a legacy reference until `v1` is fully verified.
 
 ## IV. References
 *   [NN/g: Characteristics of Minimalism in Web Design](https://www.nngroup.com/articles/characteristics-minimalism/)
 *   [Silo Night User Journey](./user_journey.md)
+*   [Technical Assumptions](./assumptions.md)

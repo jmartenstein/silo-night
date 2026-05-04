@@ -9,13 +9,14 @@ describe User do
     load File.expand_path('../data/scenarios/smoke.rb', __dir__)
   end
 
-  let(:bot_shows) { build_list(:show, 3) do |show, i|
-    show.name = "show" + i.to_s
-    show.values[:show_order] = i
-  end }
+  let(:bot_shows) do
+    ['show0', 'show1', 'show2'].map do |n|
+      Show.new { |s| s.name = n; s.runtime = '30' }.save
+    end
+  end
 
-  let(:bot1_test) { build :user }
-  let(:bot2_test) { build :user, name: "justin" }
+  let(:bot1_test) { create :user, name: "factory_user" }
+  let(:bot2_test) { create :user, name: "justin_factory" }
 
   let(:seed_test) { User.find(name: "steph") }
   let(:seed_just) { User.find(name: "justin") }
@@ -28,35 +29,26 @@ describe User do
   end
 
   it "modifies the show order" do
-
-    # build a stub of how we expect bot1_test shows_dataset to behave
-    allow(bot1_test).to receive_message_chain(:shows_dataset,
-                                              :all).and_return(bot_shows)
-    list_of_shows = bot1_test.shows_dataset.all
-
-    # confirm that the factory bot has a list of shows
-    expect(list_of_shows).not_to be_empty
+    # Actually add the shows to the user using our service
+    bot_shows.each { |s| Services::UserShow.add_show(bot1_test, s) }
+    
+    list_of_shows = bot1_test.shows
     expect(list_of_shows.length).to eq(3)
 
     first_show = list_of_shows[0]
     second_show = list_of_shows[1]
 
-    # validate that (some of) the shows and orders are correct
-    expect(first_show.name).to eq("show0")
-    expect(second_show.name).to eq("show1")
-    expect(second_show.values[:show_order]).to eq(1)
-
-    # change the show order
+    # change the show order - move first_show to the end (index 2)
     reordered_show_list = bot1_test.set_show_order(first_show, 2)
 
-    # confirm that the new order is correct
+    # confirm that the new order is correct in the returned array
     expect(reordered_show_list[0].name).to eq("show1")
-    expect(reordered_show_list[0].values[:show_order]).to eq(0)
     expect(reordered_show_list[1].name).to eq("show2")
-    expect(reordered_show_list[1].values[:show_order]).to eq(1)
     expect(reordered_show_list[2].name).to eq("show0")
-    expect(reordered_show_list[2].values[:show_order]).to eq(2)
 
+    # CRITICAL: Re-fetch from DB to ensure it was PERSISTED
+    final_list = User.find(id: bot1_test.id).shows
+    expect(final_list.map(&:name)).to eq(["show1", "show2", "show0"])
   end
 
   it "checks for day in schedule" do
@@ -65,6 +57,7 @@ describe User do
   end
 
   it "finds next available slot for bot user" do
+    bot1_test.update(config: { "days" => "m,t,w", "time" => "60" }.to_json)
     next_slot = bot1_test.find_next_available_slot(bot_shows[1])
     expect(next_slot).to eq("Monday")
   end

@@ -101,26 +101,28 @@ class User < Sequel::Model
     load_from_file( "./data/#{name}.json" )
   end
 
-  # TODO: Add code to make sure the show orders after this one are
-  #       also updated
   def set_show_order( show="", order=0 )
 
-    usershow_list = self.shows_dataset.all
+    # reload the association to ensure we have the latest shows
+    self.reload
+    usershow_list = self.shows.dup
 
     # remove the show from the list
     usershow_list.delete(show)
 
-    i = 0
-    while i < order do
-      usershow_list[i].values[:show_order] = i
-      i += 1
-    end
-
-    show.values[:show_order] = order
+    # insert it at the new position
     usershow_list.insert(order, show)
 
-    return usershow_list
+    # persist the new order to the join table
+    usershow_list.each_with_index do |s, idx|
+      next if s.nil? || !s.respond_to?(:id) || s.id.nil?
+      DB[:shows_users].where(user_id: self.id, show_id: s.id).update(show_order: idx)
+    end
 
+    # reload the association to reflect the changes
+    self.reload
+    
+    return self.shows
   end
 
   def is_show_in_schedule?( show="", schedule=nil )

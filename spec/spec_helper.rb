@@ -20,12 +20,19 @@ $LOAD_PATH.unshift File.expand_path('..', __dir__)
 
 require 'database'
 require 'factory_bot'
+require 'rack/test'
+require_relative '../silo_night'
 require 'sequel/extensions/migration'
 require 'webmock/rspec'
 require 'vcr'
 require 'database_cleaner/sequel'
 
-VCR.configure do |config|
+FactoryBot.define do
+  to_create { |instance| instance.save }
+end
+
+VCR.configure do
+ |config|
   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
   config.hook_into :webmock
   config.filter_sensitive_data('<TMDB_API_KEY>') { ENV['TMDB_API_KEY'] }
@@ -35,6 +42,11 @@ end
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
+  config.include Rack::Test::Methods
+
+  def app
+    Sinatra::Application
+  end
 
   config.before(:suite) do
     unless Sequel::Migrator.is_current?(DB, 'db/migrations')
