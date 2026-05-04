@@ -24,7 +24,7 @@ RSpec.describe 'API Poster Path' do
       poster_path: 'https://example.com/suits.jpg'
     })
 
-    post '/api/v0.1/user/testuser/show', { show: 'Suits' }
+    post '/api/v1/user/testuser/shows', { name: 'Suits' }.to_json
     
     expect(last_response).to be_ok
     json = JSON.parse(last_response.body)
