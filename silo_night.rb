@@ -223,6 +223,9 @@ namespace '/api/v1' do
 end
 
 namespace '/api/v0.1' do
+  before do
+    logger.warn "DEPRECATION WARNING: Accessing v0.1 API endpoint: #{request.request_method} #{request.path_info}"
+  end
 
   delete '/user/:name' do
     content_type :json
