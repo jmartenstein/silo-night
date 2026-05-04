@@ -1,7 +1,7 @@
 module Services
   class Search
     def self.search(query)
-      [{ 'title' => 'The Expanse' }]
+      MetadataService.new.search_shows(query)
     end
   end
 end

@@ -145,11 +145,13 @@ namespace '/api/v1' do
     return [404, Presenters::Error.new("User not found", 404).to_h.to_json] unless user
     
     data = JSON.parse(request.body.read, symbolize_names: true)
-    show = Show.find(name: data[:name])
-    return [404, Presenters::Error.new("Show not found", 404).to_h.to_json] unless show
-    
-    Services::UserShow.add_show(user, show)
-    [201, Presenters::Show.new(show).to_h.to_json]
+    if Services::UserShow.add_show(user, data[:name])
+      # Find the show that was added/found
+      show = Show.find(name: data[:name]) || Show.order(Sequel.desc(:id)).first
+      [201, Presenters::Show.new(show).to_h.to_json]
+    else
+      [404, Presenters::Error.new("Show not found", 404).to_h.to_json]
+    end
   end
 
   delete '/user/:name/shows/:show_name' do
@@ -174,7 +176,7 @@ namespace '/api/v1' do
     
     data = JSON.parse(request.body.read, symbolize_names: true)
     if Services::UserShow.reorder(user, params[:show_name], data[:position])
-      return [200, ""]
+      return [200, user.reload.shows.map { |s| Presenters::Show.new(s).to_h }.to_json]
     end
     [404, Presenters::Error.new("Show not found", 404).to_h.to_json]
   end

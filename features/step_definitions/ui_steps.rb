@@ -22,7 +22,7 @@ When('the user searches for and adds {string}') do |name|
   # In Rack::Test, we can access the last_request
   path = $browser.last_request.path_info
   username = path.split('/')[2]
-  $browser.post "/api/v1/user/#{username}/shows", { "name" => name }.to_json
+  $browser.post "/api/v1/user/#{username}/shows", { "name" => name }.to_json, { 'CONTENT_TYPE' => 'application/json' }
 end
 
 Then('the show {string} appears in the {string}') do |name, list_name|
@@ -53,8 +53,8 @@ When('the user drags {string} above {string}') do |show1, show2|
   username = path.split('/')[2]
   
   # We want show1 above show2. Let's assume the list was [show2, show1] and now it's [show1, show2]
-  $browser.patch "/api/v1/user/#{username}/shows/#{show1}", { "position" => 0 }.to_json
-  $browser.patch "/api/v1/user/#{username}/shows/#{show2}", { "position" => 1 }.to_json
+  $browser.patch "/api/v1/user/#{username}/shows/#{show1}", { "position" => 0 }.to_json, { 'CONTENT_TYPE' => 'application/json' }
+  $browser.patch "/api/v1/user/#{username}/shows/#{show2}", { "position" => 1 }.to_json, { 'CONTENT_TYPE' => 'application/json' }
 end
 
 Then('{string} is the first show in the list') do |name|

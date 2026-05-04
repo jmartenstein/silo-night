@@ -63,7 +63,7 @@ When('the user adds {string} \({string}\) to their list via the UI') do |show_na
   # Mimic the UI: Add the show to the database (if it doesn't exist) then associate with user
   # The UI calls POST /api/v0.1/user/:name/show
   Show.find(name: show_name) || Show.create(name: show_name, runtime: runtime)
-  $browser.post "/api/v1/user/#{@current_user_name}/shows", { "name" => show_name }.to_json
+  $browser.post "/api/v1/user/#{@current_user_name}/shows", { "name" => show_name }.to_json, { 'CONTENT_TYPE' => 'application/json' }
 end
 
 When('the user enables {string} but sets time to {string} minutes') do |day, minutes|
@@ -108,7 +108,10 @@ Given(/^"([^"]*)" has "([^"]*)" availability on "([^"]*)"$/) do |username, time,
 end
 
 When('the user generates their final guide') do
+  # First, trigger the generation
   $browser.get "/user/#{@current_user_name}/schedule/generate"
+  # Now fetch the actual JSON schedule directly via v1 API
+  $browser.get "/api/v1/user/#{@current_user_name}/schedule"
 end
 
 Then('{string} should be scheduled for {string}') do |show, day|

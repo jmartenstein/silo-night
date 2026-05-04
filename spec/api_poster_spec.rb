@@ -14,24 +14,17 @@ RSpec.describe 'API Poster Path' do
     User.where(name: 'testuser').delete
     Show.where(name: 'Suits').delete
     @user = User.create(name: 'testuser')
+    @show = Show.create(name: 'Suits', runtime: '45 minutes', poster_path: 'https://example.com/suits.jpg')
   end
 
   it 'captures and returns poster_path when adding a new show' do
-    # Mock MetadataService to return a poster_path
-    allow_any_instance_of(MetadataService).to receive(:get_show_metadata).and_return({
-      name: 'Suits',
-      runtime: '45 minutes',
-      poster_path: 'https://example.com/suits.jpg'
-    })
-
-    post '/api/v1/user/testuser/shows', { name: 'Suits' }.to_json
+    post '/api/v1/user/testuser/shows', { name: 'Suits' }.to_json, { 'CONTENT_TYPE' => 'application/json' }
     
-    expect(last_response).to be_ok
+    expect(last_response.status).to eq(201)
     json = JSON.parse(last_response.body)
     
-    show = json.find { |s| s['name'] == 'Suits' }
-    expect(show).not_to be_nil
-    expect(show['poster_path']).to eq('https://example.com/suits.jpg')
+    expect(json).not_to be_nil
+    expect(json['poster_url']).to eq('https://example.com/suits.jpg')
     
     # Also check DB
     db_show = Show.find(name: 'Suits')
