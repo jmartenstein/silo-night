@@ -5,7 +5,14 @@ module Presenters
     end
 
     def to_h
-      @results.map { |r| { 'name' => r['title'] } }
+      @results.map do |r|
+        {
+          'name' => r[:name],
+          'year' => r[:year],
+          'genres' => r[:genres],
+          'poster_path' => r[:poster_path]
+        }
+      end
     end
 
     def to_json(*_args)
