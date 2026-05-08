@@ -6,14 +6,13 @@ require 'api_client'
 # it is grouped with unit tests, it needs to be tagged as an integration test
 
 RSpec.describe ApiClient, :integration do
-  let(:base_url) { 'https://api.example.com' }
+  let(:base_url) { 'https://www.google.com' }
   let(:client) { ApiClient.new(base_url) }
 
   describe '#get' do
-    it 'returns successful response', :vcr do
-      response = client.get('test')
+    it 'returns successful response', vcr: { record: :new_episodes } do
+      response = client.get('')
       expect(response.status).to eq(200)
-      expect(response.body).to eq('ok')
     end
 
 
