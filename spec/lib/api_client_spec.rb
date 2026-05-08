@@ -1,6 +1,10 @@
 require 'spec_helper'
 require 'api_client'
 
+# this file manages a suite of integration tests, which tests the API Client's
+# resiliency with interacting with external services (such as TMDB); even though
+# it is grouped with unit tests, it needs to be tagged as an integration test
+
 RSpec.describe ApiClient do
   let(:base_url) { 'https://api.example.com' }
   let(:client) { ApiClient.new(base_url) }
