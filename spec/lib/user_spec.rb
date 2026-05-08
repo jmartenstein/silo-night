@@ -1,12 +1,11 @@
 require 'user'
-require 'rspec'
 require 'spec_helper'
 
-describe User do
+describe User, :unit do
 
   before(:each) do
     # Load the smoke scenario for every test to ensure seeded users are present
-    load File.expand_path('../data/scenarios/smoke.rb', __dir__)
+    load File.expand_path('../../data/scenarios/smoke.rb', __dir__)
   end
 
   let(:bot_shows) do

@@ -5,19 +5,17 @@ require 'api_client'
 # resiliency with interacting with external services (such as TMDB); even though
 # it is grouped with unit tests, it needs to be tagged as an integration test
 
-RSpec.describe ApiClient do
+RSpec.describe ApiClient, :integration do
   let(:base_url) { 'https://api.example.com' }
   let(:client) { ApiClient.new(base_url) }
 
   describe '#get' do
-    it 'returns successful response' do
-      stub_request(:get, "#{base_url}/test")
-        .to_return(status: 200, body: 'ok')
-
+    it 'returns successful response', :vcr do
       response = client.get('test')
       expect(response.status).to eq(200)
       expect(response.body).to eq('ok')
     end
+
 
     it 'retries on 429' do
       # Need to allow sleep to be mocked to avoid slow tests

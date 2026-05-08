@@ -1,7 +1,7 @@
 require 'show'
 require 'rspec'
 
-describe Show do
+describe Show, :unit do
 
   let(:suits)    {{ "name" => "Suits",    "runtime" => "42 minutes"    }}
   let(:platonic) {{ "name" => "Platonic", "runtime" => "28-32 minutes" }}
@@ -28,7 +28,7 @@ describe Show do
 
 end
 
-describe Shows do
+describe Shows, :unit do
 
   let(:shows)    { '[ { "name": "foo", "runtime": "12 minutes", "poster_path": "foo.jpg" } ]' }
   let(:filename) { "spec/support/shows.json" }
