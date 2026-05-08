@@ -44,6 +44,11 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Rack::Test::Methods
 
+  # Allow running only unit tests: RSpec.configure { |c| c.filter_run_including :unit }
+  config.define_derived_metadata(file_path: %r{spec/lib/}) do |metadata|
+    metadata[:type] = :unit
+  end
+
   def app
     Sinatra::Application
   end
