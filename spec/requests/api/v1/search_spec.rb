@@ -9,7 +9,7 @@ RSpec.describe 'API v1 Search', type: :request do
     Sinatra::Application
   end
 
-  it 'returns a 200 OK and formatted search results', failing: true do
+  it 'returns a 200 OK and formatted search results', vcr: { record: :new_episodes } do
     get '/api/v1/search', { q: 'The Expanse' }
 
     expect(last_response.status).to eq(200)

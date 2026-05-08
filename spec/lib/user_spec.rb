@@ -69,7 +69,7 @@ describe User do
     expect(actual).to eq(25)
   end
 
-  it "generates populated schedule from first seeded user", failing: true do
+  it "generates populated schedule from first seeded user" do
 
     seed_just.generate_schedule()
     weekday = "Tuesday"
