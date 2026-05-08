@@ -1,7 +1,7 @@
 require 'show_metadata'
 require 'spec_helper'
 
-describe ShowMetadata, :unit do
+describe ShowMetadata do
   before(:each) do
     # Clear the table before each test
     ShowMetadata.dataset.delete

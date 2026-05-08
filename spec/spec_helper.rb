@@ -44,9 +44,14 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Rack::Test::Methods
 
-  # Allow running only unit tests: RSpec.configure { |c| c.filter_run_including :unit }
-  config.define_derived_metadata(file_path: %r{spec/lib/}) do |metadata|
+  # allow tags for unit tests
+  config.define_derived_metadata(file_path: %r{spec/(services|lib)/}) do |metadata|
     metadata[:type] = :unit
+  end
+
+  # allow tags for integration tests
+  config.define_derived_metadata(file_path: %r{spec/(integration|adapters|requests)/}) do |metadata|
+    metadata[:type] = :integration
   end
 
   def app

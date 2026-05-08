@@ -1,7 +1,7 @@
 require 'user'
 require 'spec_helper'
 
-describe User, :unit do
+describe User do
 
   before(:each) do
     # Load the smoke scenario for every test to ensure seeded users are present
