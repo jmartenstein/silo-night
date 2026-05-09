@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.tvmaze.com/shows/81
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.24.0 (Ubuntu)
+      Date:
+      - Sat, 09 May 2026 00:27:21 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=3600
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":81,"url":"https://www.tvmaze.com/shows/81/criminal-minds","name":"Criminal
+        Minds","type":"Scripted","language":"English","genres":["Drama","Crime","Thriller"],"status":"Running","runtime":null,"averageRuntime":60,"premiered":"2005-09-22","ended":null,"officialSite":"https://www.paramountplus.com/shows/criminal_minds/","schedule":{"time":"","days":["Thursday"]},"rating":{"average":8.1},"weight":100,"network":null,"webChannel":{"id":107,"name":"Paramount+","country":null,"officialSite":"https://www.paramountplus.com/"},"dvdCountry":null,"externals":{"tvrage":3171,"thetvdb":75710,"imdb":"tt0452046"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/0/571.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/0/571.jpg"},"summary":"<p><b>Criminal
+        Minds</b> revolves around an elite team of FBI profilers who analyze the country''s
+        most twisted criminal minds, anticipating their next moves before they strike
+        again.</p>","updated":1778181703,"_links":{"self":{"href":"https://api.tvmaze.com/shows/81"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/3231475","name":"The
+        Disciple"},"nextepisode":{"href":"https://api.tvmaze.com/episodes/3578496","name":"Now
+        and Then"}}}'
+  recorded_at: Sat, 09 May 2026 00:27:22 GMT
+recorded_with: VCR 6.2.0
