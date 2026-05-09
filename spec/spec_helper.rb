@@ -22,10 +22,12 @@ $LOAD_PATH.unshift File.expand_path('..', __dir__)
 require 'database'
 require 'factory_bot'
 require 'rack/test'
+
 require_relative '../silo_night'
+require_relative 'support/vcr'
+
 require 'sequel/extensions/migration'
 require 'webmock/rspec'
-require 'vcr'
 require 'database_cleaner/sequel'
 require 'dotenv'
 
@@ -33,15 +35,6 @@ Dotenv.load('.env.test')
 
 FactoryBot.define do
   to_create { |instance| instance.save }
-end
-
-VCR.configure do
- |config|
-  config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
-  config.hook_into :webmock
-  config.filter_sensitive_data('<TMDB_API_KEY>') { ENV['TMDB_API_KEY'] }
-  config.filter_sensitive_data('<TVMAZE_API_KEY>') { ENV['TVMAZE_API_KEY'] }
-  config.configure_rspec_metadata!
 end
 
 RSpec.configure do |config|
