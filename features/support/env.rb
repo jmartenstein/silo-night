@@ -1,5 +1,10 @@
 ENV['RACK_ENV'] = 'test'
 require 'rack/test'
+require 'factory_bot'
+FactoryBot.define do
+  to_create { |instance| instance.save }
+end
+FactoryBot.find_definitions
 $LOAD_PATH.unshift File.expand_path('../../lib', __dir__)
 require 'database'
 require 'sequel/extensions/migration'
