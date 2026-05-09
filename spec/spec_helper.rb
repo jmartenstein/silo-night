@@ -1,4 +1,5 @@
 require 'cgi'
+
 # Fallback for older CGI/VCR compatibility issues
 unless CGI.respond_to?(:parse)
   def CGI.parse(query)
@@ -26,6 +27,9 @@ require 'sequel/extensions/migration'
 require 'webmock/rspec'
 require 'vcr'
 require 'database_cleaner/sequel'
+require 'dotenv'
+
+Dotenv.load('.env.test')
 
 FactoryBot.define do
   to_create { |instance| instance.save }

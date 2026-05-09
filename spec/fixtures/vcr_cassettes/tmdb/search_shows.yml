@@ -1,0 +1,67 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/search/tv?api_key=<TMDB_API_KEY>&query=Breaking%20Bad
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 09 May 2026 00:15:30 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=21644
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - 2dc1543c289f86ed3c3c34b98d2344b0bb525d41acffb4b06656327a905cd75c
+      X-Memc-Age:
+      - '6662'
+      X-Memc-Expires:
+      - '21644'
+      X-Az:
+      - us-east-1c
+      X-Task-Id:
+      - 763e38d36bbf4b63b04894a02bdf2517
+      Etag:
+      - W/"0346b4b6d92a2e2be6f46e0e2c6638da"
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 25613905b0a903d6371e53d7485e0cb0.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - JFK50-P14
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - kTrPcWp-e7yHj8ly1-9Qv_5Wv9hh-Jx7WZ1ZPUKLUe8Sih--IR5i5A==
+      Age:
+      - '310'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJwYWdlIjoxLCJyZXN1bHRzIjpbeyJhZHVsdCI6ZmFsc2UsImJhY2tkcm9wX3BhdGgiOiIvdHNSeTYzTXU1Y3U4ZXRMMVg3Wkx5ZjdVUDFNLmpwZyIsImdlbnJlX2lkcyI6WzE4LDgwXSwiaWQiOjEzOTYsIm9yaWdpbl9jb3VudHJ5IjpbIlVTIl0sIm9yaWdpbmFsX2xhbmd1YWdlIjoiZW4iLCJvcmlnaW5hbF9uYW1lIjoiQnJlYWtpbmcgQmFkIiwib3ZlcnZpZXciOiJXYWx0ZXIgV2hpdGUsIGEgTmV3IE1leGljbyBjaGVtaXN0cnkgdGVhY2hlciwgaXMgZGlhZ25vc2VkIHdpdGggU3RhZ2UgSUlJIGNhbmNlciBhbmQgZ2l2ZW4gYSBwcm9nbm9zaXMgb2Ygb25seSB0d28geWVhcnMgbGVmdCB0byBsaXZlLiBIZSBiZWNvbWVzIGZpbGxlZCB3aXRoIGEgc2Vuc2Ugb2YgZmVhcmxlc3NuZXNzIGFuZCBhbiB1bnJlbGVudGluZyBkZXNpcmUgdG8gc2VjdXJlIGhpcyBmYW1pbHkncyBmaW5hbmNpYWwgZnV0dXJlIGF0IGFueSBjb3N0IGFzIGhlIGVudGVycyB0aGUgZGFuZ2Vyb3VzIHdvcmxkIG9mIGRydWdzIGFuZCBjcmltZS4iLCJwb3B1bGFyaXR5IjoxMTkuNDIwNiwicG9zdGVyX3BhdGgiOiIvenRrVVFGTGxDMTlDQ01ZSFc5bzF6V2hKUk5xLmpwZyIsImZpcnN0X2Fpcl9kYXRlIjoiMjAwOC0wMS0yMCIsInNvZnRjb3JlIjpmYWxzZSwibmFtZSI6IkJyZWFraW5nIEJhZCIsInZvdGVfYXZlcmFnZSI6OC45NDIsInZvdGVfY291bnQiOjE3NjUyfSx7ImFkdWx0IjpmYWxzZSwiYmFja2Ryb3BfcGF0aCI6bnVsbCwiZ2VucmVfaWRzIjpbMzUsODAsMThdLCJpZCI6Mjk3OTk3LCJvcmlnaW5fY291bnRyeSI6WyJVUyJdLCJvcmlnaW5hbF9sYW5ndWFnZSI6ImVuIiwib3JpZ2luYWxfbmFtZSI6IkJyZWFraW5nIEJhZDogT3JpZ2luYWwgTWluaXNvZGVzIiwib3ZlcnZpZXciOiJCcmVha2luZyBCYWQ6IE9yaWdpbmFsIE1pbmlzb2RlcyBpcyBhIHdlYiBzZXJpZXMgYmFzZWQgb24gdGhlIHRlbGV2aXNpb24gc2VyaWVzIEJyZWFraW5nIEJhZC4gQSB0b3RhbCBvZiAxNyBcIm1pbmlzb2Rlc1wiLCB3aGljaCBhcmUgbW9yZSBjb21lZHktb3JpZW50ZWQgdGhhbiBtb3N0IGZ1bGwgZXBpc29kZXMsIHdlcmUgcmVsZWFzZWQgb3ZlciB0aGUgY291cnNlIG9mIHRocmVlIHllYXJzLiIsInBvcHVsYXJpdHkiOjAuMTU3NSwicG9zdGVyX3BhdGgiOiIvZkZOYlJVbGVKUTlHa0NmSnVuVTR5WHVOYm1hLmpwZyIsImZpcnN0X2Fpcl9kYXRlIjoiMjAwOS0wMi0xNyIsInNvZnRjb3JlIjpmYWxzZSwibmFtZSI6IkJyZWFraW5nIEJhZDogT3JpZ2luYWwgTWluaXNvZGVzIiwidm90ZV9hdmVyYWdlIjo2LjAsInZvdGVfY291bnQiOjF9LHsiYWR1bHQiOmZhbHNlLCJiYWNrZHJvcF9wYXRoIjpudWxsLCJnZW5yZV9pZHMiOlsxOCw5NjQ4XSwiaWQiOjIzMjUzMywib3JpZ2luX2NvdW50cnkiOlsiQ04iXSwib3JpZ2luYWxfbGFuZ3VhZ2UiOiJ6aCIsIm9yaWdpbmFsX25hbWUiOiLnu53lkb3ljabluIgiLCJvdmVydmlldyI6IkR1cmluZyB0aGUgTWluZyBEeW5hc3R5LCB0aGUgZW1wZXJvciBzZXRzIG91dCBmb3IgWGluamlhbmcgdG8gYWR2b2NhdGUgcGVhY2UuIFNob3J0bHkgYWZ0ZXIgaGlzIGFic2VuY2UsIG15c3RlcmlvdXMgb2NjdXJyZW5jZXMgcGxhZ3VlIHRoZSBwYWxhY2UgYW5kIERhb2lzdCBUaWFuIE11IFRvbmcgaXMgY2FsbGVkIHRvIGNhc3Qgb3V0IGRlbW9ucy4gVG9nZXRoZXIgd2l0aCBldW51Y2ggWGlhbyBNbyBHdSBhbmQgSmluIFlpIFdlaSBsZWFkZXIgWXVuIFhpYW5nIFJvbmcsIE11IFRvbmcgdW5jb3ZlcnMgZGVlcCBkYXJrIHNlY3JldHMgYW5kIGNvbnNwaXJhY2llcyBoaWRkZW4gd2l0aGluIGNvbnNwaXJhY2llcy4iLCJwb3B1bGFyaXR5IjowLjM3NzgsInBvc3Rlcl9wYXRoIjoiL244ZEtrYlBrZEVQRkNGbWpOdnJVbDFnVUFZci5qcGciLCJmaXJzdF9haXJfZGF0ZSI6IjIwMTYtMDQtMTEiLCJzb2Z0Y29yZSI6ZmFsc2UsIm5hbWUiOiJCcmVha2luZyBCYWQgRm9ydHVuZSBUZWxsZXIiLCJ2b3RlX2F2ZXJhZ2UiOjcuNSwidm90ZV9jb3VudCI6MX0seyJhZHVsdCI6ZmFsc2UsImJhY2tkcm9wX3BhdGgiOm51bGwsImdlbnJlX2lkcyI6W10sImlkIjozMDgxOTcsIm9yaWdpbl9jb3VudHJ5IjpbIlVTIl0sIm9yaWdpbmFsX2xhbmd1YWdlIjoiZW4iLCJvcmlnaW5hbF9uYW1lIjoiQnJlYWtpbmcgQmFkIC0gRTAxLWRqIHNtaXRoIiwib3ZlcnZpZXciOiJXYWx0ZXIgV2hpdGUgaXMgYSBicmlsbGlhbnQgYnV0IHVuZnVsZmlsbGVkIGNoZW1pc3Qgd2hvc2UgbGlmZSBoYXMgYmVjb21lIGEgcXVpZXQgdHJhZ2VkeSBvZiBtaXNzZWQgb3Bwb3J0dW5pdGllcyBhbmQgZmluYW5jaWFsIHN0cmFpbi4gV2hlbiBoZSBpcyBkaWFnbm9zZWQgd2l0aCBpbm9wZXJhYmxlIGx1bmcgY2FuY2VyLCBoZSBmZWFycyBsZWF2aW5nIGhpcyBmYW1pbHkgZGVzdGl0dXRlLiBJbiBhIG1vbWVudCBvZiBkZXNwZXJhdGUgaW5zcGlyYXRpb24sIGhlIHVzZXMgaGlzIGV4cGVydGlzZSBub3QgZm9yIGdvb2QsIGJ1dCBmb3IgcHJvZml0LiBIZSBlbmxpc3RzIGEgc21hbGwtdGltZSBleC1zdHVkZW50LCBKZXNzZSBQaW5rbWFuLCBhcyBoaXMgc3RyZWV0d2lzZSBwYXJ0bmVyIHRvIGJ1aWxkIGEgY3J5c3RhbCBtZXRoIGVtcGlyZS4gVGhpcyBtb3ZpZSBpcyBsb2NhbGx5IHRyYW5zbGF0ZWQgYnkgREogU21pdGgiLCJwb3B1bGFyaXR5IjowLjA4ODQsInBvc3Rlcl9wYXRoIjpudWxsLCJmaXJzdF9haXJfZGF0ZSI6IiIsInNvZnRjb3JlIjpmYWxzZSwibmFtZSI6IkJyZWFraW5nIEJhZCAtIEUwMS1kaiBzbWl0aCIsInZvdGVfYXZlcmFnZSI6MC4wLCJ2b3RlX2NvdW50IjowfSx7ImFkdWx0IjpmYWxzZSwiYmFja2Ryb3BfcGF0aCI6Ii9wWGRrSnZoQmNQZjhvRWo4MzFBU01rTFBYS1QuanBnIiwiZ2VucmVfaWRzIjpbMTYsODAsMzUsMTA3NTFdLCJpZCI6MzAyNTQwLCJvcmlnaW5fY291bnRyeSI6WyJVUyJdLCJvcmlnaW5hbF9sYW5ndWFnZSI6ImVuIiwib3JpZ2luYWxfbmFtZSI6IlRoZSBCYWQgR3V5czogVGhlIFNlcmllcyIsIm92ZXJ2aWV3IjoiSG93IGRpZCB0aGUgQmFkIEd1eXMgYnJlYWsgaW50byB0aGUgYmFkIGd1eSBidXNpbmVzcyBpbiB0aGUgZmlyc3QgcGxhY2U/IEZpbmQgb3V0IGluIHRoaXMgaGlsYXJpb3VzIHByZXF1ZWwgc2VyaWVzIHNldCBiZWZvcmUgdGhlIGhpdCBmaWxtcy4iLCJwb3B1bGFyaXR5Ijo5Ljk1MzksInBvc3Rlcl9wYXRoIjoiLzFGMTlCRml2UGMyTjNzWEo0NDYxY1dzckszMy5qcGciLCJmaXJzdF9haXJfZGF0ZSI6IjIwMjUtMTEtMDYiLCJzb2Z0Y29yZSI6ZmFsc2UsIm5hbWUiOiJUaGUgQmFkIEd1eXM6IFRoZSBTZXJpZXMiLCJ2b3RlX2F2ZXJhZ2UiOjYuNzAzLCJ2b3RlX2NvdW50IjozN31dLCJ0b3RhbF9wYWdlcyI6MSwidG90YWxfcmVzdWx0cyI6NX0=
+  recorded_at: Sat, 09 May 2026 00:20:40 GMT
+recorded_with: VCR 6.2.0
