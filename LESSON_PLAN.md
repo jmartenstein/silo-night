@@ -1,6 +1,6 @@
 # Junior Developer Tutorial: Building the Test Pyramid
 
-Welcome! This guide is designed to take you through the process of refactoring a legacy test suite into a modern, reliable "Test Pyramid." You will learn about infrastructure isolation, deterministic API testing, and standardized data setup.
+Welcome! This guide is designed to take you through the process of refactoring a legacy test suite into a modern, reliable "Test Pyramid." You will learn about infrastructure isolation, deterministic API testing, and the crucial distinction between **Unit** and **Integration** tests.
 
 ---
 
@@ -25,41 +25,59 @@ Welcome! This guide is designed to take you through the process of refactoring a
 
 ---
 
-## Module 2: The "Identity Crisis" (Tagging)
+## Module 2: The "Identity Crisis" (Tagging & Boundaries)
 
-### Lesson: Defining Boundaries
-**Why?** We want to run our "Unit" tests (logic only) in seconds. If a unit test hits a database, it's not a unit test—it's an "Integration" test.
+### Lesson: Logic vs. Orchestration
+**Why?** Services are often "hybrids." They do two things:
+1.  **Orchestration (Wiring)**: "Call API A, then call API B."
+2.  **Transformation (Logic)**: "Take data from A and B, merge it, and format it."
 
-### Step 2.1: Correct the Auto-Tagging
+We want to test **Logic** with lightning-fast **Unit Tests** (using mocks). We want to test **Wiring** with **Integration Tests** (using VCR).
+
+### Step 2.1: Set the Default Tags
 1.  **Open** `spec/spec_helper.rb`.
-2.  **Locate** the `config.define_derived_metadata` blocks.
-3.  **Change the Regex:**
-    *   Currently: `spec/(services|lib)/` is tagged `:unit`.
-    *   **Change to:** Only `spec/lib/` and `spec/presenters/` should be `:unit`.
-    *   **Add:** `spec/services/` should now be tagged `:integration`.
+2.  **Update** the auto-tagging logic:
+    *   Keep `spec/lib/` and `spec/presenters/` as `:unit`.
+    *   Tag `spec/adapters/` and `spec/requests/` as `:integration`.
+    *   *Note:* We will manually tag services because they are hybrids!
+
+### Step 2.2: Identify the Split
+Look at `lib/metadata_service.rb`. The method `unify_metadata` is pure logic—it doesn't need a real API. But `get_show_metadata` is wiring—it needs to know the adapters were called.
 
 **[Homework Assignment #2]**
-- Run `rake test:unit`. 
-- **Observation:** Notice that `MetadataService` no longer runs. 
-- **Question:** Explain in one sentence why a "Service" that talks to a database is an integration test, not a unit test.
+- Find the `calculate_runtime` method in `MetadataService`. 
+- **Question:** If we want to test that it correctly handles 10 different weird edge cases for runtimes, should we use a Unit test with mocks or an Integration test with VCR? Why?
 
 ---
 
-## Module 3: Realism over Mocks (MetadataService)
+## Module 3: Implementing the Hybrid Split
 
-### Lesson: VCR vs. Manual Doubles
-**Why?** Manual `double('Adapter')` calls are "brittle." They assume we know exactly how the adapter works. VCR records *real* interactions, so if the API changes, our tests will actually fail (which is good!).
+### Lesson: mocks for Logic, VCR for Wiring
+**Why?** If we use VCR for every edge case, we'll have 50 slow cassettes. If we use mocks for everything, we might not notice if the real API changes. We need both.
 
-### Step 3.1: Refactor the Spec
+### Step 3.1: Refactor the Unit Spec
 1.  **Open** `spec/services/metadata_service_spec.rb`.
-2.  **Remove** the `double` calls for `tmdb_adapter` and `tvmaze_adapter`.
-3.  **Replace** them with real instances: `TmdbAdapter.new(ENV['TMDB_API_KEY'])`.
-4.  **Add the VCR tag** to the top-level `describe` or individual `it` blocks: `, vcr: { cassette_name: 'metadata_service/unified_lookup' }`.
+2.  **Add** the tag `:unit` to the top-level `RSpec.describe`.
+3.  **Upgrade Mocks**: Replace `double('TmdbAdapter')` with `instance_double(TmdbAdapter)`.
+    *   *Junior Tip:* `instance_double` is safer. It will fail if you try to mock a method that doesn't actually exist on the real class!
+
+### Step 3.2: Create the Integration Spec
+1.  **Create** `spec/services/metadata_service_integration_spec.rb`.
+2.  **Add** the tag `:integration` and use **real** adapters:
+    ```ruby
+    RSpec.describe MetadataService, :integration do
+      let(:service) { MetadataService.new(TmdbAdapter.new, TvmazeAdapter.new) }
+      
+      it 'successfully fetches and merges data', vcr: { cassette_name: 'metadata_service/happy_path' } do
+        result = service.get_show_metadata('Breaking Bad')
+        expect(result[:name]).to eq('Breaking Bad')
+      end
+    end
+    ```
 
 **[Homework Assignment #3]**
-- Delete the file `spec/fixtures/vcr_cassettes/metadata_service/unified_lookup.yml` (if it exists).
-- Run the spec. Watch it record a *new* cassette.
-- **Challenge:** Look inside the `.yml` file. Can you see the real JSON response from the TV API?
+- Run `rake test:unit`. How many milliseconds did the `MetadataService` unit tests take?
+- Run `rake test:integration`. Notice how much slower it is because it's "talking" (via VCR) to the external world.
 
 ---
 
@@ -85,6 +103,6 @@ When you think you're done, run the full suite:
 `rake test`
 
 **Success Criteria:**
-1. `rake test:unit` runs only pure logic tests.
-2. `rake test:integration` uses VCR for all service/adapter tests.
+1. `rake test:unit` contains the logic edge-cases for `MetadataService` and runs in < 1 second.
+2. `rake test:integration` contains one or two "Happy Path" tests for `MetadataService` using real adapters and VCR.
 3. `rake test:cucumber` passes using FactoryBot helpers.
