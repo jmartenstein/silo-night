@@ -1,77 +1,90 @@
-# Phase 2: Restructuring for the Test Pyramid
+# Junior Developer Tutorial: Building the Test Pyramid
 
-Welcome to Phase 2 of our test suite overhaul! As a senior developer, my goal is to help you understand not just *what* we are changing, but *why* these patterns are industry standards.
-
-## The Big Picture: The Test Pyramid
-Our goal is a "Test Pyramid" with three tiers:
-1.  **Unit Tests**: Hundreds of them. Fast, isolated, and testing logic.
-2.  **Integration Tests**: Dozens of them. Testing how our code talks to the DB and APIs.
-3.  **E2E (Cucumber)**: A few critical user journeys. Testing the whole system.
+Welcome! This guide is designed to take you through the process of refactoring a legacy test suite into a modern, reliable "Test Pyramid." You will learn about infrastructure isolation, deterministic API testing, and standardized data setup.
 
 ---
 
-## Step 1: Infrastructure Cleanup (The Foundation)
+## Module 1: Infrastructure & Isolation
 
-### Why?
-Good tests require a clean environment. Right now, our configuration is "leaky"—too much is crammed into `spec_helper.rb`. By modularizing, we make the suite easier to maintain.
+### Lesson: Modular Configuration
+**Why?** A monolithic `spec_helper.rb` becomes a "junk drawer." We want to move specific tool configurations (like VCR) into their own files in `spec/support/`.
 
-### How?
-1.  **Move VCR Config**: Create `spec/support/vcr.rb`.
-    *   *Why?* VCR records real network calls so we don't hit APIs every time (which is slow and expensive). Keeping its config separate makes it clear where to manage API keys and recording settings.
-2.  **Enable FactoryBot in Cucumber**: Update `features/support/env.rb`.
-    *   *Why?* We want to use the same "factories" (blueprints) for data in both RSpec and Cucumber. This ensures a "Single Source of Truth" for what a `User` or `Show` looks like.
+### Step 1.1: Extract VCR Configuration
+1.  **Create** a new file at `spec/support/vcr.rb`.
+2.  **Move** the `VCR.configure` block from `spec/spec_helper.rb` into this new file.
+3.  **Update** `spec/spec_helper.rb` to require the new support file: `require_relative 'support/vcr'`.
 
----
+### Step 1.2: Unify FactoryBot
+1.  **Open** `features/support/env.rb`.
+2.  **Add** `World(FactoryBot::Syntax::Methods)` to the bottom of the file.
+    *   *Junior Tip:* `World` makes the FactoryBot methods (like `create` and `build`) available directly inside your Cucumber steps.
 
-## Step 2: Fixing the "Identity Crisis" (Tagging)
-
-### Why?
-In `spec_helper.rb`, we have logic that automatically tags tests as `:unit` or `:integration`. Currently, it's marking `spec/services/` as unit tests. This is wrong. Services hit the database and external APIs—that's an **integration** test.
-
-### How?
-Update the regex in `spec_helper.rb`:
--   `spec/lib/` and `spec/presenters/` -> `:unit`
--   `spec/services/`, `spec/adapters/`, and `spec/requests/` -> `:integration`
+**[Homework Assignment #1]**
+- Run `bundle exec rspec spec/adapters/tmdb_adapter_spec.rb`. 
+- **Verification:** Did it pass? If not, check if `vcr.rb` is being loaded correctly. Why is it important that `tmdb_adapter_spec.rb` still works even after we moved the config?
 
 ---
 
-## Step 3: Refactoring MetadataService (The Meat)
+## Module 2: The "Identity Crisis" (Tagging)
 
-### Why?
-The `MetadataService` is currently tested with "Manual Doubles" (mocks).
-*   *The Problem:* If the TMDB API changes, our mocks won't know! The tests will pass, but the app will break in production.
-*   *The Fix:* Use **Integration Testing with VCR**. We will use the *real* adapters and have VCR record the *real* response once. This gives us the speed of a mock with the accuracy of a real call.
+### Lesson: Defining Boundaries
+**Why?** We want to run our "Unit" tests (logic only) in seconds. If a unit test hits a database, it's not a unit test—it's an "Integration" test.
 
-### How?
-1.  Remove `double('TmdbAdapter')`.
-2.  Initialize the service with `TmdbAdapter.new` and `TvmazeAdapter.new`.
-3.  Wrap the tests in `vcr: { cassette_name: '...' }` blocks.
+### Step 2.1: Correct the Auto-Tagging
+1.  **Open** `spec/spec_helper.rb`.
+2.  **Locate** the `config.define_derived_metadata` blocks.
+3.  **Change the Regex:**
+    *   Currently: `spec/(services|lib)/` is tagged `:unit`.
+    *   **Change to:** Only `spec/lib/` and `spec/presenters/` should be `:unit`.
+    *   **Add:** `spec/services/` should now be tagged `:integration`.
 
----
-
-## Step 4: Cucumber Step Cleanup
-
-### Why?
-Our Cucumber steps currently do things like `User.create(...)`.
-*   *The Problem:* If we add a mandatory `email` field to the User model tomorrow, we have to find every single step definition and update it.
-*   *The Fix:* Use `FactoryBot.create(:user)`. The factory handles the defaults, so we only specify the fields we care about for that specific test.
-
-### How?
-Go through `features/step_definitions/` and replace manual `Model.create` calls with FactoryBot syntax.
+**[Homework Assignment #2]**
+- Run `rake test:unit`. 
+- **Observation:** Notice that `MetadataService` no longer runs. 
+- **Question:** Explain in one sentence why a "Service" that talks to a database is an integration test, not a unit test.
 
 ---
 
-## Step 5: Verification
+## Module 3: Realism over Mocks (MetadataService)
 
-### Why?
-A refactor isn't finished until the suite is green and the categories are separate.
+### Lesson: VCR vs. Manual Doubles
+**Why?** Manual `double('Adapter')` calls are "brittle." They assume we know exactly how the adapter works. VCR records *real* interactions, so if the API changes, our tests will actually fail (which is good!).
 
-### How?
-Run the targeted rake tasks:
--   `rake test:unit` (Should be lightning fast)
--   `rake test:integration` (Should use VCR cassettes)
--   `rake test:cucumber` (Should pass with the new factory logic)
+### Step 3.1: Refactor the Spec
+1.  **Open** `spec/services/metadata_service_spec.rb`.
+2.  **Remove** the `double` calls for `tmdb_adapter` and `tvmaze_adapter`.
+3.  **Replace** them with real instances: `TmdbAdapter.new(ENV['TMDB_API_KEY'])`.
+4.  **Add the VCR tag** to the top-level `describe` or individual `it` blocks: `, vcr: { cassette_name: 'metadata_service/unified_lookup' }`.
+
+**[Homework Assignment #3]**
+- Delete the file `spec/fixtures/vcr_cassettes/metadata_service/unified_lookup.yml` (if it exists).
+- Run the spec. Watch it record a *new* cassette.
+- **Challenge:** Look inside the `.yml` file. Can you see the real JSON response from the TV API?
 
 ---
 
-Happy coding! If you get stuck, remember: **Unit tests for logic, Integration for boundaries.**
+## Module 4: Standardizing Data (Cucumber)
+
+### Lesson: Factories > Manual Creation
+**Why?** Calling `User.create` in every step makes your tests hard to maintain. If the database schema changes, you have to fix it in 50 places. Factories centralize this.
+
+### Step 4.1: Update User Steps
+1.  **Open** `features/step_definitions/user_steps.rb`.
+2.  **Find** the line: `User.find(name: username) || User.create(name: username, ...)`
+3.  **Replace with:** `User.find(name: username) || create(:user, name: username)`
+
+**[Homework Assignment #4]**
+- Open `spec/factories/users.rb`.
+- Add a "trait" to the user factory called `:admin`.
+- **Task:** Create a new Cucumber step in a new file that uses `create(:user, :admin)`.
+
+---
+
+## Final Exam: Verification
+When you think you're done, run the full suite:
+`rake test`
+
+**Success Criteria:**
+1. `rake test:unit` runs only pure logic tests.
+2. `rake test:integration` uses VCR for all service/adapter tests.
+3. `rake test:cucumber` passes using FactoryBot helpers.
