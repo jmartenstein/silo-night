@@ -42,7 +42,7 @@ RSpec.configure do |config|
   config.include Rack::Test::Methods
 
   # allow tags for unit tests
-  config.define_derived_metadata(file_path: %r{spec/(services|lib)/}) do |metadata|
+  config.define_derived_metadata(file_path: %r{spec/(presenters|lib)/}) do |metadata|
     metadata[:type] = :unit
   end
 
