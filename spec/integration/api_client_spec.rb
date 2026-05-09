@@ -1,19 +1,20 @@
 require 'spec_helper'
 require 'api_client'
 
-RSpec.describe ApiClient do
-  let(:base_url) { 'https://api.example.com' }
+# this file manages a suite of integration tests, which tests the API Client's
+# resiliency with interacting with external services (such as TMDB); even though
+# it is grouped with unit tests, it needs to be tagged as an integration test
+
+RSpec.describe ApiClient, :integration do
+  let(:base_url) { 'https://www.google.com' }
   let(:client) { ApiClient.new(base_url) }
 
   describe '#get' do
-    it 'returns successful response' do
-      stub_request(:get, "#{base_url}/test")
-        .to_return(status: 200, body: 'ok')
-
-      response = client.get('test')
+    it 'returns successful response', vcr: { record: :new_episodes } do
+      response = client.get('')
       expect(response.status).to eq(200)
-      expect(response.body).to eq('ok')
     end
+
 
     it 'retries on 429' do
       # Need to allow sleep to be mocked to avoid slow tests

@@ -4,7 +4,7 @@ require 'presenters/show'
 RSpec.describe Presenters::Show do
   # We use a "double" instead of a real database model.
   # This makes the test fast and independent!
-  let(:show) { double('Show', id: 1, name: 'Test Show', runtime: '30 mins', uri_encoded: 'test-show', poster_path: '/test.jpg') }
+  let(:show) { instance_double('Show', id: 1, name: 'Test Show', runtime: '30 mins', uri_encoded: 'test-show', poster_path: '/test.jpg') }
   let(:presenter) { Presenters::Show.new(show) }
 
   it "formats the poster URL correctly" do

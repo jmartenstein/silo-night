@@ -1,11 +1,3 @@
-ENV['APP_ENV'] = 'test'
-
-require 'silo_night'
-
-require 'rspec'
-require 'rack/test'
-require 'sinatra'
-
 RSpec.describe 'Silo Night app' do
   include Rack::Test::Methods
 

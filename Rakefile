@@ -183,8 +183,20 @@ task :stats do
 end
 
 namespace :test do
+
+  desc "Run all non-failing rspec tests"
   RSpec::Core::RakeTask.new(:spec) do |t|
     t.rspec_opts = "--tag ~failing"
+  end
+
+  desc "Run fast, isolated unit tests"
+  RSpec::Core::RakeTask.new(:unit) do |t|
+    t.rspec_opts = "--tag type:unit"
+  end
+
+  desc "Run integration tests"
+  RSpec::Core::RakeTask.new(:integration) do |t|
+    t.rspec_opts = "--tag type:integration"
   end
 
   Cucumber::Rake::Task.new(:cucumber) do |t|
@@ -193,6 +205,6 @@ namespace :test do
 end
 
 desc "Run all tests"
-task :test => ['db:migrate', 'test:spec', 'test:cucumber']
+task :test => ['db:migrate', 'test:unit', 'test:integration', 'test:cucumber']
 
 task :default => :test

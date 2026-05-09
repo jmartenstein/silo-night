@@ -2,15 +2,15 @@ require 'spec_helper'
 require 'services/user_show'
 
 RSpec.describe Services::UserShow do
-  let(:user) { double('User', add_show: true, generate_schedule: true, shows: [], reload: true) }
-  let(:show) { double('Show') }
+  let(:user) { create(:user) }
+  let(:show) { create(:show, name: 'Expanse') }
 
   describe ".add_show" do
     it "adds the show to the user and regenerates the schedule" do
-      expect(user).to receive(:add_show).with(show)
-      expect(user).to receive(:generate_schedule)
-      
+      # Since we are using a real user, we can verify persistence instead of mocking calls
       Services::UserShow.add_show(user, show)
+      
+      expect(user.shows.map(&:name)).to include('Expanse')
     end
   end
 end

@@ -1,5 +1,5 @@
 require 'show_metadata'
-require 'rspec'
+require 'spec_helper'
 
 describe ShowMetadata do
   before(:each) do

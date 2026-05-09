@@ -1,12 +1,11 @@
 require 'user'
-require 'rspec'
 require 'spec_helper'
 
 describe User do
 
   before(:each) do
     # Load the smoke scenario for every test to ensure seeded users are present
-    load File.expand_path('../data/scenarios/smoke.rb', __dir__)
+    load File.expand_path('../../data/scenarios/smoke.rb', __dir__)
   end
 
   let(:bot_shows) do
@@ -70,7 +69,7 @@ describe User do
     expect(actual).to eq(25)
   end
 
-  it "generates populated schedule from first seeded user", failing: true do
+  it "generates populated schedule from first seeded user" do
 
     seed_just.generate_schedule()
     weekday = "Tuesday"

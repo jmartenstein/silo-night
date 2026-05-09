@@ -1,4 +1,5 @@
 require 'cgi'
+
 # Fallback for older CGI/VCR compatibility issues
 unless CGI.respond_to?(:parse)
   def CGI.parse(query)
@@ -26,6 +27,9 @@ require 'sequel/extensions/migration'
 require 'webmock/rspec'
 require 'vcr'
 require 'database_cleaner/sequel'
+require 'dotenv'
+
+Dotenv.load('.env.test')
 
 FactoryBot.define do
   to_create { |instance| instance.save }
@@ -43,6 +47,16 @@ end
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Rack::Test::Methods
+
+  # allow tags for unit tests
+  config.define_derived_metadata(file_path: %r{spec/(services|lib)/}) do |metadata|
+    metadata[:type] = :unit
+  end
+
+  # allow tags for integration tests
+  config.define_derived_metadata(file_path: %r{spec/(integration|adapters|requests)/}) do |metadata|
+    metadata[:type] = :integration
+  end
 
   def app
     Sinatra::Application

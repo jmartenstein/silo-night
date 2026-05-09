@@ -1,0 +1,153 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/search/tv?api_key&query=The%20Expanse
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 08 May 2026 23:37:10 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=300
+      X-Cache:
+      - Error from cloudfront
+      Via:
+      - 1.1 8944ddb1c5239551b946c1ebd5be7728.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - JFK50-P14
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - nCiuro0GJQyLiFmzwI3PePQIWC78sax2530MVURYFN6EXMaOquhwAA==
+      Vary:
+      - Origin
+    body:
+      encoding: UTF-8
+      string: '{"status_code":7,"status_message":"Invalid API key: You must be granted
+        a valid key.","success":false}
+
+        '
+  recorded_at: Fri, 08 May 2026 23:37:10 GMT
+- request:
+    method: get
+    uri: https://api.tvmaze.com/search/shows?q=The%20Expanse
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.24.0 (Ubuntu)
+      Date:
+      - Fri, 08 May 2026 23:37:10 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=3600
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        W3sic2NvcmUiOjEuMTk2NTI1MSwic2hvdyI6eyJpZCI6MTgyNSwidXJsIjoiaHR0cHM6Ly93d3cudHZtYXplLmNvbS9zaG93cy8xODI1L3RoZS1leHBhbnNlIiwibmFtZSI6IlRoZSBFeHBhbnNlIiwidHlwZSI6IlNjcmlwdGVkIiwibGFuZ3VhZ2UiOiJFbmdsaXNoIiwiZ2VucmVzIjpbIlNjaWVuY2UtRmljdGlvbiIsIlRocmlsbGVyIiwiTXlzdGVyeSJdLCJzdGF0dXMiOiJFbmRlZCIsInJ1bnRpbWUiOm51bGwsImF2ZXJhZ2VSdW50aW1lIjo1NSwicHJlbWllcmVkIjoiMjAxNS0xMi0xNCIsImVuZGVkIjoiMjAyMi0wMS0xNCIsIm9mZmljaWFsU2l0ZSI6Imh0dHBzOi8vd3d3LmFtYXpvbi5jb20vZHAvQjA3WUw5V0sxUy8iLCJzY2hlZHVsZSI6eyJ0aW1lIjoiIiwiZGF5cyI6WyJGcmlkYXkiXX0sInJhdGluZyI6eyJhdmVyYWdlIjo4Ljd9LCJ3ZWlnaHQiOjEwMCwibmV0d29yayI6bnVsbCwid2ViQ2hhbm5lbCI6eyJpZCI6MywibmFtZSI6IlByaW1lIFZpZGVvIiwiY291bnRyeSI6bnVsbCwib2ZmaWNpYWxTaXRlIjoiaHR0cHM6Ly93d3cucHJpbWV2aWRlby5jb20ifSwiZHZkQ291bnRyeSI6bnVsbCwiZXh0ZXJuYWxzIjp7InR2cmFnZSI6NDE5NjcsInRoZXR2ZGIiOjI4MDYxOSwiaW1kYiI6InR0MzIzMDg1NCJ9LCJpbWFnZSI6eyJtZWRpdW0iOiJodHRwczovL3N0YXRpYy50dm1hemUuY29tL3VwbG9hZHMvaW1hZ2VzL21lZGl1bV9wb3J0cmFpdC80NDUvMTExNDA4MS5qcGciLCJvcmlnaW5hbCI6Imh0dHBzOi8vc3RhdGljLnR2bWF6ZS5jb20vdXBsb2Fkcy9pbWFnZXMvb3JpZ2luYWxfdW50b3VjaGVkLzQ0NS8xMTE0MDgxLmpwZyJ9LCJzdW1tYXJ5IjoiPHA+QSB0aHJpbGxlciBzZXQgdHdvIGh1bmRyZWQgeWVhcnMgaW4gdGhlIGZ1dHVyZSwgPGI+VGhlIEV4cGFuc2U8L2I+IGZvbGxvd3MgdGhlIGNhc2Ugb2YgYSBtaXNzaW5nIHlvdW5nIHdvbWFuIHdobyBicmluZ3MgYSBoYXJkZW5lZCBkZXRlY3RpdmUgYW5kIGEgcm9ndWUgc2hpcCdzIGNhcHRhaW4gdG9nZXRoZXIgaW4gYSByYWNlIGFjcm9zcyB0aGUgc29sYXIgc3lzdGVtIHRvIGV4cG9zZSB0aGUgZ3JlYXRlc3QgY29uc3BpcmFjeSBpbiBodW1hbiBoaXN0b3J5LjwvcD4iLCJ1cGRhdGVkIjoxNzc3Mzc0NjczLCJfbGlua3MiOnsic2VsZiI6eyJocmVmIjoiaHR0cHM6Ly9hcGkudHZtYXplLmNvbS9zaG93cy8xODI1In0sInByZXZpb3VzZXBpc29kZSI6eyJocmVmIjoiaHR0cHM6Ly9hcGkudHZtYXplLmNvbS9lcGlzb2Rlcy8yMTkwMDE3IiwibmFtZSI6IkJhYnlsb24ncyBBc2hlcyJ9fX19LHsic2NvcmUiOjAuOTcwNzE1MTcsInNob3ciOnsiaWQiOjUyNDcxLCJ1cmwiOiJodHRwczovL3d3dy50dm1hemUuY29tL3Nob3dzLzUyNDcxL3RoZS1leHBhbnNlLWFmdGVyc2hvdyIsIm5hbWUiOiJUaGUgRXhwYW5zZSBBZnRlcnNob3ciLCJ0eXBlIjoiVGFsayBTaG93IiwibGFuZ3VhZ2UiOiJFbmdsaXNoIiwiZ2VucmVzIjpbXSwic3RhdHVzIjoiRW5kZWQiLCJydW50aW1lIjpudWxsLCJhdmVyYWdlUnVudGltZSI6MzMsInByZW1pZXJlZCI6IjIwMjAtMTItMTYiLCJlbmRlZCI6IjIwMjItMDEtMTQiLCJvZmZpY2lhbFNpdGUiOiJodHRwczovL3d3dy55b3V0dWJlLmNvbS9wbGF5bGlzdD9saXN0PVBMV3oyRE8zOVItTlU1RlctYUZmaWxSdnllZzlvWE1UZ3AiLCJzY2hlZHVsZSI6eyJ0aW1lIjoiIiwiZGF5cyI6WyJGcmlkYXkiXX0sInJhdGluZyI6eyJhdmVyYWdlIjo3LjN9LCJ3ZWlnaHQiOjQ0LCJuZXR3b3JrIjpudWxsLCJ3ZWJDaGFubmVsIjp7ImlkIjoyMSwibmFtZSI6IllvdVR1YmUiLCJjb3VudHJ5IjpudWxsLCJvZmZpY2lhbFNpdGUiOiJodHRwczovL3d3dy55b3V0dWJlLmNvbSJ9LCJkdmRDb3VudHJ5IjpudWxsLCJleHRlcm5hbHMiOnsidHZyYWdlIjpudWxsLCJ0aGV0dmRiIjpudWxsLCJpbWRiIjpudWxsfSwiaW1hZ2UiOnsibWVkaXVtIjoiaHR0cHM6Ly9zdGF0aWMudHZtYXplLmNvbS91cGxvYWRzL2ltYWdlcy9tZWRpdW1fcG9ydHJhaXQvMjg5LzcyMjk0OC5qcGciLCJvcmlnaW5hbCI6Imh0dHBzOi8vc3RhdGljLnR2bWF6ZS5jb20vdXBsb2Fkcy9pbWFnZXMvb3JpZ2luYWxfdW50b3VjaGVkLzI4OS83MjI5NDguanBnIn0sInN1bW1hcnkiOiI8cD5UeSBGcmFuY2sgYW5kIFdlcyBDaGF0aGFtIGRpdmUgaW50byB0aGUgZGV2ZWxvcG1lbnQsIGJlaGluZC10aGUtc2NlbmVzLCBhbmQgZWFzdGVyIGVnZ3Mgb2YgU2Vhc29uIDUgJmFtcDsgU2Vhc29uIDYgb2YgPGk+VGhlIEV4cGFuc2UuPC9pPjwvcD4iLCJ1cGRhdGVkIjoxNzI1NjAwNzAwLCJfbGlua3MiOnsic2VsZiI6eyJocmVmIjoiaHR0cHM6Ly9hcGkudHZtYXplLmNvbS9zaG93cy81MjQ3MSJ9LCJwcmV2aW91c2VwaXNvZGUiOnsiaHJlZiI6Imh0dHBzOi8vYXBpLnR2bWF6ZS5jb20vZXBpc29kZXMvMjk5MDQ4NCIsIm5hbWUiOiJTNkU2IOKAkyBXZXMgQ2hhdGhhbSAmIFR5IEZyYW5jayB3LyBEb21pbmlxdWUgVGlwcGVyICYgU3RldmVuIFN0cmFpdCJ9fX19LHsic2NvcmUiOjAuOTAxNzUxMDQsInNob3ciOnsiaWQiOjY0Mzg2LCJ1cmwiOiJodHRwczovL3d3dy50dm1hemUuY29tL3Nob3dzLzY0Mzg2L3RoZS1leHBhbnNlLW9uZS1zaGlwIiwibmFtZSI6IlRoZSBFeHBhbnNlOiBPbmUgU2hpcCIsInR5cGUiOiJTY3JpcHRlZCIsImxhbmd1YWdlIjoiRW5nbGlzaCIsImdlbnJlcyI6WyJTY2llbmNlLUZpY3Rpb24iXSwic3RhdHVzIjoiRW5kZWQiLCJydW50aW1lIjpudWxsLCJhdmVyYWdlUnVudGltZSI6NiwicHJlbWllcmVkIjoiMjAyMS0xMi0xMCIsImVuZGVkIjoiMjAyMi0wMS0wNyIsIm9mZmljaWFsU2l0ZSI6bnVsbCwic2NoZWR1bGUiOnsidGltZSI6IiIsImRheXMiOltdfSwicmF0aW5nIjp7ImF2ZXJhZ2UiOjcuOX0sIndlaWdodCI6OTUsIm5ldHdvcmsiOm51bGwsIndlYkNoYW5uZWwiOnsiaWQiOjMsIm5hbWUiOiJQcmltZSBWaWRlbyIsImNvdW50cnkiOm51bGwsIm9mZmljaWFsU2l0ZSI6Imh0dHBzOi8vd3d3LnByaW1ldmlkZW8uY29tIn0sImR2ZENvdW50cnkiOm51bGwsImV4dGVybmFscyI6eyJ0dnJhZ2UiOm51bGwsInRoZXR2ZGIiOm51bGwsImltZGIiOiJ0dDE2NDQyNjAwIn0sImltYWdlIjp7Im1lZGl1bSI6Imh0dHBzOi8vc3RhdGljLnR2bWF6ZS5jb20vdXBsb2Fkcy9pbWFnZXMvbWVkaXVtX3BvcnRyYWl0LzUwMC8xMjUxNjkwLmpwZyIsIm9yaWdpbmFsIjoiaHR0cHM6Ly9zdGF0aWMudHZtYXplLmNvbS91cGxvYWRzL2ltYWdlcy9vcmlnaW5hbF91bnRvdWNoZWQvNTAwLzEyNTE2OTAuanBnIn0sInN1bW1hcnkiOiI8cD5BbiBhbnRob2xvZ3kgb2Ygc2hvcnQgd2ViaXNvZGVzIG9mIFRoZSBFeHBhbnNlLCBhbGwgcmVsYXRpbmcgdG8gdGhlIERvY3RyaW5lIG9mIE9uZSBTaGlwIC0gdGhhdCB0aGVyZSBpcyBvbmx5IG9uZSBzaGlwLCBhbmQgaXQgaGFzIGNvdW50bGVzcyBwYXJ0cyBhcyBhIHNpbmdsZSBib2R5IGhhcyBjb3VudGxlc3MgY2VsbHMuPC9wPiIsInVwZGF0ZWQiOjE3NDE1OTUwNDUsIl9saW5rcyI6eyJzZWxmIjp7ImhyZWYiOiJodHRwczovL2FwaS50dm1hemUuY29tL3Nob3dzLzY0Mzg2In0sInByZXZpb3VzZXBpc29kZSI6eyJocmVmIjoiaHR0cHM6Ly9hcGkudHZtYXplLmNvbS9lcGlzb2Rlcy8yNDA2NDAzIiwibmFtZSI6IlJlbWVtYmVyIHRoZSBDYW50In19fX0seyJzY29yZSI6MC4zNTYzNDgxMywic2hvdyI6eyJpZCI6ODA1MCwidXJsIjoiaHR0cHM6Ly93d3cudHZtYXplLmNvbS9zaG93cy84MDUwL2hvdy10aGUtdW5pdmVyc2Utd29ya3MtZXhwYW5kZWQtZWRpdGlvbiIsIm5hbWUiOiJIb3cgdGhlIFVuaXZlcnNlIFdvcmtzOiBFeHBhbmRlZCBFZGl0aW9uIiwidHlwZSI6IkRvY3VtZW50YXJ5IiwibGFuZ3VhZ2UiOiJFbmdsaXNoIiwiZ2VucmVzIjpbXSwic3RhdHVzIjoiRW5kZWQiLCJydW50aW1lIjo2MCwiYXZlcmFnZVJ1bnRpbWUiOjYwLCJwcmVtaWVyZWQiOiIyMDEzLTAyLTE4IiwiZW5kZWQiOiIyMDE1LTExLTEwIiwib2ZmaWNpYWxTaXRlIjpudWxsLCJzY2hlZHVsZSI6eyJ0aW1lIjoiMjA6MDAiLCJkYXlzIjpbIlR1ZXNkYXkiXX0sInJhdGluZyI6eyJhdmVyYWdlIjpudWxsfSwid2VpZ2h0Ijo0NywibmV0d29yayI6eyJpZCI6NzcsIm5hbWUiOiJTY2llbmNlIiwiY291bnRyeSI6eyJuYW1lIjoiVW5pdGVkIFN0YXRlcyIsImNvZGUiOiJVUyIsInRpbWV6b25lIjoiQW1lcmljYS9OZXdfWW9yayJ9LCJvZmZpY2lhbFNpdGUiOiJodHRwczovL3d3dy5zY2llbmNlY2hhbm5lbC5jb20vIn0sIndlYkNoYW5uZWwiOm51bGwsImR2ZENvdW50cnkiOm51bGwsImV4dGVybmFscyI6eyJ0dnJhZ2UiOjQ2OTAxLCJ0aGV0dmRiIjpudWxsLCJpbWRiIjpudWxsfSwiaW1hZ2UiOnsibWVkaXVtIjoiaHR0cHM6Ly9zdGF0aWMudHZtYXplLmNvbS91cGxvYWRzL2ltYWdlcy9tZWRpdW1fcG9ydHJhaXQvMjkvNzMxOTkuanBnIiwib3JpZ2luYWwiOiJodHRwczovL3N0YXRpYy50dm1hemUuY29tL3VwbG9hZHMvaW1hZ2VzL29yaWdpbmFsX3VudG91Y2hlZC8yOS83MzE5OS5qcGcifSwic3VtbWFyeSI6IjxwPjxiPkhvdyB0aGUgVW5pdmVyc2UgV29ya3M6IEV4cGFuZGVkIEVkaXRpb248L2I+IG9yaWdpbmFsbHkgdGl0bGVkIGFzIFwiSG93IHRoZSBVbml2ZXJzZSBXb3JrcyAyXCIgaXMgYSBzZXJpZXMgdGhhdCBhaXJzIEV4dGVuZGVkIEVuaGFuY2VkIEVwaXNvZGVzIHdpdGggZXh0cmEgaW5mb3JtYXRpb24gYW5kIHVuc2VlbiBmb290YWdlIGZyb20gdGhlIHNob3cgXCJIb3cgdGhlIFVuaXZlcnNlIFdvcmtzXCIgdGhhdCBhbHNvIGFpcnMgb24gdGhlIFNjaWVuY2UgQ2hhbm5lbC48L3A+IiwidXBkYXRlZCI6MTY3NzUwMDEzMywiX2xpbmtzIjp7InNlbGYiOnsiaHJlZiI6Imh0dHBzOi8vYXBpLnR2bWF6ZS5jb20vc2hvd3MvODA1MCJ9LCJwcmV2aW91c2VwaXNvZGUiOnsiaHJlZiI6Imh0dHBzOi8vYXBpLnR2bWF6ZS5jb20vZXBpc29kZXMvNDQ1OTM5IiwibmFtZSI6IkRlYXRoIG9mIHRoZSBDb3Ntb3MifX19fV0=
+  recorded_at: Fri, 08 May 2026 23:37:10 GMT
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/search/tv?api_key=<TMDB_API_KEY>&query=The%20Expanse
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 09 May 2026 00:17:15 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=24518
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - 97b47c949ff774cdc998cecd2bf557d356193b7dcbd5f96aeefe484a0f453173
+      X-Memc-Age:
+      - '3487'
+      X-Memc-Expires:
+      - '24518'
+      X-Az:
+      - us-east-1a
+      X-Task-Id:
+      - 6a6078f43bc3415c81bab7e5ac5a3b47
+      Etag:
+      - W/"fb922ff9b931ffde83864481d6dcf383"
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 0b8fb8cb1cf28a3cde0e374767435cf6.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - JFK50-P14
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - fZgvOxxgzHLHNvQtmefOHN1QVKM3EoGn-PHg7iarZXQPkUSEZdD7yA==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJwYWdlIjoxLCJyZXN1bHRzIjpbeyJhZHVsdCI6ZmFsc2UsImJhY2tkcm9wX3BhdGgiOiIvdVV3bkNsd2RNQTEyYnBIZ2VLZ2tRcmJ1NU9lLmpwZyIsImdlbnJlX2lkcyI6WzE4LDk2NDgsMTA3NjVdLCJpZCI6NjM2MzksIm9yaWdpbl9jb3VudHJ5IjpbIlVTIl0sIm9yaWdpbmFsX2xhbmd1YWdlIjoiZW4iLCJvcmlnaW5hbF9uYW1lIjoiVGhlIEV4cGFuc2UiLCJvdmVydmlldyI6IkEgdGhyaWxsZXIgc2V0IHR3byBodW5kcmVkIHllYXJzIGluIHRoZSBmdXR1cmUgZm9sbG93aW5nIHRoZSBjYXNlIG9mIGEgbWlzc2luZyB5b3VuZyB3b21hbiB3aG8gYnJpbmdzIGEgaGFyZGVuZWQgZGV0ZWN0aXZlIGFuZCBhIHJvZ3VlIHNoaXAncyBjYXB0YWluIHRvZ2V0aGVyIGluIGEgcmFjZSBhY3Jvc3MgdGhlIHNvbGFyIHN5c3RlbSB0byBleHBvc2UgdGhlIGdyZWF0ZXN0IGNvbnNwaXJhY3kgaW4gaHVtYW4gaGlzdG9yeS4iLCJwb3B1bGFyaXR5Ijo1Mi4wNzg4LCJwb3N0ZXJfcGF0aCI6Ii81dlFsVldrSU1QaFo4OE9XY2hKc2d3R0VLOS5qcGciLCJmaXJzdF9haXJfZGF0ZSI6IjIwMTUtMTItMTQiLCJzb2Z0Y29yZSI6ZmFsc2UsIm5hbWUiOiJUaGUgRXhwYW5zZSIsInZvdGVfYXZlcmFnZSI6OC4wNjQsInZvdGVfY291bnQiOjI3ODN9LHsiYWR1bHQiOmZhbHNlLCJiYWNrZHJvcF9wYXRoIjoiL2FaYnU1TTVtN2t1bEhBSkZzb2FJUVdvZG80Ry5qcGciLCJnZW5yZV9pZHMiOlsxMDc2NV0sImlkIjoxNTU2NTUsIm9yaWdpbl9jb3VudHJ5IjpbIlVTIl0sIm9yaWdpbmFsX2xhbmd1YWdlIjoiZW4iLCJvcmlnaW5hbF9uYW1lIjoiVGhlIEV4cGFuc2U6IE9uZSBTaGlwIiwib3ZlcnZpZXciOiJBbiBhbnRob2xvZ3kgb2Ygc2hvcnQgd2ViaXNvZGVzIG9mIFRoZSBFeHBhbnNlLCBhbGwgcmVsYXRpbmcgdG8gdGhlIERvY3RyaW5lIG9mIE9uZSBTaGlwIC0gdGhhdCB0aGVyZSBpcyBvbmx5IG9uZSBzaGlwLCBhbmQgaXQgaGFzIGNvdW50bGVzcyBwYXJ0cyBhcyBhIHNpbmdsZSBib2R5IGhhcyBjb3VudGxlc3MgY2VsbHMuIiwicG9wdWxhcml0eSI6MS42MzA3LCJwb3N0ZXJfcGF0aCI6Ii8xT0hzclFuR3kybzBjUnFwMHBEM2F4OU5BcW0uanBnIiwiZmlyc3RfYWlyX2RhdGUiOiIyMDIxLTEyLTEwIiwic29mdGNvcmUiOmZhbHNlLCJuYW1lIjoiVGhlIEV4cGFuc2U6IE9uZSBTaGlwIiwidm90ZV9hdmVyYWdlIjo2Ljg1Mywidm90ZV9jb3VudCI6MTd9LHsiYWR1bHQiOmZhbHNlLCJiYWNrZHJvcF9wYXRoIjoiLzlzTGo1dUE2SlNOMDlWRzFwaEc5a01HMFYwNS5qcGciLCJnZW5yZV9pZHMiOls5OV0sImlkIjoxMjczMzcsIm9yaWdpbl9jb3VudHJ5IjpbIkFVIl0sIm9yaWdpbmFsX2xhbmd1YWdlIjoiZW4iLCJvcmlnaW5hbF9uYW1lIjoiQnJpZGdpbmcgdGhlIEV4cGFuc2UiLCJvdmVydmlldyI6IiIsInBvcHVsYXJpdHkiOjAuMDY2NiwicG9zdGVyX3BhdGgiOiIvMzAySzhyOTUwTEtQOWZ6eGVaMUxUYUs4aFJ5LmpwZyIsImZpcnN0X2Fpcl9kYXRlIjoiMjAxOS0wNS0wNiIsInNvZnRjb3JlIjpmYWxzZSwibmFtZSI6IkJyaWRnaW5nIHRoZSBFeHBhbnNlIiwidm90ZV9hdmVyYWdlIjowLjAsInZvdGVfY291bnQiOjB9LHsiYWR1bHQiOmZhbHNlLCJiYWNrZHJvcF9wYXRoIjpudWxsLCJnZW5yZV9pZHMiOltdLCJpZCI6MzEzNTY3LCJvcmlnaW5fY291bnRyeSI6WyJVUyJdLCJvcmlnaW5hbF9sYW5ndWFnZSI6ImVuIiwib3JpZ2luYWxfbmFtZSI6IlRoZSBCb3VuZGxlc3MsIFRoZSBFeHBhbnNlIGFuZCBUaGUgVW5rbm93biIsIm92ZXJ2aWV3IjoiU3Bpbi1vZmYgc2VyaWVzIGZyb20gdGhlIHdvcmxkIG9mIFwiQmV5b25kIHRoZSBVbmtub3du4oCdLiIsInBvcHVsYXJpdHkiOjAuMDE0MywicG9zdGVyX3BhdGgiOm51bGwsImZpcnN0X2Fpcl9kYXRlIjoiMjAyNi0wMi0wNSIsInNvZnRjb3JlIjpmYWxzZSwibmFtZSI6IlRoZSBCb3VuZGxlc3MsIFRoZSBFeHBhbnNlIGFuZCBUaGUgVW5rbm93biIsInZvdGVfYXZlcmFnZSI6MC4wLCJ2b3RlX2NvdW50IjowfV0sInRvdGFsX3BhZ2VzIjoxLCJ0b3RhbF9yZXN1bHRzIjo0fQ==
+  recorded_at: Sat, 09 May 2026 00:17:15 GMT
+recorded_with: VCR 6.2.0

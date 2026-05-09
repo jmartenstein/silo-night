@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/tv/invalid?api_key=<TMDB_API_KEY>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 09 May 2026 00:20:40 GMT
+      Server:
+      - openresty
+      X-Az:
+      - us-east-1c
+      X-Task-Id:
+      - 71ea9e19710847ae9441e3421a8dfb3d
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Error from cloudfront
+      Via:
+      - 1.1 81943ecf479423de3131481cdfd8dff8.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - JFK50-P14
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - 1vBVcFEL50x1FRKBlxtVc_FZd6njisKnTon0tuiPBDBUuaJrMNEHFg==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"success":false,"status_code":6,"status_message":"Invalid id: The
+        pre-requisite id is invalid or not found."}'
+  recorded_at: Sat, 09 May 2026 00:20:40 GMT
+recorded_with: VCR 6.2.0
