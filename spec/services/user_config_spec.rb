@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'services/user_config'
 require 'user'
 
-RSpec.describe Services::UserConfig do
+RSpec.describe Services::UserConfig, type: :unit do
   let(:user) { User.create(name: 'steph', config: {}.to_json) }
 
   describe '.update_for_user' do

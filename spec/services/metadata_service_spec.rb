@@ -1,9 +1,11 @@
 require 'spec_helper'
 require 'metadata_service'
+require 'tmdb_adapter'
+require 'tvmaze_adapter'
 
-RSpec.describe MetadataService do
-  let(:tmdb_adapter) { double('TmdbAdapter') }
-  let(:tvmaze_adapter) { double('TvmazeAdapter') }
+RSpec.describe MetadataService, type: :unit do
+  let(:tmdb_adapter) { instance_double(TmdbAdapter) }
+  let(:tvmaze_adapter) { instance_double(TvmazeAdapter) }
   let(:service) { MetadataService.new(tmdb_adapter, tvmaze_adapter) }
 
   describe '#get_show_metadata' do

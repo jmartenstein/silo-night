@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'services/search'
 
-RSpec.describe Services::Search do
+RSpec.describe Services::Search, type: :integration do
   describe '.search' do
     it 'returns a list of shows based on a query', vcr: { record: :new_episodes }  do
       # We anticipate needing to stub adapters eventually

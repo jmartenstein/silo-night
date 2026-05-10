@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'services/user_show'
 
-RSpec.describe Services::UserShow do
+RSpec.describe Services::UserShow, type: :integration do
   let(:user) { create(:user) }
   let(:show) { create(:show, name: 'Expanse') }
 

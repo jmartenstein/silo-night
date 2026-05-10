@@ -1,6 +1,11 @@
+# spec/spec_helper.rb
+# This file is the primary entry point for the RSpec test suite.
+# It handles global load paths, environment initialization, and auto-loading
+# of support configurations from the spec/support/ directory.
+
 require 'cgi'
 
-# Fallback for older CGI/VCR compatibility issues
+# Fallback for older CGI/VCR compatibility issues to support consistent parameter parsing.
 unless CGI.respond_to?(:parse)
   def CGI.parse(query)
     params = {}
@@ -15,70 +20,40 @@ unless CGI.respond_to?(:parse)
     params
   end
 end
+
+# Set test environment
 ENV['RACK_ENV'] = 'test'
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 $LOAD_PATH.unshift File.expand_path('..', __dir__)
 
+# Load base testing dependencies
 require 'database'
-require 'factory_bot'
 require 'rack/test'
-require_relative '../silo_night'
-require 'sequel/extensions/migration'
-require 'webmock/rspec'
-require 'vcr'
-require 'database_cleaner/sequel'
 require 'dotenv'
+require 'webmock/rspec'
 
+# Load test-specific environment configuration
 Dotenv.load('.env.test')
+require_relative '../silo_night'
 
-FactoryBot.define do
-  to_create { |instance| instance.save }
-end
-
-VCR.configure do
- |config|
-  config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
-  config.hook_into :webmock
-  config.filter_sensitive_data('<TMDB_API_KEY>') { ENV['TMDB_API_KEY'] }
-  config.filter_sensitive_data('<TVMAZE_API_KEY>') { ENV['TVMAZE_API_KEY'] }
-  config.configure_rspec_metadata!
-end
+# Dynamically load all support configuration files (e.g., database, factory_bot)
+Dir[File.join(__dir__, 'support/**/*.rb')].sort.each { |f| require f }
 
 RSpec.configure do |config|
-  config.include FactoryBot::Syntax::Methods
+  # Enable rack-test methods for integration/request specs
   config.include Rack::Test::Methods
 
-  # allow tags for unit tests
-  config.define_derived_metadata(file_path: %r{spec/(services|lib)/}) do |metadata|
+  # Automatically tag specs based on file directory for architectural testing
+  config.define_derived_metadata(file_path: %r{spec/(presenters|lib)/}) do |metadata|
     metadata[:type] = :unit
   end
 
-  # allow tags for integration tests
   config.define_derived_metadata(file_path: %r{spec/(integration|adapters|requests)/}) do |metadata|
     metadata[:type] = :integration
   end
 
+  # Define the Sinatra application under test
   def app
     Sinatra::Application
-  end
-
-  config.before(:suite) do
-    unless Sequel::Migrator.is_current?(DB, 'db/migrations')
-      puts "Database migrations are not up to date. Run 'RACK_ENV=test rake db:migrate' first."
-      exit 1
-    end
-    FactoryBot.find_definitions
-    DatabaseCleaner[:sequel].db = DB
-    DatabaseCleaner[:sequel].strategy = :transaction
-
-    DB.run("PRAGMA foreign_keys = OFF")
-    DatabaseCleaner[:sequel].clean_with(:truncation)
-    DB.run("PRAGMA foreign_keys = ON")
-  end
-
-  config.around(:each) do |example|
-    DatabaseCleaner[:sequel].cleaning do
-      example.run
-    end
   end
 end
