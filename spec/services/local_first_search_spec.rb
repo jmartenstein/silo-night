@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'services/search'
 
-RSpec.describe 'Local-First Search Strategy' do
+RSpec.describe 'Local-First Search Strategy', type: :integration do
   it 'includes shows from the database in the search results', vcr: { record: :once } do
     Show.create(name: 'The Expanse', poster_path: '/poster.jpg')
 
