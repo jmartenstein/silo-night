@@ -1,12 +1,16 @@
 #  features/step_definitions/user_steps.rb
 
 Given('there are existing users {string} and {string}') do |user1, user2|
-  User.find(name: user1) || User.create(name: user1, config: {}.to_json, schedule: {}.to_json)
-  User.find(name: user2) || User.create(name: user2, config: {}.to_json, schedule: {}.to_json)
+  User.find(name: user1) || create(:user, name: user1)
+  User.find(name: user2) || create(:user, name: user2)
 end
 
 Given('there is an existing user {string}') do |username|
-  User.find(name: username) || User.create(name: username, config: {}.to_json, schedule: {}.to_json)
+  User.find(name: username) || create(:user, name: username)
+end
+
+Given('there is an existing admin user {string}') do |username|
+  User.find(name: username) || create(:user, :admin, name: username)
 end
 
 When('the user enters {string} in the {string} field') do |value, field_name|

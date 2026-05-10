@@ -1,5 +1,10 @@
 ENV['RACK_ENV'] = 'test'
 require 'rack/test'
+require 'factory_bot'
+FactoryBot.define do
+  to_create { |instance| instance.save }
+end
+FactoryBot.find_definitions
 $LOAD_PATH.unshift File.expand_path('../../lib', __dir__)
 require 'database'
 require 'sequel/extensions/migration'
@@ -31,3 +36,5 @@ end
 require File.dirname(__FILE__) + '/../../silo_night'
 
 $browser = Rack::Test::Session.new(Rack::MockSession.new(Sinatra::Application))
+
+World(FactoryBot::Syntax::Methods)
