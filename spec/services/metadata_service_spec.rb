@@ -74,12 +74,12 @@ RSpec.describe MetadataService, type: :unit do
     let(:title) { 'Breaking Bad' }
     let(:tmdb_results) do
       [
-        { 'id' => 1396, 'name' => 'Breaking Bad', 'first_air_date' => '2008-01-20', 'genre_ids' => [18], 'poster_path' => '/bb.jpg' }
+        { 'id' => 1396, 'name' => 'Breaking Bad', 'first_air_date' => '2008-01-20', 'genre_ids' => [18], 'poster_path' => '/bb.jpg', 'popularity' => 10.0 }
       ]
     end
     let(:tvmaze_results) do
       [
-        { 'id' => 169, 'name' => 'Breaking Bad', 'premiered' => '2008-01-20', 'genres' => ['Drama', 'Crime'], 'image' => { 'medium' => 'tvm_bb.jpg' } }
+        { 'id' => 169, 'name' => 'Breaking Bad', 'premiered' => '2008-01-20', 'genres' => ['Drama', 'Crime'], 'image' => { 'medium' => 'tvm_bb.jpg' }, 'weight' => 50 }
       ]
     end
 

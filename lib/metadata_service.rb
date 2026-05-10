@@ -56,8 +56,8 @@ class MetadataService
       }
     end
 
-    tmdb_results = @tmdb_adapter.search_shows_by_title(title)
-    tvmaze_results = @tvmaze_adapter.search_shows_by_title(title)
+    tmdb_results = @tmdb_adapter.search_shows_by_title(title).select { |s| s['popularity'].to_f > 5.0 }
+    tvmaze_results = @tvmaze_adapter.search_shows_by_title(title).select { |s| s['weight'].to_i > 30 }
 
     # Map TVMaze results
     tvmaze_results.each do |tvm|
