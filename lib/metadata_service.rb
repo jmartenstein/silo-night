@@ -44,18 +44,27 @@ class MetadataService
   end
 
   def search_shows(title)
+    # Local Query Implementation
+    suggestions = []
+    local_shows = Show.where(Sequel.ilike(:name, "%#{title}%")).limit(5)
+    local_shows.each do |show|
+      suggestions << {
+        name: show.name,
+        year: show.year,
+        genres: show.genres || [],
+        poster_path: show.poster_path
+      }
+    end
+
     tmdb_results = @tmdb_adapter.search_shows_by_title(title)
     tvmaze_results = @tvmaze_adapter.search_shows_by_title(title)
-
-    # Simple merging: use TVMaze as base because it has genre names in search results
-    # and TMDB for additional name matching if needed.
-    # For now, let's just return a unified list of suggestions.
-    
-    suggestions = []
 
     # Map TVMaze results
     tvmaze_results.each do |tvm|
       year = extract_year(tvm['premiered'])
+      
+      # Deduplication: check if already in suggestions (from local)
+      next if suggestions.any? { |s| s[:name].downcase == tvm['name'].downcase && s[:year] == year }
       
       # Try to find matching TMDB result for poster fallback
       tmdb_match = tmdb_results.find { |tmdb| tmdb['name'].downcase == tvm['name'].downcase && extract_year(tmdb['first_air_date']) == year }
@@ -76,16 +85,17 @@ class MetadataService
     # Add TMDB results if they don't already exist (by name and year)
     tmdb_results.each do |tmdb|
       year = extract_year(tmdb['first_air_date'])
-      unless suggestions.any? { |s| s[:name].downcase == tmdb['name'].downcase && s[:year] == year }
-        genres = (tmdb['genre_ids'] || []).map { |id| TMDB_GENRE_MAP[id] }.compact
-        poster_path = tmdb['poster_path'] ? "#{TMDB_IMAGE_BASE_URL}#{tmdb['poster_path']}" : nil
-        suggestions << {
-          name: tmdb['name'],
-          year: year,
-          genres: genres,
-          poster_path: poster_path
-        }
-      end
+      # Deduplication: check if already in suggestions
+      next if suggestions.any? { |s| s[:name].downcase == tmdb['name'].downcase && s[:year] == year }
+      
+      genres = (tmdb['genre_ids'] || []).map { |id| TMDB_GENRE_MAP[id] }.compact
+      poster_path = tmdb['poster_path'] ? "#{TMDB_IMAGE_BASE_URL}#{tmdb['poster_path']}" : nil
+      suggestions << {
+        name: tmdb['name'],
+        year: year,
+        genres: genres,
+        poster_path: poster_path
+      }
     end
 
     suggestions
