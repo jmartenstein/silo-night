@@ -50,8 +50,8 @@ class MetadataService
     local_shows.each do |show|
       suggestions << {
         name: show.name,
-        year: show.year,
-        genres: show.genres || [],
+        year: show.respond_to?(:year) ? show.year : nil,
+        genres: show.respond_to?(:genres) ? (show.genres || []) : [],
         poster_path: show.poster_path
       }
     end
@@ -64,7 +64,8 @@ class MetadataService
       year = extract_year(tvm['premiered'])
       
       # Deduplication: check if already in suggestions (from local)
-      next if suggestions.any? { |s| s[:name].downcase == tvm['name'].downcase && s[:year] == year }
+      # If local show year is nil, treat it as a match by name alone
+      next if suggestions.any? { |s| s[:name].downcase == tvm['name'].downcase && (s[:year].nil? || year.nil? || s[:year] == year) }
       
       # Try to find matching TMDB result for poster fallback
       tmdb_match = tmdb_results.find { |tmdb| tmdb['name'].downcase == tvm['name'].downcase && extract_year(tmdb['first_air_date']) == year }
@@ -86,7 +87,7 @@ class MetadataService
     tmdb_results.each do |tmdb|
       year = extract_year(tmdb['first_air_date'])
       # Deduplication: check if already in suggestions
-      next if suggestions.any? { |s| s[:name].downcase == tmdb['name'].downcase && s[:year] == year }
+      next if suggestions.any? { |s| s[:name].downcase == tmdb['name'].downcase && (s[:year].nil? || year.nil? || s[:year] == year) }
       
       genres = (tmdb['genre_ids'] || []).map { |id| TMDB_GENRE_MAP[id] }.compact
       poster_path = tmdb['poster_path'] ? "#{TMDB_IMAGE_BASE_URL}#{tmdb['poster_path']}" : nil
