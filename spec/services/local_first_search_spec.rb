@@ -30,7 +30,7 @@ RSpec.describe 'Local-First Search Strategy', type: :integration do
     Show.create(name: 'The Show', poster_path: '/local.jpg')
     
     # Stub API to return a different show
-    allow_any_instance_of(TmdbAdapter).to receive(:search_shows_by_title).and_return([{'name' => 'Different Show', 'first_air_date' => '2020-01-01'}])
+    allow_any_instance_of(TmdbAdapter).to receive(:search_shows_by_title).and_return([{'name' => 'Different Show', 'first_air_date' => '2020-01-01', 'popularity' => 10.0}])
     allow_any_instance_of(TvmazeAdapter).to receive(:search_shows_by_title).and_return([])
 
     results = Services::Search.search('The Show')
