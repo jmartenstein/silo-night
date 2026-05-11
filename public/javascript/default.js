@@ -14,12 +14,13 @@ function removeShow(name, li) {
   var username = window.location.pathname.split('/')[2];
   if (!username) return;
 
-  fetch('/api/v0.1/user/' + username + '/show/' + encodeURIComponent(name), {
+  fetch('/api/v1/user/' + username + '/shows/' + encodeURIComponent(name), {
     method: 'DELETE'
   })
-  .then(response => response.json())
-  .then(data => {
-    li.remove();
+  .then(response => {
+    if (response.ok) {
+      li.remove();
+    }
   });
 }
 
@@ -134,10 +135,12 @@ function saveNewOrder() {
   var showNames = Array.from(document.querySelectorAll("ul#show.list li"))
     .map(li => li.querySelector('.name').textContent.trim());
 
-  fetch('/api/v0.1/user/' + username + '/shows/reorder', {
-    method: 'POST',
-    body: JSON.stringify(showNames),
-    headers: { 'Content-Type': 'application/json' }
+  showNames.forEach(function(name, index) {
+    fetch('/api/v1/user/' + username + '/shows/' + encodeURIComponent(name), {
+      method: 'PATCH',
+      body: JSON.stringify({ position: index }),
+      headers: { 'Content-Type': 'application/json' }
+    });
   });
 }
 
@@ -227,7 +230,7 @@ if (searchInput) {
     }
 
     debounceTimer = setTimeout(function() {
-      fetch('/api/v0.1/search?q=' + encodeURIComponent(query))
+      fetch('/api/v1/search?q=' + encodeURIComponent(query))
         .then(response => response.json())
         .then(data => {
           renderSuggestions(data);
@@ -272,17 +275,20 @@ function addShow(name) {
   var username = window.location.pathname.split('/')[2];
   if (!username) return;
 
-  var formData = new FormData();
-  formData.append('show', name);
-
-  fetch('/api/v0.1/user/' + username + '/show', {
+  fetch('/api/v1/user/' + username + '/shows', {
     method: 'POST',
-    body: formData
+    body: JSON.stringify({ name: name }),
+    headers: { 'Content-Type': 'application/json' }
   })
   .then(response => response.json())
   .then(data => {
-    renderShows(data);
-    searchInput.value = '';
+    // Refresh list from v1 API
+    fetch('/api/v1/user/' + username + '/shows')
+      .then(r => r.json())
+      .then(shows => {
+        renderShows(shows);
+        searchInput.value = '';
+      });
   });
 }
 

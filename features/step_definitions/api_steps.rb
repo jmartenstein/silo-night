@@ -33,3 +33,14 @@ Then('the site responds with JSON') do
   head = $browser.last_response.headers
   expect(head["Content-Type"]).to match("application/json")
 end
+
+When('I send a POST request to {string} with body {string}') do |path, body|
+  # Parse body string "key=value" into form data
+  key, value = body.split('=')
+  $browser.post path, { key => value }
+end
+
+
+Then('the response status should be {int}') do |status_code|
+  expect($browser.last_response.status).to eq(status_code)
+end

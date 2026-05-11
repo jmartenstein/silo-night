@@ -8,6 +8,7 @@ $LOAD_PATH.unshift File.expand_path('./lib', __dir__)
 require 'database'
 require 'user'
 require 'metadata_service'
+require 'show_metadata'
 require 'clock'
 require 'services/schedule'
 require 'services/show'
@@ -321,18 +322,7 @@ namespace '/api/v0.1' do
 
     if s.nil?
       # Try to fetch metadata and create the show
-      service = MetadataService.new
-      metadata = service.get_show_metadata(params["show"])
-      
-      if metadata
-        require 'uri'
-        s = Show.create(
-          name: metadata[:name],
-          runtime: metadata[:runtime],
-          uri_encoded: URI.encode_www_form_component(metadata[:name].downcase),
-          poster_path: metadata[:poster_path]
-        )
-      end
+      s = Services::UserShow.create_show_from_metadata(params["show"])
     end
 
     if s.nil?
@@ -341,7 +331,7 @@ namespace '/api/v0.1' do
       Services::UserShow.add_show(u, s)
     end
 
-    u.shows.map { |s| { name: s.name, runtime: s.runtime, poster_path: s.poster_path } }.to_json
+    u.reload.shows.map { |s| { name: s.name, runtime: s.average_runtime, poster_path: s.poster_path } }.to_json
   end
 
   delete '/user/:name/show/:show' do
