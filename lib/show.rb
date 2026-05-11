@@ -4,6 +4,7 @@ require 'database'
 class Show < Sequel::Model
 
   many_to_many :users
+  one_to_one :metadata, class: :ShowMetadata, key: :show_id
 
   def average_runtime
 

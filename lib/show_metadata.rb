@@ -8,6 +8,8 @@ Sequel.connect(db_url)
 class ShowMetadata < Sequel::Model(:show_metadata)
   plugin :timestamps, update_on_create: true
   
+  many_to_one :show, class: :Show
+  
   # Configure JSON serialization for the payload column
   plugin :serialization, :json, :payload
 
