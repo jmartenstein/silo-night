@@ -10,7 +10,9 @@ describe User do
 
   let(:bot_shows) do
     ['show0', 'show1', 'show2'].map do |n|
-      Show.new { |s| s.name = n; s.runtime = '30' }.save
+      s = Show.create(name: n)
+      ShowMetadata.create(show_id: s.id, provider_name: 'internal', external_id: s.name, payload: { runtime: '30' })
+      s
     end
   end
 
@@ -97,8 +99,10 @@ describe User do
 
   it "re-generates schedule when show order changes" do
     u = User.create(name: "reorder_test", config: { "days" => "m,t,w", "time" => "60" }.to_json, schedule: {}.to_json)
-    s1 = Show.create(name: "Show 1", runtime: "30")
-    s2 = Show.create(name: "Show 2", runtime: "30")
+    s1 = Show.create(name: "Show 1")
+    ShowMetadata.create(show_id: s1.id, provider_name: 'internal', external_id: 'show1', payload: { runtime: '30' })
+    s2 = Show.create(name: "Show 2")
+    ShowMetadata.create(show_id: s2.id, provider_name: 'internal', external_id: 'show2', payload: { runtime: '30' })
     
     u.add_show(s1)
     u.add_show(s2)

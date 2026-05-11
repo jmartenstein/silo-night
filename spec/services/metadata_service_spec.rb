@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'metadata_service'
+require 'show_metadata'
 require 'tmdb_adapter'
 require 'tvmaze_adapter'
 

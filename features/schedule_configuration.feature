@@ -32,7 +32,7 @@ Scenario: Creating a new list of shows
     When the user searches for and adds "Silo"
     And the user "sam" visits the page to edit her shows
     Then the show "Silo" appears in the "Watch List"
-    And the runtime "50 min" is displayed for "Silo"
+    And the runtime "50" is displayed for "Silo"
     And the show "Silo" displays its poster art
 
   Scenario: Reordering the watch list

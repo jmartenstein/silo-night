@@ -13,10 +13,12 @@ RSpec.describe 'API v1 Shows', type: :request do
 
   let(:user_name) { 'test_user' }
   let!(:user) { User.create(name: user_name) }
-  let!(:show1) { Show.create(name: 'The Expanse', runtime: 60, uri_encoded: 'the+expanse') }
-  let!(:show2) { Show.create(name: 'Firefly', runtime: 45, uri_encoded: 'firefly') }
+  let!(:show1) { Show.create(name: 'The Expanse', uri_encoded: 'the+expanse') }
+  let!(:show2) { Show.create(name: 'Firefly', uri_encoded: 'firefly') }
 
   before do
+    ShowMetadata.create(show_id: show1.id, provider_name: 'internal', external_id: 'the+expanse', payload: { runtime: 60 })
+    ShowMetadata.create(show_id: show2.id, provider_name: 'internal', external_id: 'firefly', payload: { runtime: 45 })
     user.add_show(show1)
     user.add_show(show2)
   end

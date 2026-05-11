@@ -1,7 +1,7 @@
 FactoryBot.define do
 
   factory :show do
-    runtime{ "5-7 minutes" }
+    name { "Some Show" }
   end
 
   factory :user do

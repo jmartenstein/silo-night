@@ -6,6 +6,7 @@ db_url = ENV['DATABASE_URL'] || (ENV['RACK_ENV'] == 'test' ? 'sqlite://data/test
 Sequel.connect(db_url)
 
 class ShowMetadata < Sequel::Model(:show_metadata)
+  many_to_one :show
   plugin :timestamps, update_on_create: true
   
   # Configure JSON serialization for the payload column
@@ -17,14 +18,14 @@ class ShowMetadata < Sequel::Model(:show_metadata)
     errors.add(:external_id, 'is required') if external_id.nil? || external_id.empty?
   end
 
-  def self.upsert(provider_name:, external_id:, payload:)
+  def self.upsert(provider_name:, external_id:, payload:, show_id: nil)
     retries = 2
     begin
       metadata = find(provider_name: provider_name, external_id: external_id)
       if metadata
-        metadata.update(payload: payload)
+        metadata.update(payload: payload, show_id: show_id || metadata.show_id)
       else
-        create(provider_name: provider_name, external_id: external_id, payload: payload)
+        create(provider_name: provider_name, external_id: external_id, payload: payload, show_id: show_id)
       end
     rescue Sequel::UniqueConstraintViolation
       retries -= 1

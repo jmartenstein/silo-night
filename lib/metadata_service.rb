@@ -29,6 +29,10 @@ class MetadataService
   end
 
   def get_show_metadata(title)
+    # 0. Check local cache first
+    cached = ::ShowMetadata.find(provider_name: 'internal', external_id: URI.encode_www_form_component(title.downcase))
+    return cached.payload.transform_keys(&:to_sym) if cached && cached.payload
+
     # 1. Search in TMDB first (usually has better poster and detailed info)
     tmdb_results = @tmdb_adapter.search_shows_by_title(title)
     tmdb_show = tmdb_results.any? ? @tmdb_adapter.fetch_show_by_id(tmdb_results.first['id']) : nil
@@ -40,7 +44,18 @@ class MetadataService
     return nil if tmdb_show.nil? && tvmaze_show.nil?
 
     # 3. Merge and unify
-    unify_metadata(tmdb_show, tvmaze_show)
+    unified = unify_metadata(tmdb_show, tvmaze_show)
+  
+    # Cache the result if we found something
+    if unified
+      ::ShowMetadata.upsert(
+        provider_name: 'internal',
+        external_id: URI.encode_www_form_component(title.downcase),
+        payload: unified
+      )
+    end
+
+    unified
   end
 
   def search_shows(title)
@@ -48,11 +63,12 @@ class MetadataService
     suggestions = []
     local_shows = Show.where(Sequel.ilike(:name, "%#{title}%")).limit(5)
     local_shows.each do |show|
+      metadata = ::ShowMetadata.find(show_id: show.id, provider_name: 'internal')
       suggestions << {
         name: show.name,
         year: show.respond_to?(:year) ? show.year : nil,
         genres: show.respond_to?(:genres) ? (show.genres || []) : [],
-        poster_path: show.poster_path
+        poster_path: metadata&.payload&.fetch('poster_path', nil)
       }
     end
 

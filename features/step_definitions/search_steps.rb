@@ -1,5 +1,6 @@
 Given('a show named {string} exists in the local database with a poster') do |name|
-  Show.create(name: name, poster_path: '/poster.jpg')
+  s = Show.create(name: name)
+  ShowMetadata.create(show_id: s.id, provider_name: 'internal', external_id: name, payload: { poster_path: '/poster.jpg' })
 end
 
 When('I search for {string}') do |query|

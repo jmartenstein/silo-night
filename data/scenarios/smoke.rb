@@ -26,7 +26,13 @@ shows_to_create = [
 ]
 
 shows_to_create.each do |s|
-  Show.create(s)
+  show = Show.create(name: s[:name], uri_encoded: s[:uri_encoded])
+  ShowMetadata.upsert(
+    show_id: show.id,
+    provider_name: 'internal',
+    external_id: show.uri_encoded,
+    payload: { runtime: s[:runtime] }
+  )
 end
 
 # 2. Create users expected by Cucumber tests

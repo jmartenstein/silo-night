@@ -17,7 +17,7 @@ module Presenters
     private
 
     def runtime_as_integer
-      @show.runtime.to_i
+      @show.average_runtime.to_i
     end
 
     def formatted_poster_url

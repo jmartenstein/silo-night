@@ -1,10 +1,15 @@
 require 'spec_helper'
 require 'presenters/schedule'
 require 'show'
+require 'show_metadata'
 require 'presenters/show'
 
 RSpec.describe Presenters::Schedule do
-  let!(:show) { Show.create(name: 'The Expanse', runtime: '60', poster_path: '/path.jpg') }
+  let(:show) do
+    s = Show.create(name: 'The Expanse')
+    ShowMetadata.create(show_id: s.id, provider_name: 'internal', external_id: s.name, payload: { runtime: '60', poster_path: '/path.jpg' })
+    s
+  end
   let(:raw_schedule) do
     { 'Monday' => [{ 'name' => show.name }] }
   end

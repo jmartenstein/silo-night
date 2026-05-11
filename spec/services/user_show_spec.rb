@@ -3,7 +3,11 @@ require 'services/user_show'
 
 RSpec.describe Services::UserShow, type: :integration do
   let(:user) { create(:user) }
-  let(:show) { create(:show, name: 'Expanse') }
+  let(:show) do
+    s = create(:show, name: 'Expanse')
+    ShowMetadata.create(show_id: s.id, provider_name: 'internal', external_id: s.name, payload: { runtime: '30' })
+    s
+  end
 
   describe ".add_show" do
     it "adds the show to the user and regenerates the schedule" do

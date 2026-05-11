@@ -32,6 +32,7 @@ end
 
 Then('the runtime {string} is displayed for {string}') do |runtime, name|
   actual_body = $browser.last_response.body.to_s
+  $stderr.puts "BODY: #{actual_body}"
   expect(actual_body).to include(name)
   expect(actual_body).to include(runtime)
 end
@@ -42,7 +43,11 @@ Given('the user {string} has {string} and {string} in their list') do |username,
   
   # Ensure shows exist and are added to user
   [show1, show2].each do |name|
-    show = Show.find(name: name) || Show.create(name: name, runtime: "45 minutes", uri_encoded: name.downcase.gsub(' ', '+'))
+    unless Show.find(name: name)
+      show = Show.create(name: name)
+      ShowMetadata.create(show_id: show.id, provider_name: 'internal', external_id: name, payload: { runtime: "45 minutes", poster_path: "/#{name.downcase}.jpg" })
+    end
+    show = Show.find(name: name)
     Services::UserShow.add_show(u, show)
   end
 end

@@ -7,6 +7,7 @@ end
 FactoryBot.find_definitions
 $LOAD_PATH.unshift File.expand_path('../../lib', __dir__)
 require 'database'
+require 'show_metadata'
 require 'sequel/extensions/migration'
 require 'database_cleaner/sequel'
 

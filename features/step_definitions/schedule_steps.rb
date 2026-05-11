@@ -62,7 +62,10 @@ end
 When('the user adds {string} \({string}\) to their list via the UI') do |show_name, runtime|
   # Mimic the UI: Add the show to the database (if it doesn't exist) then associate with user
   # The UI calls POST /api/v0.1/user/:name/show
-  Show.find(name: show_name) || Show.create(name: show_name, runtime: runtime)
+  unless Show.find(name: show_name)
+    s = Show.create(name: show_name)
+    ShowMetadata.create(show_id: s.id, provider_name: 'internal', external_id: show_name, payload: { runtime: runtime })
+  end
   $browser.post "/api/v1/user/#{@current_user_name}/shows", { "name" => show_name }.to_json, { 'CONTENT_TYPE' => 'application/json' }
 end
 
@@ -86,8 +89,17 @@ Given(/^the user "([^"]*)" has "([^"]*)" \(([^)]*)\) and "([^"]*)" \(([^)]*)\) i
   @current_user_name = username
   u = User.find(name: username) || User.create(name: username, config: {}.to_json, schedule: {}.to_json)
   
-  s1 = Show.find(name: show1) || Show.create(name: show1, runtime: run1)
-  s2 = Show.find(name: show2) || Show.create(name: show2, runtime: run2)
+  unless Show.find(name: show1)
+    s1 = Show.create(name: show1)
+    ShowMetadata.create(show_id: s1.id, provider_name: 'internal', external_id: show1, payload: { runtime: run1 })
+  end
+  unless Show.find(name: show2)
+    s2 = Show.create(name: show2)
+    ShowMetadata.create(show_id: s2.id, provider_name: 'internal', external_id: show2, payload: { runtime: run2 })
+  end
+  
+  s1 = Show.find(name: show1)
+  s2 = Show.find(name: show2)
   
   Services::UserShow.add_show(u, s1) unless u.shows.include?(s1)
   Services::UserShow.add_show(u, s2) unless u.shows.include?(s2)

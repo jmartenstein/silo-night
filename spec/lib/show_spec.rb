@@ -12,17 +12,20 @@ describe Show do
   end
 
   it "loads from a data structure" do
-    s = Show.new(suits)
+    s = Show.create(name: suits["name"])
+    ShowMetadata.create(show_id: s.id, provider_name: 'internal', external_id: s.name, payload: { runtime: suits["runtime"] })
     expect(s.name).to eq(suits["name"])
   end
 
   it "calculates an average from one number" do
-    s = Show.new(suits)
+    s = Show.create(name: suits["name"])
+    ShowMetadata.create(show_id: s.id, provider_name: 'internal', external_id: s.name, payload: { runtime: suits["runtime"] })
     expect(s.average_runtime).to eq(42)
   end
 
   it "calculates an average from two numbers" do
-    s = Show.new(platonic)
+    s = Show.create(name: platonic["name"])
+    ShowMetadata.create(show_id: s.id, provider_name: 'internal', external_id: s.name, payload: { runtime: platonic["runtime"] })
     expect(s.average_runtime).to eq(30)
   end
 
@@ -47,7 +50,7 @@ describe Shows do
   it "list loads from json" do
     l = Shows.new()
     l.load_from_json(shows)
-    expect(l[0].runtime).to eq("12 minutes")
+    expect(l[0].average_runtime).to eq(12)
     expect(l[0].poster_path).to eq("foo.jpg")
   end
 

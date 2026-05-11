@@ -45,12 +45,20 @@ module Services
       metadata = MetadataService.new.get_show_metadata(name)
       return nil unless metadata
 
-      ::Show.create(
-        name: metadata[:name],
-        runtime: metadata[:runtime],
-        uri_encoded: URI.encode_www_form_component(metadata[:name].downcase),
-        poster_path: metadata[:poster_path]
-      )
+      DB.transaction do
+        show = ::Show.find(name: metadata[:name]) || ::Show.create(
+          name: metadata[:name],
+          uri_encoded: URI.encode_www_form_component(metadata[:name].downcase)
+        )
+
+        ::ShowMetadata.upsert(
+          show_id: show.id,
+          provider_name: 'internal',
+          external_id: show.uri_encoded,
+          payload: metadata
+        )
+        show
+      end
     end
   end
 end

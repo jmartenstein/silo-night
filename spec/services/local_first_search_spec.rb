@@ -1,9 +1,11 @@
 require 'spec_helper'
 require 'services/search'
+require 'show_metadata'
 
 RSpec.describe 'Local-First Search Strategy', type: :integration do
   it 'includes shows from the database in the search results', vcr: { record: :once } do
-    Show.create(name: 'The Expanse', poster_path: '/poster.jpg')
+    s = Show.create(name: 'The Expanse')
+    ShowMetadata.create(show_id: s.id, provider_name: 'internal', external_id: s.name, payload: { poster_path: '/poster.jpg' })
 
     results = Services::Search.search('The Expanse')
 
@@ -13,7 +15,8 @@ RSpec.describe 'Local-First Search Strategy', type: :integration do
   end
 
   it 'handles case-insensitive and partial matches from the local database' do
-    Show.create(name: 'The Expanse', poster_path: '/poster.jpg')
+    s = Show.create(name: 'The Expanse')
+    ShowMetadata.create(show_id: s.id, provider_name: 'internal', external_id: s.name, payload: { poster_path: '/poster.jpg' })
     
     # Stub adapters to avoid API calls
     allow_any_instance_of(TmdbAdapter).to receive(:search_shows_by_title).and_return([])
@@ -27,7 +30,8 @@ RSpec.describe 'Local-First Search Strategy', type: :integration do
 
   it 'returns both local and API results when they are distinct shows' do
     # Local show
-    Show.create(name: 'The Show', poster_path: '/local.jpg')
+    s = Show.create(name: 'The Show')
+    ShowMetadata.create(show_id: s.id, provider_name: 'internal', external_id: s.name, payload: { poster_path: '/local.jpg' })
     
     # Stub API to return a different show
     allow_any_instance_of(TmdbAdapter).to receive(:search_shows_by_title).and_return([{'name' => 'Different Show', 'first_air_date' => '2020-01-01', 'popularity' => 10.0}])
