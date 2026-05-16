@@ -53,10 +53,10 @@ The schema changes are already in `db/migrations`. Now we need to move the actua
 ### Step 2: Update the `Show` Model (Delegation)
 We want the `Show` model to be smart. If someone asks for `show.runtime`, it should check its associated metadata record first.
 
-- [ ] **Edit `lib/show.rb`**: 
+- [x] **Edit `lib/show.rb`**: 
     - Update the `runtime` getter (or create one) to return `metadata.payload['runtime']` if it exists, falling back to the column.
     - Do the same for `poster_path`.
-- [ ] **Validation**: Run the model specs.
+- [x] **Validation**: Run the model specs.
   ```bash
   bundle exec rspec spec/lib/show_spec.rb
   ```

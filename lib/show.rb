@@ -7,10 +7,26 @@ class Show < Sequel::Model
   many_to_many :users
   one_to_one :metadata, class: :ShowMetadata, key: :show_id
 
+  def runtime
+    if metadata && metadata.payload && metadata.payload['runtime']
+      metadata.payload['runtime']
+    else
+      @values[:runtime]
+    end
+  end
+
+  def poster_path
+    if metadata && metadata.payload && metadata.payload['poster_path']
+      metadata.payload['poster_path']
+    else
+      @values[:poster_path]
+    end
+  end
+
   def average_runtime
 
     # split the strings by non-word characters
-    times = @values[:runtime].split(/\W+/)
+    times = self.runtime.to_s.split(/\W+/)
 
     # remove common words
     times.delete("minutes")

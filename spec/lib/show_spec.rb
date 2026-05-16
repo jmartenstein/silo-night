@@ -26,6 +26,26 @@ describe Show do
     expect(s.average_runtime).to eq(30)
   end
 
+  context "with metadata" do
+    let(:show) { Show.create(name: "Test Show", runtime: "30 minutes") }
+    let(:metadata) { ShowMetadata.create(provider_name: "local", external_id: "test", payload: { "runtime" => "60 minutes", "poster_path" => "/path/to/poster.jpg" }, show_id: show.id) }
+
+    it "retrieves runtime from metadata if present" do
+      show.metadata = metadata
+      expect(show.runtime).to eq("60 minutes")
+    end
+
+    it "retrieves poster_path from metadata if present" do
+      show.metadata = metadata
+      expect(show.poster_path).to eq("/path/to/poster.jpg")
+    end
+
+    it "falls back to columns if metadata values are missing" do
+      show.metadata = ShowMetadata.create(provider_name: "local", external_id: "test2", payload: {}, show_id: show.id)
+      expect(show.runtime).to eq("30 minutes")
+    end
+  end
+
 end
 
 describe Shows do
