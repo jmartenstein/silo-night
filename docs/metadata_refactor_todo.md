@@ -82,7 +82,17 @@ Our seed scripts (`smoke.rb`, `n1_audit.rb`) currently create shows without meta
   bundle exec rake db:seed:scenario[n1_audit]
   ```
 
-### Step 5: Refactor Feature Step Definitions
+### Step 5: Modernize Test Data Factories
+Our current FactoryBot definitions and RSpec setup rely on setting legacy `runtime` and `poster_path` attributes. These must be refactored to use the `:with_metadata` trait to avoid mass-assignment errors.
+
+- [ ] **Update Factory Definitions**: Update `spec/factories/users.rb` to ensure `:show` factory uses `:with_metadata` by default or via explicit traits.
+- [ ] **Audit Spec Setup**: Search for all occurrences of `create(:show, ...)` or `Show.create(...)` in `spec/` files. Ensure they pass valid metadata payloads instead of legacy column attributes.
+- [ ] **Validation**: Run the full RSpec suite.
+  ```bash
+  bundle exec rake test:unit
+  ```
+
+### Step 6: Refactor Feature Step Definitions
 Cucumber steps currently create `Show` objects directly, bypassing the metadata service. This will cause failures once columns are removed.
 
 - [x] **Refactor Step Definitions**: Update `features/step_definitions/schedule_steps.rb` and `features/step_definitions/ui_steps.rb` to use your unified show creation helper.
@@ -91,17 +101,27 @@ Cucumber steps currently create `Show` objects directly, bypassing the metadata 
   bundle exec cucumber
   ```
 
-### Step 6: Refactor the Presenter
+### Step 7: Refactor the Presenter
 The Presenter shouldn't care *where* the data comes from, but we should make sure it's using the new "source of truth."
 
-- [ ] **Edit `lib/presenters/show.rb`**: Update it to use the delegated methods from the `Show` model.
-- [ ] **Validation**: Run the presenter specs.
+- [x] **Edit `lib/presenters/show.rb`**: Update it to use the delegated methods from the `Show` model.
+- [x] **Validation**: Run the presenter specs.
   ```bash
   bundle exec rspec spec/lib/presenters/show_spec.rb
   ```
 
-### Step 7: Final Schema Cleanup (The "Point of No Return")
-Once we are 100% sure the app is reading from the `payload`, we safely remove the old columns.
+### Step 8: Enforce Write-Safety
+Before we remove the database columns, we must stop the application from trying to write to them. This step identifies and removes all "legacy writes" to the `shows` table.
+
+- [ ] **Lock Model Attributes**: Add `set_restricted_columns :runtime, :poster_path` (or equivalent Sequel restriction) to the `Show` model to prevent accidental mass-assignment.
+- [ ] **Audit Creation Calls**: Search the entire codebase for `Show.create`, `Show.new`, and `update` calls. Remove `runtime` and `poster_path` arguments from every single one.
+- [ ] **Validation**: Run the full test suite.
+  ```bash
+  bundle exec rake test
+  ```
+
+### Step 9: Final Schema Cleanup (The "Point of No Return")
+Once we are 100% sure the app is reading from the `payload` and no code is trying to write to legacy columns, we safely remove them.
 
 - [ ] **Rename Columns**: Create a migration to rename `runtime` and `poster_path` to `deprecated_runtime` and `deprecated_poster_path`. This will trigger an immediate crash if any code still tries to access them.
 - [ ] **Run Migration**: `bundle exec rake db:migrate`.
