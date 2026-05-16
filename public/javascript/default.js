@@ -298,9 +298,9 @@ function renderShows(shows) {
     var li = document.createElement('li');
     li.className = 'list-item';
     
-    if (s.poster_path) {
+    if (s.poster_url) {
       var img = document.createElement('img');
-      img.src = s.poster_path;
+      img.src = s.poster_url;
       img.className = 'show-poster';
       li.appendChild(img);
     }
@@ -317,7 +317,7 @@ function renderShows(shows) {
 
     var runtimeSpan = document.createElement('span');
     runtimeSpan.className = 'runtime';
-    runtimeSpan.textContent = s.runtime;
+    runtimeSpan.textContent = s.runtime + ' minutes';
     li.appendChild(runtimeSpan);
 
     var removeSpan = document.createElement('span');
