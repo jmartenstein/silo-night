@@ -1,7 +1,7 @@
 # spec/requests/api/v1/shows/create_spec.rb
 require 'spec_helper'
 
-RSpec.describe 'API v1 Shows Create', type: :request do
+RSpec.describe 'API v1 Shows Create', type: :request, type: :integration do
   before do
     User.create(name: 'sam')
     Show.create(name: 'Foundation', runtime: '60')
