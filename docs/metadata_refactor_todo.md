@@ -85,10 +85,10 @@ Our seed scripts (`smoke.rb`, `n1_audit.rb`) currently create shows without meta
 ### Step 5: Refactor Feature Step Definitions
 Cucumber steps currently create `Show` objects directly, bypassing the metadata service. This will cause failures once columns are removed.
 
-- [ ] **Refactor Step Definitions**: Update `features/step_definitions/schedule_steps.rb` and `features/step_definitions/ui_steps.rb` to use your unified show creation helper.
-- [ ] **Validation**: Run the feature suite.
+- [x] **Refactor Step Definitions**: Update `features/step_definitions/schedule_steps.rb` and `features/step_definitions/ui_steps.rb` to use your unified show creation helper.
+- [x] **Validation**: Run the feature suite.
   ```bash
-  bundle exec rake cucumber
+  bundle exec cucumber
   ```
 
 ### Step 6: Refactor the Presenter
