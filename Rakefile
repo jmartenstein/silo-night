@@ -7,10 +7,14 @@ require 'fileutils'
 
 MIGRATIONS_DIR = 'db/migrations'
 
+def db_name
+  DB_URL.sub('sqlite://', '')
+end
+
 namespace :db do
   desc "Create the database files"
   task :create do
-    db_path = DB_URL.sub('sqlite://', '')
+    db_path = db_name
     dir = File.dirname(db_path)
     FileUtils.mkdir_p(dir) unless Dir.exist?(dir)
     if File.exist?(db_path)
@@ -23,7 +27,7 @@ namespace :db do
 
   desc "Drop the database files"
   task :drop do
-    db_path = DB_URL.sub('sqlite://', '')
+    db_path = db_name
     if File.exist?(db_path)
       # We might need to disconnect before dropping
       DB.disconnect
@@ -42,6 +46,7 @@ namespace :db do
 
   desc "Run migrations to the latest version"
   task :migrate do
+    puts "Running migrations on #{db_name}..."
     Sequel::Migrator.run(DB, MIGRATIONS_DIR)
     puts "Applied migrations to the latest version."
   end
@@ -57,11 +62,13 @@ namespace :db do
   desc "Show current migration version"
   task :version do
     version = DB[:schema_info].first[:version] rescue 0
+    puts "Database: #{db_name}"
     puts "Current migration version: #{version}"
   end
 
   desc "Check if migrations are current"
   task :status do
+    puts "Checking status of #{db_name}..."
     if Sequel::Migrator.is_current?(DB, MIGRATIONS_DIR)
       puts "Migrations are up to date."
     else
