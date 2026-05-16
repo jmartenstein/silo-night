@@ -71,7 +71,18 @@ When we add a new show (e.g., via the Search UI), we need to make sure we create
   bundle exec rspec spec/requests/api/v1/shows/create_spec.rb
   ```
 
-### Step 4: Refactor the Presenter
+### Step 4: Refactor Data Seeding Scenarios
+Our seed scripts (`smoke.rb`, `n1_audit.rb`) currently create shows without metadata, which will break the new delegation logic. We need a unified helper to create shows consistently.
+
+- [ ] **Create Seeder Helper**: Move show creation logic to a shared helper (e.g., in a `DatabaseSeeder` module or shared service) that creates both `Show` and `ShowMetadata` records.
+- [ ] **Update Seeding Scripts**: Refactor `data/scenarios/smoke.rb` and `data/scenarios/n1_audit.rb` to use this new helper.
+- [ ] **Validation**: Run the scenarios to verify they don't break.
+  ```bash
+  bundle exec rake db:seed:scenario[smoke]
+  bundle exec rake db:seed:scenario[n1_audit]
+  ```
+
+### Step 5: Refactor the Presenter
 The Presenter shouldn't care *where* the data comes from, but we should make sure it's using the new "source of truth."
 
 - [ ] **Edit `lib/presenters/show.rb`**: Update it to use the delegated methods from the `Show` model.
@@ -80,7 +91,7 @@ The Presenter shouldn't care *where* the data comes from, but we should make sur
   bundle exec rspec spec/lib/presenters/show_spec.rb
   ```
 
-### Step 5: Final Schema Cleanup (The "Point of No Return")
+### Step 6: Final Schema Cleanup (The "Point of No Return")
 Once we are 100% sure the app is reading from the `payload`, we can remove the old columns.
 
 - [ ] **Create a Migration**: Create a new migration to drop `runtime` and `poster_path` from the `shows` table.
