@@ -1,5 +1,8 @@
-require_relative '../lib/show'
-require_relative '../lib/show_metadata'
+$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
+
+require 'database'
+require 'show'
+require 'show_metadata'
 
 def migrate_metadata
   puts "Starting metadata migration..."

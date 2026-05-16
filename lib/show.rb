@@ -1,5 +1,6 @@
 require 'json'
 require 'database'
+require_relative 'show_metadata'
 
 class Show < Sequel::Model
 

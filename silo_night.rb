@@ -7,6 +7,7 @@ require 'slim'
 $LOAD_PATH.unshift File.expand_path('./lib', __dir__)
 require 'database'
 require 'user'
+require 'show_metadata'
 require 'metadata_service'
 require 'clock'
 require 'services/schedule'

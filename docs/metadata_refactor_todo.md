@@ -31,20 +31,20 @@ Before we touch the schema, we need a "Save Point" in case we need to abandon th
 ### Step 1: Data Migration
 The schema changes are already in `db/migrations`. Now we need to move the actual data.
 
-- [ ] **Run Migrations**: Ensure your local DB is up to date.
+- [x] **Run Migrations**: Ensure your local DB is up to date.
   ```bash
   bundle exec rake db:migrate
   ```
-- [ ] **Run the Migration Script**: Move data from `shows` columns into `show_metadata` records.
+- [x] **Run the Migration Script**: Move data from `shows` columns into `show_metadata` records.
   ```bash
   bundle exec ruby scripts/migrate_metadata_to_payload.rb
   ```
-- [ ] **Validation**: Open the console and verify a show has metadata.
+- [x] **Validation**: Open the console and verify a show has metadata.
   ```ruby
   # In bundle exec irb -r ./silo_night
   Show.first.metadata.payload # Should return a hash with runtime and poster_path
   ```
-- [ ] **Create a V4 Snapshot (Checkpoint)**: Create a fresh snapshot of the database *before* running migrations. This is our "Point of Abandonment"—if the refactor fails, we can restore this.
+- [x] **Create a V4 Snapshot (Checkpoint)**: Create a fresh snapshot of the database *before* running migrations. This is our "Point of Abandonment"—if the refactor fails, we can restore this.
   ```bash
   # Create a schedule_v4 snapshot to save current state
   bundle exec rake db:snapshot:save[schedule_v4]
