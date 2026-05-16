@@ -18,19 +18,19 @@ We are currently on the `refactor/metadata` branch. If a step breaks the tests a
 ### Step 0: Establish Database Baselines (Safety First)
 Before we touch the schema, we need a "Save Point" in case we need to abandon this branch entirely.
 
-- [ ] **Verify V3 Baseline**: Ensure your local database is currently reflecting the `v3` snapshot state.
+- [ ] **Verify V3 Baseline**: Ensure your local database is currently reflecting the `schedule_v3` snapshot state.
   ```bash
   # Check your data folder for the v3 snapshot
-  ls db/snapshots/
+  ls db/snapshots/schedule_v3*
   ```
 - [ ] **Create a V4 Snapshot (Checkpoint)**: Create a fresh snapshot of the database *before* running migrations. This is our "Point of Abandonment"—if the refactor fails, we can restore this.
   ```bash
-  # Create a v4 snapshot to save current state
-  bundle exec rake db:snapshot:create[v4]
+  # Create a schedule_v4 snapshot to save current state
+  bundle exec rake db:snapshot:create[schedule_v4]
   ```
 - [ ] **Sync Environments**: Use this snapshot to ensure your development and test databases are synced.
   ```bash
-  bundle exec rake db:snapshot:restore[v4]
+  bundle exec rake db:snapshot:restore[schedule_v4]
   ```
 
 ### Step 1: Data Migration
@@ -97,9 +97,9 @@ If `Show.first.metadata` returns `nil` after Step 1, the migration script didn't
 
 ### "Abandon Ship" (How to reset)
 If you decide to abandon the `refactor/metadata` branch due to unresolvable issues:
-1. **Restore Baseline**: Revert to the known-good V3 state.
+1. **Restore Baseline**: Revert to the known-good schedule_v3 state.
    ```bash
-   bundle exec rake db:snapshot:restore[v3]
+   bundle exec rake db:snapshot:restore[schedule_v3]
    ```
 2. **Discard Branch Changes**:
    ```bash
