@@ -1,3 +1,4 @@
+@vcr
 Feature: Search Edge Cases
   As a user
   I want search results to be handled gracefully

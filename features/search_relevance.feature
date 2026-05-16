@@ -1,3 +1,4 @@
+@vcr
 Feature: Search Relevance
   As a user
   I want search results to be relevant

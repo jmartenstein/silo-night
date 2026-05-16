@@ -9,6 +9,24 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __dir__)
 require 'database'
 require 'sequel/extensions/migration'
 require 'database_cleaner/sequel'
+require 'vcr'
+require 'cgi'
+
+# Configure VCR for Cucumber
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.hook_into :webmock
+  config.filter_sensitive_data('<TMDB_API_KEY>') { ENV['TMDB_API_KEY'] }
+  config.filter_sensitive_data('<TVMAZE_API_KEY>') { ENV['TVMAZE_API_KEY'] }
+end
+
+# Manage cassettes for tagged scenarios
+Around('@vcr') do |scenario, block|
+  name = scenario.name.gsub(/[^\w-]/, '_').downcase
+  VCR.use_cassette("cucumber/#{name}") do
+    block.call
+  end
+end
 
 unless Sequel::Migrator.is_current?(DB, 'db/migrations')
   puts "Database migrations are not up to date. Run 'RACK_ENV=test rake db:migrate' first."

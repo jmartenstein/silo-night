@@ -1,3 +1,4 @@
+@vcr
 Feature: Local-First Search
   As a user, I want to see my saved shows in the search results instantly,
   so that I can quickly add them to my schedule without waiting for external API calls.
