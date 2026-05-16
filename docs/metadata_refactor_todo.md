@@ -18,14 +18,14 @@ We are currently on the `refactor/metadata` branch. If a step breaks the tests a
 ### Step 0: Establish Database Baselines (Safety First)
 Before we touch the schema, we need a "Save Point" in case we need to abandon this branch entirely.
 
-- [ ] **Create a V3 Snapshot (Checkpoint)**: Create a fresh snapshot of the database *before* running migrations. This is our "Point of Abandonment"—if the refactor fails, we can restore this.
+- [x] **Create a V3 Snapshot (Checkpoint)**: Create a fresh snapshot of the database *before* running migrations. This is our "Point of Abandonment"—if the refactor fails, we can restore this.
   ```bash
   # Create a schedule_v4 snapshot to save current state
-  bundle exec rake db:snapshot:create[schedule_v3]
+  bundle exec rake db:snapshot:save[schedule_v3]
   ```
-- [ ] **Sync Environments**: Use this snapshot to ensure your development and test databases are synced.
+- [x] **Sync Environments**: Use this snapshot to ensure your development and test databases are synced.
   ```bash
-  bundle exec rake db:snapshot:restore[schedule_v3]
+  bundle exec rake db:snapshot:load[schedule_v3]
   ```
 
 ### Step 1: Data Migration
@@ -47,8 +47,8 @@ The schema changes are already in `db/migrations`. Now we need to move the actua
 - [ ] **Create a V4 Snapshot (Checkpoint)**: Create a fresh snapshot of the database *before* running migrations. This is our "Point of Abandonment"—if the refactor fails, we can restore this.
   ```bash
   # Create a schedule_v4 snapshot to save current state
-  bundle exec rake db:snapshot:create[schedule_v4]
-
+  bundle exec rake db:snapshot:save[schedule_v4]
+  ```
 
 ### Step 2: Update the `Show` Model (Delegation)
 We want the `Show` model to be smart. If someone asks for `show.runtime`, it should check its associated metadata record first.
@@ -99,7 +99,7 @@ If `Show.first.metadata` returns `nil` after Step 1, the migration script didn't
 If you decide to abandon the `refactor/metadata` branch due to unresolvable issues:
 1. **Restore Baseline**: Revert to the known-good schedule_v3 state.
    ```bash
-   bundle exec rake db:snapshot:restore[schedule_v3]
+   bundle exec rake db:snapshot:load[schedule_v3]
    ```
 2. **Discard Branch Changes**:
    ```bash
