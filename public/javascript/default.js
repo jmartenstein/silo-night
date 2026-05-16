@@ -276,6 +276,12 @@ function addShow(name) {
     body: JSON.stringify({ name: name }),
     headers: { 'Content-Type': 'application/json' }
   })
+  .then(response => {
+    if (response.ok) {
+      // Fetch the full list to refresh the UI
+      return fetch('/api/v1/user/' + username + '/shows');
+    }
+  })
   .then(response => response.json())
   .then(data => {
     renderShows(data);
