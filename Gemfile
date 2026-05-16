@@ -15,6 +15,7 @@ gem 'rackup', '>=2.1.0'
 gem 'rack-test', '~>2.1.0'
 
 group :development, :test do
+  gem 'cgi'
   gem 'irb', '~> 1.18.0'
   gem 'cucumber', '~>10.0.0'
   gem 'rspec', '>=3.12.0'

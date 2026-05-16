@@ -74,15 +74,24 @@ When we add a new show (e.g., via the Search UI), we need to make sure we create
 ### Step 4: Refactor Data Seeding Scenarios
 Our seed scripts (`smoke.rb`, `n1_audit.rb`) currently create shows without metadata, which will break the new delegation logic. We need a unified helper to create shows consistently.
 
-- [ ] **Create Seeder Helper**: Move show creation logic to a shared helper (e.g., in a `DatabaseSeeder` module or shared service) that creates both `Show` and `ShowMetadata` records.
-- [ ] **Update Seeding Scripts**: Refactor `data/scenarios/smoke.rb` and `data/scenarios/n1_audit.rb` to use this new helper.
-- [ ] **Validation**: Run the scenarios to verify they don't break.
+- [x] **Create Seeder Helper**: Move show creation logic to a shared helper (e.g., in a `DatabaseSeeder` module or shared service) that creates both `Show` and `ShowMetadata` records.
+- [x] **Update Seeding Scripts**: Refactor `data/scenarios/smoke.rb` and `data/scenarios/n1_audit.rb` to use this new helper.
+- [x] **Validation**: Run the scenarios to verify they don't break.
   ```bash
   bundle exec rake db:seed:scenario[smoke]
   bundle exec rake db:seed:scenario[n1_audit]
   ```
 
-### Step 5: Refactor the Presenter
+### Step 5: Refactor Feature Step Definitions
+Cucumber steps currently create `Show` objects directly, bypassing the metadata service. This will cause failures once columns are removed.
+
+- [ ] **Refactor Step Definitions**: Update `features/step_definitions/schedule_steps.rb` and `features/step_definitions/ui_steps.rb` to use your unified show creation helper.
+- [ ] **Validation**: Run the feature suite.
+  ```bash
+  bundle exec rake cucumber
+  ```
+
+### Step 6: Refactor the Presenter
 The Presenter shouldn't care *where* the data comes from, but we should make sure it's using the new "source of truth."
 
 - [ ] **Edit `lib/presenters/show.rb`**: Update it to use the delegated methods from the `Show` model.
@@ -91,15 +100,14 @@ The Presenter shouldn't care *where* the data comes from, but we should make sur
   bundle exec rspec spec/lib/presenters/show_spec.rb
   ```
 
-### Step 6: Final Schema Cleanup (The "Point of No Return")
-Once we are 100% sure the app is reading from the `payload`, we can remove the old columns.
+### Step 7: Final Schema Cleanup (The "Point of No Return")
+Once we are 100% sure the app is reading from the `payload`, we safely remove the old columns.
 
-- [ ] **Create a Migration**: Create a new migration to drop `runtime` and `poster_path` from the `shows` table.
+- [ ] **Rename Columns**: Create a migration to rename `runtime` and `poster_path` to `deprecated_runtime` and `deprecated_poster_path`. This will trigger an immediate crash if any code still tries to access them.
 - [ ] **Run Migration**: `bundle exec rake db:migrate`.
-- [ ] **Validation**: Run the **entire** test suite.
-  ```bash
-  bundle exec rspec
-  ```
+- [ ] **Verification**: Run the **entire** test suite (`bundle exec rake test`). If it stays green, you are safe.
+- [ ] **Drop Columns**: Create a final migration to remove the `deprecated_` columns.
+- [ ] **Run Migration**: `bundle exec rake db:migrate`.
 
 ---
 
