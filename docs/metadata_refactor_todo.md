@@ -64,9 +64,9 @@ We want the `Show` model to be smart. If someone asks for `show.runtime`, it sho
 ### Step 3: Update Show Creation Logic
 When we add a new show (e.g., via the Search UI), we need to make sure we create the `Show` **and** the `ShowMetadata` at the same time.
 
-- [ ] **Edit `silo_night.rb`**: Find the `post '/user/:name/show'` route (and any other creation points). Ensure that when a show is created from `MetadataService` results, the metadata is saved to the `show_metadata` table and linked via `show_id`.
-- [ ] **Edit `lib/services/user_show.rb`**: If there is logic here for adding shows, ensure it handles the metadata link.
-- [ ] **Validation**: Run the integration tests for adding shows.
+- [x] **Edit `silo_night.rb`**: Find the `post '/user/:name/show'` route (and any other creation points). Ensure that when a show is created from `MetadataService` results, the metadata is saved to the `show_metadata` table and linked via `show_id`.
+- [x] **Edit `lib/services/user_show.rb`**: If there is logic here for adding shows, ensure it handles the metadata link.
+- [x] **Validation**: Run the integration tests for adding shows.
   ```bash
   bundle exec rspec spec/requests/api/v1/shows/create_spec.rb
   ```
