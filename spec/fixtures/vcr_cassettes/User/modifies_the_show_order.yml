@@ -1,0 +1,686 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/search/tv?api_key=<TMDB_API_KEY>&query=The%20Equalizer
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 16 May 2026 20:29:41 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=24068
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - e8caf58686f0740f75184b594e6a4826bd3c02650101d1708cb0343ff4255e21
+      X-Memc-Age:
+      - '1953'
+      X-Memc-Expires:
+      - '24068'
+      X-Az:
+      - us-east-1c
+      X-Task-Id:
+      - 72e9b4e386154672a1fd66d01a9f7f77
+      Etag:
+      - W/"29d6d47b7bb2de14ddd24d35dfaae0e7"
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 5d17d63ab6a3c1bd41982f69ab92d17a.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SEA900-P5
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - NNGgGxFEPEasvnQhzvByTluLDoYIGOqk0sqaok-neYUDeINelGehIA==
+      Age:
+      - '1972'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"page":1,"results":[{"adult":false,"backdrop_path":"/iq7kBdJfpbyt9hMZUaF6B0osr3v.jpg","genre_ids":[10759,80,18],"id":4297,"origin_country":["CA","US"],"original_language":"en","original_name":"The
+        Equalizer","overview":"Robert McCall is a former agent of a secret government
+        agency who is now running his own private crime fighting operation where he
+        fashions himself as \"The Equalizer.\" It is a service for victims of the
+        system who have exhausted all possible means of seeking justice and have nowhere
+        to go. McCall promises to even out the odds for them.","popularity":18.6081,"poster_path":"/7nrKPxGJWYe5cacNN9AV9bVplNZ.jpg","first_air_date":"1985-09-18","softcore":false,"name":"The
+        Equalizer","vote_average":7.136,"vote_count":66},{"adult":false,"backdrop_path":"/z8CzVVAGHRRmgJQ6ZRjr8OuCmlj.jpg","genre_ids":[80,18],"id":95205,"origin_country":["US"],"original_language":"en","original_name":"The
+        Equalizer","overview":"Robyn McCall, an enigmatic former CIA operative with
+        a mysterious background, uses her extensive skills to help those with nowhere
+        else to turn.","popularity":16.1545,"poster_path":"/oxJG9F16AUji71jpPxkEOBWanMP.jpg","first_air_date":"2021-02-07","softcore":false,"name":"The
+        Equalizer","vote_average":7.3,"vote_count":315},{"adult":false,"backdrop_path":null,"genre_ids":[],"id":127707,"origin_country":[],"original_language":"en","original_name":"Alex
+        Morgan: The Equalizer","overview":"Behind-the-scenes look at Alex Morgan and
+        her fellow teammates who are paving the way for the generations of female
+        athletes who will follow their lead.","popularity":0.0654,"poster_path":"/zA8MFgIKCMtAXFtlbyDiL22V5xa.jpg","first_air_date":"2019-07-02","softcore":false,"name":"Alex
+        Morgan: The Equalizer","vote_average":9.0,"vote_count":2}],"total_pages":1,"total_results":3}'
+  recorded_at: Sat, 16 May 2026 21:02:33 GMT
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/tv/4297?api_key=<TMDB_API_KEY>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 16 May 2026 20:29:41 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=8652
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - b604cbda5eda35ecd7e99e2e07c5eec068cd73b32424eaaf95c06a7d3066847c
+      X-Memc-Age:
+      - '16869'
+      X-Memc-Expires:
+      - '8652'
+      X-Az:
+      - us-east-1b
+      X-Task-Id:
+      - b68043e5fb964195ba3ee4924c49b113
+      Etag:
+      - W/"9441a17abfb72402df94a93ee8e6b6d6"
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 7f908c32ed2ff2036a2c0fe12120ac4a.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SEA900-P5
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - MTQ4P2qd5sobOcu4R4XUQuiViJv2gXa8BWQB0MHZ-nSlOI6LrSo-mA==
+      Age:
+      - '1973'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJhZHVsdCI6ZmFsc2UsImJhY2tkcm9wX3BhdGgiOiIvaXE3a0JkSmZwYnl0OWhNWlVhRjZCMG9zcjN2LmpwZyIsImNyZWF0ZWRfYnkiOlt7ImlkIjoxNDgwNTE5LCJjcmVkaXRfaWQiOiI1NTkwZGFhZmMzYTM2ODA3ZmQwMDAyMjgiLCJuYW1lIjoiUmljaGFyZCBMaW5kaGVpbSIsIm9yaWdpbmFsX25hbWUiOiJSaWNoYXJkIExpbmRoZWltIiwiZ2VuZGVyIjowLCJwcm9maWxlX3BhdGgiOm51bGx9LHsiaWQiOjQzOTIyLCJjcmVkaXRfaWQiOiI1NTkwZGIwMTkyNTE0MTc1ODgwMDAyMTgiLCJuYW1lIjoiTWljaGFlbCBTbG9hbiIsIm9yaWdpbmFsX25hbWUiOiJNaWNoYWVsIFNsb2FuIiwiZ2VuZGVyIjoyLCJwcm9maWxlX3BhdGgiOm51bGx9XSwiZXBpc29kZV9ydW5fdGltZSI6WzQ4XSwiZmlyc3RfYWlyX2RhdGUiOiIxOTg1LTA5LTE4IiwiZ2VucmVzIjpbeyJpZCI6MTA3NTksIm5hbWUiOiJBY3Rpb24gJiBBZHZlbnR1cmUifSx7ImlkIjo4MCwibmFtZSI6IkNyaW1lIn0seyJpZCI6MTgsIm5hbWUiOiJEcmFtYSJ9XSwiaG9tZXBhZ2UiOiIiLCJpZCI6NDI5NywiaW5fcHJvZHVjdGlvbiI6ZmFsc2UsImxhbmd1YWdlcyI6WyJkZSIsImZyIiwiZW4iXSwibGFzdF9haXJfZGF0ZSI6IjE5ODktMDgtMjQiLCJsYXN0X2VwaXNvZGVfdG9fYWlyIjp7ImlkIjoyOTU1MjYsIm5hbWUiOiJTdWljaWRlIFNxdWFkIiwib3ZlcnZpZXciOiJNY0NhbGwgY29tZXMgdG8gdGhlIGFpZCBvZiBhIGNvbGxlZ2Ugc3R1ZGVudCB3aG8ncyBsb3N0IGhpcyBhdGhsZXRpYyBzY2hvbGFyc2hpcCBhbmQgZmVhcnMgZGlzYXBwb2ludGluZyBoaXMgcGFyZW50cywgYW5kIHR1cm5zIHRvIGRydWcgZGVhbGluZyBhcyBhIHdheSB0byBtYWtlIHRoZSBiaWcgbW9uZXkgdGhleSBleHBlY3QuIiwidm90ZV9hdmVyYWdlIjo4LjAsInZvdGVfY291bnQiOjIsImFpcl9kYXRlIjoiMTk4OS0wOC0yNCIsImVwaXNvZGVfbnVtYmVyIjoyMiwiZXBpc29kZV90eXBlIjoiZmluYWxlIiwicHJvZHVjdGlvbl9jb2RlIjoiIiwicnVudGltZSI6NDgsInNlYXNvbl9udW1iZXIiOjQsInNob3dfaWQiOjQyOTcsInN0aWxsX3BhdGgiOiIvazlwNVA2RnVFWmtDRUE1UXQ5OUhoeW1EMG1nLmpwZyJ9LCJuYW1lIjoiVGhlIEVxdWFsaXplciIsIm5leHRfZXBpc29kZV90b19haXIiOm51bGwsIm5ldHdvcmtzIjpbeyJpZCI6MTYsImxvZ29fcGF0aCI6Ii93anU4S2hPVXNSNXk0Ykg5cDNKYzUwaGhhTE8ucG5nIiwibmFtZSI6IkNCUyIsIm9yaWdpbl9jb3VudHJ5IjoiVVMifV0sIm51bWJlcl9vZl9lcGlzb2RlcyI6ODgsIm51bWJlcl9vZl9zZWFzb25zIjo0LCJvcmlnaW5fY291bnRyeSI6WyJDQSIsIlVTIl0sIm9yaWdpbmFsX2xhbmd1YWdlIjoiZW4iLCJvcmlnaW5hbF9uYW1lIjoiVGhlIEVxdWFsaXplciIsIm92ZXJ2aWV3IjoiUm9iZXJ0IE1jQ2FsbCBpcyBhIGZvcm1lciBhZ2VudCBvZiBhIHNlY3JldCBnb3Zlcm5tZW50IGFnZW5jeSB3aG8gaXMgbm93IHJ1bm5pbmcgaGlzIG93biBwcml2YXRlIGNyaW1lIGZpZ2h0aW5nIG9wZXJhdGlvbiB3aGVyZSBoZSBmYXNoaW9ucyBoaW1zZWxmIGFzIFwiVGhlIEVxdWFsaXplci5cIiBJdCBpcyBhIHNlcnZpY2UgZm9yIHZpY3RpbXMgb2YgdGhlIHN5c3RlbSB3aG8gaGF2ZSBleGhhdXN0ZWQgYWxsIHBvc3NpYmxlIG1lYW5zIG9mIHNlZWtpbmcganVzdGljZSBhbmQgaGF2ZSBub3doZXJlIHRvIGdvLiBNY0NhbGwgcHJvbWlzZXMgdG8gZXZlbiBvdXQgdGhlIG9kZHMgZm9yIHRoZW0uIiwicG9wdWxhcml0eSI6MTguNjA4MSwicG9zdGVyX3BhdGgiOiIvN25yS1B4R0pXWWU1Y2FjTk45QVY5YlZwbE5aLmpwZyIsInByb2R1Y3Rpb25fY29tcGFuaWVzIjpbeyJpZCI6MjY3MjcsImxvZ29fcGF0aCI6Ii9qZVR4ZGpYaHpnS1p5THIzbDlNbGxrVG4zZnkucG5nIiwibmFtZSI6IlVuaXZlcnNhbCBUZWxldmlzaW9uIiwib3JpZ2luX2NvdW50cnkiOiJVUyJ9XSwicHJvZHVjdGlvbl9jb3VudHJpZXMiOlt7Imlzb18zMTY2XzEiOiJDQSIsIm5hbWUiOiJDYW5hZGEifSx7Imlzb18zMTY2XzEiOiJVUyIsIm5hbWUiOiJVbml0ZWQgU3RhdGVzIG9mIEFtZXJpY2EifV0sInNlYXNvbnMiOlt7ImFpcl9kYXRlIjoiMjAxMi0xMC0yOSIsImVwaXNvZGVfY291bnQiOjEsImlkIjoxMjY2MywibmFtZSI6IlNwZWNpYWxzIiwib3ZlcnZpZXciOiIiLCJwb3N0ZXJfcGF0aCI6bnVsbCwic2Vhc29uX251bWJlciI6MCwidm90ZV9hdmVyYWdlIjowLjB9LHsiYWlyX2RhdGUiOiIxOTg1LTA5LTE4IiwiZXBpc29kZV9jb3VudCI6MjIsImlkIjoxMjY1OSwibmFtZSI6IlNlYXNvbiAxIiwib3ZlcnZpZXciOiIiLCJwb3N0ZXJfcGF0aCI6Ii91YXRueG0xMGNVMFlzUTZvajRNYjhpRXg2VDcuanBnIiwic2Vhc29uX251bWJlciI6MSwidm90ZV9hdmVyYWdlIjo3LjR9LHsiYWlyX2RhdGUiOiIxOTg2LTEwLTA4IiwiZXBpc29kZV9jb3VudCI6MjIsImlkIjoxMjY2MCwibmFtZSI6IlNlYXNvbiAyIiwib3ZlcnZpZXciOiIiLCJwb3N0ZXJfcGF0aCI6Ii9xM1l0UE1YTEJqakE5a2FsTFJ0YjJnZTNjSFYuanBnIiwic2Vhc29uX251bWJlciI6Miwidm90ZV9hdmVyYWdlIjo3LjV9LHsiYWlyX2RhdGUiOiIxOTg3LTA5LTIzIiwiZXBpc29kZV9jb3VudCI6MjIsImlkIjoxMjY2MSwibmFtZSI6IlNlYXNvbiAzIiwib3ZlcnZpZXciOiIiLCJwb3N0ZXJfcGF0aCI6Ii85cEliTlkwTTl4OXkxZWNldUxOWTlqTXBvVlAuanBnIiwic2Vhc29uX251bWJlciI6Mywidm90ZV9hdmVyYWdlIjo3LjF9LHsiYWlyX2RhdGUiOiIxOTg4LTEwLTI2IiwiZXBpc29kZV9jb3VudCI6MjIsImlkIjoxMjY2MiwibmFtZSI6IlNlYXNvbiA0Iiwib3ZlcnZpZXciOiIiLCJwb3N0ZXJfcGF0aCI6Ii90ZnZXaWtIdE9jdERwaUZpQjdhQzJoUEp6c3QuanBnIiwic2Vhc29uX251bWJlciI6NCwidm90ZV9hdmVyYWdlIjo3Ljh9XSwic29mdGNvcmUiOmZhbHNlLCJzcG9rZW5fbGFuZ3VhZ2VzIjpbeyJlbmdsaXNoX25hbWUiOiJHZXJtYW4iLCJpc29fNjM5XzEiOiJkZSIsIm5hbWUiOiJEZXV0c2NoIn0seyJlbmdsaXNoX25hbWUiOiJGcmVuY2giLCJpc29fNjM5XzEiOiJmciIsIm5hbWUiOiJGcmFuw6dhaXMifSx7ImVuZ2xpc2hfbmFtZSI6IkVuZ2xpc2giLCJpc29fNjM5XzEiOiJlbiIsIm5hbWUiOiJFbmdsaXNoIn1dLCJzdGF0dXMiOiJFbmRlZCIsInRhZ2xpbmUiOiJJZiB0aGUgcnVsZXMgYXJlIGFnYWluc3QgeW91IGhlJ2xsIGNoYW5nZSB0aGVtLiBJZiB0aGUgb2RkcyBhcmUgYWdhaW5zdCB5b3UgaGUnbGwgZXZlbiB0aGVtLiIsInR5cGUiOiJTY3JpcHRlZCIsInZvdGVfYXZlcmFnZSI6Ny4xMzYsInZvdGVfY291bnQiOjY2fQ==
+  recorded_at: Sat, 16 May 2026 21:02:34 GMT
+- request:
+    method: get
+    uri: https://api.tvmaze.com/search/shows?q=The%20Equalizer
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.24.0 (Ubuntu)
+      Date:
+      - Sat, 16 May 2026 21:02:34 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=3600
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"score":1.2002418,"show":{"id":47929,"url":"https://www.tvmaze.com/shows/47929/the-equalizer","name":"The
+        Equalizer","type":"Scripted","language":"English","genres":["Drama","Action","Crime"],"status":"Ended","runtime":60,"averageRuntime":60,"premiered":"2021-02-07","ended":"2025-05-04","officialSite":"https://www.cbs.com/shows/the-equalizer/","schedule":{"time":"22:00","days":["Sunday"]},"rating":{"average":6},"weight":97,"network":{"id":2,"name":"CBS","country":{"name":"United
+        States","code":"US","timezone":"America/New_York"},"officialSite":"https://www.cbs.com/"},"webChannel":null,"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":382327,"imdb":"tt11242246"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/540/1350125.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/540/1350125.jpg"},"summary":"<p>A
+        reimagining of the classic series, <b>The Equalizer</b> centers on enigmatic
+        woman with a mysterious background who uses her extensive skills to help those
+        with nowhere else to turn.</p>","updated":1759389846,"_links":{"self":{"href":"https://api.tvmaze.com/shows/47929"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/3169653","name":"Decisions"}}}},{"score":1.1655266,"show":{"id":8757,"url":"https://www.tvmaze.com/shows/8757/the-equalizer","name":"The
+        Equalizer","type":"Scripted","language":"English","genres":["Drama","Crime"],"status":"Ended","runtime":60,"averageRuntime":60,"premiered":"1985-09-18","ended":"1989-08-24","officialSite":null,"schedule":{"time":"","days":["Thursday"]},"rating":{"average":7.8},"weight":47,"network":{"id":2,"name":"CBS","country":{"name":"United
+        States","code":"US","timezone":"America/New_York"},"officialSite":"https://www.cbs.com/"},"webChannel":null,"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":72170,"imdb":"tt0088513"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/31/77877.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/31/77877.jpg"},"summary":"<p><b>The
+        Equalizer</b> follows a retired espionage/intelligence officer with a mysterious
+        past, who uses the skills from his former career to exact vigilante justice
+        on behalf of innocent people who are hopelessly trapped in dangerous circumstances.</p>","updated":1710860344,"_links":{"self":{"href":"https://api.tvmaze.com/shows/8757"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/481887","name":"Suicide
+        Squad"}}}}]'
+  recorded_at: Sat, 16 May 2026 21:02:34 GMT
+- request:
+    method: get
+    uri: https://api.tvmaze.com/shows/47929
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.24.0 (Ubuntu)
+      Date:
+      - Sat, 16 May 2026 21:02:36 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=3600
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":47929,"url":"https://www.tvmaze.com/shows/47929/the-equalizer","name":"The
+        Equalizer","type":"Scripted","language":"English","genres":["Drama","Action","Crime"],"status":"Ended","runtime":60,"averageRuntime":60,"premiered":"2021-02-07","ended":"2025-05-04","officialSite":"https://www.cbs.com/shows/the-equalizer/","schedule":{"time":"22:00","days":["Sunday"]},"rating":{"average":6},"weight":97,"network":{"id":2,"name":"CBS","country":{"name":"United
+        States","code":"US","timezone":"America/New_York"},"officialSite":"https://www.cbs.com/"},"webChannel":null,"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":382327,"imdb":"tt11242246"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/540/1350125.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/540/1350125.jpg"},"summary":"<p>A
+        reimagining of the classic series, <b>The Equalizer</b> centers on enigmatic
+        woman with a mysterious background who uses her extensive skills to help those
+        with nowhere else to turn.</p>","updated":1759389846,"_links":{"self":{"href":"https://api.tvmaze.com/shows/47929"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/3169653","name":"Decisions"}}}'
+  recorded_at: Sat, 16 May 2026 21:02:36 GMT
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/search/tv?api_key=<TMDB_API_KEY>&query=The%20Afterparty
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 16 May 2026 20:29:46 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=21200
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - eff33b1d51ac36cae52e17ce2a286e6eb7d25821f3f122c1953dc0da5c9c1f7a
+      X-Memc-Age:
+      - '4705'
+      X-Memc-Expires:
+      - '21200'
+      X-Az:
+      - us-east-1b
+      X-Task-Id:
+      - a8ea8ec20c8f42f3960f0ae83e3917f4
+      Etag:
+      - W/"5f4bcf4aee57821ee7406387496f4415"
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 0b834179ab679169d69e76efd0f63c8c.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SEA900-P5
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - "-zfn5mWkZDIhv90ZyaQdWVtVtIbEW4-lp1zbW0SBa5BqchxAlr2Xpg=="
+      Age:
+      - '1971'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"page":1,"results":[{"adult":false,"backdrop_path":"/kbehRFMpW7VHsoLB0FM2wsdZsyd.jpg","genre_ids":[9648,35,80],"id":106454,"origin_country":["US"],"original_language":"en","original_name":"The
+        Afterparty","overview":"Nothing is as it seems in this hilarious murder mystery
+        where each suspect''s story is told through a different film genre.","popularity":6.7032,"poster_path":"/9iAxAxeX5RjB39ckhxPMDCJPpG9.jpg","first_air_date":"2022-01-28","softcore":false,"name":"The
+        Afterparty","vote_average":7.109,"vote_count":211},{"adult":false,"backdrop_path":"/itdlI1L4hr3sDPLFAtByeSPfZTA.jpg","genre_ids":[35,10767],"id":115549,"origin_country":["US"],"original_language":"en","original_name":"The
+        Netflix Afterparty","overview":"Hosts David Spade, Fortune Feimster and London
+        Hughes welcome guests from the newest and biggest Netflix titles for fun conversations,
+        skits and more.","popularity":1.983,"poster_path":"/sb4rAJC4y8IA5VI5ZhgUC8oQbia.jpg","first_air_date":"2021-01-02","softcore":false,"name":"The
+        Netflix Afterparty","vote_average":5.667,"vote_count":12}],"total_pages":1,"total_results":2}'
+  recorded_at: Sat, 16 May 2026 21:02:37 GMT
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/tv/106454?api_key=<TMDB_API_KEY>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 16 May 2026 20:29:46 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=4581
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - 070d4bcf23252bf5de30f5b0038a36a1ed4d29af32d75310be4c0f4432990451
+      X-Memc-Age:
+      - '17212'
+      X-Memc-Expires:
+      - '4581'
+      X-Az:
+      - us-east-1a
+      X-Task-Id:
+      - 5e10ca0351b745188251a262ec2f3b78
+      Etag:
+      - W/"76c74032d22ded363be964de282d73a3"
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 5d17d63ab6a3c1bd41982f69ab92d17a.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SEA900-P5
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - X9-UcPUnPolOpLcKDkYK7u6wBaI4_sqNbRNtH4vuWfL9upk1lyFYQw==
+      Age:
+      - '1972'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJhZHVsdCI6ZmFsc2UsImJhY2tkcm9wX3BhdGgiOiIva2JlaFJGTXBXN1ZIc29MQjBGTTJ3c2Rac3lkLmpwZyIsImNyZWF0ZWRfYnkiOlt7ImlkIjoxNTUyNjcsImNyZWRpdF9pZCI6IjVmMWMzNTRkMGJiMDc2MDAzNGVmMGQ3NyIsIm5hbWUiOiJDaHJpc3RvcGhlciBNaWxsZXIiLCJvcmlnaW5hbF9uYW1lIjoiQ2hyaXN0b3BoZXIgTWlsbGVyIiwiZ2VuZGVyIjoyLCJwcm9maWxlX3BhdGgiOiIvZHIyeUNnWXRtTm1PNXZ6ams5S05ialRwYnpPLmpwZyJ9XSwiZXBpc29kZV9ydW5fdGltZSI6W10sImZpcnN0X2Fpcl9kYXRlIjoiMjAyMi0wMS0yOCIsImdlbnJlcyI6W3siaWQiOjk2NDgsIm5hbWUiOiJNeXN0ZXJ5In0seyJpZCI6MzUsIm5hbWUiOiJDb21lZHkifSx7ImlkIjo4MCwibmFtZSI6IkNyaW1lIn1dLCJob21lcGFnZSI6Imh0dHBzOi8vdHYuYXBwbGUuY29tL3Nob3cvdW1jLmNtYy41d2c4Y25pZ3dya2Z6YmRydWF1ZnpiNmIwIiwiaWQiOjEwNjQ1NCwiaW5fcHJvZHVjdGlvbiI6ZmFsc2UsImxhbmd1YWdlcyI6WyJlbiJdLCJsYXN0X2Fpcl9kYXRlIjoiMjAyMy0wOS0wNSIsImxhc3RfZXBpc29kZV90b19haXIiOnsiaWQiOjQxNzIzMzksIm5hbWUiOiJWaXZpYW4gYW5kIFpvZSIsIm92ZXJ2aWV3IjoiQWx0ZXJuYXRpbmcgYmV0d2VlbiBjYW1weSBob3Jyb3IgYW5kICc4MHMgc29hcCBvcGVyYSwgWm9lIGFuZCBoZXIgbW90aGVyIGZpbGwgaW4gdGhlIHJlbWFpbmluZyBibGFua3Mgb2YgRWRnYXIncyBtdXJkZXIuIiwidm90ZV9hdmVyYWdlIjo2LjYsInZvdGVfY291bnQiOjgsImFpcl9kYXRlIjoiMjAyMy0wOS0wNSIsImVwaXNvZGVfbnVtYmVyIjoxMCwiZXBpc29kZV90eXBlIjoiZmluYWxlIiwicHJvZHVjdGlvbl9jb2RlIjoiIiwicnVudGltZSI6MzEsInNlYXNvbl9udW1iZXIiOjIsInNob3dfaWQiOjEwNjQ1NCwic3RpbGxfcGF0aCI6Ii9rclV5S05nVkpsSkw3OGtmNldBdkRRYlBwcDYuanBnIn0sIm5hbWUiOiJUaGUgQWZ0ZXJwYXJ0eSIsIm5leHRfZXBpc29kZV90b19haXIiOm51bGwsIm5ldHdvcmtzIjpbeyJpZCI6MjU1MiwibG9nb19wYXRoIjoiL2JuZ0hSRmk3OTRtbk1xMzRnZlZjbTluRHhOMS5wbmciLCJuYW1lIjoiQXBwbGUgVFYiLCJvcmlnaW5fY291bnRyeSI6IiJ9XSwibnVtYmVyX29mX2VwaXNvZGVzIjoxOCwibnVtYmVyX29mX3NlYXNvbnMiOjIsIm9yaWdpbl9jb3VudHJ5IjpbIlVTIl0sIm9yaWdpbmFsX2xhbmd1YWdlIjoiZW4iLCJvcmlnaW5hbF9uYW1lIjoiVGhlIEFmdGVycGFydHkiLCJvdmVydmlldyI6Ik5vdGhpbmcgaXMgYXMgaXQgc2VlbXMgaW4gdGhpcyBoaWxhcmlvdXMgbXVyZGVyIG15c3Rlcnkgd2hlcmUgZWFjaCBzdXNwZWN0J3Mgc3RvcnkgaXMgdG9sZCB0aHJvdWdoIGEgZGlmZmVyZW50IGZpbG0gZ2VucmUuIiwicG9wdWxhcml0eSI6Ni43MDMyLCJwb3N0ZXJfcGF0aCI6Ii85aUF4QXhlWDVSakIzOWNraHhQTURDSlBwRzkuanBnIiwicHJvZHVjdGlvbl9jb21wYW5pZXMiOlt7ImlkIjo3Nzk3MywibG9nb19wYXRoIjoiL2VVWjBrZkU0dXlPMEpZSXJqZ1VTT3FXUHFqSy5wbmciLCJuYW1lIjoiTG9yZCBNaWxsZXIiLCJvcmlnaW5fY291bnRyeSI6IlVTIn0seyJpZCI6ODYwOSwibG9nb19wYXRoIjoiL2FYN0hRcXpkSVY3dHRkOTB1NEwxSDY0M1pOYS5wbmciLCJuYW1lIjoiVHJpU3RhciBUZWxldmlzaW9uIiwib3JpZ2luX2NvdW50cnkiOiJVUyJ9LHsiaWQiOjExMDczLCJsb2dvX3BhdGgiOiIvd0hzNDRma3Rkb2o2YzM3OFpiU1dmektzTTJaLnBuZyIsIm5hbWUiOiJTb255IFBpY3R1cmVzIFRlbGV2aXNpb24iLCJvcmlnaW5fY291bnRyeSI6IlVTIn1dLCJwcm9kdWN0aW9uX2NvdW50cmllcyI6W3siaXNvXzMxNjZfMSI6IlVTIiwibmFtZSI6IlVuaXRlZCBTdGF0ZXMgb2YgQW1lcmljYSJ9XSwic2Vhc29ucyI6W3siYWlyX2RhdGUiOiIyMDIyLTAxLTI4IiwiZXBpc29kZV9jb3VudCI6OCwiaWQiOjE1NzI3NywibmFtZSI6IlNlYXNvbiAxIiwib3ZlcnZpZXciOiJXaGVuIGEgaGlnaCBzY2hvb2wgcmV1bmlvbidzIGFmdGVycGFydHkgZW5kcyBpbiBhIHN0dW5uaW5nIGRlYXRoLCBldmVyeW9uZSBpcyBhIHN1c3BlY3QuIEEgZGV0ZWN0aXZlIGdyaWxscyB0aGUgZm9ybWVyIGNsYXNzbWF0ZXMgb25lIGJ5IG9uZSwgdW5jb3ZlcmluZyBwb3RlbnRpYWwgbW90aXZlcyBhcyBlYWNoIHRlbGxzIHRoZWlyIHZlcnNpb24gb2YgdGhlIHN0b3J54oCUY3VsbWluYXRpbmcgaW4gdGhlIHNob2NraW5nIHRydXRoLiIsInBvc3Rlcl9wYXRoIjoiLzlpQXhBeGVYNVJqQjM5Y2toeFBNRENKUHBHOS5qcGciLCJzZWFzb25fbnVtYmVyIjoxLCJ2b3RlX2F2ZXJhZ2UiOjYuM30seyJhaXJfZGF0ZSI6IjIwMjMtMDctMTEiLCJlcGlzb2RlX2NvdW50IjoxMCwiaWQiOjMyNDk1MSwibmFtZSI6IlNlYXNvbiAyIiwib3ZlcnZpZXciOiJJbiBzZWFzb24gdHdvLCBhIHdlZGRpbmcgaXMgcnVpbmVkIHdoZW4gdGhlIGdyb29tIGlzIG11cmRlcmVkIGFuZCBldmVyeSBndWVzdCBpcyBhIHN1c3BlY3QuIERldGVjdGl2ZSBEYW5uZXIgcmV0dXJucyB0byBoZWxwIEFuaXEgYW5kIFpvw6sgc29sdmUgdGhlIHdob2R1bm5pdCBieSBxdWVzdGlvbmluZyBmYW1pbHkgbWVtYmVycywgc3Rhci1jcm9zc2VkIGxvdmVycyBhbmQgYnVzaW5lc3MgcGFydG5lcnMsIGFuZCBoZWFyaW5nIGVhY2ggc3VzcGVjdOKAmXMgcmV0ZWxsaW5nIG9mIHRoZSB3ZWVrZW5kLCBlYWNoIHdpdGggdGhlaXIgb3duIHVuaXF1ZSBwZXJzcGVjdGl2ZSBhbmQgdmlzdWFsIHN0eWxlLiIsInBvc3Rlcl9wYXRoIjoiLzhVZ0hOZ1VHallMVG55SXJzczFrSG9KOGpIZy5qcGciLCJzZWFzb25fbnVtYmVyIjoyLCJ2b3RlX2F2ZXJhZ2UiOjYuMn1dLCJzb2Z0Y29yZSI6ZmFsc2UsInNwb2tlbl9sYW5ndWFnZXMiOlt7ImVuZ2xpc2hfbmFtZSI6IkVuZ2xpc2giLCJpc29fNjM5XzEiOiJlbiIsIm5hbWUiOiJFbmdsaXNoIn1dLCJzdGF0dXMiOiJDYW5jZWxlZCIsInRhZ2xpbmUiOiJUaWxsIGRlYXRoIGRvIHRoZXkgcGFydHkuIiwidHlwZSI6IlNjcmlwdGVkIiwidm90ZV9hdmVyYWdlIjo3LjEwOSwidm90ZV9jb3VudCI6MjExfQ==
+  recorded_at: Sat, 16 May 2026 21:02:38 GMT
+- request:
+    method: get
+    uri: https://api.tvmaze.com/search/shows?q=The%20Afterparty
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.24.0 (Ubuntu)
+      Date:
+      - Sat, 16 May 2026 21:02:39 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=3600
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"score":1.1995919,"show":{"id":48888,"url":"https://www.tvmaze.com/shows/48888/the-afterparty","name":"The
+        Afterparty","type":"Scripted","language":"English","genres":["Comedy","Crime","Mystery"],"status":"Ended","runtime":null,"averageRuntime":36,"premiered":"2022-01-28","ended":"2023-09-06","officialSite":"https://tv.apple.com/us/show/the-afterparty/umc.cmc.5wg8cnigwrkfzbdruaufzb6b0","schedule":{"time":"","days":["Wednesday"]},"rating":{"average":6.9},"weight":96,"network":null,"webChannel":{"id":310,"name":"Apple
+        TV","country":null,"officialSite":"https://tv.apple.com/"},"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":384495,"imdb":"tt12614214"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/488/1220528.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/488/1220528.jpg"},"summary":"<p><b>The
+        Afterparty</b> is a murder-mystery comedy set at a high school reunion afterparty.
+        Each of the eight episodes will feature a retelling of the same night told
+        through a different character''s perspective, each with its own unique visual
+        format and film genre to match the teller''s personality.</p>","updated":1700627392,"_links":{"self":{"href":"https://api.tvmaze.com/shows/48888"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/2524992","name":"Vivian
+        and Zoe"}}}},{"score":1.0085154,"show":{"id":51875,"url":"https://www.tvmaze.com/shows/51875/the-netflix-afterparty","name":"The
+        Netflix Afterparty","type":"Talk Show","language":"English","genres":["Comedy"],"status":"Ended","runtime":null,"averageRuntime":36,"premiered":"2021-01-02","ended":"2021-05-14","officialSite":"https://www.netflix.com/title/81298677","schedule":{"time":"","days":["Saturday"]},"rating":{"average":null},"weight":80,"network":null,"webChannel":{"id":1,"name":"Netflix","country":null,"officialSite":"https://www.netflix.com/"},"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":393686,"imdb":"tt13521850"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/289/723062.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/289/723062.jpg"},"summary":"<p>Hosts
+        David Spade, Fortune Feimster and London Hughes welcome guests from the newest
+        and biggest Netflix titles for fun conversations, skits and more.</p>","updated":1715720829,"_links":{"self":{"href":"https://api.tvmaze.com/shows/51875"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/2085341","name":"The
+        Upshaws"}}}}]'
+  recorded_at: Sat, 16 May 2026 21:02:39 GMT
+- request:
+    method: get
+    uri: https://api.tvmaze.com/shows/48888
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.24.0 (Ubuntu)
+      Date:
+      - Sat, 16 May 2026 21:02:40 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=3600
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":48888,"url":"https://www.tvmaze.com/shows/48888/the-afterparty","name":"The
+        Afterparty","type":"Scripted","language":"English","genres":["Comedy","Crime","Mystery"],"status":"Ended","runtime":null,"averageRuntime":36,"premiered":"2022-01-28","ended":"2023-09-06","officialSite":"https://tv.apple.com/us/show/the-afterparty/umc.cmc.5wg8cnigwrkfzbdruaufzb6b0","schedule":{"time":"","days":["Wednesday"]},"rating":{"average":6.9},"weight":96,"network":null,"webChannel":{"id":310,"name":"Apple
+        TV","country":null,"officialSite":"https://tv.apple.com/"},"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":384495,"imdb":"tt12614214"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/488/1220528.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/488/1220528.jpg"},"summary":"<p><b>The
+        Afterparty</b> is a murder-mystery comedy set at a high school reunion afterparty.
+        Each of the eight episodes will feature a retelling of the same night told
+        through a different character''s perspective, each with its own unique visual
+        format and film genre to match the teller''s personality.</p>","updated":1700627392,"_links":{"self":{"href":"https://api.tvmaze.com/shows/48888"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/2524992","name":"Vivian
+        and Zoe"}}}'
+  recorded_at: Sat, 16 May 2026 21:02:40 GMT
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/search/tv?api_key=<TMDB_API_KEY>&query=His%20Dark%20Materials
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 16 May 2026 20:29:48 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=23679
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - 4275dcca802357c77d63e95b7c8129213ace022bdcb9bc4aa4b7d3ba3c04e375
+      X-Memc-Age:
+      - '2851'
+      X-Memc-Expires:
+      - '23679'
+      X-Az:
+      - us-east-1c
+      X-Task-Id:
+      - 72e9b4e386154672a1fd66d01a9f7f77
+      Etag:
+      - W/"fcf7d1f7e5fc41a25f6d7e7e69e01fc7"
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 2489c60e47e7319619a4ca4302557e94.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SEA900-P5
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - iCBEWzBbYP1DSewsIsElWXbXWyRHwq2aT6EG6yFGQsY327EpIU_N1g==
+      Age:
+      - '1973'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"page":1,"results":[{"adult":false,"backdrop_path":"/t8KjRqfOqNx14cHLwARjR08bjeb.jpg","genre_ids":[10765,18,10759],"id":68507,"origin_country":["GB"],"original_language":"en","original_name":"His
+        Dark Materials","overview":"Lyra is an orphan who lives in a parallel universe
+        in which science, theology and magic are entwined. Her search for a kidnapped
+        friend uncovers a sinister plot involving stolen children and turns into a
+        quest to understand a mysterious phenomenon called Dust. She is later joined
+        on her journey by Will, a boy who possesses a knife that can cut windows between
+        worlds. As she learns the truth about her parents and her prophesied destiny,
+        the two young people are caught up in a war against celestial powers that
+        ranges across many worlds.","popularity":14.9206,"poster_path":"/g6tIKGc3f1H5QMz1dcgCwADKpZ7.jpg","first_air_date":"2019-11-03","softcore":false,"name":"His
+        Dark Materials","vote_average":7.831,"vote_count":1874}],"total_pages":1,"total_results":1}'
+  recorded_at: Sat, 16 May 2026 21:02:41 GMT
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/tv/68507?api_key=<TMDB_API_KEY>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 16 May 2026 20:29:48 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=23699
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - 87d8b8994ea9b19911442652101c7683cd4e0e6b1cc909767acec9bd9dbe4a4f
+      X-Memc-Age:
+      - '2620'
+      X-Memc-Expires:
+      - '23699'
+      X-Az:
+      - us-east-1b
+      X-Task-Id:
+      - 729f2ed5609c4e80b7c7ae37129d04d6
+      Etag:
+      - W/"749e37a76238d450eb61176961445193"
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 3401a77bb2c18effb6138333cd3b081e.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SEA900-P5
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - TC-xtYcWaOL0l9o3ozRfOCKRH7Tuj9r0uiSooiZCzLHPYQaiHygE3g==
+      Age:
+      - '1973'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJhZHVsdCI6ZmFsc2UsImJhY2tkcm9wX3BhdGgiOiIvdDhLalJxZk9xTngxNGNITHdBUmpSMDhiamViLmpwZyIsImNyZWF0ZWRfYnkiOlt7ImlkIjoyMDcxMzIsImNyZWRpdF9pZCI6IjY2NzNiNDIzYzI1NjdkNDFhNDU0ODRlNiIsIm5hbWUiOiJKYWNrIFRob3JuZSIsIm9yaWdpbmFsX25hbWUiOiJKYWNrIFRob3JuZSIsImdlbmRlciI6MiwicHJvZmlsZV9wYXRoIjoiL3NpVmZZU3Vyd2NJcnBsT2MwdlAzRGlKQVZOMi5qcGcifV0sImVwaXNvZGVfcnVuX3RpbWUiOls1M10sImZpcnN0X2Fpcl9kYXRlIjoiMjAxOS0xMS0wMyIsImdlbnJlcyI6W3siaWQiOjEwNzY1LCJuYW1lIjoiU2NpLUZpICYgRmFudGFzeSJ9LHsiaWQiOjE4LCJuYW1lIjoiRHJhbWEifSx7ImlkIjoxMDc1OSwibmFtZSI6IkFjdGlvbiAmIEFkdmVudHVyZSJ9XSwiaG9tZXBhZ2UiOiJodHRwczovL3d3dy5iYmMuY28udWsvcHJvZ3JhbW1lcy9tMDAwYjF2MiIsImlkIjo2ODUwNywiaW5fcHJvZHVjdGlvbiI6ZmFsc2UsImxhbmd1YWdlcyI6WyJlbiJdLCJsYXN0X2Fpcl9kYXRlIjoiMjAyMy0wMi0wNSIsImxhc3RfZXBpc29kZV90b19haXIiOnsiaWQiOjQwMzc0NTksIm5hbWUiOiJUaGUgQm90YW5pYyBHYXJkZW4iLCJvdmVydmlldyI6Ikx5cmEgYW5kIFdpbGwgcmV1bml0ZSB3aXRoIE1hcnkgYW5kIGhlYXIgYSBzdG9yeSB0aGF0IGNoYW5nZXMgZXZlcnl0aGluZy4gTm93IHRoZXkgbXVzdCBkZWNpZGUgd2hhdCB0aGV5IGFyZSB3aWxsaW5nIHRvIHNhY3JpZmljZSBpZiB0aGV5IGFyZSB0byBzYXZlIHRoZSB3b3JsZHMuIiwidm90ZV9hdmVyYWdlIjo3LjUsInZvdGVfY291bnQiOjI5LCJhaXJfZGF0ZSI6IjIwMjMtMDItMDUiLCJlcGlzb2RlX251bWJlciI6OCwiZXBpc29kZV90eXBlIjoiZmluYWxlIiwicHJvZHVjdGlvbl9jb2RlIjoiIiwicnVudGltZSI6NjAsInNlYXNvbl9udW1iZXIiOjMsInNob3dfaWQiOjY4NTA3LCJzdGlsbF9wYXRoIjoiL3JESlRTUU9KOXNyUTFHUjZEZUZ4VXR2VUVvZC5qcGcifSwibmFtZSI6IkhpcyBEYXJrIE1hdGVyaWFscyIsIm5leHRfZXBpc29kZV90b19haXIiOm51bGwsIm5ldHdvcmtzIjpbeyJpZCI6NCwibG9nb19wYXRoIjoiL3VKamNDZzNPNERNRWpNMHh0bm85T1dGY2lSUC5wbmciLCJuYW1lIjoiQkJDIE9uZSIsIm9yaWdpbl9jb3VudHJ5IjoiR0IifV0sIm51bWJlcl9vZl9lcGlzb2RlcyI6MjMsIm51bWJlcl9vZl9zZWFzb25zIjozLCJvcmlnaW5fY291bnRyeSI6WyJHQiJdLCJvcmlnaW5hbF9sYW5ndWFnZSI6ImVuIiwib3JpZ2luYWxfbmFtZSI6IkhpcyBEYXJrIE1hdGVyaWFscyIsIm92ZXJ2aWV3IjoiTHlyYSBpcyBhbiBvcnBoYW4gd2hvIGxpdmVzIGluIGEgcGFyYWxsZWwgdW5pdmVyc2UgaW4gd2hpY2ggc2NpZW5jZSwgdGhlb2xvZ3kgYW5kIG1hZ2ljIGFyZSBlbnR3aW5lZC4gSGVyIHNlYXJjaCBmb3IgYSBraWRuYXBwZWQgZnJpZW5kIHVuY292ZXJzIGEgc2luaXN0ZXIgcGxvdCBpbnZvbHZpbmcgc3RvbGVuIGNoaWxkcmVuIGFuZCB0dXJucyBpbnRvIGEgcXVlc3QgdG8gdW5kZXJzdGFuZCBhIG15c3RlcmlvdXMgcGhlbm9tZW5vbiBjYWxsZWQgRHVzdC4gU2hlIGlzIGxhdGVyIGpvaW5lZCBvbiBoZXIgam91cm5leSBieSBXaWxsLCBhIGJveSB3aG8gcG9zc2Vzc2VzIGEga25pZmUgdGhhdCBjYW4gY3V0IHdpbmRvd3MgYmV0d2VlbiB3b3JsZHMuIEFzIHNoZSBsZWFybnMgdGhlIHRydXRoIGFib3V0IGhlciBwYXJlbnRzIGFuZCBoZXIgcHJvcGhlc2llZCBkZXN0aW55LCB0aGUgdHdvIHlvdW5nIHBlb3BsZSBhcmUgY2F1Z2h0IHVwIGluIGEgd2FyIGFnYWluc3QgY2VsZXN0aWFsIHBvd2VycyB0aGF0IHJhbmdlcyBhY3Jvc3MgbWFueSB3b3JsZHMuIiwicG9wdWxhcml0eSI6MTQuOTIwNiwicG9zdGVyX3BhdGgiOiIvZzZ0SUtHYzNmMUg1UU16MWRjZ0N3QURLcFo3LmpwZyIsInByb2R1Y3Rpb25fY29tcGFuaWVzIjpbeyJpZCI6ODI5OTYsImxvZ29fcGF0aCI6Ii9zeHhQaE0zUXQzT0NRYUZVeWVlZ1o4ZXFjczkucG5nIiwibmFtZSI6IkJhZCBXb2xmIiwib3JpZ2luX2NvdW50cnkiOiJHQiJ9LHsiaWQiOjEyLCJsb2dvX3BhdGgiOiIvMnljczY0ZXFWNXJxS1lIeVFLMEdWb0tHdmZYLnBuZyIsIm5hbWUiOiJOZXcgTGluZSBDaW5lbWEiLCJvcmlnaW5fY291bnRyeSI6IlVTIn0seyJpZCI6MjMxODI1LCJsb2dvX3BhdGgiOm51bGwsIm5hbWUiOiJLYXRqYSBNb3Rpb24gUGljdHVyZSBDb3JwLiIsIm9yaWdpbl9jb3VudHJ5IjoiVVMifSx7ImlkIjoyMjE4NDQsImxvZ29fcGF0aCI6bnVsbCwibmFtZSI6IkJCQyBTdHVkaW9zIERpc3RyaWJ1dGlvbiIsIm9yaWdpbl9jb3VudHJ5IjoiR0IifSx7ImlkIjoxMzg3NDMsImxvZ29fcGF0aCI6Ii9hYkZKR210UEZzNkJxNWNCYXZtcm5YRGNwZjgucG5nIiwibmFtZSI6IkFudG9uIiwib3JpZ2luX2NvdW50cnkiOiJHQiJ9XSwicHJvZHVjdGlvbl9jb3VudHJpZXMiOlt7Imlzb18zMTY2XzEiOiJHQiIsIm5hbWUiOiJVbml0ZWQgS2luZ2RvbSJ9LHsiaXNvXzMxNjZfMSI6IlVTIiwibmFtZSI6IlVuaXRlZCBTdGF0ZXMgb2YgQW1lcmljYSJ9XSwic2Vhc29ucyI6W3siYWlyX2RhdGUiOiIyMDIwLTA0LTI2IiwiZXBpc29kZV9jb3VudCI6MjEsImlkIjoxNTgxOTQsIm5hbWUiOiJTcGVjaWFscyIsIm92ZXJ2aWV3IjoiIiwicG9zdGVyX3BhdGgiOm51bGwsInNlYXNvbl9udW1iZXIiOjAsInZvdGVfYXZlcmFnZSI6MC4wfSx7ImFpcl9kYXRlIjoiMjAxOS0xMS0wMyIsImVwaXNvZGVfY291bnQiOjgsImlkIjo4MTYxNiwibmFtZSI6IlNlcmllcyAxIiwib3ZlcnZpZXciOiJTZXJpZXMgMSBmb2xsb3dzIEx5cmEsIGEgc2VlbWluZ2x5IG9yZGluYXJ5IGJ1dCBicmF2ZSB5b3VuZyBnaXJsIGZyb20gYW5vdGhlciB3b3JsZC4gSGVyIHNlYXJjaCBmb3IgYSBraWRuYXBwZWQgZnJpZW5kIHVuY292ZXJzIGFuIGV2aWwgcGxvdC4iLCJwb3N0ZXJfcGF0aCI6Ii94T2pSTm5RdzVocVIxRVVMSjJpSGtHd0pWQTQuanBnIiwic2Vhc29uX251bWJlciI6MSwidm90ZV9hdmVyYWdlIjo3Ljh9LHsiYWlyX2RhdGUiOiIyMDIwLTExLTA4IiwiZXBpc29kZV9jb3VudCI6NywiaWQiOjE1NzE0NywibmFtZSI6IlNlcmllcyAyIiwib3ZlcnZpZXciOiJTZXJpZXMgMiBiZWdpbnMgYWZ0ZXIgTG9yZCBBc3JpZWwgaGFzIG9wZW5lZCBhIGJyaWRnZSB0byBhIG5ldyB3b3JsZCwgYW5kLCBkaXN0cmF1Z2h0IG92ZXIgdGhlIGRlYXRoIG9mIGhlciBiZXN0IGZyaWVuZCwgTHlyYSBmb2xsb3dzIEFzcmllbCBpbnRvIHRoZSB1bmtub3duLiBJbiBhIHN0cmFuZ2UgYW5kIG15c3RlcmlvdXMgYWJhbmRvbmVkIGNpdHkgc2hlIG1lZXRzIFdpbGwsIGEgYm95IGZyb20gb3VyIHdvcmxkIHdobyBpcyBhbHNvIHJ1bm5pbmcgZnJvbSBhIHRyb3VibGVkIHBhc3QuIE1ycy4gQ291bHRlciBzZWFyY2hlcyBmb3IgTHlyYSwgZGV0ZXJtaW5lZCB0byBicmluZyBoZXIgaG9tZSBieSBhbnkgbWVhbnMgbmVjZXNzYXJ5LiIsInBvc3Rlcl9wYXRoIjoiL25pZVNGdGpLSGFnUVI0MFBqeWNhdDQ0cDZxZC5qcGciLCJzZWFzb25fbnVtYmVyIjoyLCJ2b3RlX2F2ZXJhZ2UiOjcuNX0seyJhaXJfZGF0ZSI6IjIwMjItMTItMTgiLCJlcGlzb2RlX2NvdW50Ijo4LCJpZCI6MzExNjI0LCJuYW1lIjoiU2VyaWVzIDMiLCJvdmVydmlldyI6IkluIHRoZSBmaW5hbCBjaGFwdGVyLCBMeXJhLCB0aGUgcHJvcGhlc2llZCBjaGlsZCwgYW5kIFdpbGwsIHRoZSBiZWFyZXIgb2YgVGhlIFN1YnRsZSBLbmlmZSwgbXVzdCBqb3VybmV5IHRvIGEgZGFyayBwbGFjZSBmcm9tIHdoaWNoIG5vIG9uZSBoYXMgZXZlciByZXR1cm5lZC4gQXMgaGVyIGZhdGhlcuKAmXMgZ3JlYXQgd2FyIGFnYWluc3QgdGhlIEF1dGhvcml0eSBlZGdlcyBjbG9zZXIsIHRoZXkgd2lsbCBsZWFybiB0aGF0IHNhdmluZyB0aGUgd29ybGRzIGNvbWVzIGF0IGEgdGVycmlibGUgcHJpY2UuIiwicG9zdGVyX3BhdGgiOiIvdmFkT2NHUDl4aThaRU5RY1drYk8yelBHNXVFLmpwZyIsInNlYXNvbl9udW1iZXIiOjMsInZvdGVfYXZlcmFnZSI6Ny4zfV0sInNvZnRjb3JlIjpmYWxzZSwic3Bva2VuX2xhbmd1YWdlcyI6W3siZW5nbGlzaF9uYW1lIjoiRW5nbGlzaCIsImlzb182MzlfMSI6ImVuIiwibmFtZSI6IkVuZ2xpc2gifV0sInN0YXR1cyI6IkVuZGVkIiwidGFnbGluZSI6IlRoZSB0cnV0aCBsaWVzIGJleW9uZCB0aGUgd29ybGQgd2Uga25vdy4iLCJ0eXBlIjoiU2NyaXB0ZWQiLCJ2b3RlX2F2ZXJhZ2UiOjcuODMxLCJ2b3RlX2NvdW50IjoxODc0fQ==
+  recorded_at: Sat, 16 May 2026 21:02:41 GMT
+- request:
+    method: get
+    uri: https://api.tvmaze.com/search/shows?q=His%20Dark%20Materials
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.24.0 (Ubuntu)
+      Date:
+      - Sat, 16 May 2026 21:02:42 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=3600
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"score":1.4254632,"show":{"id":7626,"url":"https://www.tvmaze.com/shows/7626/his-dark-materials","name":"His
+        Dark Materials","type":"Scripted","language":"English","genres":["Drama","Adventure","Fantasy"],"status":"Ended","runtime":null,"averageRuntime":55,"premiered":"2019-11-03","ended":"2022-12-18","officialSite":"https://www.bbc.co.uk/programmes/m000b1v2","schedule":{"time":"","days":[]},"rating":{"average":7.7},"weight":98,"network":null,"webChannel":{"id":26,"name":"BBC
+        iPlayer","country":{"name":"United Kingdom","code":"GB","timezone":"Europe/London"},"officialSite":"https://www.bbc.co.uk/iplayer"},"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":360295,"imdb":"tt5607976"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/445/1113926.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/445/1113926.jpg"},"summary":"<p>Secrets
+        and dangers lie ahead for young Lyra Belacqua in an epic tale of stolen children
+        and the mysterious substance of Dust.</p>","updated":1704795629,"_links":{"self":{"href":"https://api.tvmaze.com/shows/7626"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/2440046","name":"The
+        Botanic Garden"}}}}]'
+  recorded_at: Sat, 16 May 2026 21:02:42 GMT
+- request:
+    method: get
+    uri: https://api.tvmaze.com/shows/7626
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.24.0 (Ubuntu)
+      Date:
+      - Sat, 16 May 2026 21:02:43 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=3600
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":7626,"url":"https://www.tvmaze.com/shows/7626/his-dark-materials","name":"His
+        Dark Materials","type":"Scripted","language":"English","genres":["Drama","Adventure","Fantasy"],"status":"Ended","runtime":null,"averageRuntime":55,"premiered":"2019-11-03","ended":"2022-12-18","officialSite":"https://www.bbc.co.uk/programmes/m000b1v2","schedule":{"time":"","days":[]},"rating":{"average":7.7},"weight":98,"network":null,"webChannel":{"id":26,"name":"BBC
+        iPlayer","country":{"name":"United Kingdom","code":"GB","timezone":"Europe/London"},"officialSite":"https://www.bbc.co.uk/iplayer"},"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":360295,"imdb":"tt5607976"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/445/1113926.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/445/1113926.jpg"},"summary":"<p>Secrets
+        and dangers lie ahead for young Lyra Belacqua in an epic tale of stolen children
+        and the mysterious substance of Dust.</p>","updated":1704795629,"_links":{"self":{"href":"https://api.tvmaze.com/shows/7626"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/2440046","name":"The
+        Botanic Garden"}}}'
+  recorded_at: Sat, 16 May 2026 21:02:43 GMT
+recorded_with: VCR 6.2.0
