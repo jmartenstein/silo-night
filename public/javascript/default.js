@@ -277,15 +277,24 @@ function addShow(name) {
     headers: { 'Content-Type': 'application/json' }
   })
   .then(response => {
-    if (response.ok) {
-      // Fetch the full list to refresh the UI
-      return fetch('/api/v1/user/' + username + '/shows');
+    if (!response.ok) {
+      throw new Error('Failed to add show: ' + response.statusText);
     }
+    // Fetch the full list to refresh the UI
+    return fetch('/api/v1/user/' + username + '/shows');
   })
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to fetch updated shows list');
+    }
+    return response.json();
+  })
   .then(data => {
     renderShows(data);
     searchInput.value = '';
+  })
+  .catch(error => {
+    console.error('Error:', error);
   });
 }
 
