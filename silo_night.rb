@@ -167,6 +167,29 @@ namespace '/api/v1' do
     [404, Presenters::Error.new("Show not found", 404).to_h.to_json]
   end
 
+  post '/user/:name/shows/reorder' do
+    content_type :json
+    user = User.find(name: params[:name])
+    return [404, Presenters::Error.new("User not found", 404).to_h.to_json] unless user
+
+    new_order = JSON.parse(request.body.read)
+    current_show_names = user.shows.map(&:name)
+
+    unless new_order.is_a?(Array) && new_order.sort == current_show_names.sort
+      return [422, Presenters::Error.new("Invalid show order", 422).to_h.to_json]
+    end
+
+    DB.transaction do
+      new_order.each_with_index do |show_name, index|
+        show = Show.find(name: show_name)
+        DB[:shows_users].where(user_id: user.id, show_id: show.id).update(show_order: index)
+      end
+    end
+    user.generate_schedule
+
+    user.reload.shows.map { |s| Presenters::Show.new(s).to_h }.to_json
+  end
+
   patch '/user/:name/shows/:show_name' do
     content_type :json
     user = User.find(name: params[:name])
