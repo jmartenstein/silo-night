@@ -15,6 +15,24 @@ We are moving this data into a `payload` JSON column in the `show_metadata` tabl
 ## The Workflow: "Verify at Every Step"
 We are currently on the `refactor/metadata` branch. If a step breaks the tests and you can't figure out why within 15 minutes, **stop, revert the file, and ask for a review.** It's better to stay "green" than to plow ahead into a broken state.
 
+### Step 0: Establish Database Baselines (Safety First)
+Before we touch the schema, we need a "Save Point" in case we need to abandon this branch entirely.
+
+- [ ] **Verify V3 Baseline**: Ensure your local database is currently reflecting the `v3` snapshot state.
+  ```bash
+  # Check your data folder for the v3 snapshot
+  ls db/snapshots/
+  ```
+- [ ] **Create a V4 Snapshot (Checkpoint)**: Create a fresh snapshot of the database *before* running migrations. This is our "Point of Abandonment"—if the refactor fails, we can restore this.
+  ```bash
+  # Create a v4 snapshot to save current state
+  bundle exec rake db:snapshot:create[v4]
+  ```
+- [ ] **Sync Environments**: Use this snapshot to ensure your development and test databases are synced.
+  ```bash
+  bundle exec rake db:snapshot:restore[v4]
+  ```
+
 ### Step 1: Data Migration
 The schema changes are already in `db/migrations`. Now we need to move the actual data.
 
@@ -74,7 +92,19 @@ Once we are 100% sure the app is reading from the `payload`, we can remove the o
 
 ---
 
-## Troubleshooting
+## Troubleshooting & Recovery
 If `Show.first.metadata` returns `nil` after Step 1, the migration script didn't work. Check `scripts/migrate_metadata_to_payload.rb` and ensure `DATABASE_URL` is pointing to the right place.
+
+### "Abandon Ship" (How to reset)
+If you decide to abandon the `refactor/metadata` branch due to unresolvable issues:
+1. **Restore Baseline**: Revert to the known-good V3 state.
+   ```bash
+   bundle exec rake db:snapshot:restore[v3]
+   ```
+2. **Discard Branch Changes**:
+   ```bash
+   git reset --hard origin/refactor/metadata
+   ```
+3. **Notify Lead**: If you had to perform a restore, please notify the senior developer before attempting to restart the refactor process.
 
 Good luck! You've got this.
