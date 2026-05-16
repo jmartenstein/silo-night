@@ -12,7 +12,7 @@ RSpec.describe 'JavaScript API Compatibility', type: :request do
 
   describe 'Add Show (POST)' do
     context 'v0.1 style (as currently implemented in default.js for v1)' do
-      it 'v0.1 endpoint passes with FormData' do
+      it 'v0.1 endpoint passes with form-encoded params' do
         post "/api/v0.1/user/#{username}/show", { show: show_name }
         expect(last_response.status).to eq(200)
       end
@@ -57,6 +57,9 @@ RSpec.describe 'JavaScript API Compatibility', type: :request do
       it 'v1 endpoint succeeds with bulk POST (if implemented)' do
         post "/api/v1/user/#{username}/shows/reorder", new_order.to_json, { 'CONTENT_TYPE' => 'application/json' }
         expect(last_response.status).to eq(200)
+
+        user = User.find(name: username)
+        expect(user.shows.map(&:name)).to eq(new_order)
       end
     end
   end
