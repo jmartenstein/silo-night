@@ -15,6 +15,9 @@ This document records the technical assumptions, environmental constraints, and 
 - **Provider Volatility:** We assume external providers are volatile. We utilize a strong "Adapter" pattern within the Service layer to ensure external API changes do not leak into our internal JSON contracts.
 - **API Availability:** We assume these services are generally available. For testing, we assume the environment is configured with stable VCR mocks to prevent actual network calls.
 - **Data Completeness:** We assume that the combination of TMDB and TVMaze provides all necessary fields (runtimes, genres, posters) for all shows in the database.
+- **Unification Heuristics:** We assume that merging providers (prioritizing TMDB for posters/overviews and TVMaze for runtimes/schedules) produces a higher-quality record than any single provider can offer.
+- **Search Noise Reduction:** We assume that applying hard popularity thresholds (e.g., TMDB popularity > 5.0) is a necessary trade-off to maintain search relevance and reduce API noise, even if it occasionally excludes niche content.
+- **Heuristic Deduplication:** We assume that the combination of `Name` and `Premier Year` is a sufficient unique identifier for deduplicating results across different metadata providers and local data.
 
 ## III. Environment & Infrastructure
 - **Twelve-Factor Configuration:** We assume that a `DATABASE_URL` or a standardized `.env` file is the primary method for handling environment-specific configuration.
@@ -25,5 +28,6 @@ This document records the technical assumptions, environmental constraints, and 
 ## IV. Schema Evolution & Refactoring
 - **Expand-Contract Pattern**: We assume that any schema change involving column removal must follow an "Expand-Contract" pattern (Schema Expansion -> Dual-Writing/Delegation -> Read Cutover -> Write Lockdown -> Schema Cleanup).
 - **Safety Bridges**: We assume the use of "Deprecated" column names (e.g., `deprecated_runtime`) as an application-level tripwire to detect residual dependencies before a final destructive schema change.
-- **Service-Only Creation**: We assume that database models should not be directly instantiated with legacy attributes; all show creation must flow through service objects (`ShowFactory`) to guarantee integrity.
+- **Service-Only Creation:** We assume that database models should not be directly instantiated with legacy attributes; all show creation must flow through service objects (`ShowFactory`) to guarantee integrity.
+- **JSON Payload Flexibility:** We assume that storing a unified `payload` (JSON) within the `ShowMetadata` model is superior to flat database columns for frequently changing external data. This allows us to expand the UI without performing database migrations.
 

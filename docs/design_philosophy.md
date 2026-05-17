@@ -51,6 +51,12 @@ We favor concise, module-scoped naming (e.g., `Services::Show`) over redundant d
 ### 8. Persistence Encapsulation
 Models should not just be passive data containers. They should act as a gatekeeper for the data they represent. If an attribute has been refactored out of a column, the model is responsible for providing a **deprecation warning** or an **explicit tripwire** to prevent the application from inadvertently reverting to old behavior. We prefer "loud crashes" in development over "silent data regressions" in production.
 
+### 9. Anti-Corruption Layer (Metadata)
+We treat the `MetadataService` as an anti-corruption layer. Its primary responsibility is to transform volatile, inconsistent external API responses into a stable, internal Ruby Hash "Contract" that the rest of the application can trust.
+
+### 10. Local-First Search Priority
+We prioritize local database records over external API results in all search contexts. This biases the system toward performance and honors the user's existing library as the primary source of truth.
+
 ---
 
 ## III. Implementation Guidelines
@@ -58,6 +64,7 @@ Models should not just be passive data containers. They should act as a gatekeep
 2.  **Performance Priority:** Minimalism extends to technical efficiency. Minimize large assets and complex CSS selectors.
 3.  **Consistency:** Match existing typography and spacing in `default.css`.
 4.  **Preservation:** Maintain side-by-side compatibility with the `v0.1` namespace; it remains as a legacy reference until `v1` is fully verified.
+5.  **Lazy Metadata Resolution:** Metadata should only be fetched and unified at the point of creation or explicit refresh. We avoid "on-the-fly" external fetching during list rendering to prevent cascading performance degradation.
 
 ## IV. References
 *   [NN/g: Characteristics of Minimalism in Web Design](https://www.nngroup.com/articles/characteristics-minimalism/)
