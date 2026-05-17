@@ -11,7 +11,7 @@ class Show < Sequel::Model
     if metadata && metadata.payload && metadata.payload['runtime']
       metadata.payload['runtime']
     else
-      @values[:runtime]
+      @values[:deprecated_runtime]
     end
   end
 
@@ -19,7 +19,7 @@ class Show < Sequel::Model
     if metadata && metadata.payload && metadata.payload['poster_path']
       metadata.payload['poster_path']
     else
-      @values[:poster_path]
+      @values[:deprecated_poster_path]
     end
   end
 
@@ -71,14 +71,25 @@ class Shows
   def load_from_json( json="[]" )
     j = JSON.parse(json)
     j.each do |show|
-      @list.append(
-        Show.new(name:        show["name"],
-                 wiki_page:   show["wiki_page"],
-                 page_title:  show["page_title"],
-                 runtime:     show["runtime"],
-                 uri_encoded: show["uri_encoded"],
-                 poster_path: show["poster_path"])
+      # Extract metadata fields
+      metadata_payload = {
+        "runtime" => show["runtime"],
+        "poster_path" => show["poster_path"]
+      }
+      
+      show_obj = Show.create(
+        name:        show["name"],
+        uri_encoded: show["uri_encoded"]
       )
+      
+      ShowMetadata.create(
+        provider_name: 'json_import',
+        external_id: show["name"].parameterize,
+        payload: metadata_payload,
+        show_id: show_obj.id
+      )
+      
+      @list.append(show_obj)
     end
     return true
   end

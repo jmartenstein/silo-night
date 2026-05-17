@@ -23,7 +23,7 @@ end
 # Manage cassettes for tagged scenarios
 Around('@vcr') do |scenario, block|
   name = scenario.name.gsub(/[^\w-]/, '_').downcase
-  VCR.use_cassette("cucumber/#{name}") do
+  VCR.use_cassette("cucumber/#{name}", record: :new_episodes) do
     block.call
   end
 end

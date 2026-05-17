@@ -38,10 +38,11 @@ describe Show do
     end
 
     it "falls back to columns if metadata values are missing" do
-      # We manually inject into @values to simulate the legacy column state
-      # without relying on the now-restricted mass-assignment setter.
-      s = Show.new
-      s.values[:runtime] = "30 minutes"
+      # Ensure show is saved so it has a primary key
+      s = Show.create(name: "Test") 
+      
+      # Use the renamed column in @values to verify the fallback logic
+      s.values[:deprecated_runtime] = "30 minutes"
       
       # Associated metadata exists but is empty
       s.metadata = create(:show_metadata, payload: {}, show: s)

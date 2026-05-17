@@ -48,9 +48,7 @@ module Services
       DB.transaction do
         show = ::Show.create(
           name: metadata_data[:name],
-          runtime: metadata_data[:runtime],
-          uri_encoded: URI.encode_www_form_component(metadata_data[:name].downcase),
-          poster_path: metadata_data[:poster_path]
+          uri_encoded: URI.encode_www_form_component(metadata_data[:name].downcase)
         )
 
         ::ShowMetadata.create(
