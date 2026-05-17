@@ -9,6 +9,7 @@ This document records the technical assumptions, environmental constraints, and 
 - **Data Integrity:** We assume that `data/seed.rb` and scenario files (e.g., `smoke.rb`) contain valid and up-to-date data for the current schema.
 - **SQLite Concurrency:** We assume a single-user or low-concurrency environment consistent with SQLite's capabilities.
 - **Technology Choice:** We assume the continued use of `Sequel` for migrations and database interaction.
+- **Performance Bottlenecks:** We assume that N+1 queries and JSON parsing are the primary performance concerns, biasing our service layer toward optimized fetches where possible.
 
 ## II. External Dependencies (TMDB & TVMaze)
 - **Provider Volatility:** We assume external providers are volatile. We utilize a strong "Adapter" pattern within the Service layer to ensure external API changes do not leak into our internal JSON contracts.
@@ -18,6 +19,7 @@ This document records the technical assumptions, environmental constraints, and 
 ## III. Environment & Infrastructure
 - **Twelve-Factor Configuration:** We assume that a `DATABASE_URL` or a standardized `.env` file is the primary method for handling environment-specific configuration.
 - **Test Isolation:** We assume that switching to `data/test.db` and utilizing `DatabaseCleaner` resolves state pollution between tests.
+- **Stale State Management:** We assume a high-frequency test environment (Cucumber) requires explicit state management (e.g., `reload`) to prevent stale data regressions during state-changing operations.
 - **Statelessness:** While the legacy app uses server-side rendering, we assume future clients will favor a "Client-Side State" model. The API `v1` is designed as a stateless resource provider.
 
 ## IV. Schema Evolution & Refactoring
