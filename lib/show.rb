@@ -92,7 +92,7 @@ class Shows
       
       ShowMetadata.create(
         provider_name: 'json_import',
-        external_id: show["name"].parameterize,
+        external_id: show["name"].downcase.gsub(/\s+/, '-'),
         payload: metadata_payload,
         show_id: show_obj.id
       )

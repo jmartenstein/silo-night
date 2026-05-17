@@ -1,8 +1,10 @@
+require 'uri'
+
 FactoryBot.define do
 
   factory :show do
     sequence(:name) { |n| "Show #{n}" }
-    uri_encoded { "show+#{name.parameterize}" }
+    uri_encoded { "show+#{URI.encode_www_form_component(name.downcase)}" }
 
     transient do
       runtime { "30 minutes" }

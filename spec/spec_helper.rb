@@ -22,7 +22,7 @@ unless CGI.respond_to?(:parse)
 end
 
 # Set test environment
-ENV['RACK_ENV'] = 'test'
+ENV['RACK_ENV'] ||= 'test'
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 $LOAD_PATH.unshift File.expand_path('..', __dir__)
 
