@@ -122,8 +122,8 @@ Before we touch the database, we add application-level guards to prove the syste
 ### Step 9: Final Schema Cleanup (The "Point of No Return")
 Once we are 100% sure the app is reading from the `payload` and no code is trying to write to legacy columns, we safely remove them.
 
-- [ ] **Rename Columns**: Create a migration to rename `runtime` and `poster_path` to `deprecated_runtime` and `deprecated_poster_path`. This will trigger an immediate crash if any code still tries to access them.
-- [ ] **Run Migration**: `bundle exec rake db:migrate`.
+- [x] **Rename Columns**: Create a migration to rename `runtime` and `poster_path` to `deprecated_runtime` and `deprecated_poster_path`. This will trigger an immediate crash if any code still tries to access them.
+- [x] **Run Migration**: `bundle exec rake db:migrate`.
 - [ ] **Verification**: Run the **entire** test suite (`bundle exec rake test`). If it stays green, you are safe.
 - [ ] **Drop Columns**: Create a final migration to remove the `deprecated_` columns.
 - [ ] **Run Migration**: `bundle exec rake db:migrate`.
