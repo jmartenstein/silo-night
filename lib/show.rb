@@ -7,6 +7,14 @@ class Show < Sequel::Model
   many_to_many :users
   one_to_one :metadata, class: :ShowMetadata, key: :show_id
 
+  def runtime=(value)
+    raise "Deprecated Write Detected: Attempted to write to legacy 'runtime' column."
+  end
+
+  def poster_path=(value)
+    raise "Deprecated Write Detected: Attempted to write to legacy 'poster_path' column."
+  end
+
   def runtime
     if metadata && metadata.payload && metadata.payload['runtime']
       metadata.payload['runtime']
