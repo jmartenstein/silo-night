@@ -7,6 +7,7 @@ require 'slim'
 $LOAD_PATH.unshift File.expand_path('./lib', __dir__)
 require 'database'
 require 'user'
+require 'show_metadata'
 require 'metadata_service'
 require 'clock'
 require 'services/schedule'
@@ -343,19 +344,8 @@ namespace '/api/v0.1' do
     s = Show.where(Sequel.function(:lower, :name) => params["show"].downcase).first
 
     if s.nil?
-      # Try to fetch metadata and create the show
-      service = MetadataService.new
-      metadata = service.get_show_metadata(params["show"])
-      
-      if metadata
-        require 'uri'
-        s = Show.create(
-          name: metadata[:name],
-          runtime: metadata[:runtime],
-          uri_encoded: URI.encode_www_form_component(metadata[:name].downcase),
-          poster_path: metadata[:poster_path]
-        )
-      end
+      # Try to fetch metadata and create the show using the service
+      s = Services::UserShow.create_show_from_metadata(params["show"])
     end
 
     if s.nil?

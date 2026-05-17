@@ -59,10 +59,12 @@ Given('{string} has an empty schedule') do |username|
   u.save
 end
 
-When('the user adds {string} \({string}\) to their list via the UI') do |show_name, runtime|
-  # Mimic the UI: Add the show to the database (if it doesn't exist) then associate with user
-  # The UI calls POST /api/v0.1/user/:name/show
-  Show.find(name: show_name) || Show.create(name: show_name, runtime: runtime)
+When('the user adds {string} \({string}\) to their list via the UI') do |show_name, _runtime|
+  # Use ShowFactory to ensure metadata is created. We ignore the 'runtime' parameter 
+  # from Gherkin because the MetadataService is now the source of truth.
+  VCR.use_cassette("cucumber/factory_#{show_name.gsub(/\W+/, '_').downcase}") do
+    Services::ShowFactory.create_with_metadata(show_name)
+  end
   $browser.post "/api/v1/user/#{@current_user_name}/shows", { "name" => show_name }.to_json, { 'CONTENT_TYPE' => 'application/json' }
 end
 
@@ -82,12 +84,17 @@ Then('the guide should NOT show {string}') do |text|
   expect($browser.last_response.body).not_to include(text)
 end
 
-Given(/^the user "([^"]*)" has "([^"]*)" \(([^)]*)\) and "([^"]*)" \(([^)]*)\) in their list$/) do |username, show1, run1, show2, run2|
+Given(/^the user "([^"]*)" has "([^"]*)" \(([^)]*)\) and "([^"]*)" \(([^)]*)\) in their list$/) do |username, show1, _run1, show2, _run2|
   @current_user_name = username
   u = User.find(name: username) || User.create(name: username, config: {}.to_json, schedule: {}.to_json)
   
-  s1 = Show.find(name: show1) || Show.create(name: show1, runtime: run1)
-  s2 = Show.find(name: show2) || Show.create(name: show2, runtime: run2)
+  s1 = nil
+  s2 = nil
+  
+  VCR.use_cassette("cucumber/factory_setup_#{username}") do
+    s1 = Show.find(name: show1) || Services::ShowFactory.create_with_metadata(show1)
+    s2 = Show.find(name: show2) || Services::ShowFactory.create_with_metadata(show2)
+  end
   
   Services::UserShow.add_show(u, s1) unless u.shows.include?(s1)
   Services::UserShow.add_show(u, s2) unless u.shows.include?(s2)
@@ -120,15 +127,21 @@ Then('{string} should be scheduled for {string}') do |show, day|
   expect(schedule[day].any? { |s| s.is_a?(Hash) ? s["name"] == show : s == show }).to be_truthy
 end
 
-Given('the user {string} has {string} scheduled for today') do |username, show|
+Given('the user {string} has {string} scheduled for today') do |username, show_name|
   @current_user_name = username
   u = User.find(name: username) || User.create(name: username, config: {}.to_json, schedule: {}.to_json)
-  today = Date.today.strftime('%A')
   
+  show = nil
+  VCR.use_cassette("cucumber/factory_today_#{show_name.gsub(/\W+/, '_').downcase}") do
+    show = Show.find(name: show_name) || Services::ShowFactory.create_with_metadata(show_name)
+  end
+
+  today = Date.today.strftime('%A')
   schedule = JSON.parse(u.schedule || "{}")
   schedule[today] ||= []
-  show_obj = { "name" => show, "poster_path" => nil }
-  unless schedule[today].any? { |s| s.is_a?(Hash) ? s["name"] == show : s == show }
+  
+  show_obj = { "name" => show.name, "poster_path" => show.poster_path }
+  unless schedule[today].any? { |s| s.is_a?(Hash) ? s["name"] == show.name : s == show.name }
     schedule[today] << show_obj
   end
   

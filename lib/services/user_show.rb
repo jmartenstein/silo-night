@@ -39,18 +39,8 @@ module Services
       true
     end
 
-    private
-
     def self.create_show_from_metadata(name)
-      metadata = MetadataService.new.get_show_metadata(name)
-      return nil unless metadata
-
-      ::Show.create(
-        name: metadata[:name],
-        runtime: metadata[:runtime],
-        uri_encoded: URI.encode_www_form_component(metadata[:name].downcase),
-        poster_path: metadata[:poster_path]
-      )
+      Services::ShowFactory.create_with_metadata(name)
     end
   end
 end

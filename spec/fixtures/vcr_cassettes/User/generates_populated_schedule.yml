@@ -1,0 +1,225 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/search/tv?api_key=<TMDB_API_KEY>&query=His%20Dark%20Materials
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 16 May 2026 20:29:48 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=23679
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - 4275dcca802357c77d63e95b7c8129213ace022bdcb9bc4aa4b7d3ba3c04e375
+      X-Memc-Age:
+      - '2851'
+      X-Memc-Expires:
+      - '23679'
+      X-Az:
+      - us-east-1c
+      X-Task-Id:
+      - 72e9b4e386154672a1fd66d01a9f7f77
+      Etag:
+      - W/"fcf7d1f7e5fc41a25f6d7e7e69e01fc7"
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 73f6f1dae6275f5d756c2055e3dcc9f4.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SEA900-P5
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - tzpVlIwM_xHEe7hfsUZksTDuUOzS8axPSeH2Zwrz6nvZhPDx5OkkRw==
+      Age:
+      - '1985'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"page":1,"results":[{"adult":false,"backdrop_path":"/t8KjRqfOqNx14cHLwARjR08bjeb.jpg","genre_ids":[10765,18,10759],"id":68507,"origin_country":["GB"],"original_language":"en","original_name":"His
+        Dark Materials","overview":"Lyra is an orphan who lives in a parallel universe
+        in which science, theology and magic are entwined. Her search for a kidnapped
+        friend uncovers a sinister plot involving stolen children and turns into a
+        quest to understand a mysterious phenomenon called Dust. She is later joined
+        on her journey by Will, a boy who possesses a knife that can cut windows between
+        worlds. As she learns the truth about her parents and her prophesied destiny,
+        the two young people are caught up in a war against celestial powers that
+        ranges across many worlds.","popularity":14.9206,"poster_path":"/g6tIKGc3f1H5QMz1dcgCwADKpZ7.jpg","first_air_date":"2019-11-03","softcore":false,"name":"His
+        Dark Materials","vote_average":7.831,"vote_count":1874}],"total_pages":1,"total_results":1}'
+  recorded_at: Sat, 16 May 2026 21:02:53 GMT
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/tv/68507?api_key=<TMDB_API_KEY>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 16 May 2026 20:29:48 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=23699
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - 87d8b8994ea9b19911442652101c7683cd4e0e6b1cc909767acec9bd9dbe4a4f
+      X-Memc-Age:
+      - '2620'
+      X-Memc-Expires:
+      - '23699'
+      X-Az:
+      - us-east-1b
+      X-Task-Id:
+      - 729f2ed5609c4e80b7c7ae37129d04d6
+      Etag:
+      - W/"749e37a76238d450eb61176961445193"
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 8e6570118b87577ac0e4b2d91be03f80.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SEA900-P5
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - eaWUtfAvScZwPPgQ6_1LjsJsKaBQ1kYaR2cvGhq9dinDoVcXDBIJiw==
+      Age:
+      - '1985'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJhZHVsdCI6ZmFsc2UsImJhY2tkcm9wX3BhdGgiOiIvdDhLalJxZk9xTngxNGNITHdBUmpSMDhiamViLmpwZyIsImNyZWF0ZWRfYnkiOlt7ImlkIjoyMDcxMzIsImNyZWRpdF9pZCI6IjY2NzNiNDIzYzI1NjdkNDFhNDU0ODRlNiIsIm5hbWUiOiJKYWNrIFRob3JuZSIsIm9yaWdpbmFsX25hbWUiOiJKYWNrIFRob3JuZSIsImdlbmRlciI6MiwicHJvZmlsZV9wYXRoIjoiL3NpVmZZU3Vyd2NJcnBsT2MwdlAzRGlKQVZOMi5qcGcifV0sImVwaXNvZGVfcnVuX3RpbWUiOls1M10sImZpcnN0X2Fpcl9kYXRlIjoiMjAxOS0xMS0wMyIsImdlbnJlcyI6W3siaWQiOjEwNzY1LCJuYW1lIjoiU2NpLUZpICYgRmFudGFzeSJ9LHsiaWQiOjE4LCJuYW1lIjoiRHJhbWEifSx7ImlkIjoxMDc1OSwibmFtZSI6IkFjdGlvbiAmIEFkdmVudHVyZSJ9XSwiaG9tZXBhZ2UiOiJodHRwczovL3d3dy5iYmMuY28udWsvcHJvZ3JhbW1lcy9tMDAwYjF2MiIsImlkIjo2ODUwNywiaW5fcHJvZHVjdGlvbiI6ZmFsc2UsImxhbmd1YWdlcyI6WyJlbiJdLCJsYXN0X2Fpcl9kYXRlIjoiMjAyMy0wMi0wNSIsImxhc3RfZXBpc29kZV90b19haXIiOnsiaWQiOjQwMzc0NTksIm5hbWUiOiJUaGUgQm90YW5pYyBHYXJkZW4iLCJvdmVydmlldyI6Ikx5cmEgYW5kIFdpbGwgcmV1bml0ZSB3aXRoIE1hcnkgYW5kIGhlYXIgYSBzdG9yeSB0aGF0IGNoYW5nZXMgZXZlcnl0aGluZy4gTm93IHRoZXkgbXVzdCBkZWNpZGUgd2hhdCB0aGV5IGFyZSB3aWxsaW5nIHRvIHNhY3JpZmljZSBpZiB0aGV5IGFyZSB0byBzYXZlIHRoZSB3b3JsZHMuIiwidm90ZV9hdmVyYWdlIjo3LjUsInZvdGVfY291bnQiOjI5LCJhaXJfZGF0ZSI6IjIwMjMtMDItMDUiLCJlcGlzb2RlX251bWJlciI6OCwiZXBpc29kZV90eXBlIjoiZmluYWxlIiwicHJvZHVjdGlvbl9jb2RlIjoiIiwicnVudGltZSI6NjAsInNlYXNvbl9udW1iZXIiOjMsInNob3dfaWQiOjY4NTA3LCJzdGlsbF9wYXRoIjoiL3JESlRTUU9KOXNyUTFHUjZEZUZ4VXR2VUVvZC5qcGcifSwibmFtZSI6IkhpcyBEYXJrIE1hdGVyaWFscyIsIm5leHRfZXBpc29kZV90b19haXIiOm51bGwsIm5ldHdvcmtzIjpbeyJpZCI6NCwibG9nb19wYXRoIjoiL3VKamNDZzNPNERNRWpNMHh0bm85T1dGY2lSUC5wbmciLCJuYW1lIjoiQkJDIE9uZSIsIm9yaWdpbl9jb3VudHJ5IjoiR0IifV0sIm51bWJlcl9vZl9lcGlzb2RlcyI6MjMsIm51bWJlcl9vZl9zZWFzb25zIjozLCJvcmlnaW5fY291bnRyeSI6WyJHQiJdLCJvcmlnaW5hbF9sYW5ndWFnZSI6ImVuIiwib3JpZ2luYWxfbmFtZSI6IkhpcyBEYXJrIE1hdGVyaWFscyIsIm92ZXJ2aWV3IjoiTHlyYSBpcyBhbiBvcnBoYW4gd2hvIGxpdmVzIGluIGEgcGFyYWxsZWwgdW5pdmVyc2UgaW4gd2hpY2ggc2NpZW5jZSwgdGhlb2xvZ3kgYW5kIG1hZ2ljIGFyZSBlbnR3aW5lZC4gSGVyIHNlYXJjaCBmb3IgYSBraWRuYXBwZWQgZnJpZW5kIHVuY292ZXJzIGEgc2luaXN0ZXIgcGxvdCBpbnZvbHZpbmcgc3RvbGVuIGNoaWxkcmVuIGFuZCB0dXJucyBpbnRvIGEgcXVlc3QgdG8gdW5kZXJzdGFuZCBhIG15c3RlcmlvdXMgcGhlbm9tZW5vbiBjYWxsZWQgRHVzdC4gU2hlIGlzIGxhdGVyIGpvaW5lZCBvbiBoZXIgam91cm5leSBieSBXaWxsLCBhIGJveSB3aG8gcG9zc2Vzc2VzIGEga25pZmUgdGhhdCBjYW4gY3V0IHdpbmRvd3MgYmV0d2VlbiB3b3JsZHMuIEFzIHNoZSBsZWFybnMgdGhlIHRydXRoIGFib3V0IGhlciBwYXJlbnRzIGFuZCBoZXIgcHJvcGhlc2llZCBkZXN0aW55LCB0aGUgdHdvIHlvdW5nIHBlb3BsZSBhcmUgY2F1Z2h0IHVwIGluIGEgd2FyIGFnYWluc3QgY2VsZXN0aWFsIHBvd2VycyB0aGF0IHJhbmdlcyBhY3Jvc3MgbWFueSB3b3JsZHMuIiwicG9wdWxhcml0eSI6MTQuOTIwNiwicG9zdGVyX3BhdGgiOiIvZzZ0SUtHYzNmMUg1UU16MWRjZ0N3QURLcFo3LmpwZyIsInByb2R1Y3Rpb25fY29tcGFuaWVzIjpbeyJpZCI6ODI5OTYsImxvZ29fcGF0aCI6Ii9zeHhQaE0zUXQzT0NRYUZVeWVlZ1o4ZXFjczkucG5nIiwibmFtZSI6IkJhZCBXb2xmIiwib3JpZ2luX2NvdW50cnkiOiJHQiJ9LHsiaWQiOjEyLCJsb2dvX3BhdGgiOiIvMnljczY0ZXFWNXJxS1lIeVFLMEdWb0tHdmZYLnBuZyIsIm5hbWUiOiJOZXcgTGluZSBDaW5lbWEiLCJvcmlnaW5fY291bnRyeSI6IlVTIn0seyJpZCI6MjMxODI1LCJsb2dvX3BhdGgiOm51bGwsIm5hbWUiOiJLYXRqYSBNb3Rpb24gUGljdHVyZSBDb3JwLiIsIm9yaWdpbl9jb3VudHJ5IjoiVVMifSx7ImlkIjoyMjE4NDQsImxvZ29fcGF0aCI6bnVsbCwibmFtZSI6IkJCQyBTdHVkaW9zIERpc3RyaWJ1dGlvbiIsIm9yaWdpbl9jb3VudHJ5IjoiR0IifSx7ImlkIjoxMzg3NDMsImxvZ29fcGF0aCI6Ii9hYkZKR210UEZzNkJxNWNCYXZtcm5YRGNwZjgucG5nIiwibmFtZSI6IkFudG9uIiwib3JpZ2luX2NvdW50cnkiOiJHQiJ9XSwicHJvZHVjdGlvbl9jb3VudHJpZXMiOlt7Imlzb18zMTY2XzEiOiJHQiIsIm5hbWUiOiJVbml0ZWQgS2luZ2RvbSJ9LHsiaXNvXzMxNjZfMSI6IlVTIiwibmFtZSI6IlVuaXRlZCBTdGF0ZXMgb2YgQW1lcmljYSJ9XSwic2Vhc29ucyI6W3siYWlyX2RhdGUiOiIyMDIwLTA0LTI2IiwiZXBpc29kZV9jb3VudCI6MjEsImlkIjoxNTgxOTQsIm5hbWUiOiJTcGVjaWFscyIsIm92ZXJ2aWV3IjoiIiwicG9zdGVyX3BhdGgiOm51bGwsInNlYXNvbl9udW1iZXIiOjAsInZvdGVfYXZlcmFnZSI6MC4wfSx7ImFpcl9kYXRlIjoiMjAxOS0xMS0wMyIsImVwaXNvZGVfY291bnQiOjgsImlkIjo4MTYxNiwibmFtZSI6IlNlcmllcyAxIiwib3ZlcnZpZXciOiJTZXJpZXMgMSBmb2xsb3dzIEx5cmEsIGEgc2VlbWluZ2x5IG9yZGluYXJ5IGJ1dCBicmF2ZSB5b3VuZyBnaXJsIGZyb20gYW5vdGhlciB3b3JsZC4gSGVyIHNlYXJjaCBmb3IgYSBraWRuYXBwZWQgZnJpZW5kIHVuY292ZXJzIGFuIGV2aWwgcGxvdC4iLCJwb3N0ZXJfcGF0aCI6Ii94T2pSTm5RdzVocVIxRVVMSjJpSGtHd0pWQTQuanBnIiwic2Vhc29uX251bWJlciI6MSwidm90ZV9hdmVyYWdlIjo3Ljh9LHsiYWlyX2RhdGUiOiIyMDIwLTExLTA4IiwiZXBpc29kZV9jb3VudCI6NywiaWQiOjE1NzE0NywibmFtZSI6IlNlcmllcyAyIiwib3ZlcnZpZXciOiJTZXJpZXMgMiBiZWdpbnMgYWZ0ZXIgTG9yZCBBc3JpZWwgaGFzIG9wZW5lZCBhIGJyaWRnZSB0byBhIG5ldyB3b3JsZCwgYW5kLCBkaXN0cmF1Z2h0IG92ZXIgdGhlIGRlYXRoIG9mIGhlciBiZXN0IGZyaWVuZCwgTHlyYSBmb2xsb3dzIEFzcmllbCBpbnRvIHRoZSB1bmtub3duLiBJbiBhIHN0cmFuZ2UgYW5kIG15c3RlcmlvdXMgYWJhbmRvbmVkIGNpdHkgc2hlIG1lZXRzIFdpbGwsIGEgYm95IGZyb20gb3VyIHdvcmxkIHdobyBpcyBhbHNvIHJ1bm5pbmcgZnJvbSBhIHRyb3VibGVkIHBhc3QuIE1ycy4gQ291bHRlciBzZWFyY2hlcyBmb3IgTHlyYSwgZGV0ZXJtaW5lZCB0byBicmluZyBoZXIgaG9tZSBieSBhbnkgbWVhbnMgbmVjZXNzYXJ5LiIsInBvc3Rlcl9wYXRoIjoiL25pZVNGdGpLSGFnUVI0MFBqeWNhdDQ0cDZxZC5qcGciLCJzZWFzb25fbnVtYmVyIjoyLCJ2b3RlX2F2ZXJhZ2UiOjcuNX0seyJhaXJfZGF0ZSI6IjIwMjItMTItMTgiLCJlcGlzb2RlX2NvdW50Ijo4LCJpZCI6MzExNjI0LCJuYW1lIjoiU2VyaWVzIDMiLCJvdmVydmlldyI6IkluIHRoZSBmaW5hbCBjaGFwdGVyLCBMeXJhLCB0aGUgcHJvcGhlc2llZCBjaGlsZCwgYW5kIFdpbGwsIHRoZSBiZWFyZXIgb2YgVGhlIFN1YnRsZSBLbmlmZSwgbXVzdCBqb3VybmV5IHRvIGEgZGFyayBwbGFjZSBmcm9tIHdoaWNoIG5vIG9uZSBoYXMgZXZlciByZXR1cm5lZC4gQXMgaGVyIGZhdGhlcuKAmXMgZ3JlYXQgd2FyIGFnYWluc3QgdGhlIEF1dGhvcml0eSBlZGdlcyBjbG9zZXIsIHRoZXkgd2lsbCBsZWFybiB0aGF0IHNhdmluZyB0aGUgd29ybGRzIGNvbWVzIGF0IGEgdGVycmlibGUgcHJpY2UuIiwicG9zdGVyX3BhdGgiOiIvdmFkT2NHUDl4aThaRU5RY1drYk8yelBHNXVFLmpwZyIsInNlYXNvbl9udW1iZXIiOjMsInZvdGVfYXZlcmFnZSI6Ny4zfV0sInNvZnRjb3JlIjpmYWxzZSwic3Bva2VuX2xhbmd1YWdlcyI6W3siZW5nbGlzaF9uYW1lIjoiRW5nbGlzaCIsImlzb182MzlfMSI6ImVuIiwibmFtZSI6IkVuZ2xpc2gifV0sInN0YXR1cyI6IkVuZGVkIiwidGFnbGluZSI6IlRoZSB0cnV0aCBsaWVzIGJleW9uZCB0aGUgd29ybGQgd2Uga25vdy4iLCJ0eXBlIjoiU2NyaXB0ZWQiLCJ2b3RlX2F2ZXJhZ2UiOjcuODMxLCJ2b3RlX2NvdW50IjoxODc0fQ==
+  recorded_at: Sat, 16 May 2026 21:02:53 GMT
+- request:
+    method: get
+    uri: https://api.tvmaze.com/search/shows?q=His%20Dark%20Materials
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.24.0 (Ubuntu)
+      Date:
+      - Sat, 16 May 2026 21:02:55 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=3600
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"score":1.4254632,"show":{"id":7626,"url":"https://www.tvmaze.com/shows/7626/his-dark-materials","name":"His
+        Dark Materials","type":"Scripted","language":"English","genres":["Drama","Adventure","Fantasy"],"status":"Ended","runtime":null,"averageRuntime":55,"premiered":"2019-11-03","ended":"2022-12-18","officialSite":"https://www.bbc.co.uk/programmes/m000b1v2","schedule":{"time":"","days":[]},"rating":{"average":7.7},"weight":98,"network":null,"webChannel":{"id":26,"name":"BBC
+        iPlayer","country":{"name":"United Kingdom","code":"GB","timezone":"Europe/London"},"officialSite":"https://www.bbc.co.uk/iplayer"},"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":360295,"imdb":"tt5607976"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/445/1113926.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/445/1113926.jpg"},"summary":"<p>Secrets
+        and dangers lie ahead for young Lyra Belacqua in an epic tale of stolen children
+        and the mysterious substance of Dust.</p>","updated":1704795629,"_links":{"self":{"href":"https://api.tvmaze.com/shows/7626"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/2440046","name":"The
+        Botanic Garden"}}}}]'
+  recorded_at: Sat, 16 May 2026 21:02:55 GMT
+- request:
+    method: get
+    uri: https://api.tvmaze.com/shows/7626
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.24.0 (Ubuntu)
+      Date:
+      - Sat, 16 May 2026 21:02:55 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=3600
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":7626,"url":"https://www.tvmaze.com/shows/7626/his-dark-materials","name":"His
+        Dark Materials","type":"Scripted","language":"English","genres":["Drama","Adventure","Fantasy"],"status":"Ended","runtime":null,"averageRuntime":55,"premiered":"2019-11-03","ended":"2022-12-18","officialSite":"https://www.bbc.co.uk/programmes/m000b1v2","schedule":{"time":"","days":[]},"rating":{"average":7.7},"weight":98,"network":null,"webChannel":{"id":26,"name":"BBC
+        iPlayer","country":{"name":"United Kingdom","code":"GB","timezone":"Europe/London"},"officialSite":"https://www.bbc.co.uk/iplayer"},"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":360295,"imdb":"tt5607976"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/445/1113926.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/445/1113926.jpg"},"summary":"<p>Secrets
+        and dangers lie ahead for young Lyra Belacqua in an epic tale of stolen children
+        and the mysterious substance of Dust.</p>","updated":1704795629,"_links":{"self":{"href":"https://api.tvmaze.com/shows/7626"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/2440046","name":"The
+        Botanic Garden"}}}'
+  recorded_at: Sat, 16 May 2026 21:02:55 GMT
+recorded_with: VCR 6.2.0

@@ -3,9 +3,9 @@ require 'spec_helper'
 
 RSpec.describe 'API v1 Shows Update', type: :request do
   before do
-    user = User.create(name: 'sam')
-    show1 = Show.new { |s| s.name = 'Foundation'; s.runtime = '60' }.save
-    show2 = Show.new { |s| s.name = 'Silo'; s.runtime = '60' }.save
+    user = create(:user, name: 'sam')
+    show1 = create(:show, :with_metadata, name: 'Foundation', runtime: '60')
+    show2 = create(:show, :with_metadata, name: 'Silo', runtime: '60')
     Services::UserShow.add_show(user, show1)
     Services::UserShow.add_show(user, show2)
   end

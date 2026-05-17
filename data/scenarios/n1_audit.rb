@@ -4,6 +4,8 @@ require 'database_cleaner-sequel'
 require 'json'
 require 'uri'
 require 'database'
+require 'services/show_factory'
+require 'metadata_service'
 
 puts "Seeding with n1_audit scenario..."
 
@@ -22,14 +24,12 @@ base_shows = JSON.parse(File.read("data/full_show_lookup.json")) rescue []
                 {
                   "name" => "Synthetic Show #{i}",
                   "runtime" => "#{30 + (i % 30)} minutes",
-                  "uri_encoded" => "synthetic-show-#{i}",
-                  "wiki_page" => nil,
-                  "page_title" => nil,
-                  "tmdb_id" => nil,
-                  "tvmaze_id" => 1000 + i
+                  "uri_encoded" => "synthetic-show-#{i}"
                 }
               end
   
+  # For the N+1 audit, we need raw Show records. 
+  # We bypass ShowFactory to avoid API dependency/validation overhead.
   Show.create(
     name:        show_data["name"],
     runtime:     show_data["runtime"],

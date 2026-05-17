@@ -3,27 +3,52 @@ require 'rspec'
 
 describe Show do
 
-  let(:suits)    {{ "name" => "Suits",    "runtime" => "42 minutes"    }}
-  let(:platonic) {{ "name" => "Platonic", "runtime" => "28-32 minutes" }}
-
   it "creates a new show with an empty name" do
     n = Show.new
     expect(n.values).to be_empty
   end
 
-  it "loads from a data structure" do
-    s = Show.new(suits)
-    expect(s.name).to eq(suits["name"])
+  it "loads name from a data structure" do
+    s = Show.new(name: "Suits")
+    expect(s.name).to eq("Suits")
   end
 
-  it "calculates an average from one number" do
-    s = Show.new(suits)
+  it "calculates an average from one number via metadata" do
+    s = create(:show, :with_metadata, runtime: "42 minutes")
     expect(s.average_runtime).to eq(42)
   end
 
-  it "calculates an average from two numbers" do
-    s = Show.new(platonic)
+  it "calculates an average from two numbers via metadata" do
+    s = create(:show, :with_metadata, runtime: "28-32 minutes")
     expect(s.average_runtime).to eq(30)
+  end
+
+  context "with metadata" do
+    let(:show) { create(:show) }
+    let(:metadata) { create(:show_metadata, payload: { "runtime" => "60 minutes", "poster_path" => "/path/to/poster.jpg" }, show: show) }
+
+    it "retrieves runtime from metadata if present" do
+      show.metadata = metadata
+      expect(show.runtime).to eq("60 minutes")
+    end
+
+    it "retrieves poster_path from metadata if present" do
+      show.metadata = metadata
+      expect(show.poster_path).to eq("/path/to/poster.jpg")
+    end
+
+    it "falls back to columns if metadata values are missing" do
+      # Ensure show is saved so it has a primary key
+      s = Show.create(name: "Test") 
+      
+      # Use the renamed column in @values to verify the fallback logic
+      s.values[:deprecated_runtime] = "30 minutes"
+      
+      # Associated metadata exists but is empty
+      s.metadata = create(:show_metadata, payload: {}, show: s)
+      
+      expect(s.runtime).to eq("30 minutes")
+    end
   end
 
 end

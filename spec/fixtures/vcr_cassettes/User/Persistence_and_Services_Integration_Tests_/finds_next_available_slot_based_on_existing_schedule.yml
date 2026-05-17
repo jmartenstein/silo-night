@@ -1,0 +1,231 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/search/tv?api_key=<TMDB_API_KEY>&query=The%20Afterparty
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 16 May 2026 20:29:46 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=21200
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - eff33b1d51ac36cae52e17ce2a286e6eb7d25821f3f122c1953dc0da5c9c1f7a
+      X-Memc-Age:
+      - '4705'
+      X-Memc-Expires:
+      - '21200'
+      X-Az:
+      - us-east-1b
+      X-Task-Id:
+      - a8ea8ec20c8f42f3960f0ae83e3917f4
+      Etag:
+      - W/"5f4bcf4aee57821ee7406387496f4415"
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 5d17d63ab6a3c1bd41982f69ab92d17a.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SEA900-P5
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - bep-M8LLO2082jtyeb_orpBSS59xW82-OdxXOfSt2VvEFtWs1tQeXQ==
+      Age:
+      - '2235'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"page":1,"results":[{"adult":false,"backdrop_path":"/kbehRFMpW7VHsoLB0FM2wsdZsyd.jpg","genre_ids":[9648,35,80],"id":106454,"origin_country":["US"],"original_language":"en","original_name":"The
+        Afterparty","overview":"Nothing is as it seems in this hilarious murder mystery
+        where each suspect''s story is told through a different film genre.","popularity":6.7032,"poster_path":"/9iAxAxeX5RjB39ckhxPMDCJPpG9.jpg","first_air_date":"2022-01-28","softcore":false,"name":"The
+        Afterparty","vote_average":7.109,"vote_count":211},{"adult":false,"backdrop_path":"/itdlI1L4hr3sDPLFAtByeSPfZTA.jpg","genre_ids":[35,10767],"id":115549,"origin_country":["US"],"original_language":"en","original_name":"The
+        Netflix Afterparty","overview":"Hosts David Spade, Fortune Feimster and London
+        Hughes welcome guests from the newest and biggest Netflix titles for fun conversations,
+        skits and more.","popularity":1.983,"poster_path":"/sb4rAJC4y8IA5VI5ZhgUC8oQbia.jpg","first_air_date":"2021-01-02","softcore":false,"name":"The
+        Netflix Afterparty","vote_average":5.667,"vote_count":12}],"total_pages":1,"total_results":2}'
+  recorded_at: Sat, 16 May 2026 21:07:01 GMT
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/tv/106454?api_key=<TMDB_API_KEY>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 16 May 2026 20:29:46 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=4581
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - 070d4bcf23252bf5de30f5b0038a36a1ed4d29af32d75310be4c0f4432990451
+      X-Memc-Age:
+      - '17212'
+      X-Memc-Expires:
+      - '4581'
+      X-Az:
+      - us-east-1a
+      X-Task-Id:
+      - 5e10ca0351b745188251a262ec2f3b78
+      Etag:
+      - W/"76c74032d22ded363be964de282d73a3"
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 5d17d63ab6a3c1bd41982f69ab92d17a.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SEA900-P5
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - gYCyxu7NqyYtSie1lGiRJH7SxxccaYkCnEsDTHPym2P27nKRcD3bxw==
+      Age:
+      - '2235'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJhZHVsdCI6ZmFsc2UsImJhY2tkcm9wX3BhdGgiOiIva2JlaFJGTXBXN1ZIc29MQjBGTTJ3c2Rac3lkLmpwZyIsImNyZWF0ZWRfYnkiOlt7ImlkIjoxNTUyNjcsImNyZWRpdF9pZCI6IjVmMWMzNTRkMGJiMDc2MDAzNGVmMGQ3NyIsIm5hbWUiOiJDaHJpc3RvcGhlciBNaWxsZXIiLCJvcmlnaW5hbF9uYW1lIjoiQ2hyaXN0b3BoZXIgTWlsbGVyIiwiZ2VuZGVyIjoyLCJwcm9maWxlX3BhdGgiOiIvZHIyeUNnWXRtTm1PNXZ6ams5S05ialRwYnpPLmpwZyJ9XSwiZXBpc29kZV9ydW5fdGltZSI6W10sImZpcnN0X2Fpcl9kYXRlIjoiMjAyMi0wMS0yOCIsImdlbnJlcyI6W3siaWQiOjk2NDgsIm5hbWUiOiJNeXN0ZXJ5In0seyJpZCI6MzUsIm5hbWUiOiJDb21lZHkifSx7ImlkIjo4MCwibmFtZSI6IkNyaW1lIn1dLCJob21lcGFnZSI6Imh0dHBzOi8vdHYuYXBwbGUuY29tL3Nob3cvdW1jLmNtYy41d2c4Y25pZ3dya2Z6YmRydWF1ZnpiNmIwIiwiaWQiOjEwNjQ1NCwiaW5fcHJvZHVjdGlvbiI6ZmFsc2UsImxhbmd1YWdlcyI6WyJlbiJdLCJsYXN0X2Fpcl9kYXRlIjoiMjAyMy0wOS0wNSIsImxhc3RfZXBpc29kZV90b19haXIiOnsiaWQiOjQxNzIzMzksIm5hbWUiOiJWaXZpYW4gYW5kIFpvZSIsIm92ZXJ2aWV3IjoiQWx0ZXJuYXRpbmcgYmV0d2VlbiBjYW1weSBob3Jyb3IgYW5kICc4MHMgc29hcCBvcGVyYSwgWm9lIGFuZCBoZXIgbW90aGVyIGZpbGwgaW4gdGhlIHJlbWFpbmluZyBibGFua3Mgb2YgRWRnYXIncyBtdXJkZXIuIiwidm90ZV9hdmVyYWdlIjo2LjYsInZvdGVfY291bnQiOjgsImFpcl9kYXRlIjoiMjAyMy0wOS0wNSIsImVwaXNvZGVfbnVtYmVyIjoxMCwiZXBpc29kZV90eXBlIjoiZmluYWxlIiwicHJvZHVjdGlvbl9jb2RlIjoiIiwicnVudGltZSI6MzEsInNlYXNvbl9udW1iZXIiOjIsInNob3dfaWQiOjEwNjQ1NCwic3RpbGxfcGF0aCI6Ii9rclV5S05nVkpsSkw3OGtmNldBdkRRYlBwcDYuanBnIn0sIm5hbWUiOiJUaGUgQWZ0ZXJwYXJ0eSIsIm5leHRfZXBpc29kZV90b19haXIiOm51bGwsIm5ldHdvcmtzIjpbeyJpZCI6MjU1MiwibG9nb19wYXRoIjoiL2JuZ0hSRmk3OTRtbk1xMzRnZlZjbTluRHhOMS5wbmciLCJuYW1lIjoiQXBwbGUgVFYiLCJvcmlnaW5fY291bnRyeSI6IiJ9XSwibnVtYmVyX29mX2VwaXNvZGVzIjoxOCwibnVtYmVyX29mX3NlYXNvbnMiOjIsIm9yaWdpbl9jb3VudHJ5IjpbIlVTIl0sIm9yaWdpbmFsX2xhbmd1YWdlIjoiZW4iLCJvcmlnaW5hbF9uYW1lIjoiVGhlIEFmdGVycGFydHkiLCJvdmVydmlldyI6Ik5vdGhpbmcgaXMgYXMgaXQgc2VlbXMgaW4gdGhpcyBoaWxhcmlvdXMgbXVyZGVyIG15c3Rlcnkgd2hlcmUgZWFjaCBzdXNwZWN0J3Mgc3RvcnkgaXMgdG9sZCB0aHJvdWdoIGEgZGlmZmVyZW50IGZpbG0gZ2VucmUuIiwicG9wdWxhcml0eSI6Ni43MDMyLCJwb3N0ZXJfcGF0aCI6Ii85aUF4QXhlWDVSakIzOWNraHhQTURDSlBwRzkuanBnIiwicHJvZHVjdGlvbl9jb21wYW5pZXMiOlt7ImlkIjo3Nzk3MywibG9nb19wYXRoIjoiL2VVWjBrZkU0dXlPMEpZSXJqZ1VTT3FXUHFqSy5wbmciLCJuYW1lIjoiTG9yZCBNaWxsZXIiLCJvcmlnaW5fY291bnRyeSI6IlVTIn0seyJpZCI6ODYwOSwibG9nb19wYXRoIjoiL2FYN0hRcXpkSVY3dHRkOTB1NEwxSDY0M1pOYS5wbmciLCJuYW1lIjoiVHJpU3RhciBUZWxldmlzaW9uIiwib3JpZ2luX2NvdW50cnkiOiJVUyJ9LHsiaWQiOjExMDczLCJsb2dvX3BhdGgiOiIvd0hzNDRma3Rkb2o2YzM3OFpiU1dmektzTTJaLnBuZyIsIm5hbWUiOiJTb255IFBpY3R1cmVzIFRlbGV2aXNpb24iLCJvcmlnaW5fY291bnRyeSI6IlVTIn1dLCJwcm9kdWN0aW9uX2NvdW50cmllcyI6W3siaXNvXzMxNjZfMSI6IlVTIiwibmFtZSI6IlVuaXRlZCBTdGF0ZXMgb2YgQW1lcmljYSJ9XSwic2Vhc29ucyI6W3siYWlyX2RhdGUiOiIyMDIyLTAxLTI4IiwiZXBpc29kZV9jb3VudCI6OCwiaWQiOjE1NzI3NywibmFtZSI6IlNlYXNvbiAxIiwib3ZlcnZpZXciOiJXaGVuIGEgaGlnaCBzY2hvb2wgcmV1bmlvbidzIGFmdGVycGFydHkgZW5kcyBpbiBhIHN0dW5uaW5nIGRlYXRoLCBldmVyeW9uZSBpcyBhIHN1c3BlY3QuIEEgZGV0ZWN0aXZlIGdyaWxscyB0aGUgZm9ybWVyIGNsYXNzbWF0ZXMgb25lIGJ5IG9uZSwgdW5jb3ZlcmluZyBwb3RlbnRpYWwgbW90aXZlcyBhcyBlYWNoIHRlbGxzIHRoZWlyIHZlcnNpb24gb2YgdGhlIHN0b3J54oCUY3VsbWluYXRpbmcgaW4gdGhlIHNob2NraW5nIHRydXRoLiIsInBvc3Rlcl9wYXRoIjoiLzlpQXhBeGVYNVJqQjM5Y2toeFBNRENKUHBHOS5qcGciLCJzZWFzb25fbnVtYmVyIjoxLCJ2b3RlX2F2ZXJhZ2UiOjYuM30seyJhaXJfZGF0ZSI6IjIwMjMtMDctMTEiLCJlcGlzb2RlX2NvdW50IjoxMCwiaWQiOjMyNDk1MSwibmFtZSI6IlNlYXNvbiAyIiwib3ZlcnZpZXciOiJJbiBzZWFzb24gdHdvLCBhIHdlZGRpbmcgaXMgcnVpbmVkIHdoZW4gdGhlIGdyb29tIGlzIG11cmRlcmVkIGFuZCBldmVyeSBndWVzdCBpcyBhIHN1c3BlY3QuIERldGVjdGl2ZSBEYW5uZXIgcmV0dXJucyB0byBoZWxwIEFuaXEgYW5kIFpvw6sgc29sdmUgdGhlIHdob2R1bm5pdCBieSBxdWVzdGlvbmluZyBmYW1pbHkgbWVtYmVycywgc3Rhci1jcm9zc2VkIGxvdmVycyBhbmQgYnVzaW5lc3MgcGFydG5lcnMsIGFuZCBoZWFyaW5nIGVhY2ggc3VzcGVjdOKAmXMgcmV0ZWxsaW5nIG9mIHRoZSB3ZWVrZW5kLCBlYWNoIHdpdGggdGhlaXIgb3duIHVuaXF1ZSBwZXJzcGVjdGl2ZSBhbmQgdmlzdWFsIHN0eWxlLiIsInBvc3Rlcl9wYXRoIjoiLzhVZ0hOZ1VHallMVG55SXJzczFrSG9KOGpIZy5qcGciLCJzZWFzb25fbnVtYmVyIjoyLCJ2b3RlX2F2ZXJhZ2UiOjYuMn1dLCJzb2Z0Y29yZSI6ZmFsc2UsInNwb2tlbl9sYW5ndWFnZXMiOlt7ImVuZ2xpc2hfbmFtZSI6IkVuZ2xpc2giLCJpc29fNjM5XzEiOiJlbiIsIm5hbWUiOiJFbmdsaXNoIn1dLCJzdGF0dXMiOiJDYW5jZWxlZCIsInRhZ2xpbmUiOiJUaWxsIGRlYXRoIGRvIHRoZXkgcGFydHkuIiwidHlwZSI6IlNjcmlwdGVkIiwidm90ZV9hdmVyYWdlIjo3LjEwOSwidm90ZV9jb3VudCI6MjExfQ==
+  recorded_at: Sat, 16 May 2026 21:07:01 GMT
+- request:
+    method: get
+    uri: https://api.tvmaze.com/search/shows?q=The%20Afterparty
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.24.0 (Ubuntu)
+      Date:
+      - Sat, 16 May 2026 21:07:03 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=3600
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"score":1.1995919,"show":{"id":48888,"url":"https://www.tvmaze.com/shows/48888/the-afterparty","name":"The
+        Afterparty","type":"Scripted","language":"English","genres":["Comedy","Crime","Mystery"],"status":"Ended","runtime":null,"averageRuntime":36,"premiered":"2022-01-28","ended":"2023-09-06","officialSite":"https://tv.apple.com/us/show/the-afterparty/umc.cmc.5wg8cnigwrkfzbdruaufzb6b0","schedule":{"time":"","days":["Wednesday"]},"rating":{"average":6.9},"weight":96,"network":null,"webChannel":{"id":310,"name":"Apple
+        TV","country":null,"officialSite":"https://tv.apple.com/"},"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":384495,"imdb":"tt12614214"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/488/1220528.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/488/1220528.jpg"},"summary":"<p><b>The
+        Afterparty</b> is a murder-mystery comedy set at a high school reunion afterparty.
+        Each of the eight episodes will feature a retelling of the same night told
+        through a different character''s perspective, each with its own unique visual
+        format and film genre to match the teller''s personality.</p>","updated":1700627392,"_links":{"self":{"href":"https://api.tvmaze.com/shows/48888"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/2524992","name":"Vivian
+        and Zoe"}}}},{"score":1.0085154,"show":{"id":51875,"url":"https://www.tvmaze.com/shows/51875/the-netflix-afterparty","name":"The
+        Netflix Afterparty","type":"Talk Show","language":"English","genres":["Comedy"],"status":"Ended","runtime":null,"averageRuntime":36,"premiered":"2021-01-02","ended":"2021-05-14","officialSite":"https://www.netflix.com/title/81298677","schedule":{"time":"","days":["Saturday"]},"rating":{"average":null},"weight":80,"network":null,"webChannel":{"id":1,"name":"Netflix","country":null,"officialSite":"https://www.netflix.com/"},"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":393686,"imdb":"tt13521850"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/289/723062.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/289/723062.jpg"},"summary":"<p>Hosts
+        David Spade, Fortune Feimster and London Hughes welcome guests from the newest
+        and biggest Netflix titles for fun conversations, skits and more.</p>","updated":1715720829,"_links":{"self":{"href":"https://api.tvmaze.com/shows/51875"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/2085341","name":"The
+        Upshaws"}}}}]'
+  recorded_at: Sat, 16 May 2026 21:07:03 GMT
+- request:
+    method: get
+    uri: https://api.tvmaze.com/shows/48888
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.24.0 (Ubuntu)
+      Date:
+      - Sat, 16 May 2026 21:07:03 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=3600
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":48888,"url":"https://www.tvmaze.com/shows/48888/the-afterparty","name":"The
+        Afterparty","type":"Scripted","language":"English","genres":["Comedy","Crime","Mystery"],"status":"Ended","runtime":null,"averageRuntime":36,"premiered":"2022-01-28","ended":"2023-09-06","officialSite":"https://tv.apple.com/us/show/the-afterparty/umc.cmc.5wg8cnigwrkfzbdruaufzb6b0","schedule":{"time":"","days":["Wednesday"]},"rating":{"average":6.9},"weight":96,"network":null,"webChannel":{"id":310,"name":"Apple
+        TV","country":null,"officialSite":"https://tv.apple.com/"},"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":384495,"imdb":"tt12614214"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/488/1220528.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/488/1220528.jpg"},"summary":"<p><b>The
+        Afterparty</b> is a murder-mystery comedy set at a high school reunion afterparty.
+        Each of the eight episodes will feature a retelling of the same night told
+        through a different character''s perspective, each with its own unique visual
+        format and film genre to match the teller''s personality.</p>","updated":1700627392,"_links":{"self":{"href":"https://api.tvmaze.com/shows/48888"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/2524992","name":"Vivian
+        and Zoe"}}}'
+  recorded_at: Sat, 16 May 2026 21:07:03 GMT
+recorded_with: VCR 6.2.0

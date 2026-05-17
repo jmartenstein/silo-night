@@ -1,5 +1,5 @@
 Given('a show named {string} exists in the local database with a poster') do |name|
-  Show.create(name: name, poster_path: '/poster.jpg')
+  Services::ShowFactory.create_with_metadata(name)
 end
 
 When('I search for {string}') do |query|

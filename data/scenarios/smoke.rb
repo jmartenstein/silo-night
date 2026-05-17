@@ -6,6 +6,15 @@ require 'uri'
 require 'database'
 require 'show'
 require 'user'
+require 'services/show_factory'
+require 'metadata_service'
+require 'vcr'
+require 'cgi'
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.hook_into :webmock
+end
 
 puts "Seeding with smoke_test scenario..."
 
@@ -14,19 +23,21 @@ DatabaseCleaner[:sequel].clean_with(:truncation); DB.run("PRAGMA foreign_keys = 
 
 # 1. Create shows needed for the Cucumber tests and general smoke testing
 shows_to_create = [
-  { name: "Slow Horses", runtime: "45 minutes", uri_encoded: "slow+horses" },
-  { name: "The Bear", runtime: "35 minutes", uri_encoded: "the+bear" },
-  { name: "Only Murders in the Building", runtime: "35 minutes", uri_encoded: "only+murders+in+the+building" },
-  { name: "The Equalizer", runtime: "60 minutes", uri_encoded: "the+equalizer" },
-  { name: "Suits", runtime: "42 minutes", uri_encoded: "suits" },
-  { name: "The Afterparty", runtime: "36 minutes", uri_encoded: "the+afterparty" },
-  { name: "His Dark Materials", runtime: "55 minutes", uri_encoded: "his+dark+materials" },
-  { name: "The Amazing Race", runtime: "60 minutes", uri_encoded: "the+amazing+race" },
-  { name: "Platonic", runtime: "31 minutes", uri_encoded: "platonic" }
+  "Slow Horses",
+  "The Bear",
+  "Only Murders in the Building",
+  "The Equalizer",
+  "Suits",
+  "The Afterparty",
+  "His Dark Materials",
+  "The Amazing Race",
+  "Platonic"
 ]
 
-shows_to_create.each do |s|
-  Show.create(s)
+VCR.use_cassette('smoke_scenario_seeds') do
+  shows_to_create.each do |name|
+    Services::ShowFactory.create_with_metadata(name)
+  end
 end
 
 # 2. Create users expected by Cucumber tests

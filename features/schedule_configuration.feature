@@ -1,3 +1,4 @@
+@vcr
 # features/schedule_configuration.feature
 
 Feature: Shows and Schedule Configuration

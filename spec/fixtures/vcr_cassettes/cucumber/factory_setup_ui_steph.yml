@@ -1,0 +1,241 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/search/tv?api_key=<TMDB_API_KEY>&query=Grey%27s%20Anatomy
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 16 May 2026 20:30:07 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=25085
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - ac181bab81db474f106fc63c6fb3ccb52abc5a42a97c7a6f1b7f4978cbc98268
+      X-Memc-Age:
+      - '794'
+      X-Memc-Expires:
+      - '25085'
+      X-Az:
+      - us-east-1b
+      X-Task-Id:
+      - a8ea8ec20c8f42f3960f0ae83e3917f4
+      Etag:
+      - W/"07c21bbd3a283bbd130c91cf230b339d"
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 469cf6a8d201dfefd060f8c8e825ca5c.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SEA900-P5
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - XVGIlXK3GmtnOe5OmVJ_8Gihppidi9tIXC0zxwBncWMK88XfcVKYww==
+      Age:
+      - '2681'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJwYWdlIjoxLCJyZXN1bHRzIjpbeyJhZHVsdCI6ZmFsc2UsImJhY2tkcm9wX3BhdGgiOiIvalAwUmhqOU9UUERBd1FsSFF3T0xGRGRlRTh0LmpwZyIsImdlbnJlX2lkcyI6WzE4XSwiaWQiOjE0MTYsIm9yaWdpbl9jb3VudHJ5IjpbIlVTIl0sIm9yaWdpbmFsX2xhbmd1YWdlIjoiZW4iLCJvcmlnaW5hbF9uYW1lIjoiR3JleSdzIEFuYXRvbXkiLCJvdmVydmlldyI6IkZvbGxvd3MgdGhlIHBlcnNvbmFsIGFuZCBwcm9mZXNzaW9uYWwgbGl2ZXMgb2YgYSBncm91cCBvZiBkb2N0b3JzIGF0IFNlYXR0bGUncyBHcmV5IFNsb2FuIE1lbW9yaWFsIEhvc3BpdGFsLiIsInBvcHVsYXJpdHkiOjIwOS44ODU2LCJwb3N0ZXJfcGF0aCI6Ii9oakprckxYaFd2R0hwTGVMQkRGem5wQlRZMVMuanBnIiwiZmlyc3RfYWlyX2RhdGUiOiIyMDA1LTAzLTI3Iiwic29mdGNvcmUiOmZhbHNlLCJuYW1lIjoiR3JleSdzIEFuYXRvbXkiLCJ2b3RlX2F2ZXJhZ2UiOjguMjA4LCJ2b3RlX2NvdW50IjoxMDg5Mn0seyJhZHVsdCI6ZmFsc2UsImJhY2tkcm9wX3BhdGgiOiIvYkdlQ1ZJWWo3eFE0UWJvbFJQTjNVaXJ2MHZwLmpwZyIsImdlbnJlX2lkcyI6WzE4XSwiaWQiOjc5ODk3LCJvcmlnaW5fY291bnRyeSI6WyJVUyJdLCJvcmlnaW5hbF9sYW5ndWFnZSI6ImVuIiwib3JpZ2luYWxfbmFtZSI6IkdyZXkncyBBbmF0b215OiBCLVRlYW0iLCJvdmVydmlldyI6Ik5ldyBpbnRlcm5zJyB0YWNrbGUgdGhlaXIgZmlyc3QgZGF5IGFzIHN1cmdlb25zIGF0IEdyZXkgU2xvYW4gTWVtb3JpYWwgdW5kZXIgdGhlIHdhdGNoZnVsIGFuZCBzdGVybiBleWUgb2YgQ2hpZWYgQmFpbGV5LiIsInBvcHVsYXJpdHkiOjIuMzc4NiwicG9zdGVyX3BhdGgiOiIvczBGWnU1SkJIMU9kSDVrSVZmY2szYzJEcGtDLmpwZyIsImZpcnN0X2Fpcl9kYXRlIjoiMjAxOC0wMS0xMSIsInNvZnRjb3JlIjpmYWxzZSwibmFtZSI6IkdyZXkncyBBbmF0b215OiBCLVRlYW0iLCJ2b3RlX2F2ZXJhZ2UiOjcuMywidm90ZV9jb3VudCI6Mjl9LHsiYWR1bHQiOmZhbHNlLCJiYWNrZHJvcF9wYXRoIjoiLzF2d0lWMnpRODhEeDZQd1k3WkZaeWFtaFloVi5qcGciLCJnZW5yZV9pZHMiOlsxOCwxMDc1OV0sImlkIjo3Njc3Mywib3JpZ2luX2NvdW50cnkiOlsiVVMiXSwib3JpZ2luYWxfbGFuZ3VhZ2UiOiJlbiIsIm9yaWdpbmFsX25hbWUiOiJTdGF0aW9uIDE5Iiwib3ZlcnZpZXciOiJBIGdyb3VwIG9mIGhlcm9pYyBmaXJlZmlnaHRlcnMgYXQgU2VhdHRsZSBGaXJlIFN0YXRpb24gMTnigJRmcm9tIGNhcHRhaW4gdG8gbmV3ZXN0IHJlY3J1aXTigJRyaXNrIHRoZWlyIGxpdmVzIGFuZCBoZWFydHMgYm90aCBpbiB0aGUgbGluZSBvZiBkdXR5IGFuZCBvZmYgdGhlIGNsb2NrLiBUaGVzZSBicmF2ZSBtZW4gYW5kIHdvbWVuIGFyZSBsaWtlIGZhbWlseSwgbGl0ZXJhbGx5IGFuZCBmaWd1cmF0aXZlbHksIGFuZCB0b2dldGhlciB0aGV5IHB1dCB0aGVpciBvd24gbGl2ZXMgaW4gamVvcGFyZHkgYXMgZmlyc3QgcmVzcG9uZGVycyB0byBzYXZlIHRoZSBsaXZlcyBvZiBvdGhlcnMuIiwicG9wdWxhcml0eSI6MjQuNjU1OSwicG9zdGVyX3BhdGgiOiIvM2dzOXdCc3Z2MUdKM0V6TGhlaDV5R3VUUWlzLmpwZyIsImZpcnN0X2Fpcl9kYXRlIjoiMjAxOC0wMy0yMiIsInNvZnRjb3JlIjpmYWxzZSwibmFtZSI6IlN0YXRpb24gMTkiLCJ2b3RlX2F2ZXJhZ2UiOjguMTk4LCJ2b3RlX2NvdW50IjoxNTQ0fV0sInRvdGFsX3BhZ2VzIjoxLCJ0b3RhbF9yZXN1bHRzIjozfQ==
+  recorded_at: Sat, 16 May 2026 21:14:48 GMT
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/tv/1416?api_key=<TMDB_API_KEY>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 16 May 2026 20:30:07 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=15342
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - eca0cbf1e22c6336797aec6eaaaa0bffbfde4c4de28213d25ee881117fe7470f
+      X-Memc-Age:
+      - '13352'
+      X-Memc-Expires:
+      - '15342'
+      X-Az:
+      - us-east-1a
+      X-Task-Id:
+      - 6cdc994ec9d84358b2c6c9c4effc5fdc
+      Etag:
+      - W/"3c769679f1bc96da0d88624bf7826436"
+      Vary:
+      - Origin
+      - accept-encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 207aef0b0f7f4adc5cab730ddd86d506.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - SEA900-P5
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - 4Kw4UxQnIeYx0G7unwnVKqHPm0ZRhB_38QZLk24VHWTf_V8kEwYaEw==
+      Age:
+      - '2681'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJhZHVsdCI6ZmFsc2UsImJhY2tkcm9wX3BhdGgiOiIvalAwUmhqOU9UUERBd1FsSFF3T0xGRGRlRTh0LmpwZyIsImNyZWF0ZWRfYnkiOlt7ImlkIjoyNTUzOSwiY3JlZGl0X2lkIjoiNTI1NmNmNmMxOWMyOTU2ZmY2MDliZDhlIiwibmFtZSI6IlNob25kYSBSaGltZXMiLCJvcmlnaW5hbF9uYW1lIjoiU2hvbmRhIFJoaW1lcyIsImdlbmRlciI6MSwicHJvZmlsZV9wYXRoIjoiL3BJUWJWeGZqTndaMERhQWpvM3ExMDdubmcxYi5qcGcifV0sImVwaXNvZGVfcnVuX3RpbWUiOltdLCJmaXJzdF9haXJfZGF0ZSI6IjIwMDUtMDMtMjciLCJnZW5yZXMiOlt7ImlkIjoxOCwibmFtZSI6IkRyYW1hIn1dLCJob21lcGFnZSI6Imh0dHBzOi8vYWJjLmNvbS9zaG93L2I3ZDkwZjk3LWRiYjItNGFiNS1iMTQxLWY5Y2JlYWU1MzU4MSIsImlkIjoxNDE2LCJpbl9wcm9kdWN0aW9uIjp0cnVlLCJsYW5ndWFnZXMiOlsiZW4iXSwibGFzdF9haXJfZGF0ZSI6IjIwMjYtMDUtMDciLCJsYXN0X2VwaXNvZGVfdG9fYWlyIjp7ImlkIjo2ODg1MzMyLCJuYW1lIjoiQnJpZGdlIE92ZXIgVHJvdWJsZWQgV2F0ZXIiLCJvdmVydmlldyI6IkFmdGVyIGEgY2F0YXN0cm9waGljIGJyaWRnZSBjb2xsYXBzZSBzZW5kcyBkb3plbnMgb2YgdmljdGltcyB0byBHcmV5IFNsb2FuLCB0aGUgaG9zcGl0YWwgYWN0aXZhdGVzIGl0cyBmdWxsIGRpc2FzdGVyIHJlc3BvbnNlIGFzIHRoZXkgcmFjZSB0byB0cmVhdCBhIHN1cmdlIG9mIGNyaXRpY2FsbHkgaW5qdXJlZCBwYXRpZW50cywgaW5jbHVkaW5nIG9uZSBvZiB0aGVpciBvd24uIiwidm90ZV9hdmVyYWdlIjo3LjAsInZvdGVfY291bnQiOjEsImFpcl9kYXRlIjoiMjAyNi0wNS0wNyIsImVwaXNvZGVfbnVtYmVyIjoxOCwiZXBpc29kZV90eXBlIjoiZmluYWxlIiwicHJvZHVjdGlvbl9jb2RlIjoiIiwicnVudGltZSI6NDMsInNlYXNvbl9udW1iZXIiOjIyLCJzaG93X2lkIjoxNDE2LCJzdGlsbF9wYXRoIjoiL2F4NWc4aWhVekNDdWJYVTRxN3VzOXVYUWV2UC5qcGcifSwibmFtZSI6IkdyZXkncyBBbmF0b215IiwibmV4dF9lcGlzb2RlX3RvX2FpciI6bnVsbCwibmV0d29ya3MiOlt7ImlkIjoyLCJsb2dvX3BhdGgiOiIvMnV5MlpXY3BsclNPYkl5dDR4MFk5cmtHNnFPLnBuZyIsIm5hbWUiOiJBQkMiLCJvcmlnaW5fY291bnRyeSI6IlVTIn1dLCJudW1iZXJfb2ZfZXBpc29kZXMiOjQ2NSwibnVtYmVyX29mX3NlYXNvbnMiOjIzLCJvcmlnaW5fY291bnRyeSI6WyJVUyJdLCJvcmlnaW5hbF9sYW5ndWFnZSI6ImVuIiwib3JpZ2luYWxfbmFtZSI6IkdyZXkncyBBbmF0b215Iiwib3ZlcnZpZXciOiJGb2xsb3dzIHRoZSBwZXJzb25hbCBhbmQgcHJvZmVzc2lvbmFsIGxpdmVzIG9mIGEgZ3JvdXAgb2YgZG9jdG9ycyBhdCBTZWF0dGxlJ3MgR3JleSBTbG9hbiBNZW1vcmlhbCBIb3NwaXRhbC4iLCJwb3B1bGFyaXR5IjoyMDkuODg1NiwicG9zdGVyX3BhdGgiOiIvaGpKa3JMWGhXdkdIcExlTEJERnpucEJUWTFTLmpwZyIsInByb2R1Y3Rpb25fY29tcGFuaWVzIjpbeyJpZCI6MTU1NywibG9nb19wYXRoIjoiL2NjejlicUN1M2pTRktiUEZuZldtakFLWkxCTC5wbmciLCJuYW1lIjoiVGhlIE1hcmsgR29yZG9uIENvbXBhbnkiLCJvcmlnaW5fY291bnRyeSI6IlVTIn0seyJpZCI6MzQyMDksImxvZ29fcGF0aCI6Ii9yWXQ4UTNuWXh5RTRZQkxtVm9qdm9LdklST3YucG5nIiwibmFtZSI6InNob25kYWxhbmQiLCJvcmlnaW5fY291bnRyeSI6IlVTIn0seyJpZCI6MTkzNjYsImxvZ29fcGF0aCI6Ii92T0g4ZHlRaExLMDFwZzVmWWtnaVMzMWpsRm0ucG5nIiwibmFtZSI6IkFCQyBTdHVkaW9zIiwib3JpZ2luX2NvdW50cnkiOiJVUyJ9LHsiaWQiOjE1NTgsImxvZ29fcGF0aCI6Ii93d2FLVWNPRU5IaXgyanhMZkZCZk5rQ3RPRVEucG5nIiwibmFtZSI6IlRvdWNoc3RvbmUgVGVsZXZpc2lvbiIsIm9yaWdpbl9jb3VudHJ5IjoiVVMifSx7ImlkIjo1MTg0OCwibG9nb19wYXRoIjoiL2ptclJaZ3FIblltSkM0dWVQUUkyc0xpanBTay5wbmciLCJuYW1lIjoiRW50ZXJ0YWlubWVudCBPbmUgVGVsZXZpc2lvbiIsIm9yaWdpbl9jb3VudHJ5IjoiQ0EifSx7ImlkIjoyODUyMywibG9nb19wYXRoIjoiL3p6VUx3OXc3ZDUwQkhSOGZFMzBQWlQzekoxRC5wbmciLCJuYW1lIjoiTGlvbnNnYXRlIFRlbGV2aXNpb24iLCJvcmlnaW5fY291bnRyeSI6IlVTIn0seyJpZCI6MjM2NjEzLCJsb2dvX3BhdGgiOiIvOURUZ2dvWkFSSHpBVENSZXdHUnM5WFNOT1dQLnBuZyIsIm5hbWUiOiJBQkMgU2lnbmF0dXJlIiwib3JpZ2luX2NvdW50cnkiOiJVUyJ9LHsiaWQiOjE0MTU1MywibG9nb19wYXRoIjpudWxsLCJuYW1lIjoiVHJpcCB0aGUgTGlnaHQgUHJvZHVjdGlvbnMiLCJvcmlnaW5fY291bnRyeSI6IlVTIn0seyJpZCI6MjM2MTY2LCJsb2dvX3BhdGgiOiIvOHJGbHU1aXl0bmpzY2lZWFpEdzkwa3RsbENJLnBuZyIsIm5hbWUiOiIyMHRoIFRlbGV2aXNpb24iLCJvcmlnaW5fY291bnRyeSI6IlVTIn1dLCJwcm9kdWN0aW9uX2NvdW50cmllcyI6W3siaXNvXzMxNjZfMSI6IlVTIiwibmFtZSI6IlVuaXRlZCBTdGF0ZXMgb2YgQW1lcmljYSJ9LHsiaXNvXzMxNjZfMSI6IkNBIiwibmFtZSI6IkNhbmFkYSJ9XSwic2Vhc29ucyI6W3siYWlyX2RhdGUiOiIyMDA2LTAyLTE0IiwiZXBpc29kZV9jb3VudCI6NjgsImlkIjozNzIyLCJuYW1lIjoiU3BlY2lhbHMiLCJvdmVydmlldyI6IiIsInBvc3Rlcl9wYXRoIjoiL3NuUVluZGZzRXIzU3RvMmpPbWttc1F1VVhBUS5qcGciLCJzZWFzb25fbnVtYmVyIjowLCJ2b3RlX2F2ZXJhZ2UiOjAuMH0seyJhaXJfZGF0ZSI6IjIwMDUtMDMtMjciLCJlcGlzb2RlX2NvdW50Ijo5LCJpZCI6MzcxOCwibmFtZSI6IlNlYXNvbiAxIiwib3ZlcnZpZXciOiJNZXJlZGl0aCBHcmV5LCB0aGUgZGF1Z2h0ZXIgb2YgdGhlIG9uY2UtcmVub3duZWQgc3VyZ2VvbiBFbGxpcyBHcmV5LCBiZWNvbWVzIGFuIGludGVybiBhdCB0aGUgU2VhdHRsZSBHcmFjZSBIb3NwaXRhbC4gU2hlIG1lZXRzIGZlbGxvdyBpbnRlcm5zIENyaXN0aW5hIFlhbmcsIElzb2JlbCBcIkl6emllXCIgU3RldmVucywgR2VvcmdlIE8nTWFsbGV5IGFuZCBBbGV4IEthcmV2IHdobyBiZWNvbWUgaGVyIGNsb3Nlc3QgZnJpZW5kcyBkdXJpbmcgdGhlIGludGVybiBwcm9ncmFtLiBTaGUgZmluZHMgaGVyc2VsZiB3b3JraW5nIHdpdGggcmVub3duZWQgc3VyZ2VvbnMgc3VjaCBhcyB0aGUgaGVhcnQgc3VyZ2VvbiBQcmVzdG9uIEJ1cmtlIGFuZCBSaWNoYXJkIFdlYmJlciwgY2hpZWYgb2Ygc3VyZ2VyeSBhbmQgb2xkIGZyaWVuZCBvZiBoZXIgbW90aGVyLiBTaGUgZmluZHMgaGVyc2VsZiB3b3JraW5nIHVuZGVyIGhlciBvbmUgbmlnaHQgc3RhbmQgYW5kIGZhbW91cyBuZXVyb3N1cmdlb24gRGVyZWsgU2hlcGhlcmQgYW5kIHdvcmtpbmcgd2l0aCBoZXIgcmVzaWRlbnQgRHIuIE1pcmFuZGEgQmFpbGV5IGFsc28ga25vd24gYXMgVGhlIE5hemkuIiwicG9zdGVyX3BhdGgiOiIvdWxHanU4R3lYRTM2d0NnbXZ5RkpMM3NMaVZtLmpwZyIsInNlYXNvbl9udW1iZXIiOjEsInZvdGVfYXZlcmFnZSI6Ny44fSx7ImFpcl9kYXRlIjoiMjAwNS0wOS0yNSIsImVwaXNvZGVfY291bnQiOjI3LCJpZCI6MzcxOSwibmFtZSI6IlNlYXNvbiAyIiwib3ZlcnZpZXciOiJUaGUgc2Vhc29uIGNvbnRpbnVlZCB0byBmb2N1cyBvbiB0aGUgc3VyZ2ljYWwgcmVzaWRlbmN5IG9mIGZpdmUgeW91bmcgaW50ZXJucyBhcyB0aGV5IHRyeSB0byBiYWxhbmNlIHRvIHRoZSBjaGFsbGVuZ2VzIG9mIHRoZWlyIGNvbXBldGl0aXZlIGNhcmVlcnMsIHdpdGggdGhlIGRpZmZpY3VsdGllcyB0aGF0IGRldGVybWluZSB0aGVpciBwZXJzb25hbCBsaXZlcy4gSXQgd2FzIHNldCBpbiB0aGUgZmljdGlvbmFsIFNlYXR0bGUgR3JhY2UgSG9zcGl0YWwsIGxvY2F0ZWQgaW4gdGhlIGNpdHkgb2YgU2VhdHRsZSwgV2FzaGluZ3Rvbi4gV2hlcmVhcyB0aGUgZmlyc3Qgc2Vhc29uIHB1dCB0aGUgZW1waGFzaXMgbWFpbmx5IG9uIHRoZSB1bmV4cGVjdGVkIGltcGFjdCB0aGUgc3VyZ2ljYWwgZmllbGQgaGFzIG9uIHRoZSBtYWluIGNoYXJhY3RlcnMsIHRoZSBzZWNvbmQgb25lIHByb3ZpZGVzIGEgZGV0YWlsZWQgcGVyc3BlY3RpdmUgb24gdGhlIHBlcnNvbmFsIGJhY2tncm91bmQgb2YgZWFjaCBjaGFyYWN0ZXIsIGZvY3VzaW5nIG9uIHRoZSBjb25zZXF1ZW5jZXMgdGhhdCB0aGVpciBkZWNpc2lvbnMgaGF2ZSBvbiB0aGVpciBjYXJlZXJzLiBUaHJvdWdob3V0IHRoZSBzZWFzb24sIG5ldyBzdG9yeSBsaW5lcyB3ZXJlIGludHJvZHVjZWQsIGluY2x1ZGluZyB0aGUgbG92ZSB0cmlhbmdsZSBiZXR3ZWVuIE1lcmVkaXRoIEdyZXksIERlcmVrIFNoZXBoZXJkLCBhbmQgQWRkaXNvbiBNb250Z29tZXJ5LCB0aGUgbWFpbiBhcmMgb2YgdGhlIHNlYXNvbi4gQWxzbyBoZWF2aWx5IGRldmVsb3BlZCB3YXMgdGhlIHN0b3J5IGxpbmUgaW52b2x2aW5nIEl6emllIFN0ZXZlbnMnIHJlbGF0aW9uc2hpcCB3aXRoIHBhdGllbnQgRGVubnkgRHVxdWV0dGUsIHdoaWNoIHJlc3VsdGVkIGluIGNyaXRpY2FsIGFjY2xhaW0gYW5kIHBvc2l0aXZlIGZhbiByZXNwb25zZS4iLCJwb3N0ZXJfcGF0aCI6Ii9iTzBTM2ZVOFRjcW4wZzVEQ21EY1gxb3FBMnQuanBnIiwic2Vhc29uX251bWJlciI6Miwidm90ZV9hdmVyYWdlIjo4LjZ9LHsiYWlyX2RhdGUiOiIyMDA2LTA5LTIxIiwiZXBpc29kZV9jb3VudCI6MjUsImlkIjozNzE1LCJuYW1lIjoiU2Vhc29uIDMiLCJvdmVydmlldyI6IlRoZSBzZWFzb24gZm9sbG93ZWQgdGhlIGNvbnRpbnVhdGlvbiBvZiB0aGUgc3VyZ2ljYWwgcmVzaWRlbmN5IG9mIGZpdmUgeW91bmcgaW50ZXJucywgYXMgdGhleSBleHBlcmllbmNlIHRoZSBkZW1hbmRzIG9mIHRoZSBjb21wZXRpdGl2ZSBmaWVsZCBvZiBtZWRpY2luZSwgd2hpY2ggYmVjb21lcyBkZWZpbmluZyBpbiB0aGVpciBwZXJzb25hbCBldm9sdXRpb24uIEFsdGhvdWdoIHNldCBpbiBmaWN0aW9uYWwgU2VhdHRsZSBHcmFjZSBIb3NwaXRhbCwgbG9jYXRlZCBpbiBTZWF0dGxlLCBXYXNoaW5ndG9uLCBmaWxtaW5nIHByaW1hcmlseSBvY2N1cnJlZCBpbiBMb3MgQW5nZWxlcywgQ2FsaWZvcm5pYS4gV2hlcmVhcyB0aGUgZmlyc3Qgc2Vhc29uIG1haW5seSBmb2N1c2VkIG9uIHRoZSBpbXBhY3QgdGhlIHN1cmdpY2FsIGZpZWxkIGhhcyBvbiB0aGUgbWFpbiBjaGFyYWN0ZXJzLCBhbmQgdGhlIHNlY29uZCBvbmUgcHJvdmlkZWQgYSBkZXRhaWxlZCBwZXJzcGVjdGl2ZSBvbiB0aGUgcGh5c2ljaWFucycgcHJpdmF0ZSBsaXZlcywgdGhlIHRoaXJkIHNlYXNvbiBkZWFscyB3aXRoIHRoZSB0b3VnaCBjaGFsbGVuZ2VzIGJyb3VnaHQgYnkgdGhlIGxhc3QgcGhhc2Ugb2YgdGhlIHN1cmdlb25zJyBpbnRlcm5zaGlwLCBjb21iaW5pbmcgdGhlIHByb2Zlc3Npb25hbCBtb3RpZiBlbXBoYXNpemVkIGluIHRoZSBmaXJzdCBzZWFzb24sIHdpdGggdGhlIGNvbXBsZXggcGVyc29uYWwgYmFja2dyb3VuZCB1c2VkIGluIHRoZSBzZWNvbmQuIFRocm91Z2ggdGhlIHNlYXNvbiwgc2V2ZXJhbCBuZXcgc3RvcnlsaW5lcyBhcmUgaW50cm9kdWNlZCwgaW5jbHVkaW5nIHRoZSBhcnJpdmFsIG9mIERhbmUncyBjaGFyYWN0ZXIsIERyLiBNYXJrIFNsb2FuLCBjb25jZWl2ZWQgYW5kIGludHJvZHVjZWQgYXMgYW4gYW50YWdvbml6aW5nIHByZXNlbmNlLiIsInBvc3Rlcl9wYXRoIjoiL2FZN051dkZqNVV6bGl5MG5yRnhWV21sWkZpSy5qcGciLCJzZWFzb25fbnVtYmVyIjozLCJ2b3RlX2F2ZXJhZ2UiOjguNH0seyJhaXJfZGF0ZSI6IjIwMDctMDktMjciLCJlcGlzb2RlX2NvdW50IjoxNywiaWQiOjM3MTYsIm5hbWUiOiJTZWFzb24gNCIsIm92ZXJ2aWV3IjoiRW50ZXIgYSB3b3JsZCBvZiBjaGFuZ2UgaW4gdGhlIGlycmVzaXN0aWJsZSBhbmQgdW5mb3JnZXR0YWJsZSBmb3VydGggc2Vhc29uIG9mIEdyZXkncyBBbmF0b215LiBMb3ZlLCBsaWVzLCBhbmQgZmFtaWx5IHRpZXMgYXJlIHJldmVhbGVkIGFzIHRoZSBzdXJnZW9ucyBvZiBTZWF0dGxlIEdyYWNlIGRpc2NvdmVyIHRoYXQgdGhlaXIgY2hvaWNlcyBoYXZlIG1ham9yIHVuaW50ZW5kZWQgY29uc2VxdWVuY2VzLiBBbmQgY291cGxlZCB3aXRoIHRoZSBhcnJpdmFsIG9mIHNvbWUgdmVyeSBlYWdlciBuZXcgaW50ZXJucywgbGlmZSBhdCB0aGUgaG9zcGl0YWwgc2l6emxlcyB3aXRoIG1vcmUgZW1vdGlvbiwgZXhjaXRlbWVudCwgYW5kIGhlYXJ0YnJlYWsgdGhhbiBldmVyIGJlZm9yZS4iLCJwb3N0ZXJfcGF0aCI6Ii9nRFFSMzluTWRqQXZHeVdlNGxPUENqNGlNUXguanBnIiwic2Vhc29uX251bWJlciI6NCwidm90ZV9hdmVyYWdlIjo4LjB9LHsiYWlyX2RhdGUiOiIyMDA4LTA5LTI1IiwiZXBpc29kZV9jb3VudCI6MjQsImlkIjozNzE3LCJuYW1lIjoiU2Vhc29uIDUiLCJvdmVydmlldyI6IkxpdmUgZm9yIHRoZSBtb21lbnQuIERpdmUgZGVlcGVyIGludG8gdGhlIGxpdmVzIGFuZCBsb3ZlcyBvZiBcIkdyZXkncyBBbmF0b215XCIhIFRoZSBkb2N0b3JzIHN0cnVnZ2xlIGFuZCB0aHJpdmUgYXMgdGhleSBlbnRlciB1bmNoYXJ0ZWQgdGVycml0b3JpZXMgb2YgbGlmZS4gRGlzY292ZXIgd2hhdCBoYXBwZW5zIGluIHRoZSBvbi1hZ2Fpbiwgb2ZmLWFnYWluIHdvcmxkIG9mIERlcmVrIGFuZCBNZXJlZGl0aCwgYW5kIHdpdG5lc3MgdGhlIGJ1ZGRpbmcgcmVsYXRpb25zaGlwIGJldHdlZW4gQ3Jpc3RpbmEgYW5kIE93ZW4sIFNlYXR0bGUgR3JhY2UncyBuZXdlc3QgZG9jdG9yLiIsInBvc3Rlcl9wYXRoIjoiL2JuT1MwQUtqYmZQWTF4VnFGODBxazBpQlFCWC5qcGciLCJzZWFzb25fbnVtYmVyIjo1LCJ2b3RlX2F2ZXJhZ2UiOjguNH0seyJhaXJfZGF0ZSI6IjIwMDktMDktMjQiLCJlcGlzb2RlX2NvdW50IjoyNCwiaWQiOjM3MjAsIm5hbWUiOiJTZWFzb24gNiIsIm92ZXJ2aWV3IjoiVGhlIHNlYXNvbiBmb2xsb3dzIHRoZSBzdG9yeSBvZiBzdXJnaWNhbCBpbnRlcm5zLCByZXNpZGVudHMgYW5kIHRoZWlyIGNvbXBldGVudCBtZW50b3JzLCBhcyB0aGV5IGV4cGVyaWVuY2UgdGhlIGRpZmZpY3VsdGllcyBvZiB0aGUgY29tcGV0aXRpdmUgY2FyZWVycyB0aGV5IGhhdmUgY2hvc2VuLiBJdCBpcyBzZXQgaW4gdGhlIHN1cmdpY2FsIHdpbmcgb2YgdGhlIGZpY3Rpb25hbCBTZWF0dGxlIEdyYWNlIEhvc3BpdGFsLCBsb2NhdGVkIGluIFNlYXR0bGUsIFdhc2hpbmd0b24uIEEgbWFqb3Igc3RvcnlsaW5lIG9mIHRoZSBzZWFzb24gaXMgdGhlIGNoYXJhY3RlcnMgYWRhcHRpbmcgdG8gY2hhbmdlLCBhcyB0aGVpciBiZWxvdmVkIGNvLXdvcmtlciBTdGV2ZW5zIGRlcGFydGVkIGZvbGxvd2luZyB0aGUgYnJlYWtkb3duIG9mIGhlciBtYXJyaWFnZSwgTydNYWxsZXkgZGllZCBpbiB0aGUgc2Vhc29uIHByZW1pZXJl4oCUZm9sbG93aW5nIGhpcyBiZWluZyBkcmFnZ2VkIGJ5IGEgYnVzLCBhbmQgbmV3IGNhcmRpb3Rob3JhY2ljIHN1cmdlb24gVGVkZHkgQWx0bWFuIGlzIGdpdmVuIGVtcGxveW1lbnQgYXQgdGhlIGhvc3BpdGFsLiBGdXJ0aGVyIHN0b3J5bGluZXMgaW5jbHVkZSBTaGVwaGVyZCBiZWluZyBwcm9tb3RlZCB0byBjaGllZiBvZiBzdXJnZXJ5LCBTZWF0dGxlIEdyYWNlIEhvc3BpdGFsIG1lcmdpbmcgd2l0aCB0aGUgbmVpZ2hib3JpbmcgTWVyY3kgV2VzdCDigJRpbnRyb2R1Y2luZyBzZXZlcmFsIG5ldyBkb2N0b3JzLCBhbmQgc2V2ZXJhbCBwaHlzaWNpYW5zIGxpdmVzIGJlaW5nIHBsYWNlZCBpbnRvIGRhbmdlcuKAlHdoZW4gYSBncmlldmluZyBkZWNlYXNlZCBwYXRpZW50J3MgaHVzYmFuZCBlbWJhcmtzIG9uIGEgc2hvb3Rpbmcgc3ByZWUgYXQgdGhlIGhvc3BpdGFsLCBzZWVraW5nIHJldmVuZ2UgZm9yIGhpcyB3aWZlJ3MgZGVhdGguIiwicG9zdGVyX3BhdGgiOiIvOG9jbERzdUhQWklWWGgzMTF1NVNIbFROUXpBLmpwZyIsInNlYXNvbl9udW1iZXIiOjYsInZvdGVfYXZlcmFnZSI6OC4zfSx7ImFpcl9kYXRlIjoiMjAxMC0wOS0yMyIsImVwaXNvZGVfY291bnQiOjIyLCJpZCI6MzcyMSwibmFtZSI6IlNlYXNvbiA3Iiwib3ZlcnZpZXciOiJMZXQgdGhlIGhlYWxpbmcgYmVnaW4uIEl0J3MgYSB5ZWFyIG9mIG5ldyBiZWdpbm5pbmdzIGZvciB0aGUgbWVkaWNhbCB0ZWFtIG9mIFNlYXR0bGUgR3JhY2UgSG9zcGl0YWwgYXMgdGhleSBzbG93bHkgcmVjb3ZlciBmcm9tIHRoZSB0cmFnZWR5IHRoYXQgaGl0IHRvbyBjbG9zZSB0byBob21lLiBOZXcgcmVsYXRpb25zaGlwcyBlbWVyZ2UgYW5kIHRoZSBzdHJvbmdlc3QgY29tbWl0bWVudHMgYXJlIHRlc3RlZC4gRnJvbSBzdWNjZXNzZXMgaW4gdGhlIG9wZXJhdGluZyByb29tIHRvIG1pc3Rha2VzIGluIHRoZSBiZWRyb29tIGFuZCBhbGwgdGhlIHRocmlsbGluZyBkcmFtYSBpbiBiZXR3ZWVuIHRoZSBkb2N0b3JzIGZpbmQgYSB3YXkgdG8gc3Vydml2ZSBhcyBsb25nIGFzIHRoZXkgbGVhbiBvbiBvbmUgYW5vdGhlci4iLCJwb3N0ZXJfcGF0aCI6Ii93bUdVZWRNUUprbVNaRllKQTM1QUtQckhzR0ouanBnIiwic2Vhc29uX251bWJlciI6Nywidm90ZV9hdmVyYWdlIjo3Ljl9LHsiYWlyX2RhdGUiOiIyMDExLTA5LTIxIiwiZXBpc29kZV9jb3VudCI6MjQsImlkIjozNzIzLCJuYW1lIjoiU2Vhc29uIDgiLCJvdmVydmlldyI6Ik5vIG1hdHRlciBob3cgaG90IGl0IGdldHMgLSBpbiB0aGUgb3BlcmF0aW5nIHJvb20gb3IgaW4gdGhlIGJlZHJvb20gLSB0aGUgZG9jdG9ycyBvZiBTZWF0dGxlIEdyYWNlIGtub3cgdGhleSBjYW4gYWx3YXlzIGxlYW4gb24gb25lIGFub3RoZXIuIEFzIGZpZnRoLXllYXIgcmVzaWRlbnRzLCBpdCdzIGRvIG9yIGRpZSBmb3IgdGhlIGRvY3RvcnMsIGFuZCB0aGluZ3MgZ2V0IGJ1bXB5IHdoZW4gdGhlIGNoaWVmIG1ha2VzIGEgZGVjaXNpb24gdGhhdCByb2NrcyB0aGUgZW50aXJlIHN0YWZmLiBPdXRzaWRlIHRoZSBob3NwaXRhbCwgTWVyZWRpdGggYW5kIERlcmVrIHN0cnVnZ2xlIHRvIGtlZXAgdGhlaXIgcmVsYXRpb25zaGlwIGFmbG9hdCB3aGlsZSB0aGV5IHRyeSB0byBhZG9wdCBhbiBvcnBoYW5lZCBiYWJ5IGdpcmwsIGFuZCBDcmlzdGluYSB3cmVzdGxlcyB3aXRoIGEgZGlmZmljdWx0IGNob2ljZSB0aGF0IHRocmVhdGVucyB0byBydWluIGhlciBtYXJyaWFnZS4iLCJwb3N0ZXJfcGF0aCI6Ii9wdnVNUXdNUFdEcXVuUmlham1lR1FtVUYwelMuanBnIiwic2Vhc29uX251bWJlciI6OCwidm90ZV9hdmVyYWdlIjo4LjJ9LHsiYWlyX2RhdGUiOiIyMDEyLTA5LTI3IiwiZXBpc29kZV9jb3VudCI6MjQsImlkIjozNzI0LCJuYW1lIjoiU2Vhc29uIDkiLCJvdmVydmlldyI6Ikl0J3MgYSB5ZWFyIG9mIGJvbGQgbmV3IGJlZ2lubmluZ3MgYXMgeW91ciBmYXZvcml0ZSBkb2N0b3JzIHJldHVybiB0byBTZWF0dGxlIEdyYWNlIGZvciB0aGUgYmlnZ2VzdCBjaGFsbGVuZ2Ugb2YgdGhlaXIgbGl2ZXMuIFRoZSBwbGFuZSBjcmFzaCB0aGF0IHRvb2sgdGhlIGxpdmVzIG9mIExleGllIEdyZXkgYW5kIE1hcmsgU2xvYW4gc2VudCBzaG9ja3dhdmVzIHRocm91Z2hvdXQgdGhlIGhvc3BpdGFsLiBCdXQgZnJvbSB0aGUgYXNoZXMsIHJvbWFuY2Ugd2lsbCByaXNlLCB3aXRoIGVhY2ggc3VyZ2VvbiBoYW5kbGluZyB0aGUgbG9zcyBpbiB0aGVpciBvd24gcGVyc29uYWwgd2F5LiBNZXJlZGl0aCBmaW5kcyBoZXIgZ3Jvb3ZlIGluIHRoZSBvcGVyYXRpbmcgcm9vbSB3aGlsZSBEZXJlaydzIGhhbmQgaW5qdXJ5IGZvcmNlcyBoaW0gdG8gZm9jdXMgb24gc29tZXRoaW5nIG90aGVyIHRoYW4gc3VyZ2VyeS4gQW5kIGFzIE1hcmsgcHJlcGFyZXMgdG8gc2F5IGdvb2RieWUsIEFsZXggZmFsbHMgZm9yIHNvbWVvbmUgbmV3LCBDcmlzdGluYSB0cmllcyB0byByZWtpbmRsZSB0aGUgZmxhbWUgd2l0aCBPd2VuLCBhbmQgQmFpbGV5IGFuZCBCZW4gZGlzY292ZXIgdGhlIHBlcmlscyBvZiBhIGxvbmctZGlzdGFuY2UgcmVsYXRpb25zaGlwLiIsInBvc3Rlcl9wYXRoIjoiL2dMUDhhZVdEZm9PSXFwMUVGRU1MU29IbElIVy5qcGciLCJzZWFzb25fbnVtYmVyIjo5LCJ2b3RlX2F2ZXJhZ2UiOjguMH0seyJhaXJfZGF0ZSI6IjIwMTMtMDktMjYiLCJlcGlzb2RlX2NvdW50IjoyNCwiaWQiOjM3MjUsIm5hbWUiOiJTZWFzb24gMTAiLCJvdmVydmlldyI6IlRoZSBzdG9ybSBtYXkgaGF2ZSBwYXNzZWQsIGJ1dCBub3cgdGhlIHJlbGF0aW9uc2hpcHMgYW5kIHJvbWFuY2Ugb2YgR3JleSBTbG9hbiBNZW1vcmlhbCBtdXN0IHN1cnZpdmUgaW4gaXRzIHdha2UuIEJvbmRzIGFyZSB0ZXN0ZWQsIGxvdmUgaXMgbG9zdCBhbmQgdGhlIGhvc3BpdGFsIGJpZHMgZmFyZXdlbGwgdG8gRHIuIENyaXN0aW5hIFlhbmcuIEZvbGxvd2luZyBhIG1hc3NpdmUgbXVkc2xpZGUsIHRoZSBob3NwaXRhbCBiZWNvbWVzIGEgbWFkaG91c2UsIGFuZCB0aGUgbGl2ZXMgb2YgdHdvIGRvY3RvcnMgaGFuZyBpbiB0aGUgYmFsYW5jZS4gVGhlIGRyYW1hIGVzY2FsYXRlcyBhcyBBcml6b25hIHRyaWVzIGRlc3BlcmF0ZWx5IHRvIG1lbmQgaGVyIGJyb2tlbiBtYXJyaWFnZSwgd2hpbGUgRGVyZWsgYW5kIE1lcmVkaXRoIGp1Z2dsZSB0aGVpciByb2xlcyBhcyBzdXJnZW9ucyBhbmQgbmV3IHBhcmVudHMuIE1lYW53aGlsZSwgYSBzdHVubmluZyBiZXRyYXlhbCBwaXRzIENyaXN0aW5hIGFnYWluc3QgTWVyZWRpdGggYW5kLCBhcyBBcHJpbCBwcmVwYXJlcyBmb3IgaGVyIGJpZyBkYXksIGEgZmFtaWxpYXIgZmFjZSByZXR1cm5zIHRvIHRvd24uIEJpZyBzZWNyZXRzIGxlYWQgdG8gYmlnIHByb2JsZW1zIGFuZCB0dXJuIGJlc3QgZnJpZW5kcyBpbnRvIHJpdmFscy4iLCJwb3N0ZXJfcGF0aCI6Ii9oMHowVVNLMUtlckRKdTAyYzIxOHpGTUlhNTIuanBnIiwic2Vhc29uX251bWJlciI6MTAsInZvdGVfYXZlcmFnZSI6OC4xfSx7ImFpcl9kYXRlIjoiMjAxNC0wOS0yNSIsImVwaXNvZGVfY291bnQiOjI0LCJpZCI6NjIwNTEsIm5hbWUiOiJTZWFzb24gMTEiLCJvdmVydmlldyI6IkR1cmluZyBhbiBpbnRlcnZpZXcsIFNob25kYSBSaGltZXMgc3RhdGVkIHRoYXQgXCJTZWFzb24gMTEgaXMgcmVhbGx5IGEgTWVyZWRpdGgtY2VudHJpYyBzZWFzb24uIFNoZSBsb3N0IGhlciDigJhwZXJzb27igJksIGhlciBoYWxmLXNpc3RlciBoYXMgc2hvd24gdXAsIGhlciBodXNiYW5kIGlzIGNoYWZpbmcgdG8gZ28gc29tZXBsYWNlIGVsc2XigKZcIiBTaGUgd2VudCBvbiB0byByZXZlYWwgdGhhdCBzaGUncyBiZWVuIHdhbnRpbmcgdG8gZG8gdGhlIFwiZmFtaWxpYWwgZ3JlbmFkZVwiIHN0b3J5bGluZSBmb3IgYSBsb25nIHRpbWUsIGFuZCBhdCB0aGUgZW5kIG9mIFNlYXNvbiAxMCwgc2hlIGtuZXcgaXQgd2FzIHRoZSB0aW1lIHRvIGRvIGl0LiBSaGltZXMgYWxzbyBjbGFpbWVkIHRoYXQgU2Vhc29uIDExIHdpbGwgcGljayB1cCByaWdodCB3aGVyZSBTZWFzb24gMTAgbGVmdCB1cywgc28gdGhlcmUgd29uJ3QgYmUgbXVjaCB0aGF0IHRoZSBhdWRpZW5jZSB3b24ndCBzZWUuIEluIGFub3RoZXIgaW50ZXJ2aWV3IGRpc2N1c3NpbmcgdGhpcyBzdG9yeWxpbmUsIFJoaW1lcyByZXZlYWxlZCB0aGF0IHNoZSBhbmQgdGhlIHdyaXRlcnMgYXJlIHRoaW5raW5nIGFib3V0IGRvaW5nIGZsYXNoYmFjayBwZXJpb2RzIHRvIHRoZSB5b3VuZ2VyIGRheXMgb2YgRHJzLiBFbGxpcyBHcmV5IGFuZCBSaWNoYXJkIFdlYmJlci4iLCJwb3N0ZXJfcGF0aCI6Ii9Bdk14S3h5ajZ6SUc1ZlIwZmc3RDZiV0g0QVkuanBnIiwic2Vhc29uX251bWJlciI6MTEsInZvdGVfYXZlcmFnZSI6OC4yfSx7ImFpcl9kYXRlIjoiMjAxNS0wOS0yNCIsImVwaXNvZGVfY291bnQiOjI0LCJpZCI6NzA0OTQsIm5hbWUiOiJTZWFzb24gMTIiLCJvdmVydmlldyI6IlRoZSBkb2N0b3JzIGZpbmQgdGhlbXNlbHZlcyBzaW1tZXJpbmcgaW4gYSB3b3JsZCBvZiBzZXh1YWwgcG9saXRpY3MuIEJhaWxleSBzdHJ1Z2dsZXMgd2l0aCB3aGF0IGl0IG1lYW5zIHRvIGJlIGEgd29tYW4gaW4gY2hhcmdlIG9mIHRoZSBob3NwaXRhbCBhbmQgaGVyIGh1c2JhbmQsIHdoaWxlIE1hZ2dpZSBmYWNlcyB0aGUgY2hhbGxlbmdlcyBvZiBkYXRpbmcgYSB5b3VuZ2VyIG1hbiBhbmQgQW1lbGlhIGJhdHRsZXMgaGVyIG93biBkZW1vbnMuIE1lYW53aGlsZSwgaW4gdGhlIHdha2Ugb2YgYSBicnV0YWwgYXR0YWNrLCBNZXJlZGl0aCBmaW5kcyBjb21mb3J0IGFuZCBsb3ZlIGluIHRoZSBtb3N0IHVuZXhwZWN0ZWQgcGxhY2UsIENhbGxpZSBhbmQgQXJpem9uYSBmaW5kIHRoZW1zZWx2ZXMgaW4gYSBmaWdodCBmb3IgdGhlaXIgbGl2ZXMsIGFuZCB0ZW5zaW9ucyBydW4gaGlnaCB3aGVuIEFtZWxpYSBhbmQgTWVyZWRpdGggY29tZSBmYWNlIHRvIGZhY2Ugd2l0aCB0aGUgZG9jdG9yIHJlc3BvbnNpYmxlIGZvciBEZXJlaydzIGRlYXRoLiIsInBvc3Rlcl9wYXRoIjoiL2I4cGt6b05NNVgwWFN3cHBFQTdqVElENURjbS5qcGciLCJzZWFzb25fbnVtYmVyIjoxMiwidm90ZV9hdmVyYWdlIjo4LjN9LHsiYWlyX2RhdGUiOiIyMDE2LTA5LTIyIiwiZXBpc29kZV9jb3VudCI6MjQsImlkIjo3OTE3NCwibmFtZSI6IlNlYXNvbiAxMyIsIm92ZXJ2aWV3IjoiQWZ0ZXIgYmVpbmcgb24gaGVyIG93biBmb3Igc29tZSB0aW1lLCBNZXJlZGl0aCBpcyBiZWdpbm5pbmcgdG8gZXhwbG9yZSB0aGUgaWRlYSBvZiBhIHJvbWFuY2Ugd2l0aCBSaWdncy4gVW5mb3J0dW5hdGVseSwgTWFnZ2llIGRlc2lyZXMgaGltIGFzIHdlbGwsIHdoaWNoIHRocmVhdGVucyB0byBkcml2ZSBhIGJpdHRlciB3ZWRnZSBiZXR3ZWVuIHRoZSBzaXN0ZXJzLiBBdCB0aGUgc2FtZSB0aW1lLCBkZXNwaXRlIHRoZWlyIGRpZmZlcmVuY2VzLCBKYWNrc29uIGFuZCBBcHJpbCBtdXN0IGNvbWUgdG9nZXRoZXIgd2hlbiB0aGV5IGFyZSBhc3NpZ25lZCBhIGRpZmZpY3VsdCBjYXNlLiBNZWFud2hpbGUsIEFsZXggZmFjZXMgdGhlIGNvbnNlcXVlbmNlcyBvZiBoaXMgdmljaW91cyBhdHRhY2sgb24gRGVMdWNhLCBPd2VuIGFuZCBBbWVsaWEncyBtYXJyaWFnZSBpbXBsb2RlcyBhbmQgYSBob3NwaXRhbC13aWRlIG11dGlueSBlcnVwdHMgd2hlbiBCYWlsZXkgZGVtb3RlcyBXZWJiZXIuIEZpbmFsbHksIEFyaXpvbmEgbWF5IGhhdmUgZm91bmQgbG92ZSBhZ2FpbiAtIGJ1dCBpcyBzaGUgc2xlZXBpbmcgd2l0aCB0aGUgZW5lbXk/IiwicG9zdGVyX3BhdGgiOiIvaTRnTkhhWTFNelA1MHpjamd3M2V3MmhLQ0NXLmpwZyIsInNlYXNvbl9udW1iZXIiOjEzLCJ2b3RlX2F2ZXJhZ2UiOjcuOX0seyJhaXJfZGF0ZSI6IjIwMTctMDktMjgiLCJlcGlzb2RlX2NvdW50IjoyNCwiaWQiOjkyMDg4LCJuYW1lIjoiU2Vhc29uIDE0Iiwib3ZlcnZpZXciOiJBZnRlciB0aGUgZmlyZSwgTWlyYW5kYSBCYWlsZXkgc3RhcnRzIHJlbm92YXRpb25zIGF0IHRoZSBob3NwaXRhbC4gU2hlIGRpc2NvdmVycyBzaGUnbGwgbmVlZCBtb3JlIHRoYW4gbmV3IHdhbGxzIGFuZCBwYWludCB0byByZXBhaXIgYnJva2VuIHRydXN0LCB0YWludGVkIHJlcHV0YXRpb25zIGFuZCBicm9rZW4gcmVsYXRpb25zaGlwcy4gQWdhaW5zdCB0aGUgYmFja2Ryb3Agb2YgYSB5ZWFyIGZ1bGwgb2YgbG92ZSwgbG9zcyBhbmQgZ3JvdW5kYnJlYWtpbmcgY2hhbmdlcywgTWVyZWRpdGggcGlvbmVlcnMgYSByZXZvbHV0aW9uYXJ5IHN1cmdpY2FsIHRlY2huaXF1ZSB0aGF0IGVhcm5zIGhlciBhIG5vbWluYXRpb24gZm9yIHRoZSBjb3ZldGVkIGF3YXJkIG5hbWVkIGFmdGVyIGl0cyBmb3VuZGVyLCBIYXJwZXIgQXZlcnkuIEJ1dCB3aGVuIGZvcm1lciBsZWdlbmQgRHIuIEF2ZXJ5IGdldHMgaW52b2x2ZWQgaW4gYSBzY2FuZGFsLCBNZXJlZGl0aCdzIGVmZm9ydHMgYW5kIHRoZSBmdXR1cmUgb2YgR3JleSBTbG9hbiBhcmUgcHV0IGluIGplb3BhcmR5LiIsInBvc3Rlcl9wYXRoIjoiLzJlU1FGYmVaWjdsQ3J1NDBRMFVZR0oyMGl0eC5qcGciLCJzZWFzb25fbnVtYmVyIjoxNCwidm90ZV9hdmVyYWdlIjo4LjR9LHsiYWlyX2RhdGUiOiIyMDE4LTA5LTI3IiwiZXBpc29kZV9jb3VudCI6MjUsImlkIjoxMDg3OTgsIm5hbWUiOiJTZWFzb24gMTUiLCJvdmVydmlldyI6IlJvbWFuY2UgaXMgYnJld2luZyBpbiB3YXlzIHlvdSBkaWQgbm90IHNlZSBjb21pbmcgYXMgZG9jdG9yIFRlZGR5IEFsdG1hbiBpcyBiYWNrIGluIGFuIGV4cGxvc2l2ZSBsb3ZlIHRyaWFuZ2xlLiBBbmQgdGhlIGRyYW1hIGNvbnRpbnVlcyBhcyBhIHdpbmRzdG9ybSBibG93cyB0aHJvdWdoIFNlYXR0bGUsIGNhdXNpbmcgdGhlIHBvd2VyIHRvIGdvIG91dCBhdCBHcmV5IFNsb2FuLCBsZWF2aW5nIHRoZSBkb2N0b3JzIHNjcmFtYmxpbmcgdG8gc2F2ZSB0aGVpciBwYXRpZW50cycgbGl2ZXMsIGluY2x1ZGluZyBNZXJlZGl0aCwgd2hvIGRlc3BlcmF0ZWx5IG5lZWRzIHRvIGdldCB0byBoZXIgcGF0aWVudCBmb3IgaGVyIGhlYXJ0IHRyYW5zcGxhbnQuIiwicG9zdGVyX3BhdGgiOiIvcmF2d2VCSHdxOWpreFFERER3bXFweUJEdkNmLmpwZyIsInNlYXNvbl9udW1iZXIiOjE1LCJ2b3RlX2F2ZXJhZ2UiOjguNX0seyJhaXJfZGF0ZSI6IjIwMTktMDktMjYiLCJlcGlzb2RlX2NvdW50IjoyMSwiaWQiOjEyOTM0OCwibmFtZSI6IlNlYXNvbiAxNiIsIm92ZXJ2aWV3IjoiSW4gdGhlIFNlYXNvbiAxNiBwcmVtaWVyZSwgQmFpbGV5IGZpcmVzIE1lcmVkaXRoLCBSaWNoYXJkIGFuZCBBbGV4IGZyb20gR3JleSBTbG9hbiBmb3IgaW5zdXJhbmNlIGZyYXVkOyBhbmQsIGFmdGVyIGRpc2FwcGVhcmluZyBpbiB0aGUgZm9nLCBKYWNrc29uIGhlbHBzIGEgbWFuIGluIGEgZGFuZ2Vyb3VzIHNpdHVhdGlvbiwgYXMgaGlzIHJlbGF0aW9uc2hpcCB3aXRoIE1hZ2dpZSBjb21lcyB0byBhIG5ldyBjcm9zc3JvYWQuIEFmdGVyIE1lcmVkaXRoIGluYWR2ZXJ0ZW50bHkgc3RpcnMgdXAgbmVnYXRpdmUgcHJlc3MgZm9yIEdyZXkgU2xvYW4sIHNoZSB0cmllcyB0byBtYWtlIHRoaW5ncyByaWdodCB3aXRoIGhlciBmb3JtZXIgY29sbGVhZ3VlcywgamVvcGFyZGl6aW5nIGhlciBjb21tdW5pdHkgc2VydmljZSBob3Vycy4gTWVhbndoaWxlLCBUb20gZ2V0cyBuZXcgcmVzcG9uc2liaWxpdGllcyBhdCB0aGUgaG9zcGl0YWwgdGhhdCB0aHJvdyB0aGUgZG9jdG9ycyBmb3IgYSBsb29wLiIsInBvc3Rlcl9wYXRoIjoiL29iem8xR2RKVVEwT1BuVzlUOVNOT0NCeGhELmpwZyIsInNlYXNvbl9udW1iZXIiOjE2LCJ2b3RlX2F2ZXJhZ2UiOjguMn0seyJhaXJfZGF0ZSI6IjIwMjAtMTEtMTIiLCJlcGlzb2RlX2NvdW50IjoxNywiaWQiOjE2MzMyMCwibmFtZSI6IlNlYXNvbiAxNyIsIm92ZXJ2aWV3IjoiVGhlIHNldmVudGVlbnRoIHNlYXNvbiBvZiB0aGUgbWVkaWNhbCBkcmFtYSBzZXJpZXMgaXMgYmFjayBpbiB0aGUgbWlkc3Qgb2YgdGhlIGVhcmx5IGRheXMgb2YgdGhlIENPVklELTE5IHBhbmRlbWljIGFzIEdyZXkgU2xvYW4gTWVtb3JpYWwgYW5kIGl0cyBzdXJnZW9ucycgbGl2ZXMgaGF2ZSBiZWVuIHR1cm5lZCB1cHNpZGUgZG93bi4gVGhlIHNlYXNvbiBwaWNrcyB1cCBvbmUgbW9udGggaW50byB0aGUgcGFuZGVtaWMsIGFuZCBpdCdzIGFsbC1oYW5kcy1vbi1kZWNrIGFzIE1lcmVkaXRoLCBCYWlsZXkgYW5kIHRoZSByZXN0IG9mIHRoZSBHcmV5IFNsb2FuIGRvY3RvcnMgZmluZCB0aGVtc2VsdmVzIG9uIHRoZSBmcm9udGxpbmVzIG9mIGEgbmV3IGVyYS4gVGhlIGRvY3RvcnMgd2lsbCBuZWVkIHRvIGZhY2UgdGhlaXIgbmV3IHJlYWxpdHkgYW5kIGRlYWwgd2l0aCBhIGZhbWlsaWFyIGFuZCBzdHViYm9ybiBwYXRpZW50LiIsInBvc3Rlcl9wYXRoIjoiL2NsbnloUHFqMVNOZ3BBZGVTUzZhNmZ3RTZCby5qcGciLCJzZWFzb25fbnVtYmVyIjoxNywidm90ZV9hdmVyYWdlIjo4LjN9LHsiYWlyX2RhdGUiOiIyMDIxLTA5LTMwIiwiZXBpc29kZV9jb3VudCI6MjAsImlkIjoyMDI0NDAsIm5hbWUiOiJTZWFzb24gMTgiLCJvdmVydmlldyI6IkFmdGVyIGJlaW5nIHNpY2sgd2l0aCBDT1ZJRC0xOSBmb3Igd2Vla3MsIE1lcmVkaXRoIHNwbGl0IGhlciB0aW1lIGJldHdlZW4gdHdvIGhvc3BpdGFscy4gU2hlIHdhcyBoaXJlZCBieSBEci4gSGFtaWx0b24gdG8gd29yayBvbiBhIGN1cmUgZm9yIFBhcmtpbnNvbidzIGluIE1pbm5lc290YS4gVGhlcmUsIHNoZSByZWNvbm5lY3RlZCB3aXRoIE5pY2sgTWFyc2ggYW5kIGJlZ2FuIGRhdGluZyBoaW0gd2hpbGUgc3RpbGwgd29ya2luZyBwYXJ0LXRpbWUgYXQgR3JleS1TbG9hbiBpbiBTZWF0dGxlLiBTaGUgZGVjaWRlcyB0byBtb3ZlIGhlciBmYW1pbHkgdG8gTWlubmVzb3RhIHdpdGggTmljayBhZnRlciBoZWxwaW5nIEdyZXktU2xvYW4gZ2FpbiBiYWNrIGl0cyBhY2NyZWRpdGF0aW9uIGZvciB0aGUgcmVzaWRlbmN5IHByb2dyYW0gdGhhdCB3YXMgb24gcHJvYmF0aW9uLiIsInBvc3Rlcl9wYXRoIjoiL3pQSXVnNWdpVThvdWc2WGVzNUsxc1RmUUp4WS5qcGciLCJzZWFzb25fbnVtYmVyIjoxOCwidm90ZV9hdmVyYWdlIjo4LjZ9LHsiYWlyX2RhdGUiOiIyMDIyLTEwLTA2IiwiZXBpc29kZV9jb3VudCI6MjAsImlkIjoyOTc2NTMsIm5hbWUiOiJTZWFzb24gMTkiLCJvdmVydmlldyI6Ik5vdyBpbiBpdHMgMTl0aCBzZWFzb24sIGEgbG90IGhhcyBjaGFuZ2VkIGFyb3VuZCBHcmV5IFNsb2FuIE1lbW9yaWFsLiBGb2xsb3dpbmcgQmFpbGV5J3MgcmVzaWduYXRpb24sIE1lcmVkaXRoIGFzc3VtZXMgdGhlIHJvbGUgb2YgSW50ZXJpbSBDaGllZiBvZiBTdXJnZXJ5OyB1bmRlciBoZXIgdGVudXJlLCBzaGUgaGFzIHJldml2ZWQgdGhlIHJlc2lkZW5jeSBwcm9ncmFtLCByZWNydWl0aW5nIHN1cmdpY2FsIHJlc2lkZW50cyB3aG8gZWl0aGVyIHdlcmUgbm90IGdvb2QgZW5vdWdoIHRvIGdldCBpbnRvIG90aGVyIHByb2dyYW1zIG9yIGtpY2tlZCBvdXQgb2YgdGhlaXIgcHJldmlvdXMgb25lcy4gQXMgdGhlIHRlYW0gb2YgZG9jdG9ycyBzZWVrIGNvbWZvcnQgZnJvbSBvbmUgYW5vdGhlciwgdGhleSBkaXNjb3ZlciB0aGF0IG5laXRoZXIgbWVkaWNpbmUgbm9yIHJlbGF0aW9uc2hpcHMgY2FuIGJlIGRlZmluZWQgaW4gYmxhY2sgYW5kIHdoaXRlLiIsInBvc3Rlcl9wYXRoIjoiL2RhU0ZicnQ4UUNYVjJoU3dCMGhxWWpiajY4MS5qcGciLCJzZWFzb25fbnVtYmVyIjoxOSwidm90ZV9hdmVyYWdlIjo4LjZ9LHsiYWlyX2RhdGUiOiIyMDI0LTAzLTE0IiwiZXBpc29kZV9jb3VudCI6MTAsImlkIjozNjYwMzQsIm5hbWUiOiJTZWFzb24gMjAiLCJvdmVydmlldyI6IlRoZSBsaWdodHMgYXJlIHN0aWxsIG9uIGF0IEdyZXkgU2xvYW4gTWVtb3JpYWwgSG9zcGl0YWwgYXMgdGhlIHR3ZW50aWV0aCBzZWFzb24gcmV0dXJucy4gSW4gcmVzcG9uc2UgdG8gQ2F0aGVyaW5lJ3MgdWx0aW1hdHVtLCBNZXJlZGl0aCByZXNpZ25zIGZyb20gdGhlIEZveCBGb3VuZGF0aW9uIGFuZCBpbnN0ZWFkIHB1Ymxpc2hlcyB0aGUgcmVzZWFyY2ggcHVibGljbHksIHZhbHVpbmcgaXRzIHBvdGVudGlhbCB0byBzYXZlIGxpdmVzIG92ZXIgaG9zcGl0YWwgcG9saXRpY3MsIGFuZCBkZXBhcnRzIEdyZXkgU2xvYW4gd2hpbGUgZGlzY3Vzc2luZyBhIGZ1dHVyZSB0b2dldGhlciB3aXRoIE5pY2suIEluIHJldGFsaWF0aW9uLCBDYXRoZXJpbmUgZmlyZXMgVGVkZHkgZm9yIHNlY3JldGx5IGZ1bmRpbmcgTWVyZWRpdGgncyBBbHpoZWltZXIncyByZXNlYXJjaC4gV2luc3RvbiBmYWNlcyByZWxhdGlvbnNoaXAgZG91YnRzIGFmdGVyIE1hZ2dpZSBjYW5jZWxzIHBsYW5zIGZvciBoaW0gdG8gdmlzaXQgQ2hpY2FnbyBtdWx0aXBsZSB0aW1lcy4gQXJpem9uYSBSb2JiaW5zIHJldHVybnMgdG8gR3JleSBTbG9hbiBNZW1vcmlhbCBIb3NwaXRhbCB0byB3b3JrIHdpdGggTWlyYW5kYSBCYWlsZXkgYW5kIEpvIFdpbHNvbi4iLCJwb3N0ZXJfcGF0aCI6Ii9qY0VsOFNJU05mR2RsUUZ3THplRXRzakR2cHcuanBnIiwic2Vhc29uX251bWJlciI6MjAsInZvdGVfYXZlcmFnZSI6OC44fSx7ImFpcl9kYXRlIjoiMjAyNC0wOS0yNiIsImVwaXNvZGVfY291bnQiOjE4LCJpZCI6NDAxNjk2LCJuYW1lIjoiU2Vhc29uIDIxIiwib3ZlcnZpZXciOiJUaGUgdHdlbnR5LWZpcnN0IHNlYXNvbiBvZiB0aGUgQW1lcmljYW4gbWVkaWNhbCBkcmFtYSB0ZWxldmlzaW9uIHNlcmllcyBHcmV5J3MgQW5hdG9teSByZXR1cm5zIGFzIHRoZSBzdG9yeSBkZWVwZW5zIHdoZW4gdGhlIG5ldyBkb2N0b3JzIHN0ZXAgaW50byBsZWFkZXJzaGlwLiBFbW90aW9uYWwgZmFsbG91dCBmcm9tIHRoZSBwYXN0IHNlYXNvbiBsaW5nZXJzLCBhbmQgYmlnIGRlY2lzaW9ucyBzaGFwZSB0aGUgZnV0dXJlIG9mIEdyZXkgU2xvYW4uIEFzIHRoZSBhZnRlcm1hdGggb2YgYSBjb252ZW5pZW5jZSBzdG9yZSBzaG9vdGluZyBicmluZ3MgY2hhb3MgdG8gR3JleSBTbG9hbiwgQmVuIGhpdHMgYSB3YWxsIHdpdGggaGlzIG5ldyBlbWVyZ2VuY3kgcHJlcGFyZWRuZXNzIHBsYW4uIE1lcmVkaXRoIGFuZCBOaWNrIHdpbGwgcmV0dXJuIHRvIEdyZXkgU2xvYW4gdG8gdHJlYXQgYSBsaXZlciB0cmFuc3BsYW50IHBhdGllbnQuIEpvIGFuZCBMaW5rIHN0cnVnZ2xlIHdpdGggd2VkZGluZyBwbGFubmluZyBhcyB0aGUgZGF5IGFycml2ZXMsIGFsb25nIHdpdGggc29tZSB2aXNpdG9ycy4gTGVnYWN5IGNoYXJhY3RlcnMgYW5kIGZyZXNoIGZhY2VzIGNvbnRpbnVlIHRvIGJhbGFuY2UgbGlmZSwgbG9zcywgYW5kIG1lZGljaW5lLiIsInBvc3Rlcl9wYXRoIjoiLzdqRVZxWEMxNGJoZkF6U1Bncjg5NmRNZER2Ni5qcGciLCJzZWFzb25fbnVtYmVyIjoyMSwidm90ZV9hdmVyYWdlIjo4LjV9LHsiYWlyX2RhdGUiOiIyMDI1LTEwLTA5IiwiZXBpc29kZV9jb3VudCI6MTgsImlkIjo0NjU4NzMsIm5hbWUiOiJTZWFzb24gMjIiLCJvdmVydmlldyI6IlRoZSB0d2VudHktc2Vjb25kIHNlYXNvbiB3aWxsIGZvY3VzIG9uIGludGVuc2UsIGxhcmdlLXNjYWxlIGRpc2FzdGVycywgaW5jbHVkaW5nIGEgbWFqb3IgYnJpZGdlIGNvbGxhcHNlIGJyaW5naW5nIGluIGRvemVucyBvZiBjcml0aWNhbGx5IGluanVyZWQgcGF0aWVudHMgYXQgR3JleSBTbG9hbiBNZW1vcmlhbCwgYWxvbmdzaWRlIGhpZ2gtc3Rha2VzIHBlcnNvbm5lbCBjaGFuZ2VzLiBEci4gTWVyZWRpdGggR3JleSBhbmQgRHIuIE5pY2sgTWFyc2ggZGVjaWRlIHRvIG1hcnJ5IGFmdGVyIE5pY2sgaXMgc2V2ZXJlbHkgaW5qdXJlZCBpbiB0aGUgYnJpZGdlIGNvbGxhcHNlLCB3aXRoIE1lcmVkaXRoIHJlYWxpemluZyBzaGUgZG9lc24ndCB3YW50IHRvIGxldCBmZWFyIGRpY3RhdGUgaGVyIGxpZmUuIFRoZSBzZWFzb24gZmVhdHVyZXMgdGhlIGRlcGFydHVyZSBvZiBsb25nLXRpbWUgc2VyaWVzIHJlZ3VsYXJzIERyLiBPd2VuIEh1bnQgYW5kIERyLiBUZWRkeSBBbHRtYW4sIHdobyBsZWF2ZSBmb3IgYSBuZXcgbGlmZSBpbiBGcmFuY2UgYWZ0ZXIgc3Vydml2aW5nIGEgbmVhci1mYXRhbCBwbHVuZ2UgaW4gaGlzIGNhciBkdXJpbmcgdGhlIGJyaWRnZSBjb2xsYXBzZSwgbWFya2luZyBhbiBlbmQgdG8gdGhlaXIgbG9uZy1ydW5uaW5nIHN0b3J5bGluZS4iLCJwb3N0ZXJfcGF0aCI6Ii9oakprckxYaFd2R0hwTGVMQkRGem5wQlRZMVMuanBnIiwic2Vhc29uX251bWJlciI6MjIsInZvdGVfYXZlcmFnZSI6OC4wfSx7ImFpcl9kYXRlIjpudWxsLCJlcGlzb2RlX2NvdW50IjowLCJpZCI6NTE0MjMyLCJuYW1lIjoiU2Vhc29uIDIzIiwib3ZlcnZpZXciOiIiLCJwb3N0ZXJfcGF0aCI6bnVsbCwic2Vhc29uX251bWJlciI6MjMsInZvdGVfYXZlcmFnZSI6MC4wfV0sInNvZnRjb3JlIjpmYWxzZSwic3Bva2VuX2xhbmd1YWdlcyI6W3siZW5nbGlzaF9uYW1lIjoiRW5nbGlzaCIsImlzb182MzlfMSI6ImVuIiwibmFtZSI6IkVuZ2xpc2gifV0sInN0YXR1cyI6IlJldHVybmluZyBTZXJpZXMiLCJ0YWdsaW5lIjoiQmVnaW4gYWdhaW4uIiwidHlwZSI6IlNjcmlwdGVkIiwidm90ZV9hdmVyYWdlIjo4LjIwOCwidm90ZV9jb3VudCI6MTA4OTJ9
+  recorded_at: Sat, 16 May 2026 21:14:48 GMT
+- request:
+    method: get
+    uri: https://api.tvmaze.com/search/shows?q=Grey%27s%20Anatomy
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.24.0 (Ubuntu)
+      Date:
+      - Sat, 16 May 2026 21:14:48 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=3600
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"score":1.2013396,"show":{"id":67,"url":"https://www.tvmaze.com/shows/67/greys-anatomy","name":"Grey''s
+        Anatomy","type":"Scripted","language":"English","genres":["Drama","Romance","Medical"],"status":"Running","runtime":60,"averageRuntime":60,"premiered":"2005-03-27","ended":null,"officialSite":"https://abc.com/shows/greys-anatomy/","schedule":{"time":"22:00","days":["Thursday"]},"rating":{"average":7.6},"weight":100,"network":{"id":3,"name":"ABC","country":{"name":"United
+        States","code":"US","timezone":"America/New_York"},"officialSite":"https://abc.com/"},"webChannel":null,"dvdCountry":null,"externals":{"tvrage":3741,"thetvdb":73762,"imdb":"tt0413573"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/600/1501061.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/600/1501061.jpg"},"summary":"<p>The
+        doctors of Grey Sloan Memorial Hospital deal with life-or-death consequences
+        on a daily basis -- it''s in one another that they find comfort, friendship
+        and, at times, more than friendship. Together they''re discovering that neither
+        medicine nor relationships can be defined in black and white. Real life only
+        comes in shades of grey.</p>","updated":1778240786,"_links":{"self":{"href":"https://api.tvmaze.com/shows/67"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/3577493","name":"Bridge
+        Over Troubled Water"}}}},{"score":1.014823,"show":{"id":34388,"url":"https://www.tvmaze.com/shows/34388/greys-anatomy-b-team","name":"Grey''s
+        Anatomy: B-Team","type":"Scripted","language":"English","genres":["Drama","Romance","Medical"],"status":"Ended","runtime":3,"averageRuntime":3,"premiered":"2018-01-11","ended":"2018-01-11","officialSite":"http://abc.go.com/shows/greys-anatomy-b-team","schedule":{"time":"","days":["Thursday"]},"rating":{"average":6.2},"weight":93,"network":null,"webChannel":{"id":95,"name":"ABC.com","country":{"name":"United
+        States","code":"US","timezone":"America/New_York"},"officialSite":"https://abc.com/"},"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":null,"imdb":null},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/142/355662.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/142/355662.jpg"},"summary":"<p>A
+        fresh crop of interns face their first day at Grey Sloan Memorial Hospital.
+        Can these new surgeons survive the pressures of high-stakes medicine, intimidating
+        attendings, and cut throat competition?</p>","updated":1526845476,"_links":{"self":{"href":"https://api.tvmaze.com/shows/34388"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/1390266","name":"Episode
+        Six"}}}},{"score":0.99236697,"show":{"id":32473,"url":"https://www.tvmaze.com/shows/32473/greys-anatomy-post-op","name":"Grey''s
+        Anatomy: Post-Op","type":"Talk Show","language":"English","genres":[],"status":"Ended","runtime":10,"averageRuntime":10,"premiered":"2017-10-04","ended":"2017-11-08","officialSite":null,"schedule":{"time":"","days":[]},"rating":{"average":null},"weight":57,"network":null,"webChannel":{"id":95,"name":"ABC.com","country":{"name":"United
+        States","code":"US","timezone":"America/New_York"},"officialSite":"https://abc.com/"},"dvdCountry":null,"externals":{"tvrage":null,"thetvdb":null,"imdb":"tt8263372"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/130/325167.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/130/325167.jpg"},"summary":"<p>In
+        anticipation of <i>Grey''s Anatomy</i>''s 300th episode, ABC Digital Studios
+        is launching a six-part web series, <b>Grey''s Anatomy: Post-Op</b>, hosted
+        by Gordon James who plays Nurse Gregory on the series. Each week, leading
+        up to <i>Grey''s Anatomy</i>''s astounding 300th episode, James will be joined
+        by special guests including cast, writers, producers and various crew members
+        as they look back at over a decade''s worth of memorable moments. Each new
+        episode will offer a behind-the-scenes look at some of the most iconic scenes
+        of the prolific ABC series, as well as an exclusive sneak peek into upcoming
+        episodes from this record-breaking 14th season.</p>","updated":1650589760,"_links":{"self":{"href":"https://api.tvmaze.com/shows/32473"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/1372318","name":"Krista
+        Vernoff"}}}}]'
+  recorded_at: Sat, 16 May 2026 21:14:48 GMT
+- request:
+    method: get
+    uri: https://api.tvmaze.com/shows/67
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.24.0 (Ubuntu)
+      Date:
+      - Sat, 16 May 2026 21:14:50 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=3600
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":67,"url":"https://www.tvmaze.com/shows/67/greys-anatomy","name":"Grey''s
+        Anatomy","type":"Scripted","language":"English","genres":["Drama","Romance","Medical"],"status":"Running","runtime":60,"averageRuntime":60,"premiered":"2005-03-27","ended":null,"officialSite":"https://abc.com/shows/greys-anatomy/","schedule":{"time":"22:00","days":["Thursday"]},"rating":{"average":7.6},"weight":100,"network":{"id":3,"name":"ABC","country":{"name":"United
+        States","code":"US","timezone":"America/New_York"},"officialSite":"https://abc.com/"},"webChannel":null,"dvdCountry":null,"externals":{"tvrage":3741,"thetvdb":73762,"imdb":"tt0413573"},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_portrait/600/1501061.jpg","original":"https://static.tvmaze.com/uploads/images/original_untouched/600/1501061.jpg"},"summary":"<p>The
+        doctors of Grey Sloan Memorial Hospital deal with life-or-death consequences
+        on a daily basis -- it''s in one another that they find comfort, friendship
+        and, at times, more than friendship. Together they''re discovering that neither
+        medicine nor relationships can be defined in black and white. Real life only
+        comes in shades of grey.</p>","updated":1778240786,"_links":{"self":{"href":"https://api.tvmaze.com/shows/67"},"previousepisode":{"href":"https://api.tvmaze.com/episodes/3577493","name":"Bridge
+        Over Troubled Water"}}}'
+  recorded_at: Sat, 16 May 2026 21:14:50 GMT
+recorded_with: VCR 6.2.0
