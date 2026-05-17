@@ -39,26 +39,8 @@ module Services
       true
     end
 
-    private
-
     def self.create_show_from_metadata(name)
-      metadata_data = MetadataService.new.get_show_metadata(name)
-      return nil unless metadata_data
-
-      DB.transaction do
-        show = ::Show.create(
-          name: metadata_data[:name],
-          uri_encoded: URI.encode_www_form_component(metadata_data[:name].downcase)
-        )
-
-        ::ShowMetadata.create(
-          provider_name: 'tmdb',
-          external_id: metadata_data.dig(:external_ids, :tmdb_id).to_s,
-          payload: metadata_data,
-          show_id: show.id
-        )
-        show
-      end
+      Services::ShowFactory.create_with_metadata(name)
     end
   end
 end
