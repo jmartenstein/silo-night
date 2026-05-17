@@ -3,8 +3,8 @@ require 'spec_helper'
 
 RSpec.describe 'API v1 Shows Create', type: :request, type: :integration do
   before do
-    User.create(name: 'sam')
-    Show.create(name: 'Foundation', runtime: '60')
+    create(:user, name: 'sam')
+    create(:show, :with_metadata, name: 'Foundation', runtime: '60')
   end
 
   it 'adds a show to the users list and returns 201' do

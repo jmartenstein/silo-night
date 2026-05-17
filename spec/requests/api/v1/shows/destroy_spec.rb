@@ -3,12 +3,8 @@ require 'spec_helper'
 
 RSpec.describe 'API v1 Shows Destroy', type: :request do
   before do
-    user = User.create(name: 'sam')
-    show = Show.new do |s|
-      s.name = 'Foundation'
-      s.runtime = '60'
-    end
-    show.save
+    user = create(:user, name: 'sam')
+    show = create(:show, :with_metadata, name: 'Foundation', runtime: '60')
     Services::UserShow.add_show(user, show)
   end
 

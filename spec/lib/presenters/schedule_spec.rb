@@ -4,7 +4,7 @@ require 'show'
 require 'presenters/show'
 
 RSpec.describe Presenters::Schedule do
-  let!(:show) { Show.create(name: 'The Expanse', runtime: '60', poster_path: '/path.jpg') }
+  let!(:show) { create(:show, :with_metadata, name: 'The Expanse', runtime: '60', poster_path: '/path.jpg') }
   let(:raw_schedule) do
     { 'Monday' => [{ 'name' => show.name }] }
   end

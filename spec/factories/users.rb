@@ -2,12 +2,22 @@ FactoryBot.define do
 
   factory :show do
     sequence(:name) { |n| "Show #{n}" }
-    runtime { "30 minutes" }
     uri_encoded { "show+#{name.parameterize}" }
 
+    transient do
+      runtime { "30 minutes" }
+      poster_path { "/path/to/poster.jpg" }
+    end
+
     trait :with_metadata do
-      after(:create) do |show|
-        create(:show_metadata, show: show)
+      after(:create) do |show, evaluator|
+        create(:show_metadata, 
+               show: show, 
+               payload: { 
+                 "name" => show.name,
+                 "runtime" => evaluator.runtime, 
+                 "poster_path" => evaluator.poster_path 
+               })
       end
     end
   end

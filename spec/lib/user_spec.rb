@@ -14,10 +14,9 @@ describe User do
     end
 
     it "calculates available runtime for day" do
-      # Note: This test still touches DB because User logic currently relies on Sequel lookups.
-      # However, we're categorizing it as unit because it tests a specific internal calculation.
-      s1 = create(:show, name: "Show A", runtime: "30")
-      s2 = create(:show, name: "Show B", runtime: "20")
+      # We must use :with_metadata so the runtime is correctly stored in the payload
+      create(:show, :with_metadata, name: "Show A", runtime: "30")
+      create(:show, :with_metadata, name: "Show B", runtime: "20")
       
       sched = { "Tuesday" => ["Show A", "Show B"] }
       user.update(schedule: sched.to_json)

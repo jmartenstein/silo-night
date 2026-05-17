@@ -6,8 +6,8 @@ RSpec.describe 'JavaScript API Compatibility', type: :request do
   let(:show_name) { 'Silo' }
 
   before do
-    User.create(name: username)
-    Show.create(name: show_name, runtime: '50', uri_encoded: 'silo')
+    create(:user, name: username)
+    create(:show, :with_metadata, name: show_name, runtime: '50', uri_encoded: 'silo')
   end
 
   describe 'Add Show (POST)' do
@@ -46,7 +46,7 @@ RSpec.describe 'JavaScript API Compatibility', type: :request do
     before do
       user = User.find(name: username)
       show1 = Show.find(name: show_name)
-      show2 = Show.create(name: 'Foundation', runtime: '60')
+      show2 = create(:show, :with_metadata, name: 'Foundation', runtime: '60')
       Services::UserShow.add_show(user, show1)
       Services::UserShow.add_show(user, show2)
     end

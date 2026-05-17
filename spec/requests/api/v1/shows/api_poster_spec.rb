@@ -13,8 +13,8 @@ RSpec.describe 'API Poster Path' do
     # Clear DB or setup test user
     User.where(name: 'testuser').delete
     Show.where(name: 'Suits').delete
-    @user = User.create(name: 'testuser')
-    @show = Show.create(name: 'Suits', runtime: '45 minutes', poster_path: 'https://example.com/suits.jpg')
+    @user = create(:user, name: 'testuser')
+    @show = create(:show, :with_metadata, name: 'Suits', runtime: '45 minutes', poster_path: 'https://example.com/suits.jpg')
   end
 
   it 'captures and returns poster_path when adding a new show' do

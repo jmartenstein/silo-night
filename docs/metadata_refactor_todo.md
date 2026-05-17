@@ -82,12 +82,13 @@ Our seed scripts (`smoke.rb`, `n1_audit.rb`) currently create shows without meta
   bundle exec rake db:seed:scenario[n1_audit]
   ```
 
-### Step 5: Modernize Test Data Factories
-Our current FactoryBot definitions and RSpec setup rely on setting legacy `runtime` and `poster_path` attributes. These must be refactored to use the `:with_metadata` trait to avoid mass-assignment errors.
+### Step 5: Modernize Data Creation (Factories & Services)
+Our current FactoryBot definitions, RSpec setup, and core services (`ShowFactory`, `Shows.load_from_json`) still rely on legacy `runtime` and `poster_path` attributes. These must be refactored to use the metadata association to avoid mass-assignment errors when the columns are removed.
 
-- [ ] **Update Factory Definitions**: Update `spec/factories/users.rb` to ensure `:show` factory uses `:with_metadata` by default or via explicit traits.
-- [ ] **Audit Spec Setup**: Search for all occurrences of `create(:show, ...)` or `Show.create(...)` in `spec/` files. Ensure they pass valid metadata payloads instead of legacy column attributes.
-- [ ] **Validation**: Run the full RSpec suite.
+- [x] **Update Factory Definitions**: Update `spec/factories/users.rb` to use transient attributes for `runtime` and `poster_path`.
+- [ ] **Audit Service Layer**: Refactor `Services::ShowFactory` and `Shows#load_from_json` to remove legacy writes to the `shows` table.
+- [ ] **Audit Spec Setup**: Search for remaining occurrences of `create(:show, ...)` or `Show.create(...)` in `spec/` files and migrate them.
+- [ ] **Validation**: Run the full unit test suite and ensure it is green even with renamed columns.
   ```bash
   bundle exec rake test:unit
   ```
@@ -110,15 +111,11 @@ The Presenter shouldn't care *where* the data comes from, but we should make sur
   bundle exec rspec spec/lib/presenters/show_spec.rb
   ```
 
-### Step 8: Enforce Write-Safety
-Before we remove the database columns, we must stop the application from trying to write to them. This step identifies and removes all "legacy writes" to the `shows` table.
+### Step 8: Hardening & Model Lockdown
+Now that all code has stopped writing to legacy columns, we add the final "Armor" to the `Show` model.
 
 - [ ] **Lock Model Attributes**: Add `set_restricted_columns :runtime, :poster_path` (or equivalent Sequel restriction) to the `Show` model to prevent accidental mass-assignment.
-- [ ] **Audit Creation Calls**: Search the entire codebase for `Show.create`, `Show.new`, and `update` calls. Remove `runtime` and `poster_path` arguments from every single one.
-- [ ] **Validation**: Run the full test suite.
-  ```bash
-  bundle exec rake test
-  ```
+- [ ] **Validation**: Run the **entire** test suite (`bundle exec rake test`). If it stays green, the application is officially decoupled from the legacy columns.
 
 ### Step 9: Final Schema Cleanup (The "Point of No Return")
 Once we are 100% sure the app is reading from the `payload` and no code is trying to write to legacy columns, we safely remove them.
