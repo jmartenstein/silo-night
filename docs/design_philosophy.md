@@ -48,6 +48,9 @@ Services are responsible for handling database-level constraints (e.g., `UniqueC
 ### 7. Module Scoping & Naming
 We favor concise, module-scoped naming (e.g., `Services::Show`) over redundant descriptors (e.g., `Services::ShowService`). The namespace provides sufficient context.
 
+### 8. Persistence Encapsulation
+Models should not just be passive data containers. They should act as a gatekeeper for the data they represent. If an attribute has been refactored out of a column, the model is responsible for providing a **deprecation warning** or an **explicit tripwire** to prevent the application from inadvertently reverting to old behavior. We prefer "loud crashes" in development over "silent data regressions" in production.
+
 ---
 
 ## III. Implementation Guidelines

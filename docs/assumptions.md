@@ -20,7 +20,8 @@ This document records the technical assumptions, environmental constraints, and 
 - **Test Isolation:** We assume that switching to `data/test.db` and utilizing `DatabaseCleaner` resolves state pollution between tests.
 - **Statelessness:** While the legacy app uses server-side rendering, we assume future clients will favor a "Client-Side State" model. The API `v1` is designed as a stateless resource provider.
 
-## IV. Application Logic
-- **Stale State Management:** We assume that the Service layer is responsible for ensuring model data is fresh (e.g., calling `reload`) before performing state-changing operations, especially in high-frequency test environments like Cucumber.
-- **Performance Bottlenecks:** We assume that N+1 queries and JSON parsing are the primary performance concerns, biasing our service layer toward optimized fetches where possible.
-- **Orchestration:** We assume that a single `MetadataService` is sufficient to orchestrate multiple providers and handle fallbacks effectively.
+## IV. Schema Evolution & Refactoring
+- **Expand-Contract Pattern**: We assume that any schema change involving column removal must follow an "Expand-Contract" pattern (Schema Expansion -> Dual-Writing/Delegation -> Read Cutover -> Write Lockdown -> Schema Cleanup).
+- **Safety Bridges**: We assume the use of "Deprecated" column names (e.g., `deprecated_runtime`) as an application-level tripwire to detect residual dependencies before a final destructive schema change.
+- **Service-Only Creation**: We assume that database models should not be directly instantiated with legacy attributes; all show creation must flow through service objects (`ShowFactory`) to guarantee integrity.
+
