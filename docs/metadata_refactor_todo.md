@@ -86,11 +86,11 @@ Our seed scripts (`smoke.rb`, `n1_audit.rb`) currently create shows without meta
 This is our "Contract (Writes)" phase. We must stop all parts of the app—both test and production—from writing to the legacy columns.
 
 - [x] **5.1: Factory Modernization**: Update `spec/factories/users.rb` to use transient attributes. (Done)
-- [ ] **5.2: Service Layer Audit (Production Fix)**: Refactor `Services::ShowFactory` and `Shows#load_from_json` to remove legacy keys from `create` and `new` calls.
+- [x] **5.2: Service Layer Audit (Production Fix)**: Refactor `Services::ShowFactory` and `Shows#load_from_json` to remove legacy keys from `create` and `new` calls.
     - *Verification*: `bundle exec rspec spec/services/show_factory_spec.rb`
-- [ ] **5.3: Unit Spec Data Setup Audit**: Audit `spec/lib/` and `spec/services/` for raw `Show.create` calls and fix the "primary key" association error in `show_spec.rb`.
+- [x] **5.3: Unit Spec Data Setup Audit**: Audit `spec/lib/` and `spec/services/` for raw `Show.create` calls and fix the "primary key" association error in `show_spec.rb`.
     - *Verification*: `bundle exec rake test:unit`
-- [ ] **5.4: Request Spec Data Setup Audit**: Systematically update `spec/requests/` to use factories instead of raw `Show.create`.
+- [x] **5.4: Request Spec Data Setup Audit**: Systematically update `spec/requests/` to use factories instead of raw `Show.create`.
     - *Verification*: `bundle exec rake test:integration`
 
 ### Step 6: Refactor Feature Step Definitions
