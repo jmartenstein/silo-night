@@ -1,3 +1,5 @@
+require_relative 'show_factory'
+
 module Services
   class UserShow
     def self.add_show(user, show_or_name)
