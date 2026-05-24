@@ -1,3 +1,11 @@
+# Set RACK_ENV to test if we are running any test-related rake tasks.
+# We must never run tests with RACK_ENV=development because:
+# 1. The test suite uses a truncation strategy that would wipe out the development database.
+# 2. Sinatra's HostAuthorization is enabled in development, which breaks rack-test mock requests.
+if ARGV.any? { |arg| arg =~ /^test/ }
+  ENV['RACK_ENV'] ||= 'test'
+end
+
 $LOAD_PATH.unshift File.expand_path('./lib', __dir__)
 require 'database'
 require 'sequel/extensions/migration'
