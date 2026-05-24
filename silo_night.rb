@@ -36,6 +36,7 @@ end
 
 configure :test do
   set :protection, false
+  set :host_authorization, { permitted_hosts: [] }
 end
 
 # Ensure migrations are current
