@@ -13,4 +13,10 @@ RSpec.describe 'API v1 Users Create', type: :request do
     post '/api/v1/users', { name: 'ExistingUser' }.to_json, { 'CONTENT_TYPE' => 'application/json' }
     expect(last_response.status).to eq(422)
   end
+
+  it 'returns a user object that conforms to the user schema contract' do
+    post '/api/v1/users', { name: 'ContractUser' }.to_json, { 'CONTENT_TYPE' => 'application/json' }
+    expect(last_response.status).to eq(201)
+    validate_contract('user_schema', JSON.parse(last_response.body))
+  end
 end

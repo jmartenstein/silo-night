@@ -31,6 +31,7 @@ require 'database'
 require 'rack/test'
 require 'dotenv'
 require 'webmock/rspec'
+require 'json-schema'
 
 # Load test-specific environment configuration
 Dotenv.load('.env.test')
@@ -55,5 +56,12 @@ RSpec.configure do |config|
   # Define the Sinatra application under test
   def app
     Sinatra::Application
+  end
+
+  # Validates a parsed JSON response body against a named JSON schema
+  # from the spec/contracts/ directory.
+  def validate_contract(schema_name, response_body)
+    schema = File.read(File.join(__dir__, 'contracts', "#{schema_name}.json"))
+    JSON::Validator.validate!(schema, response_body)
   end
 end
