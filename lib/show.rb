@@ -31,6 +31,18 @@ class Show < Sequel::Model
     end
   end
 
+  def year
+    if metadata && metadata.payload && metadata.payload['year']
+      metadata.payload['year']
+    end
+  end
+
+  def genres
+    if metadata && metadata.payload && metadata.payload['genres']
+      metadata.payload['genres']
+    end
+  end
+
   def average_runtime
 
     # split the strings by non-word characters
