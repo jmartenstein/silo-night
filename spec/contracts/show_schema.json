@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "required": ["id", "name", "runtime", "uri_safe_name", "poster_url"],
+  "properties": {
+    "id": { "type": "integer" },
+    "name": { "type": "string" },
+    "runtime": { "type": "integer" },
+    "uri_safe_name": { "type": "string" },
+    "poster_url": { "type": ["string", "null"] }
+  },
+  "additionalProperties": false
+}

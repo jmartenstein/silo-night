@@ -14,6 +14,8 @@ gem 'nokogiri', '~>1.18.10'
 gem 'rackup', '>=2.1.0'
 gem 'rack-test', '~>2.1.0'
 
+gem 'json-schema'
+
 group :development, :test do
   gem 'cgi'
   gem 'irb', '~> 1.18.0'

@@ -39,5 +39,14 @@ RSpec.describe 'API v1 Shows', type: :request do
       expect(show_json).to have_key('uri_safe_name')
       expect(show_json).to have_key('poster_url')
     end
+
+    it 'returns show objects that conform to the show schema contract' do
+      get "/api/v1/user/#{user_name}/shows"
+
+      json = JSON.parse(last_response.body)
+      json.each do |show|
+        validate_contract('show_schema', show)
+      end
+    end
   end
 end
