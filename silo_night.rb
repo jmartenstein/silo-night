@@ -146,9 +146,27 @@ namespace '/api/v1' do
     content_type :json
     user = User.find(name: params[:name])
     return [404, Presenters::Error.new("User not found", 404).to_h.to_json] unless user
-    
+
     data = JSON.parse(request.body.read, symbolize_names: true)
-    if Services::UserShow.add_show(user, data[:name])
+
+    # Build an optional metadata hash from any extra fields the client supplied.
+    # When present these come from the search response, letting us skip the
+    # server-side MetadataService calls entirely.
+    client_metadata = if data.key?(:external_ids) || data.key?(:genres) || data.key?(:poster_path)
+                        {
+                          name:        data[:name],
+                          year:        data[:year],
+                          genres:      data[:genres] || [],
+                          poster_path: data[:poster_path],
+                          runtime:     data[:runtime],
+                          external_ids: {
+                            tmdb_id:   data.dig(:external_ids, :tmdb_id),
+                            tvmaze_id: data.dig(:external_ids, :tvmaze_id)
+                          }
+                        }
+                      end
+
+    if Services::UserShow.add_show(user, data[:name], metadata: client_metadata)
       # Find the show that was added/found
       show = Show.find(name: data[:name]) || Show.order(Sequel.desc(:id)).first
       [201, Presenters::Show.new(show).to_h.to_json]

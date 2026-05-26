@@ -145,6 +145,10 @@ function saveNewOrder() {
 var searchInput = document.getElementById('show-search');
 var suggestionsDiv = document.getElementById('suggestions');
 
+// Cache of full suggestion objects keyed by show name so metadata survives
+// past selectSuggestion and can be forwarded to the POST /shows endpoint.
+var suggestionCache = {};
+
 if (searchInput) {
   var debounceTimer;
 
@@ -238,8 +242,13 @@ if (searchInput) {
 function renderSuggestions(suggestions) {
   if (suggestions.length === 0) {
     suggestionsDiv.innerHTML = '';
+    suggestionCache = {};
     return;
   }
+
+  // Populate cache so metadata is available when the user selects an entry.
+  suggestionCache = {};
+  suggestions.forEach(function(s) { suggestionCache[s.name] = s; });
 
   var html = '<ul id="suggestions-list">';
   suggestions.forEach(function(s) {
@@ -264,16 +273,30 @@ function renderSuggestions(suggestions) {
 window.selectSuggestion = function(name) {
   searchInput.value = name;
   suggestionsDiv.innerHTML = '';
-  addShow(name);
+  // Pass the full cached suggestion so the server can skip MetadataService.
+  var suggestion = suggestionCache[name] || { name: name };
+  addShow(suggestion);
 };
 
-function addShow(name) {
+function addShow(suggestion) {
   var username = window.location.pathname.split('/')[2];
   if (!username) return;
 
+  // Accepts either a plain name string (backwards compat) or a full suggestion object.
+  var payload = (typeof suggestion === 'string')
+    ? { name: suggestion }
+    : {
+        name:         suggestion.name,
+        year:         suggestion.year         || null,
+        genres:       suggestion.genres        || [],
+        poster_path:  suggestion.poster_path   || null,
+        runtime:      suggestion.runtime       || null,
+        external_ids: suggestion.external_ids  || {}
+      };
+
   fetch('/api/v1/user/' + username + '/shows', {
     method: 'POST',
-    body: JSON.stringify({ name: name }),
+    body: JSON.stringify(payload),
     headers: { 'Content-Type': 'application/json' }
   })
   .then(response => {

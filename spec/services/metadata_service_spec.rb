@@ -105,7 +105,7 @@ RSpec.describe MetadataService, type: :unit do
 
     it 'includes local database results' do
       # Mock the local database show
-      local_show = double('Show', name: 'Breaking Bad', year: 2008, genres: ['Drama'], poster_path: '/local.jpg')
+      local_show = double('Show', name: 'Breaking Bad', year: 2008, genres: ['Drama'], poster_path: '/local.jpg', runtime: '45 minutes')
       
       # Mock the chainable Sequel dataset
       dataset = double('Dataset')
@@ -114,7 +114,7 @@ RSpec.describe MetadataService, type: :unit do
 
       results = service.search_shows(title)
       expect(results).to include(
-        hash_including(name: 'Breaking Bad', year: 2008, genres: ['Drama'], poster_path: '/local.jpg')
+        hash_including(name: 'Breaking Bad', year: 2008, genres: ['Drama'], poster_path: '/local.jpg', runtime: '45 minutes')
       )
     end
 

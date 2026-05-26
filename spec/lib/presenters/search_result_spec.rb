@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'presenters/search_result'
 
 RSpec.describe Presenters::SearchResult do
-  let(:search_results) { [{ name: 'The Expanse' }, { name: 'Foundation' }] }
+  let(:search_results) { [{ name: 'The Expanse', runtime: '60 minutes' }, { name: 'Foundation' }] }
   let(:presenter) { described_class.new(search_results) }
 
   
@@ -13,7 +13,12 @@ RSpec.describe Presenters::SearchResult do
       'name' => 'The Expanse',
       'year' => nil,
       'genres' => nil,
-      'poster_path' => nil
+      'poster_path' => nil,
+      'runtime' => '60 minutes',
+      'external_ids' => {
+        'tmdb_id' => nil,
+        'tvmaze_id' => nil
+      }
     })
   end
 end

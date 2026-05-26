@@ -2,12 +2,12 @@ require_relative 'show_factory'
 
 module Services
   class UserShow
-    def self.add_show(user, show_or_name)
+    def self.add_show(user, show_or_name, metadata: nil)
       user.reload
       show = if show_or_name.is_a?(::Show)
                show_or_name
              else
-               ::Show.find(name: show_or_name) || create_show_from_metadata(show_or_name)
+               ::Show.find(name: show_or_name) || create_show_from_metadata(show_or_name, metadata: metadata)
              end
 
       return false unless show
@@ -41,8 +41,9 @@ module Services
       true
     end
 
-    def self.create_show_from_metadata(name)
-      Services::ShowFactory.create_with_metadata(name)
+    def self.create_show_from_metadata(name, metadata: nil)
+      Services::ShowFactory.create_with_metadata(name, metadata: metadata)
     end
   end
 end
+

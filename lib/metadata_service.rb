@@ -52,7 +52,9 @@ class MetadataService
         name: show.name,
         year: show.respond_to?(:year) ? show.year : nil,
         genres: show.respond_to?(:genres) ? (show.genres || []) : [],
-        poster_path: show.poster_path
+        poster_path: show.poster_path,
+        runtime: show.respond_to?(:runtime) ? show.runtime : nil,
+        external_ids: { tmdb_id: nil, tvmaze_id: nil }
       }
     end
 
@@ -75,11 +77,19 @@ class MetadataService
         poster_path = "https://image.tmdb.org/t/p/w500#{tmdb_match['poster_path']}"
       end
 
+      rt = tvm['averageRuntime'] || tvm['runtime']
+      runtime = rt ? "#{rt} minutes" : nil
+
       suggestions << {
         name: tvm['name'],
         year: year,
         genres: tvm['genres'] || [],
-        poster_path: poster_path
+        poster_path: poster_path,
+        runtime: runtime,
+        external_ids: {
+          tmdb_id: tmdb_match ? tmdb_match['id'] : nil,
+          tvmaze_id: tvm['id']
+        }
       }
     end
 
@@ -95,7 +105,9 @@ class MetadataService
         name: tmdb['name'],
         year: year,
         genres: genres,
-        poster_path: poster_path
+        poster_path: poster_path,
+        runtime: nil,
+        external_ids: { tmdb_id: tmdb['id'], tvmaze_id: nil }
       }
     end
 
