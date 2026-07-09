@@ -20,7 +20,7 @@ RSpec.describe 'API v1 Shows Create with Metadata', type: :integration do
   # supplied by the client or fetched server-side.
   # ---------------------------------------------------------------------------
   describe 'response contract' do
-    it 'returns 201 and a show object conforming to the show schema when metadata is provided' do
+    it 'returns 201 and each show in the list conforming to the show schema when metadata is provided' do
       body = {
         name: 'The Bear',
         year: 2022,
@@ -32,7 +32,9 @@ RSpec.describe 'API v1 Shows Create with Metadata', type: :integration do
       post '/api/v1/user/leonard/shows', body, json_headers
 
       expect(last_response.status).to eq(201)
-      validate_contract('show_schema', JSON.parse(last_response.body))
+      shows = JSON.parse(last_response.body)
+      expect(shows).to be_an(Array)
+      shows.each { |s| validate_contract('show_schema', s) }
     end
   end
 

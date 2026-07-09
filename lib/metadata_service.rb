@@ -29,17 +29,23 @@ class MetadataService
   end
 
   def get_show_metadata(title)
-    # 1. Search in TMDB first (usually has better poster and detailed info)
-    tmdb_results = @tmdb_adapter.search_shows_by_title(title)
-    tmdb_show = tmdb_results.any? ? @tmdb_adapter.fetch_show_by_id(tmdb_results.first['id']) : nil
+    # Fetch from TMDB and TVMaze concurrently to reduce latency from
+    # sum(T(tmdb), T(tvm)) to max(T(tmdb), T(tvm)).
+    tmdb_thread = Thread.new do
+      results = @tmdb_adapter.search_shows_by_title(title)
+      results.any? ? @tmdb_adapter.fetch_show_by_id(results.first['id']) : nil
+    end
 
-    # 2. Search in TVMaze (good for runtimes and airing info)
-    tvmaze_results = @tvmaze_adapter.search_shows_by_title(title)
-    tvmaze_show = tvmaze_results.any? ? @tvmaze_adapter.fetch_show_by_id(tvmaze_results.first['id']) : nil
+    tvmaze_thread = Thread.new do
+      results = @tvmaze_adapter.search_shows_by_title(title)
+      results.any? ? @tvmaze_adapter.fetch_show_by_id(results.first['id']) : nil
+    end
+
+    tmdb_show = tmdb_thread.value
+    tvmaze_show = tvmaze_thread.value
 
     return nil if tmdb_show.nil? && tvmaze_show.nil?
 
-    # 3. Merge and unify
     unify_metadata(tmdb_show, tvmaze_show)
   end
 
