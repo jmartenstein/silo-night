@@ -37,6 +37,16 @@ describe Show do
       expect(show.poster_path).to eq("/path/to/poster.jpg")
     end
 
+    it "retrieves year from metadata if present" do
+      show.metadata = create(:show_metadata, payload: { "year" => 2024 }, show: show)
+      expect(show.year).to eq(2024)
+    end
+
+    it "retrieves genres from metadata if present" do
+      show.metadata = create(:show_metadata, payload: { "genres" => ["Drama", "Sci-Fi"] }, show: show)
+      expect(show.genres).to eq(["Drama", "Sci-Fi"])
+    end
+
     it "falls back to columns if metadata values are missing" do
       # Ensure show is saved so it has a primary key
       s = Show.create(name: "Test") 

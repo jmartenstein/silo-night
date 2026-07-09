@@ -10,7 +10,12 @@ module Presenters
           'name' => r[:name],
           'year' => r[:year],
           'genres' => r[:genres],
-          'poster_path' => r[:poster_path]
+          'poster_path' => r[:poster_path],
+          'runtime' => r[:runtime],
+          'external_ids' => {
+            'tmdb_id' => r.dig(:external_ids, :tmdb_id),
+            'tvmaze_id' => r.dig(:external_ids, :tvmaze_id)
+          }
         }
       end
     end
