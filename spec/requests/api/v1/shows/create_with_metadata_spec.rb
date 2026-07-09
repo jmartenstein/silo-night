@@ -153,4 +153,59 @@ RSpec.describe 'API v1 Shows Create with Metadata', type: :integration do
       expect(User.find(name: 'leonard').shows).to include(Show.find(name: 'Foundation'))
     end
   end
+
+  # ---------------------------------------------------------------------------
+  # Contract: duplicate show names — adding a show with the same name as an
+  # existing show but different external IDs should create a new show with
+  # the year appended (e.g. "Silo (2023)").
+  # ---------------------------------------------------------------------------
+  describe 'duplicate show names' do
+    before do
+      # Create an existing show "Silo" (2017)
+      show_2017 = create(:show, name: 'Silo')
+      create(:show_metadata,
+             provider_name: 'tmdb',
+             external_id: '71485', # Silo 2017 TMDB ID
+             payload: { 'name' => 'Silo', 'year' => 2017, 'external_ids' => { 'tmdb_id' => 71485 } },
+             show: show_2017)
+    end
+
+    it 'creates a new show with the year appended when the external IDs differ' do
+      body = {
+        name: 'Silo',
+        year: 2023,
+        external_ids: { tmdb_id: 125988 } # Silo 2023 TMDB ID
+      }.to_json
+
+      post '/api/v1/user/leonard/shows', body, json_headers
+
+      expect(last_response.status).to eq(201)
+      
+      # Verify the new show was created with the year appended
+      show_2023 = Show.find(name: 'Silo (2023)')
+      expect(show_2023).not_to be_nil
+      expect(show_2023.metadata.payload['external_ids']['tmdb_id']).to eq(125988)
+
+      # Verify the old show still exists untouched
+      show_2017 = Show.find(name: 'Silo')
+      expect(show_2017).not_to be_nil
+      expect(show_2017.metadata.payload['external_ids']['tmdb_id']).to eq(71485)
+    end
+
+    it 'reuses the existing show when the external IDs match' do
+      body = {
+        name: 'Silo',
+        year: 2017,
+        external_ids: { tmdb_id: 71485 }
+      }.to_json
+
+      post '/api/v1/user/leonard/shows', body, json_headers
+
+      expect(last_response.status).to eq(201)
+      
+      # Should not create a new show
+      expect(Show.where(name: 'Silo').count).to eq(1)
+      expect(Show.where(name: 'Silo (2017)').count).to eq(0)
+    end
+  end
 end

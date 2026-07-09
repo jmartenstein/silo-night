@@ -22,14 +22,23 @@ module Services
 
       return nil unless metadata_data
 
+      final_name = metadata_data[:name]
+      if ::Show.find(name: final_name)
+        year = metadata_data[:year]
+        if year
+          final_name = "#{final_name} (#{year})"
+          metadata_data[:name] = final_name
+        end
+      end
+
       provider = metadata ? 'client' : 'tmdb'
       external_id = metadata_data.dig(:external_ids, :tmdb_id)&.to_s ||
                     metadata_data[:name].downcase.gsub(/\s+/, '-')
 
       DB.transaction do
         show = ::Show.create(
-          name: metadata_data[:name],
-          uri_encoded: URI.encode_www_form_component(metadata_data[:name].downcase)
+          name: final_name,
+          uri_encoded: URI.encode_www_form_component(final_name.downcase)
         )
 
         ::ShowMetadata.create(

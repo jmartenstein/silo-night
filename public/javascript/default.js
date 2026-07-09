@@ -145,9 +145,9 @@ function saveNewOrder() {
 var searchInput = document.getElementById('show-search');
 var suggestionsDiv = document.getElementById('suggestions');
 
-// Cache of full suggestion objects keyed by show name so metadata survives
+// Cache of full suggestion objects so metadata survives
 // past selectSuggestion and can be forwarded to the POST /shows endpoint.
-var suggestionCache = {};
+var currentSuggestions = [];
 
 if (searchInput) {
   var debounceTimer;
@@ -242,20 +242,19 @@ if (searchInput) {
 function renderSuggestions(suggestions) {
   if (suggestions.length === 0) {
     suggestionsDiv.innerHTML = '';
-    suggestionCache = {};
+    currentSuggestions = [];
     return;
   }
 
   // Populate cache so metadata is available when the user selects an entry.
-  suggestionCache = {};
-  suggestions.forEach(function(s) { suggestionCache[s.name] = s; });
+  currentSuggestions = suggestions;
 
   var html = '<ul id="suggestions-list">';
-  suggestions.forEach(function(s) {
+  suggestions.forEach(function(s, index) {
     var genreText = s.genres && s.genres.length > 0 ? s.genres.join(', ') : 'No genres';
     var yearText = s.year ? s.year : 'N/A';
     
-    html += '<li onclick="selectSuggestion(\'' + s.name.replace(/'/g, "\\'") + '\')">';
+    html += '<li onclick="selectSuggestion(' + index + ')">';
     if (s.poster_path) {
       html += '<img src="' + s.poster_path + '" class="suggestion-poster" />';
     }
@@ -270,11 +269,12 @@ function renderSuggestions(suggestions) {
   suggestionsDiv.innerHTML = html;
 }
 
-window.selectSuggestion = function(name) {
-  searchInput.value = name;
+window.selectSuggestion = function(index) {
+  var suggestion = currentSuggestions[index];
+  if (!suggestion) return;
+  searchInput.value = suggestion.name;
   suggestionsDiv.innerHTML = '';
   // Pass the full cached suggestion so the server can skip MetadataService.
-  var suggestion = suggestionCache[name] || { name: name };
   addShow(suggestion);
 };
 

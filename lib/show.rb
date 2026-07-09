@@ -43,6 +43,20 @@ class Show < Sequel::Model
     end
   end
 
+  def self.find_by_external_ids(tmdb_id: nil, tvmaze_id: nil)
+    if tmdb_id
+      meta = ShowMetadata.where(external_id: tmdb_id.to_s, provider_name: ['tmdb', 'client']).first
+      return meta.show if meta
+    end
+
+    if tvmaze_id
+      meta = ShowMetadata.where(external_id: tvmaze_id.to_s, provider_name: ['tvmaze', 'client']).first
+      return meta.show if meta
+    end
+
+    nil
+  end
+
   def average_runtime
 
     # split the strings by non-word characters
