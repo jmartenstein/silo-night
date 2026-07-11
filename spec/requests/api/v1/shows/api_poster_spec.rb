@@ -24,7 +24,9 @@ RSpec.describe 'API Poster Path' do
     json = JSON.parse(last_response.body)
     
     expect(json).not_to be_nil
-    expect(json['poster_url']).to eq('https://example.com/suits.jpg')
+    suits_show = json.find { |s| s['name'] == 'Suits' }
+    expect(suits_show).not_to be_nil
+    expect(suits_show['poster_url']).to eq('https://example.com/suits.jpg')
     
     # Also check DB
     db_show = Show.find(name: 'Suits')

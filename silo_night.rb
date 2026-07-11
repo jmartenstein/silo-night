@@ -167,9 +167,7 @@ namespace '/api/v1' do
                       end
 
     if Services::UserShow.add_show(user, data[:name], metadata: client_metadata)
-      # Find the show that was added/found
-      show = Show.find(name: data[:name]) || Show.order(Sequel.desc(:id)).first
-      [201, Presenters::Show.new(show).to_h.to_json]
+      [201, user.reload.shows.map { |s| Presenters::Show.new(s).to_h }.to_json]
     else
       [404, Presenters::Error.new("Show not found", 404).to_h.to_json]
     end

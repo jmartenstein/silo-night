@@ -303,13 +303,6 @@ function addShow(suggestion) {
     if (!response.ok) {
       throw new Error('Failed to add show: ' + response.statusText);
     }
-    // Fetch the full list to refresh the UI
-    return fetch('/api/v1/user/' + username + '/shows');
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Failed to fetch updated shows list');
-    }
     return response.json();
   })
   .then(data => {
