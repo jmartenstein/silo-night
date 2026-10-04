@@ -24,45 +24,45 @@ http_interactions:
       - chunked
       Connection:
       - keep-alive
+      Date:
+      - Sun, 04 Oct 2026 20:17:50 GMT
       Server:
       - openresty
+      X-Gateway-Cache-Status:
+      - MISS
+      Cache-Control:
+      - public, max-age=23105
       X-Memc:
       - MISS, STORE
       X-Memc-Key:
-      - 65ea5083f33d0b7f268f716c9c5248bf4fbbcc14e8b2809b119a31e5c120ed0e
+      - cd57069d191ceb3cd5679acf13c6d434
       X-Memc-Age:
       - '0'
       X-Memc-Expires:
-      - '25880'
+      - '23105'
       X-Az:
       - us-east-1b
       X-Task-Id:
-      - aa1d39a9f4204e53bf1bd27f47d446b3
-      Date:
-      - Sat, 16 May 2026 16:30:05 GMT
-      Cache-Control:
-      - public, max-age=28162
+      - 436fec9edc154ef9a9194796d1cc326f
       Etag:
       - W/"0e23279b004381f72a34159d5c7dfd1f"
       Vary:
-      - Accept-Encoding
       - Origin
+      - accept-encoding
       X-Cache:
-      - Hit from cloudfront
+      - Miss from cloudfront
       Via:
-      - 1.1 e76eba87ee47517dc7f2053edfb921bc.cloudfront.net (CloudFront)
+      - 1.1 e6b2537b87653726af8a79e6da505188.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
-      - SEA900-P5
+      - SEA900-P10
       Alt-Svc:
       - h3=":443"; ma=86400
       X-Amz-Cf-Id:
-      - VCq1BJBn_eWXs49npveX4La1x1l6ddJbgh6nwDhJb5EoYKnkzhLqJA==
-      Age:
-      - '16906'
+      - rTYp9T4pwkudAnZj1GNAOpuWr81Q6OSp9LrGBJjxurP5N2cfQmzF2g==
     body:
       encoding: ASCII-8BIT
       string: '{"page":1,"results":[],"total_pages":1,"total_results":0}'
-  recorded_at: Sat, 16 May 2026 21:11:51 GMT
+  recorded_at: Sun, 04 Oct 2026 20:17:49 GMT
 - request:
     method: get
     uri: https://api.tvmaze.com/search/shows?q=nonexistent-show-12345
@@ -84,7 +84,7 @@ http_interactions:
       Server:
       - nginx/1.24.0 (Ubuntu)
       Date:
-      - Sat, 16 May 2026 21:11:51 GMT
+      - Sun, 04 Oct 2026 20:17:51 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Transfer-Encoding:
@@ -100,5 +100,5 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: "[]"
-  recorded_at: Sat, 16 May 2026 21:11:51 GMT
+  recorded_at: Sun, 04 Oct 2026 20:17:51 GMT
 recorded_with: VCR 6.2.0
