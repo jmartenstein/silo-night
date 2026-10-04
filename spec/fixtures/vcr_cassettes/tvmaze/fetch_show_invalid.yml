@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - nginx/1.24.0 (Ubuntu)
       Date:
-      - Sat, 09 May 2026 00:27:22 GMT
+      - Sun, 04 Oct 2026 20:12:27 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Transfer-Encoding:
@@ -34,5 +34,5 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"name":"Not Found","message":"Page not found.","code":0,"status":404,"previous":{"name":"Invalid
         Route","message":"Unable to resolve the request \"shows/invalid\".","code":0}}'
-  recorded_at: Sat, 09 May 2026 00:27:22 GMT
+  recorded_at: Sun, 04 Oct 2026 20:12:27 GMT
 recorded_with: VCR 6.2.0
